@@ -1,0 +1,27 @@
+ion-content {
+  --padding-top: 16px;
+
+  .content-col {
+    --ion-grid-column-padding: 0px;
+  }
+
+  .user-image {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    border: 1px solid gray;
+  }
+
+  .edit-avatar{
+      position: relative;
+      top: -35px;
+      left: 70px;
+      font-size: larger;
+      color: black;
+      background-color: white;
+      padding: 6px;
+      font-size: 100%;
+      border-radius: 50%;
+      border: 1px solid gray;
+  }
+}

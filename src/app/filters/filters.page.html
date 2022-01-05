@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Filtros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="filter">
+    <ion-list>
+      <ion-radio-group value="biff">
+        <ion-list-header>
+          <ion-label>Ordenar por</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-icon slot="start" name="location-sharp"></ion-icon>
+          <ion-label>Cercanía</ion-label>
+          <ion-radio slot="end" value="closeness"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="star-sharp"></ion-icon>
+          <ion-label>Valoraciones</ion-label>
+          <ion-radio slot="end" value="rate"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="time-sharp"></ion-icon>
+          <ion-label>Tiempo de arribo</ion-label>
+          <ion-radio slot="end" value="arrive"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item class="ion-margin-top">
+      <ion-label>Mostrar sólo transportistas disponibles</ion-label>
+      <ion-checkbox slot="start"></ion-checkbox>
+    </ion-item>
+
+    <div class="ion-margin-top">
+      <!-- Basic -->
+      <ion-accordion-group>
+        <ion-accordion value="price">
+          <ion-item slot="header">
+            <ion-label>Rango de precios</ion-label>
+          </ion-item>
+
+          <ion-list slot="content">
+            <ion-item>
+              <ion-range dualKnobs="true" min="5" max="15000" step="50" pin="true" snaps="true">
+                <ion-icon size="small" slot="start" name="cash-sharp"></ion-icon>
+                <ion-icon slot="end" name="cash-sharp"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+    </div>
+
+    <div class="ion-margin-top">
+      <!-- Basic -->
+      <ion-accordion-group>
+        <ion-accordion value="categories">
+          <ion-item slot="header">
+            <ion-label>Categorías</ion-label>
+          </ion-item>
+
+          <ion-list slot="content">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Taxi</ion-label>
+                    <ion-checkbox name="taxi"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Mudanza</ion-label>
+                    <ion-checkbox name="moving"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Taxi</ion-label>
+                    <ion-checkbox name="taxi"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Mudanza</ion-label>
+                    <ion-checkbox name="moving"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Taxi</ion-label>
+                    <ion-checkbox name="taxi"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label slot="end">Mudanza</ion-label>
+                    <ion-checkbox name="moving"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+
+    </div>
+  </div>
+</ion-content>

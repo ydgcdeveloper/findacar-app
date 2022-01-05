@@ -1,0 +1,13 @@
+  <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+    [zoom]="true">
+    <ng-template *ngFor="let category of categories" swiperSlide>
+      <div style="padding-top: 5px;" class="success">
+        <ion-label color="white">
+          {{category.name}}
+        </ion-label>
+        <div class="category-photo">
+          <ion-img [src]="category.photo" class="category-img"></ion-img>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>

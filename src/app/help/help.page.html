@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ayuda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-list style="margin-top: 20px; margin-bottom: 20px; background-color: transparent;">
+      <ion-text class="ion-margin">
+        Contacta con nosotros
+      </ion-text>
+      <ion-item class="rounded border my-2" href="https://api.whatsapp.com/send?phone=5356401060">
+        <ion-icon name="logo-whatsapp" color="success" slot="start"></ion-icon>
+        <ion-label>Escribir por WhatsApp</ion-label>
+      </ion-item>
+      <ion-item class="rounded border my-2" href="mailto:ygomezcoba@gmail.com">
+        <ion-icon name="mail-sharp" color="primary" slot="start"></ion-icon>
+        <ion-label>Enviar correo</ion-label>
+      </ion-item>
+      <ion-item class="rounded border my-2" href="tel:+5356401060">
+        <ion-icon name="call-sharp" color="warning" slot="start"></ion-icon>
+        <ion-label>Llamar por teléfono</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="rounded border">
+      <ion-item href="about-us">
+        <ion-label>Sobre Nosotros</ion-label>
+      </ion-item>
+      <ion-item href="terms">
+        <ion-label>Términos y Condiciones</ion-label>
+      </ion-item>
+      <ion-item href="policy">
+        <ion-label>Política de Privacidad</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="version">
+    v 1.0.0
+  </div>
+</ion-content>

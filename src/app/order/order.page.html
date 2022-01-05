@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mis Pedidos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Order</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="orders-segment">
+    <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="previous">
+        <ion-label>Anteriores</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="current" checked>
+        <ion-label>Actuales</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="request">
+        <ion-label>Solicitudes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'previous'">
+      <app-no-result-found></app-no-result-found>
+    </div>
+
+    <div *ngSwitchCase="'current'">
+      <app-no-result-found></app-no-result-found>
+    </div>
+
+    <div *ngSwitchCase="'request'">
+      <app-no-result-found></app-no-result-found>
+    </div>
+  </div>
+
+  <app-explore-container name="Order"></app-explore-container>
+</ion-content>

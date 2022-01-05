@@ -1,0 +1,88 @@
+#service-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.service {
+  margin-top: 10px;
+  border-radius: 0px 0px 15px 15px;
+  border: 1px solid gray;
+  width: 100%;
+  height: 150px;
+  background-color: rgb(247, 252, 250);
+}
+
+.service-photo {
+  height: 55%;
+  width: 100%;
+}
+
+.service-photo ion-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.floating{
+  position: relative;
+  padding: 2px;
+  padding-top: 1px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: rgb(239, 241, 239);
+  top: -75px;
+  left: 10px;
+}
+
+.float-heart {
+font-size: 80%;
+}
+
+.darker{
+  color: rgb(7, 7, 7);
+}
+
+.service-data{
+  padding: 0 10px;
+}
+
+.service-name{
+  margin-top: 0px;
+  font-weight: bold;
+  color: black;
+}
+
+.service-rate{
+  
+  align-items: center;
+}
+
+.golden{
+  color: rgb(204, 128, 5);
+}
+
+.service-row{
+  font-size: 70%;
+}
+
+.service-status{
+  position: relative;
+  top: -45px;
+  right: -220px;
+  font-size: 55%;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+ion-icon {
+  // default: not-fav
+  &[name="heart"] {
+    fill: grey;
+  }
+
+  &[name="heart"].fav {
+    fill: red;
+  }
+}

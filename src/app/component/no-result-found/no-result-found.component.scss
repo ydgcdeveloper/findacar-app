@@ -1,0 +1,16 @@
+.no-result-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+  .not-result-img {
+    --size: 155px;
+  }
+
+  ion-text{
+      margin-top: 5px;
+      font-size: 80%;
+  }
+}

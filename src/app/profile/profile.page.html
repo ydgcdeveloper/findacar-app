@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-avatar>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="8" style="text-align: left; padding-top: 10%;">
+        <ion-text color="primary">
+          Yan David
+        </ion-text>
+      </ion-col>
+      <ion-col size="1">
+        <ion-fab horizontal="end">
+          <ion-fab-button size="small" href="/edit-profile">
+            <ion-icon name="create-sharp"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="p-1">
+    <!-- List of Text Items -->
+    <ion-list>
+      <ion-item class="mt-2" href="addresses">
+        <ion-icon  name="location-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Mis direcciones</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2" href="payment-methods">
+        <ion-icon name="card-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Métodos de pago</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2" href="favorites">
+        <ion-icon name="heart-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Favoritos</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2" href="help">
+        <ion-icon name="help-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Ayuda</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2">
+        <ion-icon name="share-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Invitar a un amigo</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2" href="settings">
+        <ion-icon name="settings-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Configuración</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item class="mt-2">
+        <ion-icon name="log-out-sharp"></ion-icon>
+        <ion-label class="ml-4">
+          <h2>Cerrar sesión</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <app-explore-container name="Profile"></app-explore-container>
+</ion-content>
