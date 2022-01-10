@@ -38,13 +38,6 @@ $blue-5: #b9ffff;
   border-radius: 50% !important;
 }
 
-.circle-filter {
-  border-radius: 50% !important;
-  background-color: var(--ion-background-color);
-  font-size: 120%;
-  padding: 11px;
-}
-
 .rounded{
   border-radius: 15px;
 }
@@ -113,8 +106,13 @@ ion-header .searchbar-input-container input {
   bottom: 1px;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 99000;
 }
 
 .padding-bottom-40{
   padding-bottom: 40px !important;
+}
+
+.padding-bottom-60{
+  padding-bottom: 60px !important;
 }

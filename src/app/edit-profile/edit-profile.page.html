@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-row class="ion-padding">
     <ion-col class="content-col">
       <ion-avatar class="user-image">
@@ -18,7 +18,7 @@
     </ion-col>
   </ion-row>
 
-  <div class="ion-padding padding-bottom-40">
+  <div class="padding-bottom-60">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
 
       <ion-item class="rounded mt-2">
@@ -61,5 +61,6 @@
       </ion-item>
 
     </form>
+    <ion-button class="fixed">Guardar</ion-button>
   </div>
 </ion-content>
