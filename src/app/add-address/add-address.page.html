@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="addresses"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="add-address ion-padding">
+    <ion-item class="rounded mt-2">
+      <ion-label position="floating">Nombre de Dirección</ion-label>
+      <ion-input type="text" name="address"></ion-input>
+    </ion-item>
+    <ion-item class="rounded mt-2">
+      <ion-grid>
+        <ion-row>
+          <ion-label>Ubicación</ion-label>
+        </ion-row>
+        <div class="my-location" id="my-location">
+          
+        </div>
+        <ion-row class="mt-2">
+          <ion-item href="search-location">
+            <ion-label color="primary">Buscar ubicación en el mapa</ion-label>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item class="rounded mt-2">
+      <ion-label position="floating">Añadir detalles de la dirección</ion-label>
+      <ion-textarea placeholder="En un pasillo, casa pintada de verde..." rows="4" spellcheck="true"></ion-textarea>
+    </ion-item>
+    <ion-button class="fixed">Guardar</ion-button>
+  </div>
+</ion-content>

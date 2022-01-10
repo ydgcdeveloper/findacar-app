@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="filter">
-    <ion-list>
-      <ion-radio-group value="biff">
+  <div class="filter padding-bottom-40">
+    <ion-list class="rounded">
+      <ion-radio-group value="closeness">
         <ion-list-header>
           <ion-label>Ordenar por</ion-label>
         </ion-list-header>
@@ -35,12 +35,12 @@
       </ion-radio-group>
     </ion-list>
 
-    <ion-item class="ion-margin-top">
+    <ion-item class="ion-margin-top rounded only-show">
       <ion-label>Mostrar sólo transportistas disponibles</ion-label>
       <ion-checkbox slot="start"></ion-checkbox>
     </ion-item>
 
-    <div class="ion-margin-top">
+    <div class="ion-margin-top rounded">
       <!-- Basic -->
       <ion-accordion-group>
         <ion-accordion value="price">
@@ -50,7 +50,7 @@
 
           <ion-list slot="content">
             <ion-item>
-              <ion-range dualKnobs="true" min="5" max="15000" step="50" pin="true" snaps="true">
+              <ion-range dualKnobs="true" min="30" max="5000" step="50" [value]="{lower: 25, upper: 2000}" pin="true" [pinFormatter]="customFormatter" snaps="true">
                 <ion-icon size="small" slot="start" name="cash-sharp"></ion-icon>
                 <ion-icon slot="end" name="cash-sharp"></ion-icon>
               </ion-range>
@@ -60,7 +60,7 @@
       </ion-accordion-group>
     </div>
 
-    <div class="ion-margin-top">
+    <div class="ion-margin-top rounded">
       <!-- Basic -->
       <ion-accordion-group>
         <ion-accordion value="categories">
@@ -119,4 +119,5 @@
 
     </div>
   </div>
+  <ion-button class="fixed">Aplicar filtro</ion-button>
 </ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "trans-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

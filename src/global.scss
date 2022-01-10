@@ -34,12 +34,23 @@ $blue-3: #2196f3;
 $blue-4: #81c9fa;
 $blue-5: #b9ffff;
 
-
-.circle {
+.circle{
   border-radius: 50% !important;
-  background-color: #121212;
+}
+
+.circle-filter {
+  border-radius: 50% !important;
+  background-color: var(--ion-background-color);
   font-size: 120%;
   padding: 11px;
+}
+
+.rounded{
+  border-radius: 15px;
+}
+
+.rounded-25{
+  border-radius: 25px !important;
 }
 
 ion-header .searchbar-input-container input {
@@ -48,6 +59,10 @@ ion-header .searchbar-input-container input {
 }
 
 .ml-2 {
+  margin-left: 10px;
+}
+
+.ml-1 {
   margin-left: 10px;
 }
 
@@ -67,6 +82,39 @@ ion-header .searchbar-input-container input {
   padding: 5px;
 }
 
+
+
+.mt-1 {
+  margin-top: 5px;
+}
+
 .mt-2 {
   margin-top: 10px;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+.mt-5 {
+  margin-top: 25px;
+}
+
+.border {
+  border: 1px solid gray;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 1px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.padding-bottom-40{
+  padding-bottom: 40px !important;
 }

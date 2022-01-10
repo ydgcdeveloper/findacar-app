@@ -1,7 +1,18 @@
 .filter {
- 
 
-  ion-list {
-   // background-color: transparent;
+  ion-item {
+    ion-label {
+      font-size: 80%;
+    }
+  }
+
+  ion-icon {
+    margin-inline-end: 15px;
+  }
+
+  .only-show {
+    ion-checkbox {
+      margin-inline-end: 15px;
+    }
   }
 }

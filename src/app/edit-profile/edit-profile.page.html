@@ -9,7 +9,6 @@
 </ion-header>
 
 <ion-content>
-
   <ion-row class="ion-padding">
     <ion-col class="content-col">
       <ion-avatar class="user-image">
@@ -19,21 +18,26 @@
     </ion-col>
   </ion-row>
 
-  <div class="ion-padding" style="font-size: 15% !important;">
-    <form>
-      <ion-item class="mt-2">
+  <div class="ion-padding padding-bottom-40">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+      <ion-item class="rounded mt-2">
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="text"></ion-input>
       </ion-item>
-      <ion-item class="mt-2">
+      <ion-item class="rounded mt-2">
         <ion-label position="floating">Apellido</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="text"></ion-input>
       </ion-item>
-      <ion-item class="mt-2">
+      <ion-item class="rounded mt-2">
         <ion-label position="floating">Correo</ion-label>
         <ion-input type="email"></ion-input>
       </ion-item>
-      <ion-item class="mt-2">
+      <ion-item class="rounded mt-2">
+        <ion-label position="floating">Número de Teléfono</ion-label>
+        <ion-input type="tel"></ion-input>
+      </ion-item>
+      <ion-item class="rounded mt-2">
         <ion-label>Género</ion-label>
         <ion-select placeholder="Selecciona uno">
           <ion-select-option value="f">Femenino</ion-select-option>
@@ -41,19 +45,21 @@
           <ion-select-option value="o">Otro</ion-select-option>
         </ion-select>
       </ion-item>
-
-      <!-- Datetime in popover with cover element -->
-      <ion-item class="mt-2" button="true" id="open-date-input">
-        <ion-label>Fecha de nacimiento</ion-label>
-        <ion-text slot="end">{{ dateValue }}</ion-text>
+      
+      <!-- Datetime in popover with input -->
+      <ion-item class="rounded mt-2">
+        <ion-input [value]="dateValue"></ion-input>
+        <ion-button fill="clear" id="open-date-input">
+          <ion-icon icon="calendar"></ion-icon>
+        </ion-button>
         <ion-popover trigger="open-date-input" show-backdrop="false">
           <ng-template>
-            <ion-datetime #popoverDatetime presentation="date"
-              (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+            <ion-datetime placeholder="Fecha de nacimiento" [max]="currentYear - 15" locale="sp-SP" value="2007-12-15" name="birthdate" #popoverDatetime
+              presentation="date" (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
           </ng-template>
         </ion-popover>
       </ion-item>
-    
+
     </form>
   </div>
 </ion-content>

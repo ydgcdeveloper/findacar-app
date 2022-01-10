@@ -45,6 +45,14 @@ const routes: Routes = [
   {
     path: 'filters',
     loadChildren: () => import('./filters/filters.module').then( m => m.FiltersPageModule)
+  },
+  {
+    path: 'add-address',
+    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+  },
+  {
+    path: 'search-location',
+    loadChildren: () => import('./search-location/search-location.module').then( m => m.SearchLocationPageModule)
   }
 ];
 @NgModule({

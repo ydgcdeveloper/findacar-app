@@ -12,7 +12,7 @@ export class ServiceComponent implements OnInit {
   constructor() {
     setTimeout(() => {
       this.getServices()
-    }, 3000)
+    }, 2000)
    }
 
   ngOnInit() {

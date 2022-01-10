@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,26 +8,28 @@ import { format, parseISO } from 'date-fns';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
-  @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
 
-  dateValue = '';
-  dateValue2 = '';
+  dateValue = 'Fecha de Nacimiento';
+  miVariableHora = ''
+  public currentYear = parseInt(new Date().getFullYear().toString());
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.currentYear.toString())
   }
 
-  confirm() {
-    this.datetime.confirm();
+  onSubmit(f: NgForm) {
+    console.log(f.value);  // { first: '', last: '' }
+    console.log(f.valid);  // false
   }
-  
-  reset() {
-    this.datetime.reset();
+
+  validateButton(){
+    console.log(this.miVariableHora)
   }
 
   formatDate(value: string) {
-    return format(parseISO(value), 'MMM dd yyyy');
+    return format(parseISO(value), 'dd MMM yyyy');
   }
 
 }

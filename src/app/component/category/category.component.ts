@@ -11,47 +11,50 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
   encapsulation: ViewEncapsulation.None
 })
 export class CategoryComponent implements OnInit {
+  public show = false;
   private slides: any;
   public categories: Category[] = [
     {
       name: 'Carga pesada',
       color: 'red',
-      description: 'Heavy cargo',
-      photo: `../../../assets/images/carga${this.getRandomInt(1,4)}.jpg`,
+      description: '',
+      photo: `../../../assets/icon/heavy-96.png`,
     },
     {
-      name: 'Electrodomesticos',
+      name: 'Equipos pesados',
       color: 'blue',
       description: 'Carga y transporte de electrodomesticos hasta 1T',
-      photo: `../../../assets/images/carga${this.getRandomInt(1,4)}.jpg`,
+      photo: `../../../assets/images/car-motor.png`,
     },
     {
       name: 'Mudanza',
-      color: 'blue',
+      color: 'green',
       description: 'Para mudanza en todo el país',
-      photo: `../../../assets/images/carga${this.getRandomInt(1,4)}.jpg`,
+      photo: `../../../assets/icon/heavy-green-96.png`,
     },
     {
-      name: 'Personal',
-      color: 'pink',
+      name: 'Mototaxi',
+      color: 'brown',
       description: 'Recogida y transporte de personal a lugares publicos',
-      photo: `../../../assets/images/carga${this.getRandomInt(1,4)}.jpg`,
+      photo: `../../../assets/icon/motorcycle-green-96.png`,
     },
     {
       name: 'Taxi',
       color: 'yellow',
       description: 'Recogida y transporte de personal a lugares especificos',
-      photo: `../../../assets/images/carga${this.getRandomInt(1,4)}.jpg`,
+      photo: `../../../assets/icon/taxi_96.png`,
     }
   ];
 
   ngOnInit() {
-    console.log(this.slides)
+    setTimeout(() => {
+      this.show = true;
+     }, 2000)
   }
 
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); 
+    return Math.floor(Math.random() * (max - min) + min);
   }
 }

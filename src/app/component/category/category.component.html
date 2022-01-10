@@ -1,7 +1,8 @@
+<div class="category-slider" *ngIf="show">
   <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
     [zoom]="true">
-    <ng-template *ngFor="let category of categories" swiperSlide>
-      <div style="padding-top: 5px;" class="success">
+    <ng-template *ngFor="let category of categories" [class]="'cat-'+ category.color" swiperSlide>
+      <div style="padding-top: 5px;">
         <ion-label color="white">
           {{category.name}}
         </ion-label>
@@ -11,3 +12,18 @@
       </div>
     </ng-template>
   </swiper>
+</div>
+
+<div *ngIf="!show">
+  <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+    [zoom]="true">
+    <ng-template *ngFor="let category of categories" swiperSlide>
+      <div style="padding-top: 5px;">
+        <ion-label>
+          <ion-skeleton-text animated style="width: 1500%; height: 30%;"></ion-skeleton-text>
+        </ion-label>
+        <ion-skeleton-text animated style="width: 3000%; height: 70px; top: 15px; left: -45px;"></ion-skeleton-text>
+      </div>
+    </ng-template>
+  </swiper>
+</div>

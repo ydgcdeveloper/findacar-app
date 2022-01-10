@@ -12,4 +12,7 @@ export class FiltersPage implements OnInit {
   ngOnInit() {
   }
 
+  public customFormatter(value: number) {
+    return `$${value}`
+  }
 }
