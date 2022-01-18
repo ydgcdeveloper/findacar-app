@@ -1,7 +1,15 @@
 .welcome {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+
+main {
+  background-color: rgb(128, 0, 0) !important;
+}
+
+:host {
+  background-color: green !important;
 }

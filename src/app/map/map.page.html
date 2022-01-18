@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <!-- Searchbar with cancel button always shown -->
+    <ion-searchbar showCancelButton="always" ionChange="findPlace()" autocomplete="false" placeholder="Escribe la ciudad o pueblo"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.7.3/dist/css/autocomplete.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.7.3/dist/js/autocomplete.min.js"></script>
+  <div id="mapId" style="width: 100%; height: 100%">
+
+  </div>
+  <ion-button class="fixed" *ngIf="showSaveButton">Establecer dirección</ion-button>
+</ion-content>
