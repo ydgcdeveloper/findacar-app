@@ -1,15 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="success">
-    <!-- Searchbar with cancel button always shown -->
-    <ion-searchbar showCancelButton="always" ionChange="findPlace()" autocomplete="false" placeholder="Escribe la ciudad o pueblo"></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]='place' showCancelButton="always" inputmode="search" [value]="place"
+      (ionChange)="findPlace(place)" autocomplete="false" placeholder="Escribe la ciudad o pueblo aquí"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.7.3/dist/css/autocomplete.min.css">
-  <script src="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.7.3/dist/js/autocomplete.min.js"></script>
-  <div id="mapId" style="width: 100%; height: 100%">
-
-  </div>
+  <!-- Segment with secondary color -->
+  <ion-segment (ionChange)="segmentChanged($event)" color="success" scrollable="true">
+    <ion-segment-button value="Holguin" checked>
+      <ion-label>Holguin</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Habana">
+      <ion-label>Habana</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Matanzas">
+      <ion-label>Matanzas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Granma">
+      <ion-label>Granma</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Las Tunas">
+      <ion-label>Las Tunas</ion-label>
+    </ion-segment-button> 
+  </ion-segment>
+  <div class="ion-padding">{{place}}</div>
+  <div id="mapId" style="width: 100%; height: 100%"></div>
   <ion-button class="fixed" *ngIf="showSaveButton">Establecer dirección</ion-button>
 </ion-content>

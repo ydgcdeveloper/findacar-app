@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@awesome-cordova-plugins/core": "^5.37.3",
     "@awesome-cordova-plugins/native-geocoder": "^5.37.3",
     "@capacitor/android": "^3.3.3",
     "@capacitor/core": "^3.3.3",

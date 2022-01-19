@@ -50,30 +50,43 @@ var MapPage = /** @class */ (function () {
         this.geolocation = geolocation;
         this.nativeGeocoder = nativeGeocoder;
         this.toastController = toastController;
+        this.place = '';
         this.accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
         this.showSaveButton = false;
         this.marker = null;
+        this.options = {
+            useLocale: true,
+            maxResults: 5
+        };
     }
     MapPage.prototype.ngOnInit = function () {
         //this.loadMap()
     };
-    MapPage.prototype.findPlace = function () {
-        var options = {
-            useLocale: true,
-            maxResults: 5
-        };
-        this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
-            .then(function (result) { return console.log(JSON.stringify(result[0])); })["catch"](function (error) { return console.log(error); });
-        this.nativeGeocoder.forwardGeocode('Berlin', options)
-            .then(function (result) { return console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude); })["catch"](function (error) { return console.log(error); });
+    MapPage.prototype.segmentChanged = function (e) {
+        var _this = this;
+        var place = e.detail.value;
+        this.nativeGeocoder.forwardGeocode(place, this.options)
+            .then(function (result) {
+            console.log('Changed place to: ' + place);
+            _this.map.locate([result[0].latitude, result[0].longitude], 10);
+        })["catch"](function (error) { _this.presentToast('Place Error: ' + error); });
     };
-    MapPage.prototype.presentToast = function () {
+    MapPage.prototype.findPlace = function (place) {
+        var _this = this;
+        console.log(place);
+        this.nativeGeocoder.forwardGeocode(place, this.options)
+            .then(function (result) {
+            console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude);
+            // this.place = 'The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude;
+        })["catch"](function (error) { _this.presentToast('Error: ' + error); });
+    };
+    MapPage.prototype.presentToast = function (message) {
         return __awaiter(this, void 0, void 0, function () {
             var toast;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastController.create({
-                            message: 'Localización encontrada',
+                            message: message,
                             duration: 3000,
                             icon: "locate-outline",
                             color: 'dark'
@@ -106,15 +119,22 @@ var MapPage = /** @class */ (function () {
             _this.markerLat = e.latlng.lat;
             _this.markerLon = e.latlng.lng;
         }).on('locationfound', function (e) {
-            var radius = e.accuracy;
+            // var radius = e.accuracy;
             var myIcon = Leaflet.icon({
                 iconUrl: 'marker-icon.png',
                 iconAnchor: [12, 41]
             });
-            Leaflet.marker([e.latlng.lat, e.latlng.lng], {
+            _this.latitude = e.latlng.lat;
+            _this.longitude = e.latlng.lng;
+            Leaflet.marker([_this.latitude, _this.longitude], {
                 icon: myIcon
             }).addTo(_this.map);
-            _this.presentToast();
+            _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
+                .then(function (result) {
+                console.log(JSON.stringify(result[0]));
+                _this.place = JSON.stringify(result[0]);
+            })["catch"](function (error) { _this.presentToast('error: ' + error); });
+            _this.presentToast("Localización encontrada");
         });
     };
     MapPage.prototype.leafletMap = function () {
@@ -129,12 +149,6 @@ var MapPage = /** @class */ (function () {
         // antPath([[28.644800, 77.216721], [34.1526, 77.5771]],
         //   { color: '#FF0000', weight: 5, opacity: 0.6 })
         //   .addTo(this.map);
-    };
-    MapPage.prototype.onLocationFound = function (e) {
-        var radius = e.accuracy;
-        Leaflet.marker(e.latlng).addTo(this.map)
-            .bindPopup("You are within " + radius + " meters from this point").openPopup();
-        Leaflet.circle(e.latlng, radius).addTo(this.map);
     };
     MapPage.prototype.loadMap = function () {
         return __awaiter(this, void 0, void 0, function () {

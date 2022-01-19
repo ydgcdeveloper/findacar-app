@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-// import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { ToastController } from '@ionic/angular';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import * as Leaflet from 'leaflet';
 import { Marker, Icon } from 'leaflet'
-import { antPath } from 'leaflet-ant-path';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +12,7 @@ import { antPath } from 'leaflet-ant-path';
 })
 export class MapPage implements OnInit {
   L: Leaflet;
+  public place: string = '';
   map;
   latitude;
   longitude;
@@ -22,6 +21,11 @@ export class MapPage implements OnInit {
   accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
   public showSaveButton = false;
   private marker = null;
+
+  private options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
 
   constructor(
     private geolocation: Geolocation,
@@ -33,24 +37,30 @@ export class MapPage implements OnInit {
     //this.loadMap()
   }
 
-  findPlace() {
-    let options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 5
-    };
-
-    this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
-      .then((result: NativeGeocoderResult[]) => console.log(JSON.stringify(result[0])))
-      .catch((error: any) => console.log(error));
-
-    this.nativeGeocoder.forwardGeocode('Berlin', options)
-      .then((result: NativeGeocoderResult[]) => console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude))
-      .catch((error: any) => console.log(error));
+  segmentChanged(e) {
+    let place = e.detail.value;
+    this.nativeGeocoder.forwardGeocode(place, this.options)
+      .then((result: NativeGeocoderResult[]) => {
+        console.log('Changed place to: ' + place)
+        this.map.locate([result[0].latitude, result[0].longitude ], 10);
+      })
+      .catch((error: any) => { this.presentToast('Place Error: ' + error) });
   }
 
-  async presentToast() {
+  findPlace(place) {
+
+    console.log(place)
+    this.nativeGeocoder.forwardGeocode(place, this.options)
+      .then((result: NativeGeocoderResult[]) => {
+        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+        // this.place = 'The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude;
+      })
+      .catch((error: any) => { this.presentToast('Error: ' + error) });
+  }
+
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Localización encontrada',
+      message,
       duration: 3000,
       icon: "locate-outline",
       color: 'dark'
@@ -64,6 +74,7 @@ export class MapPage implements OnInit {
       iconUrl: 'marker-icon.png',
       iconAnchor: [12, 41],
     });
+
     this.map.on('click', (e) => {
       this.map = this.map;
 
@@ -80,18 +91,28 @@ export class MapPage implements OnInit {
       this.markerLon = e.latlng.lng
 
     }).on('locationfound', (e) => {
-      var radius = e.accuracy;
+      // var radius = e.accuracy;
 
       var myIcon = Leaflet.icon({
         iconUrl: 'marker-icon.png',
         iconAnchor: [12, 41],
       });
 
-      Leaflet.marker([e.latlng.lat, e.latlng.lng], {
+      this.latitude = e.latlng.lat
+      this.longitude = e.latlng.lng
+
+      Leaflet.marker([this.latitude, this.longitude], {
         icon: myIcon
       }).addTo(this.map);
 
-      this.presentToast();
+      this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
+        .then((result: NativeGeocoderResult[]) => {
+          console.log(JSON.stringify(result[0]))
+          this.place = JSON.stringify(result[0]);
+        })
+        .catch((error: any) => { this.presentToast('error: ' + error) });
+      this.presentToast("Localización encontrada")
+        ;
     })
   }
 
@@ -111,17 +132,6 @@ export class MapPage implements OnInit {
     //   { color: '#FF0000', weight: 5, opacity: 0.6 })
     //   .addTo(this.map);
   }
-
-  onLocationFound(e) {
-    var radius = e.accuracy;
-
-    Leaflet.marker(e.latlng).addTo(this.map)
-      .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-    Leaflet.circle(e.latlng, radius).addTo(this.map);
-  }
-
-
 
   async loadMap() {
     await this.geolocation.getCurrentPosition().then((resp) => {
