@@ -13,6 +13,7 @@ import { Marker, Icon } from 'leaflet'
 export class MapPage implements OnInit {
   L: Leaflet;
   public place: string = '';
+  public search: boolean = false;
   map;
   latitude;
   longitude;
@@ -37,17 +38,53 @@ export class MapPage implements OnInit {
     //this.loadMap()
   }
 
+  onCancel(e) {
+    this.search = true;
+  }
+
   segmentChanged(e) {
     let place = e.detail.value;
+
     this.nativeGeocoder.forwardGeocode(place, this.options)
       .then((result: NativeGeocoderResult[]) => {
         console.log('Changed place to: ' + place)
-        this.map.locate([result[0].latitude, result[0].longitude ], 10);
+
+        this.map.flyTo([result[0].latitude, result[0].longitude], 10);
+        switch (place) {
+          case 'Holguin':
+            this.place = 'Cuba, Holguín, Holguín'
+            break;
+          case 'Havana':
+            this.place = 'Cuba, La Habana'
+            break;
+          case 'Matanzas':
+            this.place = 'Cuba, Matanzas, Cárdenas'
+            break;
+          case 'Bayamo':
+            this.place = 'Cuba, Granma, Bayamo'
+            break;
+          case 'Las Tunas':
+            this.place = 'Cuba, Las Tunas, Las Tunas'
+            break;
+          default:
+            this.place = 'Cuba, Holguín, Holguín'
+            break;
+        }
+
       })
-      .catch((error: any) => { this.presentToast('Place Error: ' + error) });
+      .catch((error: any) => {
+        this.presentToast(`Place Error with '${place}': ` + error);
+        this.search = true;
+      });
+    this.search = false;
   }
 
-  findPlace(place) {
+  findPlace(place: string) {
+
+    if (!place.length || !this.search) {
+      this.search = true;
+      return;
+    }
 
     console.log(place)
     this.nativeGeocoder.forwardGeocode(place, this.options)
@@ -86,6 +123,14 @@ export class MapPage implements OnInit {
         icon: myIcon
       }).addTo(this.map);
 
+      this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
+        .then((result: NativeGeocoderResult[]) => {
+          console.log(JSON.stringify(result[0]))
+          let res = result[0];
+          this.place = `${res?.countryName}, ${res?.administrativeArea}, ${res?.locality}`;
+        })
+        .catch((error: any) => { this.presentToast('error click: ' + error) });
+
       this.showSaveButton = true;
       this.markerLat = e.latlng.lat;
       this.markerLon = e.latlng.lng
@@ -108,9 +153,10 @@ export class MapPage implements OnInit {
       this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
         .then((result: NativeGeocoderResult[]) => {
           console.log(JSON.stringify(result[0]))
-          this.place = JSON.stringify(result[0]);
+          let res = result[0];
+          this.place = `${res.countryName}, ${res.administrativeArea}, ${res.locality}`;
         })
-        .catch((error: any) => { this.presentToast('error: ' + error) });
+        .catch((error: any) => { this.presentToast('error found: ' + error) });
       this.presentToast("Localización encontrada")
         ;
     })

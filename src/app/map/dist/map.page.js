@@ -51,6 +51,7 @@ var MapPage = /** @class */ (function () {
         this.nativeGeocoder = nativeGeocoder;
         this.toastController = toastController;
         this.place = '';
+        this.search = false;
         this.accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
         this.showSaveButton = false;
         this.marker = null;
@@ -62,17 +63,48 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.ngOnInit = function () {
         //this.loadMap()
     };
+    MapPage.prototype.onCancel = function (e) {
+        this.search = true;
+    };
     MapPage.prototype.segmentChanged = function (e) {
         var _this = this;
         var place = e.detail.value;
         this.nativeGeocoder.forwardGeocode(place, this.options)
             .then(function (result) {
             console.log('Changed place to: ' + place);
-            _this.map.locate([result[0].latitude, result[0].longitude], 10);
-        })["catch"](function (error) { _this.presentToast('Place Error: ' + error); });
+            _this.map.flyTo([result[0].latitude, result[0].longitude], 10);
+            switch (place) {
+                case 'Holguin':
+                    _this.place = 'Cuba, Holguín, Holguín';
+                    break;
+                case 'Havana':
+                    _this.place = 'Cuba, La Habana';
+                    break;
+                case 'Matanzas':
+                    _this.place = 'Cuba, Matanzas, Cárdenas';
+                    break;
+                case 'Bayamo':
+                    _this.place = 'Cuba, Granma, Bayamo';
+                    break;
+                case 'Las Tunas':
+                    _this.place = 'Cuba, Las Tunas, Las Tunas';
+                    break;
+                default:
+                    _this.place = 'Cuba, Holguín, Holguín';
+                    break;
+            }
+        })["catch"](function (error) {
+            _this.presentToast("Place Error with '" + place + "': " + error);
+            _this.search = true;
+        });
+        this.search = false;
     };
     MapPage.prototype.findPlace = function (place) {
         var _this = this;
+        if (!place.length || !this.search) {
+            this.search = true;
+            return;
+        }
         console.log(place);
         this.nativeGeocoder.forwardGeocode(place, this.options)
             .then(function (result) {
@@ -115,6 +147,12 @@ var MapPage = /** @class */ (function () {
             _this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
                 icon: myIcon
             }).addTo(_this.map);
+            _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
+                .then(function (result) {
+                console.log(JSON.stringify(result[0]));
+                var res = result[0];
+                _this.place = (res === null || res === void 0 ? void 0 : res.countryName) + ", " + (res === null || res === void 0 ? void 0 : res.administrativeArea) + ", " + (res === null || res === void 0 ? void 0 : res.locality);
+            })["catch"](function (error) { _this.presentToast('error click: ' + error); });
             _this.showSaveButton = true;
             _this.markerLat = e.latlng.lat;
             _this.markerLon = e.latlng.lng;
@@ -132,8 +170,9 @@ var MapPage = /** @class */ (function () {
             _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
                 .then(function (result) {
                 console.log(JSON.stringify(result[0]));
-                _this.place = JSON.stringify(result[0]);
-            })["catch"](function (error) { _this.presentToast('error: ' + error); });
+                var res = result[0];
+                _this.place = res.countryName + ", " + res.administrativeArea + ", " + res.locality;
+            })["catch"](function (error) { _this.presentToast('error found: ' + error); });
             _this.presentToast("Localización encontrada");
         });
     };

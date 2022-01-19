@@ -5,19 +5,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollX="false" scrollY="false">
   <!-- Segment with secondary color -->
-  <ion-segment (ionChange)="segmentChanged($event)" color="success" scrollable="true">
-    <ion-segment-button value="Holguin" checked>
+  <ion-segment (ionChange)="segmentChanged($event)" (ionCancel)="onCancel($event)" color="success" value="Holguin" scrollable="true">
+    <ion-segment-button value="Holguin">
       <ion-label>Holguin</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Habana">
-      <ion-label>Habana</ion-label>
+    <ion-segment-button value="Havana">
+      <ion-label>La Habana</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Matanzas">
       <ion-label>Matanzas</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Granma">
+    <ion-segment-button value="Bayamo">
       <ion-label>Granma</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Las Tunas">
