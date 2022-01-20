@@ -7,11 +7,11 @@
 
 <ion-content scrollX="false" scrollY="false">
   <!-- Segment with secondary color -->
-  <ion-segment (ionChange)="segmentChanged($event)" (ionCancel)="onCancel($event)" color="success" value="Holguin" scrollable="true">
+  <ion-segment class="mb-2" (ionChange)="segmentChanged($event)" (ionCancel)="onCancel($event)" color="success" value="Holguin" scrollable="true">
     <ion-segment-button value="Holguin">
       <ion-label>Holguin</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Havana">
+    <ion-segment-button value="Habana">
       <ion-label>La Habana</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Matanzas">
@@ -24,7 +24,6 @@
       <ion-label>Las Tunas</ion-label>
     </ion-segment-button> 
   </ion-segment>
-  <div class="ion-padding">{{place}}</div>
-  <div id="mapId" style="width: 100%; height: 100%"></div>
+  <div id="mapId" style="width: 100%; height: 92%"></div>
   <ion-button class="fixed" *ngIf="showSaveButton">Establecer dirección</ion-button>
 </ion-content>

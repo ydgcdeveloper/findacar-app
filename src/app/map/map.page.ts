@@ -108,7 +108,8 @@ export class MapPage implements OnInit {
   ionViewDidEnter() {
     this.leafletMap();
     var myIcon = Leaflet.icon({
-      iconUrl: 'marker-icon.png',
+      iconUrl: 'marker-shadow.icon',
+      shadowUrl: '../../assets/icon/marker-shadow.png',
       iconAnchor: [12, 41],
     });
 
@@ -123,13 +124,15 @@ export class MapPage implements OnInit {
         icon: myIcon
       }).addTo(this.map);
 
-      this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
+      this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
         .then((result: NativeGeocoderResult[]) => {
           console.log(JSON.stringify(result[0]))
           let res = result[0];
-          this.place = `${res?.countryName}, ${res?.administrativeArea}, ${res?.locality}`;
+          this.place = `${res.countryName}, ${res.administrativeArea}, ${res.locality}`;
         })
-        .catch((error: any) => { this.presentToast('error click: ' + error) });
+        .catch((error: any) => { 
+          this.presentToast('error click: ' + error) 
+        });
 
       this.showSaveButton = true;
       this.markerLat = e.latlng.lat;
@@ -139,8 +142,8 @@ export class MapPage implements OnInit {
       // var radius = e.accuracy;
 
       var myIcon = Leaflet.icon({
-        iconUrl: 'marker-icon.png',
-        iconAnchor: [12, 41],
+        iconUrl: '../../assets/icon/icons8-location-48.png',
+        iconAnchor: [21, 41],
       });
 
       this.latitude = e.latlng.lat
@@ -148,7 +151,7 @@ export class MapPage implements OnInit {
 
       Leaflet.marker([this.latitude, this.longitude], {
         icon: myIcon
-      }).addTo(this.map);
+      }).addTo(this.map).bindPopup('Estás aquí ahora').openPopup();;
 
       this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
         .then((result: NativeGeocoderResult[]) => {
@@ -156,9 +159,11 @@ export class MapPage implements OnInit {
           let res = result[0];
           this.place = `${res.countryName}, ${res.administrativeArea}, ${res.locality}`;
         })
-        .catch((error: any) => { this.presentToast('error found: ' + error) });
-      this.presentToast("Localización encontrada")
-        ;
+        .catch((error: any) => {
+          this.presentToast('error found: ' + error)
+        });
+
+      this.presentToast("Localización encontrada");
     })
   }
 

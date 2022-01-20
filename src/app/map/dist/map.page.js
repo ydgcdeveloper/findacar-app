@@ -135,7 +135,8 @@ var MapPage = /** @class */ (function () {
         var _this = this;
         this.leafletMap();
         var myIcon = Leaflet.icon({
-            iconUrl: 'marker-icon.png',
+            iconUrl: 'marker-shadow.icon',
+            shadowUrl: '../../assets/icon/marker-shadow.png',
             iconAnchor: [12, 41]
         });
         this.map.on('click', function (e) {
@@ -147,32 +148,37 @@ var MapPage = /** @class */ (function () {
             _this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
                 icon: myIcon
             }).addTo(_this.map);
-            _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
+            _this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, _this.options)
                 .then(function (result) {
                 console.log(JSON.stringify(result[0]));
                 var res = result[0];
-                _this.place = (res === null || res === void 0 ? void 0 : res.countryName) + ", " + (res === null || res === void 0 ? void 0 : res.administrativeArea) + ", " + (res === null || res === void 0 ? void 0 : res.locality);
-            })["catch"](function (error) { _this.presentToast('error click: ' + error); });
+                _this.place = res.countryName + ", " + res.administrativeArea + ", " + res.locality;
+            })["catch"](function (error) {
+                _this.presentToast('error click: ' + error);
+            });
             _this.showSaveButton = true;
             _this.markerLat = e.latlng.lat;
             _this.markerLon = e.latlng.lng;
         }).on('locationfound', function (e) {
             // var radius = e.accuracy;
             var myIcon = Leaflet.icon({
-                iconUrl: 'marker-icon.png',
-                iconAnchor: [12, 41]
+                iconUrl: '../../assets/icon/icons8-location-48.png',
+                iconAnchor: [21, 41]
             });
             _this.latitude = e.latlng.lat;
             _this.longitude = e.latlng.lng;
             Leaflet.marker([_this.latitude, _this.longitude], {
                 icon: myIcon
-            }).addTo(_this.map);
+            }).addTo(_this.map).bindPopup('Estás aquí ahora').openPopup();
+            ;
             _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
                 .then(function (result) {
                 console.log(JSON.stringify(result[0]));
                 var res = result[0];
                 _this.place = res.countryName + ", " + res.administrativeArea + ", " + res.locality;
-            })["catch"](function (error) { _this.presentToast('error found: ' + error); });
+            })["catch"](function (error) {
+                _this.presentToast('error found: ' + error);
+            });
             _this.presentToast("Localización encontrada");
         });
     };
