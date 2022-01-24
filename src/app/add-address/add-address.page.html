@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="add-address ion-padding">
+<ion-content class="ion-padding">
+  <div class="add-address padding-bottom-45">
     <ion-item class="rounded mt-2">
       <ion-label position="floating">Nombre de Dirección</ion-label>
       <ion-input type="text" name="address"></ion-input>
@@ -22,7 +22,7 @@
           <ion-img src="../../assets/images/foto_mapa_holguin.png" style="width: 100%;"></ion-img>
         </div>
         <ion-row>
-          <ion-item [routerLink]="['/map']">
+          <ion-item [routerLink]="['/map']" lines="none" class="rounded">
             <ion-label color="primary">Buscar ubicación en el mapa</ion-label>
           </ion-item>
         </ion-row>

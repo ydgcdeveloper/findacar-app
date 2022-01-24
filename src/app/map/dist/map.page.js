@@ -61,6 +61,28 @@ var MapPage = /** @class */ (function () {
         this.places = [];
         this.placesData = [];
         this.showModalplaces = false;
+        this.sample = [
+            {
+                latitude: 75.45,
+                longitude: 59.2,
+                name: "Holguin, Ahi, Ahi"
+            },
+            {
+                latitude: 15.45,
+                longitude: 56.2,
+                name: "Holguin, Ahi, Ahi"
+            },
+            {
+                latitude: 75.45,
+                longitude: 16.2,
+                name: "Holguin, Ahi, Ahi"
+            },
+            {
+                latitude: 5.45,
+                longitude: 66.2,
+                name: "Holguin, Ahi, Ahi"
+            },
+        ];
         this.options = {
             useLocale: true,
             maxResults: 5
@@ -69,14 +91,12 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.ngOnInit = function () {
         //this.loadMap()
     };
-    MapPage.prototype.onClear = function (e) {
+    MapPage.prototype.onClear = function () {
         this.search = true;
-        if (this.modalPlaces) {
-            this.modalPlaces.dismiss();
-            this.places = [];
-            this.placesData = [];
-            this.place = '';
-        }
+        this.dismiss();
+        this.places = [];
+        this.placesData = [];
+        this.place = '';
     };
     MapPage.prototype.goBack = function () {
         this.router.navigate(['add-address']);
@@ -92,9 +112,7 @@ var MapPage = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (this.modalPlaces) {
-                            this.modalPlaces.dismiss();
-                        }
+                        this.dismiss();
                         _a = this;
                         return [4 /*yield*/, this.modalController.create({
                                 component: modal_places_component_1.ModalPlacesComponent,

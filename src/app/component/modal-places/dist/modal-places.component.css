@@ -5,3 +5,10 @@
   margin-top: 49px;
   border-radius: 10px;
 }
+.modal-places ion-label {
+  font-size: 90%;
+  font-weight: bold;
+}
+.modal-places ion-icon {
+  margin-inline-end: 8px;
+}

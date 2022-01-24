@@ -28,6 +28,29 @@ export class MapPage implements OnInit {
   public showModalplaces = false;
   public modalPlaces;
 
+  private sample: any[] = [
+    {
+      latitude: 75.45,
+      longitude: 59.2,
+      name: "Holguin, Ahi, Ahi"
+    },
+    {
+      latitude: 15.45,
+      longitude: 56.2,
+      name: "Holguin, Ahi, Ahi"
+    },
+    {
+      latitude: 75.45,
+      longitude: 16.2,
+      name: "Holguin, Ahi, Ahi"
+    },
+    {
+      latitude: 5.45,
+      longitude: 66.2,
+      name: "Holguin, Ahi, Ahi"
+    },
+  ]
+
   private options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5,
@@ -45,14 +68,12 @@ export class MapPage implements OnInit {
     //this.loadMap()
   }
 
-  onClear(e) {
+  onClear() {
     this.search = true;
-    if (this.modalPlaces) {
-      this.modalPlaces.dismiss();
-      this.places = [];
-      this.placesData = [];
-      this.place = '';
-    }
+    this.dismiss();
+    this.places = [];
+    this.placesData = [];
+    this.place = '';
   }
 
   goBack() {
@@ -61,14 +82,12 @@ export class MapPage implements OnInit {
 
   dismiss() {
     if (this.modalPlaces) {
-      this.modalPlaces.dismiss();
+     this.modalPlaces.dismiss();
     }
   }
 
   async presentModal() {
-    if (this.modalPlaces) {
-      this.modalPlaces.dismiss();
-    }
+    this.dismiss();
     this.modalPlaces = await this.modalController.create({
       component: ModalPlacesComponent,
       cssClass: 'modal-places',

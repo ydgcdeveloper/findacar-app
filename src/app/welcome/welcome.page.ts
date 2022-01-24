@@ -24,6 +24,12 @@ export class WelcomePage implements OnInit {
       console.log('dsadsadsad')
     })
 
+    // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+    //   result => console.log('Has permission?',result.hasPermission),
+    //   err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+    // );
+    
+    // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
 
   }
 

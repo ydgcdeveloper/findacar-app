@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="success">
     <ion-searchbar id="search-place" debounce="800" type="search" animated [(ngModel)]='place' showCancelButton="always"  [value]="place"
-      (ionChange)="findPlace(place)" (ionCancel)="goBack()" (ionClear)="onClear($event)" (ionBlur)="dismiss()" autocomplete="false" placeholder="Escribe la ciudad o pueblo aquí">
+      (ionChange)="findPlace(place)" (ionCancel)="goBack()" (ionClear)="onClear()" (ionBlur)="dismiss()" autocomplete="false" placeholder="Escribe la ciudad o pueblo aquí">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>

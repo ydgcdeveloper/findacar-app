@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
 
 @Component({
@@ -15,11 +16,10 @@ export class ModalPlacesComponent implements OnInit {
 
   ngOnInit() { }
 
-  goToPlace(place) {
-    this.map.flyTo([place.latitude, place.longitude], 13);
+  async goToPlace(place) {
+    this.map.flyTo([place.latitude, place.longitude], 10);   
     if (this.modalPlaces) {
       this.modalPlaces.dismiss();
     }
   }
-
 }
