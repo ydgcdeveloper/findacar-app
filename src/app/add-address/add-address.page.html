@@ -15,14 +15,14 @@
     </ion-item>
     <ion-item class="rounded mt-2">
       <ion-grid>
-        <ion-row>
+        <ion-row class="mb-2">
           <ion-label>Ubicación</ion-label>
         </ion-row>
         <div class="my-location" id="my-location">
-          
+          <ion-img src="../../assets/images/foto_mapa_holguin.png" style="width: 100%;"></ion-img>
         </div>
-        <ion-row class="mt-2">
-          <ion-item href="map">
+        <ion-row>
+          <ion-item [routerLink]="['/map']">
             <ion-label color="primary">Buscar ubicación en el mapa</ion-label>
           </ion-item>
         </ion-row>

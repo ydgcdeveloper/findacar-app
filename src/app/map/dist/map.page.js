@@ -45,16 +45,22 @@ exports.__esModule = true;
 exports.MapPage = void 0;
 var core_1 = require("@angular/core");
 var Leaflet = require("leaflet");
+var modal_places_component_1 = require("../component/modal-places/modal-places.component");
 var MapPage = /** @class */ (function () {
-    function MapPage(geolocation, nativeGeocoder, toastController) {
+    function MapPage(geolocation, nativeGeocoder, toastController, modalController, router) {
         this.geolocation = geolocation;
         this.nativeGeocoder = nativeGeocoder;
         this.toastController = toastController;
+        this.modalController = modalController;
+        this.router = router;
         this.place = '';
         this.search = false;
         this.accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
         this.showSaveButton = false;
         this.marker = null;
+        this.places = [];
+        this.placesData = [];
+        this.showModalplaces = false;
         this.options = {
             useLocale: true,
             maxResults: 5
@@ -63,16 +69,59 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.ngOnInit = function () {
         //this.loadMap()
     };
-    MapPage.prototype.onCancel = function (e) {
+    MapPage.prototype.onClear = function (e) {
         this.search = true;
+        if (this.modalPlaces) {
+            this.modalPlaces.dismiss();
+            this.places = [];
+            this.placesData = [];
+            this.place = '';
+        }
+    };
+    MapPage.prototype.goBack = function () {
+        this.router.navigate(['add-address']);
+    };
+    MapPage.prototype.dismiss = function () {
+        if (this.modalPlaces) {
+            this.modalPlaces.dismiss();
+        }
+    };
+    MapPage.prototype.presentModal = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.modalPlaces) {
+                            this.modalPlaces.dismiss();
+                        }
+                        _a = this;
+                        return [4 /*yield*/, this.modalController.create({
+                                component: modal_places_component_1.ModalPlacesComponent,
+                                cssClass: 'modal-places',
+                                keyboardClose: false,
+                                componentProps: {
+                                    places: this.placesData,
+                                    map: this.map,
+                                    modalPlaces: this.modalPlaces
+                                }
+                            })];
+                    case 1:
+                        _a.modalPlaces = _b.sent();
+                        return [4 /*yield*/, this.modalPlaces.present()];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     MapPage.prototype.segmentChanged = function (e) {
         var _this = this;
         var place = e.detail.value;
         this.nativeGeocoder.forwardGeocode(place, this.options)
             .then(function (result) {
-            console.log('Changed place to: ' + place);
-            _this.map.flyTo([result[0].latitude, result[0].longitude], 10);
+            _this.map.flyTo([result[0].latitude, result[0].longitude], 13);
             switch (place) {
                 case 'Holguin':
                     _this.place = 'Cuba, Holguín, Holguín';
@@ -105,12 +154,50 @@ var MapPage = /** @class */ (function () {
             this.search = true;
             return;
         }
-        console.log(place);
         this.nativeGeocoder.forwardGeocode(place, this.options)
             .then(function (result) {
             console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude);
-            // this.place = 'The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude;
-        })["catch"](function (error) { _this.presentToast('Error: ' + error); });
+            _this.places = [];
+            for (var i = 0; i < result.length; i++) {
+                _this.places.push(result[i]);
+            }
+            _this.presentToast('length: ' + result.length);
+        }).then(function () {
+            if (_this.places.length) {
+                _this.placesData = [];
+                var places_1 = _this.places;
+                var _loop_1 = function (i) {
+                    _this.nativeGeocoder.reverseGeocode(places_1[i].latitude, places_1[i].longitude, _this.options)
+                        .then(function (result) {
+                        var res = result[0];
+                        var phrase = '';
+                        if (res.countryName) {
+                            phrase += res.countryName;
+                        }
+                        if (res.administrativeArea) {
+                            phrase += ", " + res.administrativeArea;
+                        }
+                        if (res.locality) {
+                            phrase += ", " + res.locality;
+                        }
+                        var data = {
+                            latitude: places_1[i].latitude,
+                            longitude: places_1[i].longitude,
+                            name: phrase
+                        };
+                        _this.placesData.push(data);
+                    })["catch"](function (error) {
+                        _this.presentToast('error looking from there: ' + error);
+                    });
+                };
+                for (var i = 0; i < places_1.length; i++) {
+                    _loop_1(i);
+                }
+                _this.presentModal();
+            }
+        })["catch"](function (error) {
+            _this.presentToast('Error: ' + error + ' ' + place);
+        });
     };
     MapPage.prototype.presentToast = function (message) {
         return __awaiter(this, void 0, void 0, function () {
@@ -135,12 +222,12 @@ var MapPage = /** @class */ (function () {
         var _this = this;
         this.leafletMap();
         var myIcon = Leaflet.icon({
-            iconUrl: 'marker-shadow.icon',
+            iconUrl: 'marker-icon.png',
             shadowUrl: '../../assets/icon/marker-shadow.png',
             iconAnchor: [12, 41]
         });
         this.map.on('click', function (e) {
-            _this.map = _this.map;
+            _this.search = false;
             if (_this.marker != null) {
                 _this.marker.remove();
             }
@@ -152,9 +239,20 @@ var MapPage = /** @class */ (function () {
                 .then(function (result) {
                 console.log(JSON.stringify(result[0]));
                 var res = result[0];
-                _this.place = res.countryName + ", " + res.administrativeArea + ", " + res.locality;
+                var phrase = '';
+                if (res.countryName) {
+                    phrase += res.countryName;
+                }
+                if (res.administrativeArea) {
+                    phrase += ", " + res.administrativeArea;
+                }
+                if (res.locality) {
+                    phrase += ", " + res.locality;
+                }
+                _this.place = phrase;
             })["catch"](function (error) {
                 _this.presentToast('error click: ' + error);
+                _this.showSaveButton = false;
             });
             _this.showSaveButton = true;
             _this.markerLat = e.latlng.lat;
@@ -175,7 +273,17 @@ var MapPage = /** @class */ (function () {
                 .then(function (result) {
                 console.log(JSON.stringify(result[0]));
                 var res = result[0];
-                _this.place = res.countryName + ", " + res.administrativeArea + ", " + res.locality;
+                var phrase = '';
+                if (res.countryName) {
+                    phrase += res.countryName;
+                }
+                if (res.administrativeArea) {
+                    phrase += ", " + res.administrativeArea;
+                }
+                if (res.locality) {
+                    phrase += ", " + res.locality;
+                }
+                _this.place = phrase;
             })["catch"](function (error) {
                 _this.presentToast('error found: ' + error);
             });
@@ -183,12 +291,15 @@ var MapPage = /** @class */ (function () {
         });
     };
     MapPage.prototype.leafletMap = function () {
+        if (this.map) {
+            return;
+        }
         this.map = Leaflet.map('mapId');
         Leaflet.tileLayer("https://api.mapbox.com/styles/v1/ydgcdeveloper/ckydhd4y52fln14nxce24lhao/tiles/{z}/{x}/{y}?access_token=" + this.accessToken, {
             attribution: 'Find a Car App',
             minZoom: 2
         }).addTo(this.map);
-        this.map.locate({ setView: true, maxZoom: 15 });
+        this.map.locate({ setView: true, maxZoom: 17 });
         // Leaflet.marker([28.6, 77]).addTo(this.map).bindPopup('Delhi').openPopup();
         // Leaflet.marker([34, 77]).addTo(this.map).bindPopup('Leh').openPopup();
         // antPath([[28.644800, 77.216721], [34.1526, 77.5771]],

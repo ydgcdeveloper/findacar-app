@@ -11,8 +11,4 @@ export class HomePage {
 
   constructor(private router: Router) {}
 
-  goToFilters(){
-    this.router.navigateByUrl("/filters")
-  }
-
 }

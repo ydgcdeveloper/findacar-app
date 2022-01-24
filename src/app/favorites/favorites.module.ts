@@ -11,6 +11,7 @@ import { ServiceComponent } from '../component/service/service.component';
 import { ServiceComponentModule } from '../component/service/service.module';
 
 @NgModule({
+
   imports: [
     CommonModule,
     FormsModule,

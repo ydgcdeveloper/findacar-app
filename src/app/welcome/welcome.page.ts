@@ -19,7 +19,7 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
     const coord = this.getCoordinates();
     coord.then(() =>{
-      this.router.navigateByUrl('/tabs')
+     this.router.navigateByUrl('/tabs')
     } , () => {      
       console.log('dsadsadsad')
     })

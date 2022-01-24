@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.example.app',
-  appName: 'TransApp',
+  appName: 'FindACar',
   webDir: 'www',
   bundledWebRuntime: false
 };

@@ -13,9 +13,8 @@ var router_1 = require("@angular/router");
 var angular_1 = require("@ionic/angular");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
-var service_module_1 = require("./component/service/service.module");
 var ngx_1 = require("@ionic-native/geolocation/ngx");
-var ngx_2 = require("@ionic-native/native-geocoder/ngx");
+var ngx_2 = require("@awesome-cordova-plugins/native-geocoder/ngx");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -23,7 +22,7 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [app_component_1.AppComponent],
             entryComponents: [],
-            imports: [platform_browser_1.BrowserModule, angular_1.IonicModule.forRoot(), app_routing_module_1.AppRoutingModule, service_module_1.ServiceComponentModule],
+            imports: [platform_browser_1.BrowserModule, angular_1.IonicModule.forRoot(), app_routing_module_1.AppRoutingModule],
             providers: [{ provide: router_1.RouteReuseStrategy, useClass: angular_1.IonicRouteStrategy }, ngx_1.Geolocation, ngx_2.NativeGeocoder],
             bootstrap: [app_component_1.AppComponent]
         })

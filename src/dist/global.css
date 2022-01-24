@@ -110,3 +110,12 @@ ion-header .searchbar-input-container input {
 .padding-bottom-60 {
   padding-bottom: 60px !important;
 }
+
+.modal-places {
+  max-height: 258px !important;
+  margin-inline: auto;
+  width: 90%;
+  margin-top: 49px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}

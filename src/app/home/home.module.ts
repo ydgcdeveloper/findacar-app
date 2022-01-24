@@ -9,6 +9,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { HomePageRoutingModule } from './home-routing.module';
 import { CategoryComponent } from '../component/category/category.component';
 import { ServiceComponentModule } from '../component/service/service.module';
+import { ServiceComponent } from '../component/service/service.component';
 
 @NgModule({
   imports: [

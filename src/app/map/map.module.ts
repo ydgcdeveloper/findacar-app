@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MapPageRoutingModule } from './map-routing.module';
 
 import { MapPage } from './map.page';
+import { ModalPlacesComponent } from '../component/modal-places/modal-places.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MapPage } from './map.page';
     IonicModule,
     MapPageRoutingModule
   ],
-  declarations: [MapPage]
+  declarations: [MapPage, ModalPlacesComponent]
 })
 export class MapPageModule {}
