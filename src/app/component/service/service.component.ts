@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Service, ServiceStatus } from 'src/app/interface/service.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-service',
@@ -12,7 +13,7 @@ export class ServiceComponent implements OnInit {
   constructor() {
     setTimeout(() => {
       this.getServices()
-    }, 2000)
+    }, environment.SKELETON_TIME)
    }
 
   ngOnInit() {

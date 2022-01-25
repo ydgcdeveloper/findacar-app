@@ -9,12 +9,33 @@ exports.__esModule = true;
 exports.AddAddressPage = void 0;
 var core_1 = require("@angular/core");
 var AddAddressPage = /** @class */ (function () {
-    function AddAddressPage() {
+    function AddAddressPage(activatedRoute, router) {
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.name = '';
+        this.details = '';
     }
     AddAddressPage.prototype.ngOnInit = function () {
-        this.loadMap();
+        this.id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+        console.log(this.id);
     };
-    AddAddressPage.prototype.loadMap = function () {
+    AddAddressPage.prototype.navigate = function () {
+        if (this.id) {
+            var locationData = {
+                name: 'Cuba, Holguin, Holguin',
+                latitude: 23.5634826412,
+                longitude: 78.2316094
+            };
+            var navigationExtras = {
+                state: {
+                    locationData: locationData
+                }
+            };
+            this.router.navigate(['map'], navigationExtras);
+        }
+        else {
+            this.router.navigate(['map']);
+        }
     };
     AddAddressPage = __decorate([
         core_1.Component({

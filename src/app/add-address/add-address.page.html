@@ -22,8 +22,8 @@
           <ion-img src="../../assets/images/foto_mapa_holguin.png" style="width: 100%;"></ion-img>
         </div>
         <ion-row>
-          <ion-item [routerLink]="['/map']" lines="none" class="rounded">
-            <ion-label color="primary">Buscar ubicación en el mapa</ion-label>
+          <ion-item (click)="navigate()" lines="none">
+            <ion-label  class="item-link" color="primary">Buscar ubicación en el mapa</ion-label>
           </ion-item>
         </ion-row>
       </ion-grid>

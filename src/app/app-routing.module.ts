@@ -47,7 +47,11 @@ const routes: Routes = [
     loadChildren: () => import('./filters/filters.module').then( m => m.FiltersPageModule)
   },
   {
-    path: 'add-address',
+    path: 'add-address',    
+    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+  },
+  {
+    path: 'add-address/:id',
     loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
   },
   {

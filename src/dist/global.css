@@ -119,3 +119,7 @@ ion-header .searchbar-input-container input {
   border-radius: 10px;
   border: 1px solid gray;
 }
+
+.address-sheet .action-sheet-group {
+  text-align: center !important;
+}

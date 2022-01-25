@@ -1,88 +1,46 @@
 <div class="address padding-bottom-40" *ngIf="show">
-  <ion-radio-group value="address">
+  <ion-radio-group value="address" [(ngModel)]="selected">
     <ion-list style="background-color: transparent;">
       <ion-item class="border rounded-25 mt-2">
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
         <ion-radio slot="start" value="address"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
         <ion-label>
           <ion-grid>
             <ion-row class="py-2 text-90">Dirección Actual</ion-row>
             <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
           </ion-grid>
         </ion-label>
+        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
+      </ion-item>
+      <ion-item class="border rounded-25 mt-2">
         <ion-radio slot="start" value="address1"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
         <ion-label>
           <ion-grid>
             <ion-row class="py-2 text-90">Dirección Actual</ion-row>
             <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
           </ion-grid>
         </ion-label>
+        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
+      </ion-item>
+      <ion-item class="border rounded-25 mt-2">
         <ion-radio slot="start" value="address2"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
         <ion-label>
           <ion-grid>
             <ion-row class="py-2 text-90">Dirección Actual</ion-row>
             <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
           </ion-grid>
         </ion-label>
-        <ion-radio slot="start" value="address3"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-radio slot="start" value="address4"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-radio slot="start" value="address5"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-radio slot="start" value="address6"></ion-radio>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-radio slot="start" value="address7"></ion-radio>
+        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-radio-group>
-</div>
 
 
 <div class="address" *ngIf="!show">
   <ion-list style="background-color: transparent;">
     <ion-item class="border rounded-25 mt-2">
-      <ion-avatar slot="start" >
-        <ion-skeleton-text animated style="width: 57%; height: 57%; margin-left: 4px; margin-top: 6px;"></ion-skeleton-text>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 57%; height: 57%; margin-left: 4px; margin-top: 6px;">
+        </ion-skeleton-text>
       </ion-avatar>
       <ion-label>
         <ion-grid>

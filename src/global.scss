@@ -36,15 +36,15 @@ $blue-3: #2196f3;
 $blue-4: #81c9fa;
 $blue-5: #b9ffff;
 
-.circle{
+.circle {
   border-radius: 50% !important;
 }
 
-.rounded{
+.rounded {
   border-radius: 15px;
 }
 
-.rounded-25{
+.rounded-25 {
   border-radius: 25px !important;
 }
 
@@ -119,19 +119,24 @@ ion-header .searchbar-input-container input {
   z-index: 99000;
 }
 
-.padding-bottom-40{
+.padding-bottom-40 {
   padding-bottom: 40px !important;
 }
 
-.padding-bottom-60{
+.padding-bottom-60 {
   padding-bottom: 60px !important;
 }
 
-.modal-places{
+.modal-places {
   max-height: 258px !important;
   margin-inline: auto;
   width: 90%;
   margin-top: 49px;
   border-radius: 10px;
   border: 1px solid gray;
+}
+
+.address-sheet .action-sheet-group {
+  text-align: center !important;
+
 }

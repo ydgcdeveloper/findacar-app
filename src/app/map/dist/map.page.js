@@ -89,7 +89,10 @@ var MapPage = /** @class */ (function () {
         };
     }
     MapPage.prototype.ngOnInit = function () {
-        //this.loadMap()
+        if (this.router.getCurrentNavigation().extras.state) {
+            var locationData = this.router.getCurrentNavigation().extras.state.locationData;
+            console.log(locationData);
+        }
     };
     MapPage.prototype.onClear = function () {
         this.search = true;
@@ -168,7 +171,8 @@ var MapPage = /** @class */ (function () {
     };
     MapPage.prototype.findPlace = function (place) {
         var _this = this;
-        if (!place.length || !this.search) {
+        if (place.length < 3 || !this.search) {
+            this.dismiss();
             this.search = true;
             return;
         }

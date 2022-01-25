@@ -31,4 +31,7 @@ npm-debug.log*
 /www
 /android
 /.angular
+.js
 *.js
+.css
+*.css

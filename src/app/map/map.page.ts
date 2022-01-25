@@ -65,7 +65,10 @@ export class MapPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.loadMap()
+    if (this.router.getCurrentNavigation().extras.state) {
+      let locationData = this.router.getCurrentNavigation().extras.state.locationData;
+      console.log(locationData);      
+    }
   }
 
   onClear() {
@@ -140,7 +143,8 @@ export class MapPage implements OnInit {
 
   findPlace(place: string) {
 
-    if (!place.length || !this.search) {
+    if (place.length < 3 || !this.search) {
+      this.dismiss();
       this.search = true;
       return;
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ export class ProfilePage implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.show = true;
-    }, 2000)
+    }, environment.SKELETON_TIME)
   }
 
 }

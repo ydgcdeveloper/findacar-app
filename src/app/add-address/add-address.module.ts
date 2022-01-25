@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,4 +17,7 @@ import { AddAddressPage } from './add-address.page';
   ],
   declarations: [AddAddressPage]
 })
-export class AddAddressPageModule {}
+export class AddAddressPageModule{
+  
+
+}

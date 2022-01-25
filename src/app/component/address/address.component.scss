@@ -16,4 +16,15 @@
     color: gray;
   }
 
+  ion-radio {
+    margin-inline-end: 10px;
+  }
+
+  ion-icon {
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 95%;
+    z-index: 10;
+  }
 }
+

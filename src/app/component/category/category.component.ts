@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Category } from 'src/app/interface/category.interface';
+import { environment } from 'src/environments/environment';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
@@ -49,7 +50,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.show = true;
-     }, 2000)
+     }, environment.SKELETON_TIME)
   }
 
   getRandomInt(min, max) {
