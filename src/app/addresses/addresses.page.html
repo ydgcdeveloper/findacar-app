@@ -15,7 +15,7 @@
   </ion-fab>
 
   <ion-content class="ion-padding">
-    <app-address></app-address>
-    <ion-button class="fixed">Seleccionar</ion-button>
+    <app-address (selectedToUp)="setSelected($event)"></app-address>
+    <ion-button class="fixed" (click)="saveSelected()">Seleccionar</ion-button>
   </ion-content>
 </ion-content>

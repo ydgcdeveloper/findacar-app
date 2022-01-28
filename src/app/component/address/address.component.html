@@ -1,53 +1,33 @@
-<div class="address padding-bottom-40" *ngIf="show">
-  <ion-radio-group value="address" [(ngModel)]="selected">
+<div class="address padding-bottom-40" *ngIf="addresses">
+  <ion-radio-group (ionChange)="updateSelected()" [(ngModel)]="selected">
     <ion-list style="background-color: transparent;">
-      <ion-item class="border rounded-25 mt-2">
-        <ion-radio slot="start" value="address"></ion-radio>
+      <ion-item *ngFor="let address of addresses" class="border rounded-25 mt-2">
+        <ion-radio slot="start" [value]="address.id"></ion-radio>
         <ion-label>
           <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
+            <ion-row class="py-2 text-90">{{address.name}}</ion-row>
+            <ion-row class="py-2 text-80 gray">{{address.locationData.name}}</ion-row>
           </ion-grid>
         </ion-label>
-        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-radio slot="start" value="address1"></ion-radio>
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
-      </ion-item>
-      <ion-item class="border rounded-25 mt-2">
-        <ion-radio slot="start" value="address2"></ion-radio>
-        <ion-label>
-          <ion-grid>
-            <ion-row class="py-2 text-90">Dirección Actual</ion-row>
-            <ion-row class="py-2 text-80 gray">3, Holguín, Cuba</ion-row>
-          </ion-grid>
-        </ion-label>
-        <ion-icon slot="end" (click)="showT()" class="circle" name="ellipsis-horizontal"></ion-icon>
+        <ion-icon slot="end" (click)="showAction(address.id)" class="circle" name="ellipsis-horizontal"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-radio-group>
-
-
-<div class="address" *ngIf="!show">
-  <ion-list style="background-color: transparent;">
-    <ion-item class="border rounded-25 mt-2">
-      <ion-avatar slot="start">
-        <ion-skeleton-text animated style="width: 57%; height: 57%; margin-left: 4px; margin-top: 6px;">
-        </ion-skeleton-text>
-      </ion-avatar>
-      <ion-label>
-        <ion-grid>
-          <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-          <ion-skeleton-text class="mt-2" animated style="width: 50%"></ion-skeleton-text>
-        </ion-grid>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 </div>
+
+  <div class="address" *ngIf="!addresses">
+    <ion-list style="background-color: transparent;">
+      <ion-item class="border rounded-25 mt-2">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated style="width: 57%; height: 57%; margin-left: 4px; margin-top: 6px;">
+          </ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <ion-grid>
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+            <ion-skeleton-text class="mt-2" animated style="width: 50%"></ion-skeleton-text>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>

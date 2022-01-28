@@ -9,33 +9,51 @@ exports.__esModule = true;
 exports.AddAddressPage = void 0;
 var core_1 = require("@angular/core");
 var AddAddressPage = /** @class */ (function () {
-    function AddAddressPage(activatedRoute, router) {
+    function AddAddressPage(activatedRoute, outlet, router, _service) {
         this.activatedRoute = activatedRoute;
+        this.outlet = outlet;
         this.router = router;
+        this._service = _service;
         this.name = '';
         this.details = '';
     }
     AddAddressPage.prototype.ngOnInit = function () {
-        this.id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-        console.log(this.id);
-    };
-    AddAddressPage.prototype.navigate = function () {
-        if (this.id) {
-            var locationData = {
-                name: 'Cuba, Holguin, Holguin',
-                latitude: 23.5634826412,
-                longitude: 78.2316094
-            };
-            var navigationExtras = {
-                state: {
-                    locationData: locationData
-                }
-            };
-            this.router.navigate(['map'], navigationExtras);
+        var id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+        if (id) {
+            this.address = this._service.getAddressById(id);
+            if (this.address) {
+                this.id = id;
+                this.name = this.address.name;
+                this.details = this.address.details;
+            }
         }
         else {
-            this.router.navigate(['map']);
+            var address = localStorage.getItem('address');
+            if (address) {
+                this.address = JSON.parse(address);
+                this.name = this.address.name;
+                this.details = this.address.details;
+            }
         }
+    };
+    AddAddressPage.prototype.navigate = function () {
+        if (this.address) {
+            localStorage.removeItem('address');
+            localStorage.setItem('address', JSON.stringify(this.address));
+            console.log('navigate in ', this.address);
+        }
+        this.router.navigate(['map']);
+    };
+    AddAddressPage.prototype.saveEditAddress = function () {
+        //edit address case
+        if (this.id) {
+            console.log("edit");
+        }
+        //add address case
+        else {
+            console.log("new");
+        }
+        this.router.navigate(['/addresses']);
     };
     AddAddressPage = __decorate([
         core_1.Component({

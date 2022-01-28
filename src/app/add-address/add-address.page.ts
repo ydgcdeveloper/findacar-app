@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { IonRouterOutlet } from '@ionic/angular';
+import { Address } from '../api/interfaces/address/address.interface';
+import { AddressService } from '../api/services/address/address.service';
 
 @Component({
   selector: 'app-add-address',
@@ -7,34 +10,53 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./add-address.page.scss'],
 })
 export class AddAddressPage implements OnInit {
-  public id: number;
   public name: string = '';
   public details: string = '';
-  public address: string;
+  public address: Address;
+  public locationData;
+  id;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private outlet: IonRouterOutlet, private router: Router, private _service: AddressService) { }
 
   ngOnInit(): void {
-    this.id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    console.log(this.id);
+    let id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    if (id) {
+      this.address = this._service.getAddressById(id)
+      if (this.address) {
+        this.id = id;
+        this.name = this.address.name;
+        this.details = this.address.details;
+      }
+    } else {
+      let address = localStorage.getItem('address');
+      if (address) {
+        this.address = JSON.parse(address);
+        this.name = this.address.name;
+        this.details = this.address.details;
+      }
+    }
+
   }
 
   navigate() {
-    if (this.id) {
-      let locationData = {
-        name: 'Cuba, Holguin, Holguin',
-        latitude: 23.5634826412,
-        longitude: 78.2316094,
-      }
-      let navigationExtras: NavigationExtras = {
-        state: {
-          locationData
-        }
-      };
-      this.router.navigate(['map'], navigationExtras)
-    } else {
-      this.router.navigate(['map'])
+    if (this.address) {
+      localStorage.removeItem('address');
+      localStorage.setItem('address', JSON.stringify(this.address))
+      console.log('navigate in ', this.address);
     }
+    this.router.navigate(['map'])
+  }
+
+  saveEditAddress(){
+    //edit address case
+    if(this.id){
+console.log("edit");
+    }
+    //add address case
+    else{
+console.log("new");
+    }
+    this.router.navigate(['/addresses'])
   }
 
 }

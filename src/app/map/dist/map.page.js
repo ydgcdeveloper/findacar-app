@@ -47,12 +47,14 @@ var core_1 = require("@angular/core");
 var Leaflet = require("leaflet");
 var modal_places_component_1 = require("../component/modal-places/modal-places.component");
 var MapPage = /** @class */ (function () {
-    function MapPage(geolocation, nativeGeocoder, toastController, modalController, router) {
+    function MapPage(geolocation, nativeGeocoder, toastController, modalController, router, navCtrl, outlet) {
         this.geolocation = geolocation;
         this.nativeGeocoder = nativeGeocoder;
         this.toastController = toastController;
         this.modalController = modalController;
         this.router = router;
+        this.navCtrl = navCtrl;
+        this.outlet = outlet;
         this.place = '';
         this.search = false;
         this.accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
@@ -61,6 +63,11 @@ var MapPage = /** @class */ (function () {
         this.places = [];
         this.placesData = [];
         this.showModalplaces = false;
+        this.markerIcon = Leaflet.icon({
+            iconUrl: 'marker-icon.png',
+            shadowUrl: '../../assets/icon/marker-shadow.png',
+            iconAnchor: [12, 41]
+        });
         this.sample = [
             {
                 latitude: 75.45,
@@ -89,10 +96,114 @@ var MapPage = /** @class */ (function () {
         };
     }
     MapPage.prototype.ngOnInit = function () {
-        if (this.router.getCurrentNavigation().extras.state) {
-            var locationData = this.router.getCurrentNavigation().extras.state.locationData;
-            console.log(locationData);
+        var address = localStorage.getItem('address');
+        if (address) {
+            this.address = JSON.parse(address);
         }
+        console.log('init');
+    };
+    MapPage.prototype.placeMarker = function () {
+        if (this.marker != null) {
+            this.marker.remove();
+        }
+        ;
+        console.log('place marker');
+        this.marker = Leaflet.marker([this.address.locationData.latitude, this.address.locationData.longitude], {
+            icon: this.markerIcon
+        }).addTo(this.map).bindPopup(this.address.name).openPopup();
+    };
+    MapPage.prototype.ionViewDidEnter = function () {
+        var _this = this;
+        var address = localStorage.getItem('address');
+        if (address) {
+            this.address = JSON.parse(address);
+        }
+        console.log('did enter');
+        if (!this.map) {
+            this.leafletMap();
+            this.map
+                .on('click', function (e) {
+                _this.search = false;
+                if (_this.marker != null) {
+                    _this.marker.remove();
+                }
+                ;
+                _this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
+                    icon: _this.markerIcon
+                }).addTo(_this.map);
+                _this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, _this.options)
+                    .then(function (result) {
+                    var res = result[0];
+                    var phrase = '';
+                    if (res.countryName) {
+                        phrase += res.countryName;
+                    }
+                    if (res.administrativeArea) {
+                        phrase += ", " + res.administrativeArea;
+                    }
+                    if (res.locality) {
+                        phrase += ", " + res.locality;
+                    }
+                    _this.place = phrase;
+                })["catch"](function (error) {
+                    _this.presentToast('error click: ' + error);
+                    _this.showSaveButton = false;
+                });
+                _this.showSaveButton = true;
+                _this.markerLat = e.latlng.lat;
+                _this.markerLon = e.latlng.lng;
+                _this.markerName = _this.showSaveButton ? _this.place : 'Sin nombre';
+                console.log(_this.markerLat + '  ' + _this.markerLon);
+            }).on('locationfound', function (e) {
+                var myIcon = Leaflet.icon({
+                    iconUrl: '../../assets/icon/icons8-location-48.png',
+                    iconAnchor: [21, 41]
+                });
+                _this.latitude = e.latlng.lat;
+                _this.longitude = e.latlng.lng;
+                Leaflet.marker([_this.latitude, _this.longitude], {
+                    icon: myIcon
+                }).addTo(_this.map).bindPopup('Estás aquí ahora').openPopup();
+                _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
+                    .then(function (result) {
+                    var res = result[0];
+                    var phrase = '';
+                    if (res.countryName) {
+                        phrase += res.countryName;
+                    }
+                    if (res.administrativeArea) {
+                        phrase += ", " + res.administrativeArea;
+                    }
+                    if (res.locality) {
+                        phrase += ", " + res.locality;
+                    }
+                    _this.place = phrase;
+                })["catch"](function (error) {
+                    _this.presentToast('error found: ' + error);
+                });
+                _this.presentToast("Localización encontrada");
+            });
+        }
+        //Colocar marcador en modo edición
+        if (this.address) {
+            this.placeMarker();
+        }
+    };
+    // navigate to add-address
+    MapPage.prototype.saveEdit = function () {
+        var address = {
+            id: this.address.id,
+            name: this.address.name,
+            details: this.address.details,
+            locationData: {
+                name: this.markerName,
+                latitude: this.markerLat,
+                longitude: this.markerLon
+            }
+        };
+        localStorage.removeItem('address');
+        localStorage.setItem('address', JSON.stringify(address));
+        this.router.navigate(['add-address']);
     };
     MapPage.prototype.onClear = function () {
         this.search = true;
@@ -240,82 +351,7 @@ var MapPage = /** @class */ (function () {
             });
         });
     };
-    MapPage.prototype.ionViewDidEnter = function () {
-        var _this = this;
-        this.leafletMap();
-        var myIcon = Leaflet.icon({
-            iconUrl: 'marker-icon.png',
-            shadowUrl: '../../assets/icon/marker-shadow.png',
-            iconAnchor: [12, 41]
-        });
-        this.map.on('click', function (e) {
-            _this.search = false;
-            if (_this.marker != null) {
-                _this.marker.remove();
-            }
-            ;
-            _this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
-                icon: myIcon
-            }).addTo(_this.map);
-            _this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, _this.options)
-                .then(function (result) {
-                console.log(JSON.stringify(result[0]));
-                var res = result[0];
-                var phrase = '';
-                if (res.countryName) {
-                    phrase += res.countryName;
-                }
-                if (res.administrativeArea) {
-                    phrase += ", " + res.administrativeArea;
-                }
-                if (res.locality) {
-                    phrase += ", " + res.locality;
-                }
-                _this.place = phrase;
-            })["catch"](function (error) {
-                _this.presentToast('error click: ' + error);
-                _this.showSaveButton = false;
-            });
-            _this.showSaveButton = true;
-            _this.markerLat = e.latlng.lat;
-            _this.markerLon = e.latlng.lng;
-        }).on('locationfound', function (e) {
-            // var radius = e.accuracy;
-            var myIcon = Leaflet.icon({
-                iconUrl: '../../assets/icon/icons8-location-48.png',
-                iconAnchor: [21, 41]
-            });
-            _this.latitude = e.latlng.lat;
-            _this.longitude = e.latlng.lng;
-            Leaflet.marker([_this.latitude, _this.longitude], {
-                icon: myIcon
-            }).addTo(_this.map).bindPopup('Estás aquí ahora').openPopup();
-            ;
-            _this.nativeGeocoder.reverseGeocode(_this.latitude, _this.longitude, _this.options)
-                .then(function (result) {
-                console.log(JSON.stringify(result[0]));
-                var res = result[0];
-                var phrase = '';
-                if (res.countryName) {
-                    phrase += res.countryName;
-                }
-                if (res.administrativeArea) {
-                    phrase += ", " + res.administrativeArea;
-                }
-                if (res.locality) {
-                    phrase += ", " + res.locality;
-                }
-                _this.place = phrase;
-            })["catch"](function (error) {
-                _this.presentToast('error found: ' + error);
-            });
-            _this.presentToast("Localización encontrada");
-        });
-    };
     MapPage.prototype.leafletMap = function () {
-        if (this.map) {
-            return;
-        }
         this.map = Leaflet.map('mapId');
         Leaflet.tileLayer("https://api.mapbox.com/styles/v1/ydgcdeveloper/ckydhd4y52fln14nxce24lhao/tiles/{z}/{x}/{y}?access_token=" + this.accessToken, {
             attribution: 'Find a Car App',

@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
-import { IonRouterOutlet, ModalController, ToastController } from '@ionic/angular';
+import { IonRouterOutlet, ModalController, NavController, ToastController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
 import { ModalPlacesComponent } from '../component/modal-places/modal-places.component';
 import { Router } from '@angular/router';
+import { Address } from '../api/interfaces/address/address.interface';
 
 @Component({
   selector: 'app-map',
@@ -18,8 +19,9 @@ export class MapPage implements OnInit {
   public map;
   latitude;
   longitude;
-  markerLat;
-  markerLon;
+  markerLat: number;
+  markerLon: number;
+  markerName: string;
   accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
   public showSaveButton = false;
   private marker = null;
@@ -27,6 +29,12 @@ export class MapPage implements OnInit {
   public placesData: any[] = [];
   public showModalplaces = false;
   public modalPlaces;
+  address: Address;
+  markerIcon = Leaflet.icon({
+    iconUrl: 'marker-icon.png',
+    shadowUrl: '../../assets/icon/marker-shadow.png',
+    iconAnchor: [12, 41],
+  });
 
   private sample: any[] = [
     {
@@ -61,14 +69,142 @@ export class MapPage implements OnInit {
     private nativeGeocoder: NativeGeocoder,
     public toastController: ToastController,
     public modalController: ModalController,
-    private router: Router) {
+    private router: Router,
+    public navCtrl: NavController,
+    private outlet: IonRouterOutlet) {
   }
 
   ngOnInit() {
-    if (this.router.getCurrentNavigation().extras.state) {
-      let locationData = this.router.getCurrentNavigation().extras.state.locationData;
-      console.log(locationData);      
+
+    let address = localStorage.getItem('address');
+    if (address) {
+      this.address = JSON.parse(address);
     }
+    console.log('init');
+  }
+
+  placeMarker() {
+    if (this.marker != null) {
+      this.marker.remove()
+    };
+
+    console.log('place marker');
+    this.marker = Leaflet.marker([this.address.locationData.latitude, this.address.locationData.longitude], {
+      icon: this.markerIcon,
+    }).addTo(this.map).bindPopup(this.address.name).openPopup();
+  }
+
+  ionViewDidEnter() {
+
+    let address = localStorage.getItem('address');
+    if (address) {
+      this.address = JSON.parse(address);
+    }
+
+    console.log('did enter');
+    if (!this.map) {
+
+      this.leafletMap();
+
+      this.map
+        .on('click', (e) => {
+
+          this.search = false;
+          if (this.marker != null) {
+            this.marker.remove()
+          };
+
+          this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
+            icon: this.markerIcon,
+          }).addTo(this.map);
+
+          this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
+            .then((result: NativeGeocoderResult[]) => {
+              let res = result[0];
+              var phrase = '';
+              if (res.countryName) {
+                phrase += res.countryName;
+              }
+              if (res.administrativeArea) {
+                phrase += `, ${res.administrativeArea}`;
+              }
+              if (res.locality) {
+                phrase += `, ${res.locality}`;
+              }
+              this.place = phrase;
+            })
+            .catch((error: any) => {
+              this.presentToast('error click: ' + error)
+              this.showSaveButton = false;
+            });
+
+          this.showSaveButton = true;
+          this.markerLat = e.latlng.lat;
+          this.markerLon = e.latlng.lng
+          this.markerName = this.showSaveButton ? this.place : 'Sin nombre';
+
+          console.log(this.markerLat + '  ' + this.markerLon);
+
+        }).on('locationfound', (e) => {
+
+          var myIcon = Leaflet.icon({
+            iconUrl: '../../assets/icon/icons8-location-48.png',
+            iconAnchor: [21, 41],
+          });
+
+          this.latitude = e.latlng.lat
+          this.longitude = e.latlng.lng
+
+          Leaflet.marker([this.latitude, this.longitude], {
+            icon: myIcon
+          }).addTo(this.map).bindPopup('Estás aquí ahora').openPopup();
+
+          this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
+            .then((result: NativeGeocoderResult[]) => {
+              let res = result[0];
+              var phrase = '';
+              if (res.countryName) {
+                phrase += res.countryName;
+              }
+              if (res.administrativeArea) {
+                phrase += `, ${res.administrativeArea}`;
+              }
+              if (res.locality) {
+                phrase += `, ${res.locality}`;
+              }
+              this.place = phrase;
+            })
+            .catch((error: any) => {
+              this.presentToast('error found: ' + error)
+            });
+
+          this.presentToast("Localización encontrada");
+        })
+    }
+    //Colocar marcador en modo edición
+    if (this.address) {
+      this.placeMarker();
+    }
+  }
+
+  // navigate to add-address
+  saveEdit() {
+
+    let address = {
+      id: this.address.id,
+      name: this.address.name,
+      details: this.address.details,
+      locationData: {
+        name: this.markerName,
+        latitude: this.markerLat,
+        longitude: this.markerLon,
+      }
+    }
+
+    localStorage.removeItem('address');
+    localStorage.setItem('address', JSON.stringify(address))
+
+    this.router.navigate(['add-address']);
   }
 
   onClear() {
@@ -85,7 +221,7 @@ export class MapPage implements OnInit {
 
   dismiss() {
     if (this.modalPlaces) {
-     this.modalPlaces.dismiss();
+      this.modalPlaces.dismiss();
     }
   }
 
@@ -207,94 +343,10 @@ export class MapPage implements OnInit {
     toast.present();
   }
 
-  ionViewDidEnter() {
-    this.leafletMap();
-    var myIcon = Leaflet.icon({
-      iconUrl: 'marker-icon.png',
-      shadowUrl: '../../assets/icon/marker-shadow.png',
-      iconAnchor: [12, 41],
-    });
-
-    this.map.on('click', (e) => {
-
-      this.search = false;
-      if (this.marker != null) {
-        this.marker.remove()
-      };
-
-      this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
-        icon: myIcon
-      }).addTo(this.map);
-
-      this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
-        .then((result: NativeGeocoderResult[]) => {
-          console.log(JSON.stringify(result[0]))
-          let res = result[0];
-          var phrase = '';
-          if (res.countryName) {
-            phrase += res.countryName;
-          }
-          if (res.administrativeArea) {
-            phrase += `, ${res.administrativeArea}`;
-          }
-          if (res.locality) {
-            phrase += `, ${res.locality}`;
-          }
-          this.place = phrase;
-        })
-        .catch((error: any) => {
-          this.presentToast('error click: ' + error)
-          this.showSaveButton = false;
-        });
-
-      this.showSaveButton = true;
-      this.markerLat = e.latlng.lat;
-      this.markerLon = e.latlng.lng
-
-    }).on('locationfound', (e) => {
-      // var radius = e.accuracy;
-
-      var myIcon = Leaflet.icon({
-        iconUrl: '../../assets/icon/icons8-location-48.png',
-        iconAnchor: [21, 41],
-      });
-
-      this.latitude = e.latlng.lat
-      this.longitude = e.latlng.lng
-
-      Leaflet.marker([this.latitude, this.longitude], {
-        icon: myIcon
-      }).addTo(this.map).bindPopup('Estás aquí ahora').openPopup();;
-
-      this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
-        .then((result: NativeGeocoderResult[]) => {
-          console.log(JSON.stringify(result[0]))
-          let res = result[0];
-          var phrase = '';
-          if (res.countryName) {
-            phrase += res.countryName;
-          }
-          if (res.administrativeArea) {
-            phrase += `, ${res.administrativeArea}`;
-          }
-          if (res.locality) {
-            phrase += `, ${res.locality}`;
-          }
-          this.place = phrase;
-        })
-        .catch((error: any) => {
-          this.presentToast('error found: ' + error)
-        });
-
-      this.presentToast("Localización encontrada");
-    })
-  }
 
   leafletMap() {
 
-    if (this.map) {
-      return;
-    }
+
     this.map = Leaflet.map('mapId');
     Leaflet.tileLayer(`https://api.mapbox.com/styles/v1/ydgcdeveloper/ckydhd4y52fln14nxce24lhao/tiles/{z}/{x}/{y}?access_token=${this.accessToken}`, {
       attribution: 'Find a Car App',

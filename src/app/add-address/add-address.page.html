@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="addresses"></ion-back-button>
+      <ion-back-button [routerLink]="['/addresses']"></ion-back-button>
     </ion-buttons>
     <ion-title>Agregar Dirección</ion-title>
   </ion-toolbar>
@@ -11,7 +11,7 @@
   <div class="add-address padding-bottom-45">
     <ion-item class="rounded mt-2">
       <ion-label position="floating">Nombre de Dirección</ion-label>
-      <ion-input type="text" name="address"></ion-input>
+      <ion-input type="text" name="address" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item class="rounded mt-2">
       <ion-grid>
@@ -30,8 +30,8 @@
     </ion-item>
     <ion-item class="rounded mt-2">
       <ion-label position="floating">Añadir detalles de la dirección</ion-label>
-      <ion-textarea placeholder="En un pasillo, casa pintada de verde..." rows="4" spellcheck="true"></ion-textarea>
+      <ion-textarea placeholder="En un pasillo, casa pintada de verde..." rows="4" [(ngModel)]="details" spellcheck="true"></ion-textarea>
     </ion-item>
-    <ion-button class="fixed">Guardar</ion-button>
+    <ion-button class="fixed" (click)="saveEditAddress()">Guardar</ion-button>
   </div>
 </ion-content>

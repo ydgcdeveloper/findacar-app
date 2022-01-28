@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddAddressPageRoutingModule } from './add-address-routing.module';
 
 import { AddAddressPage } from './add-address.page';
+import { AddressService } from '../api/services/address/address.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { AddAddressPage } from './add-address.page';
     IonicModule,
     AddAddressPageRoutingModule
   ],
+  providers:[AddressService],
   declarations: [AddAddressPage]
 })
 export class AddAddressPageModule{
