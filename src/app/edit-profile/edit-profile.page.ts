@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { format, parseISO } from 'date-fns';
 import {NgForm} from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,11 +13,15 @@ export class EditProfilePage implements OnInit {
   dateValue = 'Fecha de Nacimiento';
   miVariableHora = ''
   public currentYear = parseInt(new Date().getFullYear().toString());
+  show: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
     console.log(this.currentYear.toString())
+    setTimeout(() => {
+      this.show = true;
+    }, environment.SKELETON_TIME)
   }
 
   onSubmit(f: NgForm) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { IonRouterOutlet } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 import { Address } from '../api/interfaces/address/address.interface';
 import { AddressService } from '../api/services/address/address.service';
 
@@ -15,10 +16,14 @@ export class AddAddressPage implements OnInit {
   public address: Address;
   public locationData;
   id;
+  show: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private outlet: IonRouterOutlet, private router: Router, private _service: AddressService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.show = true;
+    }, environment.SKELETON_TIME)
     let id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
       this.address = this._service.getAddressById(id)
@@ -47,14 +52,14 @@ export class AddAddressPage implements OnInit {
     this.router.navigate(['map'])
   }
 
-  saveEditAddress(){
+  saveEditAddress() {
     //edit address case
-    if(this.id){
-console.log("edit");
+    if (this.id) {
+      console.log("edit");
     }
     //add address case
-    else{
-console.log("new");
+    else {
+      console.log("new");
     }
     this.router.navigate(['/addresses'])
   }

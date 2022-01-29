@@ -12,6 +12,12 @@ ion-content {
     border: 1px solid gray;
   }
 
+  .user-image-skeleton{
+    height: 100px;
+    width: 100px;
+    margin: auto;
+  }
+
   .edit-avatar {
     position: relative;
     top: -35px;

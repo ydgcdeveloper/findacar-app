@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.AddAddressPage = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("src/environments/environment");
 var AddAddressPage = /** @class */ (function () {
     function AddAddressPage(activatedRoute, outlet, router, _service) {
         this.activatedRoute = activatedRoute;
@@ -16,8 +17,13 @@ var AddAddressPage = /** @class */ (function () {
         this._service = _service;
         this.name = '';
         this.details = '';
+        this.show = false;
     }
     AddAddressPage.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.show = true;
+        }, environment_1.environment.SKELETON_TIME);
         var id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
         if (id) {
             this.address = this._service.getAddressById(id);

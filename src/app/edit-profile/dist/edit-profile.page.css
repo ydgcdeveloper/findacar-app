@@ -10,6 +10,11 @@ ion-content .user-image {
   margin: auto;
   border: 1px solid gray;
 }
+ion-content .user-image-skeleton {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
 ion-content .edit-avatar {
   position: relative;
   top: -35px;
