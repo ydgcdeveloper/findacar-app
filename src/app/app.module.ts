@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+// import { Device } from '@awesome-cordova-plugins/device/ngx';
+// import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],

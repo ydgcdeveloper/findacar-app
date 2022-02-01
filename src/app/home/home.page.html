@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-row class="ion-align-items-center">
       <ion-col size="10">
-        <ion-searchbar class="rounded" placeholder="Buscar transporte">
+        <ion-searchbar class="rounded" (ionFocus)="yeah()" placeholder="Buscar transporte">
         </ion-searchbar>
       </ion-col>
       <ion-col>
@@ -19,7 +19,32 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <app-category></app-category>
+    
+
+    <div class="category-slider" *ngIf="categories">
+      <swiper [slidesPerView]="3" [autoplay]="true" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+        [zoom]="true">
+        <ng-template *ngFor="let category of categories" [class]="'cat-'+ category.color" swiperSlide>
+          <app-category [category]="category"></app-category>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <div *ngIf="!categories">
+      <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+        [zoom]="true">
+        <ng-template *ngFor="let item of [1,2,3,4,5,6,7]" swiperSlide>
+          <div style="padding-top: 5px;">
+            <ion-label>
+              <ion-skeleton-text animated style="width: 1500%; height: 30%;" class="rounded"></ion-skeleton-text>
+            </ion-label>
+            <ion-skeleton-text animated style="width: 3000%; height: 70px; top: 15px; left: -45px;"></ion-skeleton-text>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+    
+
     <ion-title size="large" class="ml-3">Todos los transportes</ion-title>
     <app-service></app-service>
   </ion-content>

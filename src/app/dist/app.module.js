@@ -15,6 +15,8 @@ var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ngx_1 = require("@ionic-native/geolocation/ngx");
 var ngx_2 = require("@awesome-cordova-plugins/native-geocoder/ngx");
+// import { Device } from '@awesome-cordova-plugins/device/ngx';
+// import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }

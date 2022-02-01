@@ -17,6 +17,7 @@ export class AddAddressPage implements OnInit {
   public locationData;
   id;
   show: boolean = false;
+  editable: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private outlet: IonRouterOutlet, private router: Router, private _service: AddressService) { }
 
@@ -24,6 +25,7 @@ export class AddAddressPage implements OnInit {
     setTimeout(() => {
       this.show = true;
     }, environment.SKELETON_TIME)
+
     let id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
       this.address = this._service.getAddressById(id)
@@ -41,6 +43,7 @@ export class AddAddressPage implements OnInit {
       }
     }
 
+    this.editable = this.id ? true : false;
   }
 
   navigate() {

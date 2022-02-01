@@ -1,5 +1,5 @@
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
@@ -7,9 +7,8 @@ import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { CategoryComponent } from '../component/category/category.component';
 import { ServiceComponentModule } from '../component/service/service.module';
-import { ServiceComponent } from '../component/service/service.component';
+import { CategoryComponentModule } from '../component/category/category.module';
 
 @NgModule({
   imports: [
@@ -19,8 +18,10 @@ import { ServiceComponent } from '../component/service/service.component';
     ExploreContainerComponentModule,
     HomePageRoutingModule,
     ServiceComponentModule,
-    SwiperModule
+    SwiperModule,
+    CategoryComponentModule
   ],
-  declarations: [HomePage, CategoryComponent]
+  declarations: [HomePage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

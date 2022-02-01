@@ -1,7 +1,7 @@
 <div class="address padding-bottom-40" *ngIf="addresses">
   <ion-radio-group (ionChange)="updateSelected()" [(ngModel)]="selected">
     <ion-list style="background-color: transparent;">
-      <ion-item *ngFor="let address of addresses" class="border rounded-25 mt-2">
+      <ion-item *ngFor="let address of addresses" class="border rounded-25 mt-2" lines="none">
         <ion-radio slot="start" [value]="address.id"></ion-radio>
         <ion-label>
           <ion-grid>
@@ -17,15 +17,15 @@
 
   <div class="address" *ngIf="!addresses">
     <ion-list style="background-color: transparent;">
-      <ion-item class="border rounded-25 mt-2">
+      <ion-item class="border rounded-25 mt-2" lines="none">
         <ion-avatar slot="start">
           <ion-skeleton-text animated style="width: 57%; height: 57%; margin-left: 4px; margin-top: 6px;">
           </ion-skeleton-text>
         </ion-avatar>
         <ion-label>
           <ion-grid>
-            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
-            <ion-skeleton-text class="mt-2" animated style="width: 50%"></ion-skeleton-text>
+            <ion-skeleton-text class="rounded" animated style="width: 40%"></ion-skeleton-text>
+            <ion-skeleton-text class="mt-2 rounded" animated style="width: 60%"></ion-skeleton-text>
           </ion-grid>
         </ion-label>
       </ion-item>

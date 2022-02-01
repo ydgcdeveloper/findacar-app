@@ -18,6 +18,7 @@ var AddAddressPage = /** @class */ (function () {
         this.name = '';
         this.details = '';
         this.show = false;
+        this.editable = false;
     }
     AddAddressPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -41,6 +42,7 @@ var AddAddressPage = /** @class */ (function () {
                 this.details = this.address.details;
             }
         }
+        this.editable = this.id ? true : false;
     };
     AddAddressPage.prototype.navigate = function () {
         if (this.address) {

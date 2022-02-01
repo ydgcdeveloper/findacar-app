@@ -15,4 +15,22 @@
       margin-inline-end: 15px;
     }
   }
+
+  .categories {
+    ion-row{
+      ion-label {
+        font-size: 75%;
+      }
+
+      ion-ckeckbox{
+        --size: 5px;
+      }
+    }
+  }
+
+ 
+}
+
+.no-padding {
+  padding: 0 !important;
 }

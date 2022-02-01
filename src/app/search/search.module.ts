@@ -6,6 +6,7 @@ import { SearchPage } from './search.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { SearchPageRoutingModule } from './search-routing.module';
+import { CategoryComponentModule } from '../component/category/category.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SearchPageRoutingModule } from './search-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    SearchPageRoutingModule
+    SearchPageRoutingModule,
+    CategoryComponentModule
   ],
   declarations: [SearchPage]
 })

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar style="background-color: beige;">
-    <ion-searchbar class="rounded" placeholder="Buscar transporte">
+    <ion-searchbar #searcher class="rounded" placeholder="Buscar transporte">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -11,6 +11,142 @@
       <ion-title size="large">Search</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-content class="ion-padding">
+    <div *ngIf="categories">
+      <ion-grid style="align-content: center;">
+        <ion-row style="row-gap: 15px; column-gap: 17px;">
+          <ion-col size="3" *ngFor="let category of categories" [class]="'cat-'+ category.color" class="category">
+            <app-category [category]="category"></app-category>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    
+    <div *ngIf="!categories">
+      <ion-grid style="justify-content: center;">
+        <ion-row style="row-gap: 15px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+        <ion-row style="row-gap: 15px; margin-top: 35px;">
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+          <ion-col>
+            <ion-thumbnail>
+              <ion-skeleton-text animated style="width: 85px; height: 85px;" class="rounded"></ion-skeleton-text>
+            </ion-thumbnail>
+          </ion-col>          
+        </ion-row> 
+      </ion-grid>
+    </div>
+  </ion-content>
 
   <app-explore-container name="Search"></app-explore-container>
 </ion-content>

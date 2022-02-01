@@ -5,3 +5,76 @@
   padding: 11px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
 }
+
+/* swiper module*/
+@import '~swiper/scss';
+@import '~@ionic/angular/css/ionic-swiper'; 
+@import '~swiper/scss';
+@import '~swiper/scss/autoplay';
+@import '~swiper/scss/keyboard';
+@import '~swiper/scss/pagination';
+@import '~swiper/scss/scrollbar';
+@import '~swiper/scss/zoom';
+@import '~@ionic/angular/css/ionic-swiper';
+@import '../../global.scss';
+
+.swiper {
+  height: 92px !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.swiper-slide {
+
+  ion-label {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-weight: bolder;
+  }
+
+  height: 92px !important;
+  width: 92px !important;
+  font-size: 65% !important;
+  margin-right: 5px;
+  text-align: center !important;
+  margin-left: 5px;
+  color: white;
+  border-radius: 8px;
+  border: 1px solid gray;
+
+  .category-img {
+    background-repeat: no-repeat;
+    width: 100%; /*or your image's width*/
+    height: 100%; /*or your image's height*/
+    margin: 40% 0 0 0;
+    padding: 0;
+}
+}
+
+
+
+.cat-green{
+  background-color: #3fcf00;
+  border-radius: 8px;
+}
+.cat-red{
+  background-color: #d30206;
+  border-radius: 8px;
+}
+.cat-blue{
+  background-color: #0034cf;
+  border-radius: 8px;
+}
+.cat-yellow{
+  background-color: #9b9308;
+  border-radius: 8px;
+}
+.cat-gray{
+  background-color: #414e4b;
+  border-radius: 8px;
+}
+.cat-brown{
+  background-color: #321e1f;
+  border-radius: 8px;
+}
