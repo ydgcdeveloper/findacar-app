@@ -8,6 +8,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { OrderPageRoutingModule } from './order-routing.module';
 import { NoResultComponentModule } from '../component/no-result-found/no-result.module';
+import { OrderComponent } from '../component/order/order.component';
+import { PastOrderComponent } from '../component/past-order/past-order.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,6 @@ import { NoResultComponentModule } from '../component/no-result-found/no-result.
     OrderPageRoutingModule,
     NoResultComponentModule
   ],
-  declarations: [OrderPage]
+  declarations: [OrderPage, OrderComponent, PastOrderComponent]
 })
 export class OrderPageModule {}

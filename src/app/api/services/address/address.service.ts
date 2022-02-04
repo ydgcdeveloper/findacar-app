@@ -56,7 +56,7 @@ export class AddressService {
 
   getAddressById(id: number): Address {
     let addresses = this.getAllAddress();
-    var foundAddress = addresses.filter(function (address) {
+    var foundAddress = addresses.filter((address) => {
       var add = address;
       if (add.id == id) {
         return add;
@@ -71,7 +71,7 @@ export class AddressService {
 
   getSelectedAddressId(): number {
     let addresses = this.getAllAddress();
-    var selected = addresses.filter(function (address) {
+    var selected = addresses.filter((address) => {
       var add = address;
       if (add.selected) {
         return add;

@@ -43,10 +43,23 @@
         </ng-template>
       </swiper>
     </div>
-    
 
     <ion-title size="large" class="ml-3">Todos los transportes</ion-title>
-    <app-service></app-service>
+    <div id="service-container" *ngIf="services">
+      <div class="service" *ngFor="let service of services">
+        <app-service [service]="service"></app-service>
+      </div>
+    </div>
+    <!-- Skeleton screen -->
+  <div *ngIf="!services">
+  
+    <app-service-skeleton></app-service-skeleton>
+    <app-service-skeleton></app-service-skeleton>
+    <app-service-skeleton></app-service-skeleton>
+    <app-service-skeleton></app-service-skeleton>
+    <app-service-skeleton></app-service-skeleton>
+    <app-service-skeleton></app-service-skeleton>
+  </div>
   </ion-content>
   <app-explore-container name="Home"></app-explore-container>
 </ion-content>

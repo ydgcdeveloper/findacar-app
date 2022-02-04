@@ -9,6 +9,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { HomePageRoutingModule } from './home-routing.module';
 import { ServiceComponentModule } from '../component/service/service.module';
 import { CategoryComponentModule } from '../component/category/category.module';
+import { ServiceSkeletonComponentModule } from '../component/service-skeleton/service-skeleton.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CategoryComponentModule } from '../component/category/category.module';
     HomePageRoutingModule,
     ServiceComponentModule,
     SwiperModule,
-    CategoryComponentModule
+    CategoryComponentModule,
+    ServiceSkeletonComponentModule
   ],
   declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

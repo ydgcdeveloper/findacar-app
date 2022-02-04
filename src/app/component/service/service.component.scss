@@ -26,10 +26,9 @@
 
 .floating{
   position: relative;
-  padding: 2px;
-  padding-top: 1px;
-  width: 17px;
-  height: 17px;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background-color: rgb(239, 241, 239);
   top: -75px;
@@ -37,7 +36,7 @@
 }
 
 .float-heart {
-font-size: 80%;
+  font-size: 105%;
 }
 
 .darker{
@@ -78,11 +77,11 @@ font-size: 80%;
 
 ion-icon {
   // default: not-fav
-  &[name="heart"] {
+  &[name="heart-sharp"] {
     fill: grey;
   }
 
-  &[name="heart"].fav {
-    fill: red;
+  &[name="heart-sharp"].fav {
+    fill: rgb(21, 255, 0);
   }
 }

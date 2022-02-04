@@ -1,10 +1,8 @@
-<div id="service-container" *ngIf="services">
-  <div class="service" *ngFor="let service of services">
     <div class="service-photo">
       <ion-img [src]="service.photo"></ion-img>
     </div>
     <div class="floating">
-      <ion-icon name="heart-sharp" (click)="yeah()" color="primary" class="float-heart"></ion-icon>
+      <ion-icon name="heart-sharp" (click)="yeah()" class="float-heart"></ion-icon>
     </div>
     <div class="service-data">
       <ion-text class="service-name">{{service.name}}</ion-text>
@@ -27,18 +25,3 @@
         </ion-text>
       </div>
     </div>
-  </div>  
-</div>
-
-
-
-<!-- Skeleton screen -->
-<div *ngIf="!services">
-
-  <app-service-skeleton></app-service-skeleton>
-  <app-service-skeleton></app-service-skeleton>
-  <app-service-skeleton></app-service-skeleton>
-  <app-service-skeleton></app-service-skeleton>
-  <app-service-skeleton></app-service-skeleton>
-  <app-service-skeleton></app-service-skeleton>
-</div>

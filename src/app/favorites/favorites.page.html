@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content>
-<app-service></app-service>
+  <div id="service-container" *ngIf="services">
+    <div class="service" *ngFor="let service of services">
+      <app-service [service]="service"></app-service>
+    </div>
+  </div>
+  <!-- Skeleton screen -->
+<div *ngIf="!services">
+
+  <app-service-skeleton></app-service-skeleton>
+  <app-service-skeleton></app-service-skeleton>
+  <app-service-skeleton></app-service-skeleton>
+  <app-service-skeleton></app-service-skeleton>
+  <app-service-skeleton></app-service-skeleton>
+  <app-service-skeleton></app-service-skeleton>
+</div>
 </ion-content>

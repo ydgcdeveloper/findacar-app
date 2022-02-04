@@ -1,4 +1,5 @@
 export interface Service {
+    id: number
     name: string
     status: ServiceStatus
     address: string

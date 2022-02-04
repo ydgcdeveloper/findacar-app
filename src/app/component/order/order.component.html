@@ -1,0 +1,41 @@
+<div class="order">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <ion-thumbnail style="margin: auto; width: 80px;">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+            style="border-radius: 50%; height: 80px;">
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col size="7">
+        <ion-row>
+          <ion-col class="data">
+            <ion-label class="name" color="dark">{{order.service.name}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="data">
+            <ion-label class="price" color="dark">Precio - {{order.price}} {{order.coin}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="data">
+            <ion-label class="date" color="medium">15 Enero 2022</ion-label>
+          </ion-col>          
+        </ion-row>
+        <ion-row>
+          <ion-col class="data pointer">
+            <ion-icon name="star-outline" class="order-note" color="medium"></ion-icon>
+            <ion-note class="order-note active" color="primary">Valorar</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-1">
+      <ion-col>
+        <ion-button expand="block" color="medium" fill="outline">Ver detalles</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
