@@ -24,9 +24,9 @@
           </ion-col>          
         </ion-row>
         <ion-row>
-          <ion-col class="data pointer">
-            <ion-icon name="star-outline" class="order-note" color="medium"></ion-icon>
-            <ion-note class="order-note active" color="primary">Valorar</ion-note>
+          <ion-col class="data pointer" (click)="presentAlertConfirmDelete(order.id)">
+            <ion-icon name="close-circle-outline" color="medium" class="order-note"></ion-icon>
+            <ion-note class="order-note active" color="danger">Cancelar</ion-note>
           </ion-col>
         </ion-row>
       </ion-col>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Order } from '../api/interfaces/order/order.interface';
 import { OrderService } from '../api/services/order/order.service';
 
@@ -10,11 +11,18 @@ import { OrderService } from '../api/services/order/order.service';
 export class OrderPage implements OnInit {
   orders: Order[];
   type: string;
-  constructor(private _services: OrderService) { }
+  fragment: string;
+
+  constructor(private _services: OrderService, private activated: ActivatedRoute) { }
 
   ngOnInit() {
-    this.type = 'current';
+    this.fragment = 'current';
     this.getOrders()
+  }
+
+  ionViewDidEnter() {
+    let fragment = this.activated.snapshot.fragment;
+    this.fragment = fragment == 'previous' ? fragment : this.fragment;
   }
 
   getOrders() {

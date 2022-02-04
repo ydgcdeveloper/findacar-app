@@ -67,7 +67,7 @@ const routes: Routes = [
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
   {
-    path: 'rate',
+    path: 'rate/:id',
     loadChildren: () => import('./rate/rate.module').then( m => m.RatePageModule)
   }
 ];
