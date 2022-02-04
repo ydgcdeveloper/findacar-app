@@ -1,0 +1,46 @@
+.request {
+    border-radius: 25px;
+    border: 1px solid gray;
+    padding: 5px;
+    margin-bottom: 10px;
+  
+    ion-button {
+      --border-radius: 25px;
+    }
+  
+    .name {
+      font-weight: bolder;
+      font-size: 15px;
+    }
+  
+    .place {
+      font-size: 12px;
+    }
+  
+    .price {
+      font-size: 11px;
+    }
+  
+    .date {
+      font-size: 11px;
+    }
+  
+    .data {
+      padding: 1px;
+    }
+  
+    .order-note {
+      font-size: 11px;
+      margin-right: 3px;
+    }
+  
+    .pointer {
+      cursor: pointer;    
+    }
+  
+    .active:active {
+      opacity: 0.85;
+    }
+  
+  }
+  

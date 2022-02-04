@@ -1,25 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Order } from 'src/app/api/interfaces/order/order.interface';
+import { Request } from 'src/app/api/interfaces/request/request.interface';
 
 @Component({
-  selector: 'app-order-component',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  selector: 'app-request',
+  templateUrl: './request.component.html',
+  styleUrls: ['./request.component.scss'],
 })
-export class OrderComponent implements OnInit {
+export class RequestComponent implements OnInit {
+   @Input() request: Request
 
-  @Input() order: Order;
   constructor(private alertController: AlertController) { }
 
-  ngOnInit() { }
-
+  ngOnInit() {}
 
   async presentAlertConfirmDelete(id:number) {
     const alert = await this.alertController.create({
       cssClass: 'alert-delete-class',
       header: 'Confirmar',
-      message: 'Está seguro que desea eliminar la orden?',
+      message: 'Está seguro que desea eliminar la solicitud?',
       buttons: [
         {
           text: 'Si',
@@ -40,7 +39,5 @@ export class OrderComponent implements OnInit {
 
     await alert.present();
   }
-
-
 
 }

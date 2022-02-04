@@ -10,6 +10,7 @@ import { OrderPageRoutingModule } from './order-routing.module';
 import { NoResultComponentModule } from '../component/no-result-found/no-result.module';
 import { OrderComponent } from '../component/order/order.component';
 import { PastOrderComponent } from '../component/past-order/past-order.component';
+import { RequestComponent } from '../component/request/request.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { PastOrderComponent } from '../component/past-order/past-order.component
     OrderPageRoutingModule,
     NoResultComponentModule
   ],
-  declarations: [OrderPage, OrderComponent, PastOrderComponent]
+  declarations: [OrderPage, OrderComponent, PastOrderComponent, RequestComponent]
 })
 export class OrderPageModule {}

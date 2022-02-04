@@ -16,3 +16,16 @@
       font-size: 32px;
   }
 }
+
+.rate{
+  border-radius: 25px;
+  border: 1px solid gray;
+  height: 150px;
+
+  --background: none;
+  background: url("../../assets/images/car-motorcycle.png") no-repeat fixed center;
+  background-size: cover;
+
+
+ 
+}

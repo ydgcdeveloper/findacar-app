@@ -15,7 +15,17 @@ export class OrderService {
       price: '120.00',
       coin: Coin.USD,
       date: new Date(),
-      client: this.user_service.getUserById(1)
+      client: this.user_service.getUserById(1),
+      from: {
+        name: "Ciudad de Guantanamo",
+        latitude: 20.151510,
+        longitude: -75.206452,
+      },
+      to: {
+        name: "Bayamo",
+        latitude: 20.379128,
+        longitude: -76.642529,
+      },
     },
     {
       id: 2,
@@ -23,7 +33,17 @@ export class OrderService {
       price: '350.00',
       coin: Coin.CUP,
       date: new Date(),
-      client: this.user_service.getUserById(2)
+      client: this.user_service.getUserById(2),
+      from: {
+        name: "Ciudad de Holguin",
+        latitude: 20.898995,
+        longitude: -76.262816,
+      },
+      to: {
+        name: "Santiago de Cuba",
+        latitude: 20.035335,
+        longitude: -75.829092,
+      },
     },
     {
       id: 3,
@@ -31,7 +51,17 @@ export class OrderService {
       price: '560.00',
       coin: Coin.CUP,
       date: new Date(),
-      client: this.user_service.getUserById(3)
+      client: this.user_service.getUserById(3),
+      from: {
+        name: "Ciudad de Guantanamo",
+        latitude: 20.151510,
+        longitude: -75.206452,
+      },
+      to: {
+        name: "Bayamo",
+        latitude: 20.379128,
+        longitude: -76.642529,
+      },
     }
   ]
 

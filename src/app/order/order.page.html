@@ -37,7 +37,7 @@
     </div>
 
     <div *ngSwitchCase="'request'">
-      <app-no-result-found></app-no-result-found>
+      <app-request *ngFor="let request of requests" [request]="request"></app-request>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-.order {
+.past-order {
   border-radius: 25px;
   border: 1px solid gray;
   padding: 5px;
@@ -13,12 +13,16 @@
     font-size: 16px;
   }
 
-  .price {
+  .place {
     font-size: 12px;
   }
 
+  .price {
+    font-size: 11px;
+  }
+
   .date {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .data {
@@ -26,7 +30,7 @@
   }
 
   .order-note {
-    font-size: 12px;
+    font-size: 11px;
     margin-right: 3px;
   }
 
