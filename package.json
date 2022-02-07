@@ -24,7 +24,7 @@
     "@awesome-cordova-plugins/native-geocoder": "^5.37.3",
     "@capacitor/android": "^3.3.3",
     "@capacitor/app": "^1.1.0",
-    "@capacitor/core": "^3.3.3",
+    "@capacitor/core": "3.4.0",
     "@ionic-native/core": "^5.22.0-beta-1",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic-native/native-geocoder": "^5.36.0",

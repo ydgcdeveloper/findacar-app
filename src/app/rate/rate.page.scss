@@ -3,7 +3,7 @@
 }
 
 .close-button {
-  background-color: #ffffff;
+  background-color: var(--ion-background-color);
   margin-left: 11px;
   width: 35px;
   height: 35px;
@@ -13,19 +13,40 @@
   justify-content: center;
 
   .icon-close {
-      font-size: 32px;
+    font-size: 32px;
   }
 }
 
-.rate{
+.rate {
   border-radius: 25px;
   border: 1px solid gray;
-  height: 150px;
+  height: 170px;
 
   --background: none;
-  background: url("../../assets/images/car-motorcycle.png") no-repeat fixed center;
-  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 115%;
+}
 
+.rate-col {
+  text-align: center;
+}
 
- 
+.divider {
+  width: 85%;
+  height: 1px;
+  background-color: gray;
+  margin: auto;
+  margin-top: 10px;
+}
+
+ion-chip {
+  margin-bottom: 5px;
+}
+
+.rate-value {
+  position: relative;
+  font-size: 40px;
+  top: 5px;
+  left: 15px;
+
 }

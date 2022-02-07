@@ -1,13 +1,57 @@
 <ion-header>
   <ion-toolbar>
     <div class="close-button circle" (click)="goToOrders()">
-      <ion-icon slot="start" class="icon-close" color="dark" name="close-outline"></ion-icon>
+      <ion-icon slot="start" class="icon-close" name="close-outline"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="rate" url="service.photo">
-   
+  <div class="padding-bottom-50">
+    <div id="serviceComponent" class="rate">
+      <ion-label class="rate-value" color="warning">{{rate}}</ion-label>
+    </div>
+    <div style="text-align: center;" class="ion-padding">
+      <ion-label>Valorar a <strong>{{service.name}}</strong></ion-label>
+    </div>
+
+    <ion-row class="mt-1" style="font-size: 27px; cursor: pointer;">
+      <ion-col size="1"></ion-col>
+      <ion-col size="2" class="rate-col">
+        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(1)"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="rate-col">
+        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(2)"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="rate-col">
+        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(3)"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="rate-col">
+        <ion-icon name="star" color="light" class="star-rate" (click)="setRate(4)"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="rate-col">
+        <ion-icon name="star" color="light" class="star-rate" (click)="setRate(5)"></ion-icon>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+    <div class="divider"></div>
+    <div style="text-align: center;" class="ion-padding mt-1">
+      <ion-label>Selecciona una o más opciones</ion-label>
+      <p id="chips">
+        <ng-template ngFor let-option [ngForOf]="rateOptions">
+          <ion-chip color="medium" [attr.data-rate]="option.value" [hidden]="!checkDiference(option.value)">
+            <ion-label>{{option.description + ' - ' + option.value}}</ion-label>
+          </ion-chip>
+        </ng-template>
+      </p>
+    </div>
+
+    <ion-item lines="none" class="rounded shadow ion-margin">
+      <ion-label position="floating">Añadir una nota <ion-icon slot="end" name="pencil"></ion-icon>
+      </ion-label>
+      <ion-textarea autocapitalize="true" rows="4"></ion-textarea>
+    </ion-item>
+    <ion-button class="fixed">Valorar</ion-button>
   </div>
+
 </ion-content>
