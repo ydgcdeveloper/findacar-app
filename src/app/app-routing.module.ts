@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'rate/:id',
     loadChildren: () => import('./rate/rate.module').then( m => m.RatePageModule)
+  },
+  {
+    path: 'request',
+    loadChildren: () => import('./request/request.module').then( m => m.RequestPageModule)
   }
 ];
 @NgModule({

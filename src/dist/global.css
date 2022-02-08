@@ -149,3 +149,7 @@ ion-header .searchbar-input-container input {
 .alert-delete-class .alert-wrapper .alert-button-group {
   justify-content: center;
 }
+
+.middle {
+  vertical-align: middle;
+}

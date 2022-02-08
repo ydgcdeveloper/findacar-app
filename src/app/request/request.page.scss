@@ -1,0 +1,18 @@
+.circle {
+    --border-radius: 50%;
+  }
+  
+  .close-button {
+    background-color: var(--ion-background-color);
+    margin-left: 11px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid gray;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+  
+    .icon-close {
+      font-size: 32px;
+    }
+  }
