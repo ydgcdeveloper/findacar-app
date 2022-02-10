@@ -3,9 +3,18 @@
     <div class="close-button circle" (click)="goToHome()">
       <ion-icon slot="start" class="icon-close" name="close-outline"></ion-icon>
     </div>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <div>
+    <ion-title>Crear Solicitud de Viaje</ion-title>
+
+    <ion-item class="shadow rounded mt-2" (click)="showPicker()">
+      <ion-label>Ahora</ion-label>
+      <ion-icon name="time-outline" slot="end"></ion-icon>
+    </ion-item>
+  </div>
 
 </ion-content>

@@ -153,3 +153,7 @@ ion-header .searchbar-input-container input {
 .middle {
   vertical-align: middle;
 }
+
+.date-picker ion-picker-column:first-of-type {
+  flex: 0 0 135px !important;
+}
