@@ -10,7 +10,7 @@ import { add } from 'date-fns';
 })
 export class RequestPage implements OnInit {
 
-  private days: string[] = [];
+  private days: any[] = [];
   private hours: string[] = [];
   private minutes: string[] = [];
   private hour;
@@ -31,8 +31,6 @@ export class RequestPage implements OnInit {
 
   ngOnInit() {
     this.setPickerData();
-    console.log(new Date(''))
-
   }
 
   goToHome() {
@@ -52,12 +50,20 @@ export class RequestPage implements OnInit {
       weekday: 'short', month: 'short', day: 'numeric',
     };
 
-    this.days.push('hoy')
+    this.days.push({
+      realdate: new Date().toDateString(),
+      dateview: 'Hoy'
+    })
     for (let index = 1; index < 30; index++) {
       let day = add(new Date(), {
         days: index
       })
-      this.days.push(new Intl.DateTimeFormat('es-Es', options).format(day))
+
+      let data = {
+        realdate: day.toDateString(),
+        dateview: new Intl.DateTimeFormat('es-Es', options).format(day)
+      }
+      this.days.push(data)
     }
   }
 
@@ -65,17 +71,20 @@ export class RequestPage implements OnInit {
     this.setTime();
 
     let options: PickerOptions = {
-      cssClass: 'date-picker',      
+      cssClass: 'date-picker',
       buttons: [
         {
           text: 'Ahora',
           role: 'cancel',
-          cssClass: 'rounded'
+          cssClass: 'rounded',
         },
         {
           text: 'Confirmar',
           handler: (value) => {
-            console.log(`Got Value ${JSON.stringify(value)}`);
+            let date = new Date(this.gadgets[0][parseInt(value.col0.value)].realdate)
+            let hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value)]);
+            date.setHours(this.gadgets[3][parseInt(value.col3.value)] == 'AM' ? hourVal == 12 ? 0 : hourVal : hourVal == 12 ? 12 : hourVal + 12) 
+            date.setMinutes(this.gadgets[2][parseInt(value.col2.value)])
           },
         },
       ],
@@ -108,7 +117,7 @@ export class RequestPage implements OnInit {
     let columns: PickerColumn[] = [];
     for (let i = 0; i < elements.length; i++) {
       columns.push({
-        name: `col-${i}`,
+        name: `col${i}`,
         options: this.getColumnOptions(i, elements),
         selectedIndex: i == 1 || i == 2 || i == 3 ? this.checkSelected(i) : 0
       })
@@ -121,7 +130,7 @@ export class RequestPage implements OnInit {
     let options: PickerColumnOption[] = [];
     for (let i = 0; i < elements[columIndex].length; i++) {
       options.push({
-        text: elements[columIndex][i],
+        text: columIndex == 0 ? elements[columIndex][i].dateview : elements[columIndex][i],
         value: i,
       })
     }
