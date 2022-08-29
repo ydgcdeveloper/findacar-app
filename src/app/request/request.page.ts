@@ -16,6 +16,7 @@ export class RequestPage implements OnInit {
   private hour;
   private minute;
   private meridiam;
+  private date;
 
   gadgets: any[] = [
     this.days,
@@ -77,14 +78,23 @@ export class RequestPage implements OnInit {
           text: 'Ahora',
           role: 'cancel',
           cssClass: 'rounded',
+          handler: () => {
+            this.date = new Date(Date.now());
+          }
         },
         {
           text: 'Confirmar',
           handler: (value) => {
             let date = new Date(this.gadgets[0][parseInt(value.col0.value)].realdate)
             let hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value)]);
-            date.setHours(this.gadgets[3][parseInt(value.col3.value)] == 'AM' ? hourVal == 12 ? 0 : hourVal : hourVal == 12 ? 12 : hourVal + 12) 
+            date.setHours(this.gadgets[3][parseInt(value.col3.value)] == 'AM' ? hourVal == 12 ? 0 : hourVal : hourVal == 12 ? 12 : hourVal + 12)
             date.setMinutes(this.gadgets[2][parseInt(value.col2.value)])
+            var dateNow = new Date(Date.now());
+            if (+dateNow > +date) {
+              console.log('Wrong')
+            } else {
+              console.log('Good!')
+            }
           },
         },
       ],
