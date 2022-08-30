@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PickerColumn, PickerColumnOption, PickerController, PickerOptions } from '@ionic/angular';
+import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ToastController } from '@ionic/angular';
 import { add } from 'date-fns';
 
 @Component({
@@ -28,10 +28,17 @@ export class RequestPage implements OnInit {
     ]
   ];
 
-  constructor(private router: Router, private pickerController: PickerController) { }
+  constructor(private router: Router, private pickerController: PickerController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.setPickerData();
+    setTimeout(() => {
+      console.log("Empecé")
+      this.minutes = [];
+      for (let i = 0; i < 30; i += 5) {
+        this.minutes.push(i < 10 ? '0' + i : i + '');
+      }
+    }, 10000)
   }
 
   goToHome() {
@@ -80,20 +87,22 @@ export class RequestPage implements OnInit {
           cssClass: 'rounded',
           handler: () => {
             this.date = new Date(Date.now());
-          }
+          },
+          
         },
         {
           text: 'Confirmar',
-          handler: (value) => {
+          handler:  (value) => {
             let date = new Date(this.gadgets[0][parseInt(value.col0.value)].realdate)
             let hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value)]);
             date.setHours(this.gadgets[3][parseInt(value.col3.value)] == 'AM' ? hourVal == 12 ? 0 : hourVal : hourVal == 12 ? 12 : hourVal + 12)
             date.setMinutes(this.gadgets[2][parseInt(value.col2.value)])
             var dateNow = new Date(Date.now());
             if (+dateNow > +date) {
-              console.log('Wrong')
+              console.log('Wrong', date)
+              this.presentToast()
             } else {
-              console.log('Good!')
+              console.log('Good!', date)
             }
           },
         },
@@ -103,9 +112,23 @@ export class RequestPage implements OnInit {
     };
     let picker = await this.pickerController.create(options);
     picker.onDidDismiss().then(() => {
-      console.log('closed');
+      console.log('closed did dismiss');
+    })
+    picker.onWillDismiss().then(() => {
+      console.log('closed will dismiss');
     })
     picker.present()
+  }
+
+  async presentToast() {
+    let toast = await  this.toastCtrl.create({
+      message: 'User was added successfully',
+      duration: 3000,
+      position: 'top',
+      animated: true,
+    });
+  
+    toast.present();
   }
 
   setTime() {
@@ -129,7 +152,7 @@ export class RequestPage implements OnInit {
       columns.push({
         name: `col${i}`,
         options: this.getColumnOptions(i, elements),
-        selectedIndex: i == 1 || i == 2 || i == 3 ? this.checkSelected(i) : 0
+        selectedIndex: i == 1 || i == 2 || i == 3 ? this.checkSelected(i) : 0,
       })
     }
     return columns;
