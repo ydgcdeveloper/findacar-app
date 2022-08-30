@@ -18,8 +18,8 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-     this.getCategories()
-     }, environment.SKELETON_TIME)
+     this.getCategories();
+     }, environment.SKELETON_TIME);
   }
 
   getCategories(){

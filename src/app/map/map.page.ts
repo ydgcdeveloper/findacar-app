@@ -14,15 +14,15 @@ import { Address } from '../api/interfaces/address/address.interface';
 })
 export class MapPage implements OnInit {
   L: Leaflet;
-  public place: string = '';
-  public search: boolean = false;
+  public place = '';
+  public search = false;
   public map;
   latitude;
   longitude;
   markerLat: number;
   markerLon: number;
   markerName: string;
-  accessToken = "pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg";
+  accessToken = 'pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg';
   public showSaveButton = false;
   private marker = null;
   public places: any[] = [];
@@ -40,24 +40,24 @@ export class MapPage implements OnInit {
     {
       latitude: 75.45,
       longitude: 59.2,
-      name: "Holguin, Ahi, Ahi"
+      name: 'Holguin, Ahi, Ahi'
     },
     {
       latitude: 15.45,
       longitude: 56.2,
-      name: "Holguin, Ahi, Ahi"
+      name: 'Holguin, Ahi, Ahi'
     },
     {
       latitude: 75.45,
       longitude: 16.2,
-      name: "Holguin, Ahi, Ahi"
+      name: 'Holguin, Ahi, Ahi'
     },
     {
       latitude: 5.45,
       longitude: 66.2,
-      name: "Holguin, Ahi, Ahi"
+      name: 'Holguin, Ahi, Ahi'
     },
-  ]
+  ];
 
   private options: NativeGeocoderOptions = {
     useLocale: true,
@@ -76,7 +76,7 @@ export class MapPage implements OnInit {
 
   ngOnInit() {
 
-    let address = localStorage.getItem('address');
+    const address = localStorage.getItem('address');
     if (address) {
       this.address = JSON.parse(address);
     }
@@ -85,7 +85,7 @@ export class MapPage implements OnInit {
 
   placeMarker() {
     if (this.marker != null) {
-      this.marker.remove()
+      this.marker.remove();
     };
 
     console.log('place marker');
@@ -96,7 +96,7 @@ export class MapPage implements OnInit {
 
   ionViewDidEnter() {
 
-    let address = localStorage.getItem('address');
+    const address = localStorage.getItem('address');
     if (address) {
       this.address = JSON.parse(address);
     }
@@ -111,7 +111,7 @@ export class MapPage implements OnInit {
 
           this.search = false;
           if (this.marker != null) {
-            this.marker.remove()
+            this.marker.remove();
           };
 
           this.marker = Leaflet.marker([e.latlng.lat, e.latlng.lng], {
@@ -120,8 +120,8 @@ export class MapPage implements OnInit {
 
           this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
             .then((result: NativeGeocoderResult[]) => {
-              let res = result[0];
-              var phrase = '';
+              const res = result[0];
+              let phrase = '';
               if (res.countryName) {
                 phrase += res.countryName;
               }
@@ -134,26 +134,26 @@ export class MapPage implements OnInit {
               this.place = phrase;
             })
             .catch((error: any) => {
-              this.presentToast('error click: ' + error)
+              this.presentToast('error click: ' + error);
               this.showSaveButton = false;
             });
 
           this.showSaveButton = true;
           this.markerLat = e.latlng.lat;
-          this.markerLon = e.latlng.lng
+          this.markerLon = e.latlng.lng;
           this.markerName = this.showSaveButton ? this.place : 'Sin nombre';
 
           console.log(this.markerLat + '  ' + this.markerLon);
 
         }).on('locationfound', (e) => {
 
-          var myIcon = Leaflet.icon({
+          const myIcon = Leaflet.icon({
             iconUrl: '../../assets/icon/icons8-location-48.png',
             iconAnchor: [21, 41],
           });
 
-          this.latitude = e.latlng.lat
-          this.longitude = e.latlng.lng
+          this.latitude = e.latlng.lat;
+          this.longitude = e.latlng.lng;
 
           Leaflet.marker([this.latitude, this.longitude], {
             icon: myIcon
@@ -161,8 +161,8 @@ export class MapPage implements OnInit {
 
           this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
             .then((result: NativeGeocoderResult[]) => {
-              let res = result[0];
-              var phrase = '';
+              const res = result[0];
+              let phrase = '';
               if (res.countryName) {
                 phrase += res.countryName;
               }
@@ -175,11 +175,11 @@ export class MapPage implements OnInit {
               this.place = phrase;
             })
             .catch((error: any) => {
-              this.presentToast('error found: ' + error)
+              this.presentToast('error found: ' + error);
             });
 
-          this.presentToast("Localización encontrada");
-        })
+          this.presentToast('Localización encontrada');
+        });
     }
     //Colocar marcador en modo edición
     if (this.address) {
@@ -190,7 +190,7 @@ export class MapPage implements OnInit {
   // navigate to add-address
   saveEdit() {
 
-    let address = {
+    const address = {
       id: this.address.id,
       name: this.address.name,
       details: this.address.details,
@@ -199,10 +199,10 @@ export class MapPage implements OnInit {
         latitude: this.markerLat,
         longitude: this.markerLon,
       }
-    }
+    };
 
     localStorage.removeItem('address');
-    localStorage.setItem('address', JSON.stringify(address))
+    localStorage.setItem('address', JSON.stringify(address));
 
     this.router.navigate(['add-address']);
   }
@@ -216,7 +216,7 @@ export class MapPage implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['add-address'])
+    this.router.navigate(['add-address']);
   }
 
   dismiss() {
@@ -242,7 +242,7 @@ export class MapPage implements OnInit {
 
   segmentChanged(e) {
 
-    let place = e.detail.value;
+    const place = e.detail.value;
 
     this.nativeGeocoder.forwardGeocode(place, this.options)
       .then((result: NativeGeocoderResult[]) => {
@@ -250,22 +250,22 @@ export class MapPage implements OnInit {
         this.map.flyTo([result[0].latitude, result[0].longitude], 13);
         switch (place) {
           case 'Holguin':
-            this.place = 'Cuba, Holguín, Holguín'
+            this.place = 'Cuba, Holguín, Holguín';
             break;
           case 'Havana':
-            this.place = 'Cuba, La Habana'
+            this.place = 'Cuba, La Habana';
             break;
           case 'Matanzas':
-            this.place = 'Cuba, Matanzas, Cárdenas'
+            this.place = 'Cuba, Matanzas, Cárdenas';
             break;
           case 'Bayamo':
-            this.place = 'Cuba, Granma, Bayamo'
+            this.place = 'Cuba, Granma, Bayamo';
             break;
           case 'Las Tunas':
-            this.place = 'Cuba, Las Tunas, Las Tunas'
+            this.place = 'Cuba, Las Tunas, Las Tunas';
             break;
           default:
-            this.place = 'Cuba, Holguín, Holguín'
+            this.place = 'Cuba, Holguín, Holguín';
             break;
         }
 
@@ -287,23 +287,23 @@ export class MapPage implements OnInit {
 
     this.nativeGeocoder.forwardGeocode(place, this.options)
       .then((result: NativeGeocoderResult[]) => {
-        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude)
+        console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude);
         this.places = [];
 
         for (let i = 0; i < result.length; i++) {
           this.places.push(result[i]);
         }
 
-        this.presentToast('length: ' + result.length)
+        this.presentToast('length: ' + result.length);
       }).then(() => {
         if (this.places.length) {
           this.placesData = [];
-          let places = this.places
+          const places = this.places;
           for (let i = 0; i < places.length; i++) {
             this.nativeGeocoder.reverseGeocode(places[i].latitude, places[i].longitude, this.options)
               .then((result: NativeGeocoderResult[]) => {
-                let res = result[0];
-                var phrase = '';
+                const res = result[0];
+                let phrase = '';
                 if (res.countryName) {
                   phrase += res.countryName;
                 }
@@ -313,15 +313,15 @@ export class MapPage implements OnInit {
                 if (res.locality) {
                   phrase += `, ${res.locality}`;
                 }
-                let data = {
+                const data = {
                   latitude: places[i].latitude,
                   longitude: places[i].longitude,
                   name: phrase
-                }
+                };
                 this.placesData.push(data);
               })
               .catch((error: any) => {
-                this.presentToast('error looking from there: ' + error)
+                this.presentToast('error looking from there: ' + error);
               });
           }
 
@@ -329,7 +329,7 @@ export class MapPage implements OnInit {
         }
       })
       .catch((error: any) => {
-        this.presentToast('Error: ' + error + ' ' + place)
+        this.presentToast('Error: ' + error + ' ' + place);
       });
   }
 
@@ -337,7 +337,7 @@ export class MapPage implements OnInit {
     const toast = await this.toastController.create({
       message,
       duration: 3000,
-      icon: "locate-outline",
+      icon: 'locate-outline',
       color: 'dark'
     });
     toast.present();
@@ -367,8 +367,8 @@ export class MapPage implements OnInit {
 
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
-      console.log(`Latitud: ${this.latitude}`)
-      console.log(`Longitud: ${this.longitude}`)
+      console.log(`Latitud: ${this.latitude}`);
+      console.log(`Longitud: ${this.longitude}`);
     }).catch((error) => {
       console.log('Error getting location', error);
     });

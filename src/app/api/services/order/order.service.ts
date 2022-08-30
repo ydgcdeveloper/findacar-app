@@ -17,12 +17,12 @@ export class OrderService {
       date: new Date(),
       client: this.user_service.getUserById(1),
       from: {
-        name: "Ciudad de Guantanamo",
+        name: 'Ciudad de Guantanamo',
         latitude: 20.151510,
         longitude: -75.206452,
       },
       to: {
-        name: "Bayamo",
+        name: 'Bayamo',
         latitude: 20.379128,
         longitude: -76.642529,
       },
@@ -35,12 +35,12 @@ export class OrderService {
       date: new Date(),
       client: this.user_service.getUserById(2),
       from: {
-        name: "Ciudad de Holguin",
+        name: 'Ciudad de Holguin',
         latitude: 20.898995,
         longitude: -76.262816,
       },
       to: {
-        name: "Santiago de Cuba",
+        name: 'Santiago de Cuba',
         latitude: 20.035335,
         longitude: -75.829092,
       },
@@ -53,17 +53,17 @@ export class OrderService {
       date: new Date(),
       client: this.user_service.getUserById(3),
       from: {
-        name: "Ciudad de Guantanamo",
+        name: 'Ciudad de Guantanamo',
         latitude: 20.151510,
         longitude: -75.206452,
       },
       to: {
-        name: "Bayamo",
+        name: 'Bayamo',
         latitude: 20.379128,
         longitude: -76.642529,
       },
     }
-  ]
+  ];
 
   constructor(private user_service: UserService, private service_service: ServiceService) { }
 
@@ -72,8 +72,6 @@ export class OrderService {
   }
 
   getOrderById(id: number) {
-    return this.orders.filter((order) => {
-      return order.id == id;
-    })[0];
+    return this.orders.filter((order) => order.id == id)[0];
   }
 }

@@ -21,7 +21,7 @@ export class AddressesPage implements OnInit {
   }
 
   saveSelected() {
-    this._service.setSelectedAddress(this.selected)
+    this._service.setSelectedAddress(this.selected);
   }
 
   ionViewDidEnter(){

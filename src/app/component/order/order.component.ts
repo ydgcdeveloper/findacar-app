@@ -15,7 +15,7 @@ export class OrderComponent implements OnInit {
   ngOnInit() { }
 
 
-  async presentAlertConfirmDelete(id:number) {
+  async presentAlertConfirmDelete(id: number) {
     const alert = await this.alertController.create({
       cssClass: 'alert-delete-class',
       header: 'Confirmar',

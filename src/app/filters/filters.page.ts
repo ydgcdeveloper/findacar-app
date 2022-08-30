@@ -11,15 +11,15 @@ import { FilterService } from '../api/services/filter/filter.service';
 export class FiltersPage implements OnInit {
 
   categories: Category[];
-  show: boolean = false;
+  show = false;
 
   constructor(private _service: FilterService) { }
 
   ngOnInit() {
     setTimeout(() => {
-      this.getCategories()
+      this.getCategories();
       this.show = true;
-    }, environment.SKELETON_TIME)
+    }, environment.SKELETON_TIME);
   }
 
   getCategories(){
@@ -27,6 +27,6 @@ export class FiltersPage implements OnInit {
   }
 
   public customFormatter(value: number) {
-    return `$${value}`
+    return `$${value}`;
   }
 }

@@ -12,18 +12,18 @@ import { ServiceService } from '../api/services/service/service.service';
 })
 export class RatePage implements OnInit {
   service: Service;
-  rateOptions: RateOption[]
+  rateOptions: RateOption[];
   id: number;
-  rate: number = 3;
+  rate = 3;
 
   constructor(private router: Router, private _service: ServiceService, private rate_service: RateService, private activated: ActivatedRoute) { }
 
   ngOnInit() {
-    this.id = parseInt(this.activated.snapshot.paramMap.get('id'))
+    this.id = parseInt(this.activated.snapshot.paramMap.get('id'));
     if (this.id) {
       this.setService(this.id);
     }
-    this.setRateOptions()
+    this.setRateOptions();
 
   }
 
@@ -34,20 +34,20 @@ export class RatePage implements OnInit {
   }
 
   setEventToChips() {
-    let chips = document.getElementById('chips').children;
+    const chips = document.getElementById('chips').children;
     Array.from(chips).forEach((chip) => {
       chip.addEventListener('click', () => {
-        let color = chip.getAttribute('color');
+        const color = chip.getAttribute('color');
         if (color == 'medium') {
-          chip.setAttribute('color', 'dark')
-          chip.setAttribute('outline', 'true')
+          chip.setAttribute('color', 'dark');
+          chip.setAttribute('outline', 'true');
         } else {
-          chip.setAttribute('color', 'medium')
-          chip.setAttribute('outline', 'false')
+          chip.setAttribute('color', 'medium');
+          chip.setAttribute('outline', 'false');
         }
 
-      })
-    })
+      });
+    });
   }
 
   setService(id: number) {
@@ -59,20 +59,20 @@ export class RatePage implements OnInit {
   }
 
   checkDiference(number1: number) {
-    let number2 = Math.ceil(this.rate)
+    const number2 = Math.ceil(this.rate);
     return Math.abs(number1 - number2) <= 1;
   }
 
   goToOrders() {
-    this.router.navigate(['tabs/order'], { fragment: 'previous' })
+    this.router.navigate(['tabs/order'], { fragment: 'previous' });
   }
 
   setRate(rate: number) {
-    let stars = document.getElementsByClassName('star-rate')
+    const stars = document.getElementsByClassName('star-rate');
     if (this.rate == rate || this.rate == rate - 0.5) {
       if (stars.item(rate - 1).getAttribute('name') == 'star') {
         stars.item(rate - 1).setAttribute('name', 'star-half');
-        rate = rate - 0.5
+        rate = rate - 0.5;
       } else {
         stars.item(rate - 1).setAttribute('name', 'star');
       }

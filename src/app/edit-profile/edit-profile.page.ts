@@ -11,17 +11,17 @@ import { environment } from 'src/environments/environment';
 export class EditProfilePage implements OnInit {
 
   dateValue = 'Fecha de Nacimiento';
-  miVariableHora = ''
+  miVariableHora = '';
   public currentYear = parseInt(new Date().getFullYear().toString());
-  show: boolean = false;
+  show = false;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.currentYear.toString())
+    console.log(this.currentYear.toString());
     setTimeout(() => {
       this.show = true;
-    }, environment.SKELETON_TIME)
+    }, environment.SKELETON_TIME);
   }
 
   onSubmit(f: NgForm) {
@@ -30,7 +30,7 @@ export class EditProfilePage implements OnInit {
   }
 
   validateButton(){
-    console.log(this.miVariableHora)
+    console.log(this.miVariableHora);
   }
 
   formatDate(value: string) {

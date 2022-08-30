@@ -11,31 +11,31 @@ import { AddressService } from '../api/services/address/address.service';
   styleUrls: ['./add-address.page.scss'],
 })
 export class AddAddressPage implements OnInit {
-  public name: string = '';
-  public details: string = '';
+  public name = '';
+  public details = '';
   public address: Address;
   public locationData;
   id;
-  show: boolean = false;
-  editable: boolean = false;
+  show = false;
+  editable = false;
 
   constructor(private activatedRoute: ActivatedRoute, private outlet: IonRouterOutlet, private router: Router, private _service: AddressService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.show = true;
-    }, environment.SKELETON_TIME)
+    }, environment.SKELETON_TIME);
 
-    let id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
-      this.address = this._service.getAddressById(id)
+      this.address = this._service.getAddressById(id);
       if (this.address) {
         this.id = id;
         this.name = this.address.name;
         this.details = this.address.details;
       }
     } else {
-      let address = localStorage.getItem('address');
+      const address = localStorage.getItem('address');
       if (address) {
         this.address = JSON.parse(address);
         this.name = this.address.name;
@@ -49,22 +49,22 @@ export class AddAddressPage implements OnInit {
   navigate() {
     if (this.address) {
       localStorage.removeItem('address');
-      localStorage.setItem('address', JSON.stringify(this.address))
+      localStorage.setItem('address', JSON.stringify(this.address));
       console.log('navigate in ', this.address);
     }
-    this.router.navigate(['map'])
+    this.router.navigate(['map']);
   }
 
   saveEditAddress() {
     //edit address case
     if (this.id) {
-      console.log("edit");
+      console.log('edit');
     }
     //add address case
     else {
-      console.log("new");
+      console.log('new');
     }
-    this.router.navigate(['/addresses'])
+    this.router.navigate(['/addresses']);
   }
 
 }

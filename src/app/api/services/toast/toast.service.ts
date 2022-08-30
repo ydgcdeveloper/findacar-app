@@ -8,8 +8,8 @@ export class ToastService {
 
   constructor(private toastCtrl: ToastController) { }
 
-  async showToast(ToastOption: { message: string, header?: string, color?: ToastColors, position?: ToastPositions, icon?: string }) {
-    let toast = await this.toastCtrl.create({
+  async showToast(ToastOption: { message: string; header?: string; color?: ToastColors; position?: ToastPositions; icon?: string }) {
+    const toast = await this.toastCtrl.create({
       message: ToastOption.message,
       header: ToastOption.header,
       color: ToastOption.color,

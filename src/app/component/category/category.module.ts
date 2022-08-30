@@ -5,12 +5,12 @@ import { CategoryComponent } from './category.component';
 @NgModule({
     declarations: [CategoryComponentModule.rootComponent],
     imports: [
-        CommonModule,        
+        CommonModule,
     ],
     exports: [CategoryComponentModule.rootComponent],
     entryComponents: [CategoryComponentModule.rootComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CategoryComponentModule {
-    static rootComponent = CategoryComponent
+    static rootComponent = CategoryComponent;
 }

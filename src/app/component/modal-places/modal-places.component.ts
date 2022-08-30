@@ -17,7 +17,7 @@ export class ModalPlacesComponent implements OnInit {
   ngOnInit() { }
 
   async goToPlace(place) {
-    this.map.flyTo([place.latitude, place.longitude], 10);   
+    this.map.flyTo([place.latitude, place.longitude], 10);
     if (this.modalPlaces) {
       this.modalPlaces.dismiss();
     }

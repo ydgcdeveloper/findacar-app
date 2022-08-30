@@ -18,6 +18,6 @@ import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, NativeGeocoder],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule {}

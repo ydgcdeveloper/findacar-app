@@ -15,8 +15,8 @@ export class FavoritesPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.getServices()
-    }, environment.SKELETON_TIME)
+      this.getServices();
+    }, environment.SKELETON_TIME);
   }
 
   getServices() {

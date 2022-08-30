@@ -21,7 +21,7 @@ export class AddressComponent implements OnInit {
     setTimeout(() => {
       this.getSelectedAddressId();
       this.getAddresses();
-    }, environment.SKELETON_TIME)    
+    }, environment.SKELETON_TIME);
   }
 
   getSelectedAddressId() {
@@ -60,7 +60,7 @@ export class AddressComponent implements OnInit {
             type: 'edit'
           },
           handler: () => {
-            this.router.navigate(['/add-address', id])
+            this.router.navigate(['/add-address', id]);
           }
         }, {
           text: 'Eliminar dirección',

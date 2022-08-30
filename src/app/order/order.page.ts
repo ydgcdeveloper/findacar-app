@@ -20,12 +20,12 @@ export class OrderPage implements OnInit {
 
   ngOnInit() {
     this.fragment = 'current';
-    this.getOrders()
-    this.getRequests()
+    this.getOrders();
+    this.getRequests();
   }
 
   ionViewDidEnter() {
-    let fragment = this.activated.snapshot.fragment;
+    const fragment = this.activated.snapshot.fragment;
     this.fragment = fragment == 'previous' ? fragment : this.fragment;
   }
 
@@ -34,7 +34,7 @@ export class OrderPage implements OnInit {
   }
 
   getRequests() {
-    this.requests = this.request_service.getAllRquests()
+    this.requests = this.request_service.getAllRquests();
   }
 
   segmentChanged(ev: any) {

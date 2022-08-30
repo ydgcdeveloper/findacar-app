@@ -10,7 +10,7 @@ import { Platform, ToastController } from '@ionic/angular';
 export class AppComponent {
   constructor(private platform: Platform, private _location: Location, private toastController: ToastController) {
     this.initializeApp();
-    console.log("App init");
+    console.log('App init');
    }
 
   initializeApp() {
@@ -20,24 +20,24 @@ export class AppComponent {
 
         // Show Exit Alert!
         console.log('Show Exit Alert!');
-        this.presentToast('Show Exit Alert!')
+        this.presentToast('Show Exit Alert!');
         processNextHandler();
       } else {
 
         // Navigate to back page
         console.log('Navigate to back page');
-        this.presentToast('Navigate to back page')
+        this.presentToast('Navigate to back page');
         this._location.back();
 
       }
-    })
+    });
   }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
       duration: 3000,
-      icon: "locate-outline",
+      icon: 'locate-outline',
       color: 'dark'
     });
     toast.present();

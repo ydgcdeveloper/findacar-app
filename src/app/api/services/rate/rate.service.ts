@@ -42,7 +42,7 @@ export class RateService {
       value: 3,
       quality: RateOptionQuality.REGULAR
     },
-  ]
+  ];
 
   constructor() { }
 

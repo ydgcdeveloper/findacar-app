@@ -1,12 +1,12 @@
 export interface Service {
-    id: number
-    name: string
-    status: ServiceStatus
-    address: string
-    schedule: string
-    rate: number
-    photo: string
-    pickupTime: string    
+    id: number;
+    name: string;
+    status: ServiceStatus;
+    address: string;
+    schedule: string;
+    rate: number;
+    photo: string;
+    pickupTime: string;
 }
 
 export enum ServiceStatus {

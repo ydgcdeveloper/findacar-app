@@ -1,16 +1,16 @@
-import { Place } from "../request/request.interface";
-import { Service } from "../service/service.interface";
-import { User } from "../user/user.interface";
+import { Place } from '../request/request.interface';
+import { Service } from '../service/service.interface';
+import { User } from '../user/user.interface';
 
 export interface Order {
     id: number;
     service: Service;
     price: string;
-    coin: Coin,
-    date: Date,
-    client: User,
-    from: Place,
-    to: Place,
+    coin: Coin;
+    date: Date;
+    client: User;
+    from: Place;
+    to: Place;
 }
 
 export enum Coin {

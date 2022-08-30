@@ -19,12 +19,12 @@ export class RequestService {
     ableToPay: 125,
     coin: Coin.MLC,
     from: {
-      name: "Ciudad de Holguin",
+      name: 'Ciudad de Holguin',
       latitude: 20.898995,
       longitude: -76.262816,
     },
     to: {
-      name: "PLaya Guardalavaca",
+      name: 'PLaya Guardalavaca',
       latitude: 21.123695,
       longitude: -75.831821,
     },
@@ -41,12 +41,12 @@ export class RequestService {
     ableToPay: 2000,
     coin: Coin.CUP,
     from: {
-      name: "Ciudad de Holguin",
+      name: 'Ciudad de Holguin',
       latitude: 20.898995,
       longitude: -76.262816,
     },
     to: {
-      name: "Santiago de Cuba",
+      name: 'Santiago de Cuba',
       latitude: 20.035335,
       longitude: -75.829092,
     },
@@ -63,19 +63,19 @@ export class RequestService {
     ableToPay: 1500,
     coin: Coin.CUP,
     from: {
-      name: "Ciudad de Guantanamo",
+      name: 'Ciudad de Guantanamo',
       latitude: 20.151510,
       longitude: -75.206452,
     },
     to: {
-      name: "Bayamo",
+      name: 'Bayamo',
       latitude: 20.379128,
       longitude: -76.642529,
     },
     status: RequestStatus.ACCEPTED,
     },
-  ]
-  
+  ];
+
   constructor(private user_service: UserService) { }
 
   getAllRquests(){
@@ -83,8 +83,6 @@ export class RequestService {
   }
 
   getRequestsById(id: number){
-    return this.requests.filter((request) => {
-      return request.id == id;
-    })[0];
+    return this.requests.filter((request) => request.id == id)[0];
   }
 }

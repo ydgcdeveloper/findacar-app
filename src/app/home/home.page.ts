@@ -25,9 +25,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-     this.getCategories()
-     this.getServices()
-     }, environment.SKELETON_TIME)
+     this.getCategories();
+     this.getServices();
+     }, environment.SKELETON_TIME);
   }
 
   getCategories(){
@@ -45,6 +45,6 @@ export class HomePage implements OnInit {
   }
 
   yeah(){
-    this.router.navigate(['tabs/search'])
+    this.router.navigate(['tabs/search']);
   }
 }

@@ -8,8 +8,8 @@ export class AddressService {
   private addresses: Address[] = [
     {
       id: 1,
-      name: "My first Address",
-      details: "Alli cerca del rio",
+      name: 'My first Address',
+      details: 'Alli cerca del rio',
       locationData: {
         name: 'Cuba, Holguin, Holguin',
         latitude: 23.5634826412,
@@ -19,8 +19,8 @@ export class AddressService {
     },
     {
       id: 2,
-      name: "My second Address",
-      details: "Alli cerca del rio 2",
+      name: 'My second Address',
+      details: 'Alli cerca del rio 2',
       locationData: {
         name: 'Cuba, Granma, Bayamo',
         latitude: 15.5634826412,
@@ -30,8 +30,8 @@ export class AddressService {
     },
     {
       id: 3,
-      name: "My third Address",
-      details: "Alli cerca del rio 3",
+      name: 'My third Address',
+      details: 'Alli cerca del rio 3',
       locationData: {
         name: 'Cuba, Matanzas, Jovellanos',
         latitude: 38.5634826412,
@@ -41,8 +41,8 @@ export class AddressService {
     },
     {
       id: 4,
-      name: "My fourth Address",
-      details: "Alli cerca del rio 4",
+      name: 'My fourth Address',
+      details: 'Alli cerca del rio 4',
       locationData: {
         name: 'Cuba, Las Tunas, Las Tunas',
         latitude: 23.5634826412,
@@ -55,9 +55,9 @@ export class AddressService {
   constructor() { }
 
   getAddressById(id: number): Address {
-    let addresses = this.getAllAddress();
-    var foundAddress = addresses.filter((address) => {
-      var add = address;
+    const addresses = this.getAllAddress();
+    const foundAddress = addresses.filter((address) => {
+      const add = address;
       if (add.id == id) {
         return add;
       }
@@ -70,9 +70,9 @@ export class AddressService {
   }
 
   getSelectedAddressId(): number {
-    let addresses = this.getAllAddress();
-    var selected = addresses.filter((address) => {
-      var add = address;
+    const addresses = this.getAllAddress();
+    const selected = addresses.filter((address) => {
+      const add = address;
       if (add.selected) {
         return add;
       }
@@ -81,9 +81,9 @@ export class AddressService {
   }
 
   setSelectedAddress(id: number){
-    let addresses = this.getAllAddress();
-    var selected = addresses.map(function (address) {
-      var add = address;
+    const addresses = this.getAllAddress();
+    const selected = addresses.map(function(address) {
+      const add = address;
       if (add.id == id) {
         address.selected = true;
       }else{
@@ -91,7 +91,7 @@ export class AddressService {
       }
       return address;
     });
-    
+
     //save selected ones to the server
   }
 }

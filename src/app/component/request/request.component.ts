@@ -8,13 +8,13 @@ import { Request } from 'src/app/api/interfaces/request/request.interface';
   styleUrls: ['./request.component.scss'],
 })
 export class RequestComponent implements OnInit {
-   @Input() request: Request
+   @Input() request: Request;
 
   constructor(private alertController: AlertController) { }
 
   ngOnInit() {}
 
-  async presentAlertConfirmDelete(id:number) {
+  async presentAlertConfirmDelete(id: number) {
     const alert = await this.alertController.create({
       cssClass: 'alert-delete-class',
       header: 'Confirmar',

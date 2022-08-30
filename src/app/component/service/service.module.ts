@@ -5,7 +5,7 @@ import { ServiceComponent } from './service.component';
 @NgModule({
     declarations: [ServiceComponentModule.rootComponent],
     imports: [
-        CommonModule,        
+        CommonModule,
     ],
     exports: [ServiceComponentModule.rootComponent],
     entryComponents: [ServiceComponentModule.rootComponent],
@@ -13,5 +13,5 @@ import { ServiceComponent } from './service.component';
 })
 
 export class ServiceComponentModule {
-    static rootComponent = ServiceComponent
+    static rootComponent = ServiceComponent;
 }

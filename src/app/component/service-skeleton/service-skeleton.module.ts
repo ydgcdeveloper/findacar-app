@@ -5,7 +5,7 @@ import { ServiceSkeletonComponent } from './service-skeleton.component';
 @NgModule({
     declarations: [ServiceSkeletonComponentModule.rootComponent],
     imports: [
-        CommonModule,        
+        CommonModule,
     ],
     exports: [ServiceSkeletonComponentModule.rootComponent],
     entryComponents: [ServiceSkeletonComponentModule.rootComponent],
@@ -13,5 +13,5 @@ import { ServiceSkeletonComponent } from './service-skeleton.component';
 })
 
 export class ServiceSkeletonComponentModule {
-    static rootComponent = ServiceSkeletonComponent
+    static rootComponent = ServiceSkeletonComponent;
 }

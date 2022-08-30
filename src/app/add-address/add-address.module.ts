@@ -20,6 +20,6 @@ import { AddressService } from '../api/services/address/address.service';
   declarations: [AddAddressPage]
 })
 export class AddAddressPageModule{
-  
+
 
 }

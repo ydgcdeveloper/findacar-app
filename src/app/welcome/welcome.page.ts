@@ -26,10 +26,10 @@ export class WelcomePage implements OnInit {
     // this.isAndroid = this.device.platform === 'Android';
     const coord = this.getCoordinates();
     coord.then(() => {
-      this.router.navigateByUrl('/tabs')
+      this.router.navigateByUrl('/tabs');
     }, () => {
-      console.log('dsadsadsad')
-    })
+      console.log('dsadsadsad');
+    });
 
     // this.presentToast("Toast:  " +this.device.platform)
 
@@ -54,7 +54,7 @@ export class WelcomePage implements OnInit {
     const toast = await this.toastController.create({
       message,
       duration: 3000,
-      icon: "locate-outline",
+      icon: 'locate-outline',
       color: 'dark'
     });
     toast.present();
@@ -86,7 +86,7 @@ export class WelcomePage implements OnInit {
       });
 
     });
-    console.log(this.locationTraces)
+    console.log(this.locationTraces);
     return coord;
   }
 

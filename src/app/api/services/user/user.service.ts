@@ -21,7 +21,7 @@ export class UserService {
       username: 'ydgcdeveloper',
       name: 'Yan David'
     },
-  ]
+  ];
 
   constructor() { }
 
@@ -30,8 +30,6 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    return this.users.filter((user) => {
-      return user.id == id;
-    })[0]
+    return this.users.filter((user) => user.id == id)[0];
   }
 }
