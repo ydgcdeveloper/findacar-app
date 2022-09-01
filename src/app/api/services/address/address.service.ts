@@ -5,6 +5,7 @@ import { Address } from '../../interfaces/address/address.interface';
   providedIn: 'root'
 })
 export class AddressService {
+
   private addresses: Address[] = [
     {
       id: 1,
@@ -78,6 +79,17 @@ export class AddressService {
       }
     });
     return selected[0].id;
+  }
+
+  getSelectedAddress(): Address {
+    const addresses = this.getAllAddress();
+    const selected = addresses.filter((address) => {
+      const add = address;
+      if (add.selected) {
+        return add;
+      }
+    });
+    return selected[0];
   }
 
   setSelectedAddress(id: number){
