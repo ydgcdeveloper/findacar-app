@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <div class="close-button circle" (click)="goToHome()">
+    <div *ngIf="addresses.length > 1" class="close-button circle" (click)="goToHome()">
       <ion-icon slot="start" class="icon-close" name="close-outline"></ion-icon>
     </div>
 
@@ -8,57 +8,93 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-title>Crear Solicitud de Viaje</ion-title>
-  <form [formGroup]="requestForm">
-    <ion-item class="shadow rounded mt-2">
-      <ion-label position="floating">Etiqueta</ion-label>
-      <ion-input formControlName="tag"></ion-input>
+  <div *ngIf="addresses.length > 1">
+    <ion-title>Crear Solicitud de Viaje</ion-title>
+    <form [formGroup]="requestForm">
+      <ion-item class="shadow rounded mt-2">
+        <ion-label position="floating">Etiqueta</ion-label>
+        <ion-input formControlName="tag"></ion-input>
 
+      </ion-item>
+      <ion-label *ngIf="tag.errors?.['required']" class="input-message" color="danger">Escribe un identificador para la
+        solicitud</ion-label>
+      <ion-label *ngIf="tag.errors?.['minlength']" class="input-message" color="danger">Debe tener al menos dos
+        caracteres</ion-label>
+
+      <ion-item class="shadow rounded mt-2">
+        <ion-label position="floating">Selecciona tu dirección de recogida</ion-label>
+        <ion-select formControlName="sinceAddress" interface="action-sheet">
+          <ion-select-option *ngFor="let adress of addresses" [value]="adress.id">
+            {{adress.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser
+        diferentes</ion-label>
+
+      <ion-item class="shadow rounded mt-2">
+        <ion-label position="floating">Selecciona tu dirección de destino</ion-label>
+        <ion-select formControlName="destinyAddress" interface="action-sheet">
+          <ion-select-option *ngFor="let adress of addresses" [value]="adress.id">
+            {{adress.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser
+        diferentes</ion-label>
+
+      <ion-row class="mt-2">
+        <ion-col size="8" style="padding-left: 0px; margin-left: 0px; margin-right: 0px;">
+          <ion-item class="shadow rounded">
+            <ion-label position="floating">Dispuesto a pagar</ion-label>
+            <ion-input formControlName="ableToPay" pattern="[0-9]*"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4" style="padding-right: 0px; margin-left: 0px; margin-right: 0px; height: 100% !important;">
+          <ion-item class="shadow rounded">
+            <ion-label position="floating"></ion-label>
+            <ion-select formControlName="coin" interface="action-sheet">
+              <ion-select-option *ngFor="let co of coins" [value]="co.tag">
+                {{co.tag}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item class="shadow rounded mt-2" (click)="showPicker()">
+        <ion-label>{{timeText}}</ion-label>
+        <ion-icon name="time-outline" slot="end"></ion-icon>
+      </ion-item>
+    </form>
+
+    <ion-button [disabled]="!requestForm.valid" class="fixed" (click)="createRequest()">Crear</ion-button>
+  </div>
+  <div *ngIf="addresses.length < 2">
+    <ion-item class="rounded mt-2">
+      <ion-label class="py-1">
+        <ion-skeleton-text animated style="width: 45%; height: 14px;" class="rounded"></ion-skeleton-text>
+      </ion-label>
     </ion-item>
-
-    <ion-item class="shadow rounded mt-2">
-      <ion-label position="floating">Selecciona tu dirección de recogida</ion-label>
-      <ion-select formControlName="sinceAddress" interface="action-sheet">
-        <ion-select-option *ngFor="let adress of adresses" [value]="adress.id">
-          {{adress.name}}
-        </ion-select-option>
-      </ion-select>
+    <ion-item class="rounded mt-2">
+      <ion-label class="py-1">
+        <ion-skeleton-text animated style="width: 30%; height: 14px;" class="rounded"></ion-skeleton-text>
+      </ion-label>
     </ion-item>
-    <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser diferentes</ion-label>
-
-    <ion-item class="shadow rounded mt-2">
-      <ion-label position="floating">Selecciona tu dirección de destino</ion-label>
-      <ion-select formControlName="destinyAddress" interface="action-sheet">
-        <ion-select-option *ngFor="let adress of adresses" [value]="adress.id">
-          {{adress.name}}
-        </ion-select-option>
-      </ion-select>
+    <ion-item class="rounded mt-2">
+      <ion-label class="py-1">
+        <ion-skeleton-text animated style="width: 30%; height: 14px;" class="rounded"></ion-skeleton-text>
+      </ion-label>
     </ion-item>
-    <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser diferentes</ion-label>
-
-    <ion-row class="mt-2">
-      <ion-col size="8" style="padding-left: 0px; margin-left: 0px; margin-right: 0px;">
-        <ion-item class="shadow rounded">
-          <ion-label position="floating">Dispuesto a pagar</ion-label>
-          <ion-input formControlName="ableToPay" pattern="[0-9]*"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="4" style="padding-right: 0px; margin-left: 0px; margin-right: 0px; height: 100% !important;">
-        <ion-item class="shadow rounded">
-          <ion-label position="floating"></ion-label>
-          <ion-select formControlName="coin" interface="action-sheet">
-            <ion-select-option *ngFor="let co of coins" [value]="co.tag">
-              {{co.tag}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-item class="shadow rounded mt-2" (click)="showPicker()">
-      <ion-label>{{timeText}}</ion-label>
-      <ion-icon name="time-outline" slot="end"></ion-icon>
+    <ion-item class="rounded mt-2">
+      <ion-label class="py-1">
+        <ion-skeleton-text animated style="width: 25%; height: 14px;" class="rounded"></ion-skeleton-text>
+      </ion-label>
     </ion-item>
-  </form>
-
+    <ion-item class="rounded mt-2">
+      <ion-label class="py-1">
+        <ion-skeleton-text animated style="width: 65%; height: 14px;" class="rounded"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </div>
 </ion-content>
