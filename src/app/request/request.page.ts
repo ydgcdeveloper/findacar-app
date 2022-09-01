@@ -1,8 +1,13 @@
+import { Address } from './../api/interfaces/address/address.interface';
+import { AddressService } from './../api/services/address/address.service';
 import { ToastColors, ToastService, ToastPositions } from './../api/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ToastController } from '@ionic/angular';
 import { add } from 'date-fns';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-request',
@@ -19,6 +24,9 @@ export class RequestPage implements OnInit {
   private meridiam;
   private date;
   public timeText: string;
+  public requestForm: FormGroup;
+  public coins = Coins;
+  public adresses: Address[]
 
   gadgets: any[] = [
     this.days,
@@ -30,11 +38,55 @@ export class RequestPage implements OnInit {
     ]
   ];
 
-  constructor(private router: Router, private pickerController: PickerController, private toast: ToastService) { }
+  constructor(private router: Router,
+    private pickerController: PickerController,
+    private toast: ToastService,
+    private formBuilder: FormBuilder,
+    private addressService: AddressService
+  ) {
+    this.adresses = this.addressService.getAllAddress();
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.setPickerData();
     this.timeText = 'Ahora';
+    this.requestForm = this.formBuilder.group({
+      tag: [`Solicitud-${this.makeid(6)}`, [Validators.required, Validators.maxLength(24), Validators.minLength(2)]],
+      ableToPay: [0, [Validators.pattern('[0-9]*')]],
+      coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
+      sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
+      destinyAddress: [this.adresses[this.getRandomAddress()].id, [Validators.required]]
+    }, { validators: checkSameAddressValidator });
+    console.log(this.coins)
+  }
+
+  get tag() {
+    return this.requestForm.get('tag');
+  }
+  get ableToPay() {
+    return this.requestForm.get('ableToPay');
+  }
+  get coin() {
+    return this.requestForm.get('coin');
+  }
+  get sinceAddress() {
+    return this.requestForm.get('sinceAddress');
+  }
+  get destinyAddress() {
+    return this.requestForm.get('destinyAddress');
+  }
+
+  getRandomAddress(min = 0, max = this.adresses.length - 1): number {
+    if (this.adresses.length === 0) {
+      return 0;
+    }
+    const selectedAddressId = this.addressService.getSelectedAddressId()
+    let randomGenerated
+    do {
+      randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
+      console.log(randomGenerated)
+    } while (selectedAddressId === this.adresses[randomGenerated].id)
+    return randomGenerated;
   }
 
   goToHome() {
@@ -71,6 +123,17 @@ export class RequestPage implements OnInit {
     }
   }
 
+  makeid(length: number) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result.push(characters.charAt(Math.floor(Math.random() *
+        charactersLength)));
+    }
+    return result.join('');
+  }
+
   async showPicker() {
     this.setTime();
 
@@ -95,7 +158,6 @@ export class RequestPage implements OnInit {
             date.setMinutes(this.gadgets[2][parseInt(value.col2.value)]);
             const dateNow = new Date(Date.now());
             if (+dateNow > +date) {
-              console.log('Wrong', date);
               this.date = dateNow;
               this.timeText = 'Ahora';
               this.toast.showToast({ header: 'INFO', message: 'Fecha anterior a la actual', color: ToastColors.WARNING, position: ToastPositions.TOP, icon: 'information-circle' });
@@ -103,8 +165,6 @@ export class RequestPage implements OnInit {
               const optionsDate: Intl.DateTimeFormatOptions = {
                 weekday: 'long', month: 'short', day: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit'
               };
-              console.log('Good!', date);
-              console.log('Good!', new Intl.DateTimeFormat('es-Es', optionsDate).format(date));
               this.timeText = new Intl.DateTimeFormat('es-Es', optionsDate).format(date);
               this.timeText = this.timeText.charAt(0).toUpperCase() + this.timeText.slice(1);
             }
@@ -115,15 +175,8 @@ export class RequestPage implements OnInit {
       columns: this.getColumns(this.gadgets),
     };
     const picker = await this.pickerController.create(options);
-    picker.onDidDismiss().then(() => {
-      console.log('closed did dismiss');
-    });
-    picker.onWillDismiss().then(() => {
-      console.log('closed will dismiss');
-    });
     picker.present();
   }
-
 
   setTime() {
     let option: Intl.DateTimeFormatOptions = {
@@ -180,3 +233,15 @@ export class RequestPage implements OnInit {
   }
 
 }
+
+export const Coins = [
+  { tag: 'CUP' },
+  { tag: 'MLC' },
+  { tag: 'USD' }
+]
+
+export const checkSameAddressValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const sinceAddress = control.get('sinceAddress');
+  const destinyAddress = control.get('destinyAddress');
+  return sinceAddress && destinyAddress && sinceAddress.value === destinyAddress.value ? { sameAddress: true } : null;
+};
