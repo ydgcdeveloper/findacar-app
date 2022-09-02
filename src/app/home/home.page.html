@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-row class="ion-align-items-center">
       <ion-col size="10">
-        <ion-searchbar class="rounded" (ionFocus)="yeah()" placeholder="Buscar transporte">
+        <ion-searchbar class="rounded" (ionFocus)="yeah()" [placeholder]="'home.search_placeholder'|translate">
         </ion-searchbar>
       </ion-col>
       <ion-col>
@@ -15,7 +15,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Inicio</ion-title>
+      <ion-title size="large">{{'tabs.start'|translate}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
@@ -44,7 +44,7 @@
       </swiper>
     </div>
 
-    <ion-title size="large" class="ml-3">Todos los transportes</ion-title>
+    <ion-title size="large" class="ml-3">{{'home.all_vehicles_types'|translate}}</ion-title>
     <div id="service-container" *ngIf="services">
       <div class="service" *ngFor="let service of services">
         <app-service [service]="service"></app-service>
