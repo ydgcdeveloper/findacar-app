@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: ProfilePage }]),
     ProfilePageRoutingModule,
+    TranslateModule
   ],
   declarations: [ProfilePage]
 })

@@ -1,0 +1,21 @@
+{
+    "home": {
+        "all_vehicles_types": "Todos los transportes",
+        "search_placeholder": "Buscar transportes"
+    },
+    "tabs": {
+        "start": "Inicio",
+        "search": "Buscar",
+        "order": "Orden",
+        "profile": "Perfil"
+    },
+    "profile": {
+        "my_addresses": "Mis direcciones",
+        "payment_methods": "Métodos de pago",
+        "favs": "Favoritos",
+        "help": "Ayuda",
+        "invite_friend": "Invitar a un amigo",
+        "conf": "Configuración",
+        "log_out": "Cerrar sesión"
+    }
+}

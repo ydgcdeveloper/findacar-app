@@ -1,0 +1,21 @@
+{
+    "home": {
+        "all_vehicles_types": "All services",
+        "search_placeholder": "Search service"
+    },
+    "tabs": {
+        "start": "Start",
+        "search": "Search",
+        "order": "Order",
+        "profile": "Profile"
+    },
+    "profile": {
+        "my_addresses": "My addresses",
+        "payment_methods": "Payment methods",
+        "favs": "Favorites",
+        "help": "Help",
+        "invite_friend": "Invite a friend",
+        "conf": "Configuration",
+        "log_out": "Logout"
+    }
+}

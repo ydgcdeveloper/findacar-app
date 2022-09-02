@@ -10,6 +10,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { ServiceComponentModule } from '../component/service/service.module';
 import { CategoryComponentModule } from '../component/category/category.module';
 import { ServiceSkeletonComponentModule } from '../component/service-skeleton/service-skeleton.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ServiceSkeletonComponentModule } from '../component/service-skeleton/se
     ServiceComponentModule,
     SwiperModule,
     CategoryComponentModule,
-    ServiceSkeletonComponentModule
+    ServiceSkeletonComponentModule,
+    TranslateModule
   ],
   declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
