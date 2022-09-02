@@ -3,7 +3,7 @@ import { AddressService } from './../api/services/address/address.service';
 import { ToastColors, ToastService, ToastPositions } from './../api/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ToastController } from '@ionic/angular';
+import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ViewWillEnter, AlertController, NavController } from '@ionic/angular';
 import { add } from 'date-fns';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
   templateUrl: './request.page.html',
   styleUrls: ['./request.page.scss'],
 })
-export class RequestPage implements OnInit {
+export class RequestPage implements OnInit, ViewWillEnter {
 
   private days: any[] = [];
   private hours: string[] = [];
@@ -26,7 +26,7 @@ export class RequestPage implements OnInit {
   public timeText: string;
   public requestForm: FormGroup;
   public coins = Coins;
-  public adresses: Address[]
+  public addresses: Address[]
 
   gadgets: any[] = [
     this.days,
@@ -42,22 +42,32 @@ export class RequestPage implements OnInit {
     private pickerController: PickerController,
     private toast: ToastService,
     private formBuilder: FormBuilder,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private alertController: AlertController,
+    private navController: NavController,
   ) {
-    this.adresses = this.addressService.getAllAddress();
+    this.getAddresses();
   }
 
   async ngOnInit() {
-    this.setPickerData();
-    this.timeText = 'Ahora';
-    this.requestForm = this.formBuilder.group({
-      tag: [`Solicitud-${this.makeid(6)}`, [Validators.required, Validators.maxLength(24), Validators.minLength(2)]],
-      ableToPay: [0, [Validators.pattern('[0-9]*')]],
-      coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
-      sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
-      destinyAddress: [this.adresses[this.getRandomAddress()].id, [Validators.required]]
-    }, { validators: checkSameAddressValidator });
-    console.log(this.coins)
+    if (this.addresses.length > 2) {
+      this.setPickerData();
+      this.timeText = 'Ahora';
+      this.requestForm = this.formBuilder.group({
+        tag: [`Solicitud-${this.makeid(6)}`, [Validators.required, Validators.maxLength(24), Validators.minLength(2)]],
+        ableToPay: [0, [Validators.pattern('[0-9]*')]],
+        coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
+        sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
+        destinyAddress: [this.addresses[this.getRandomAddress()].id, [Validators.required]]
+      }, { validators: checkSameAddressValidator });
+    }
+  }
+
+  async ionViewWillEnter() {
+    await this.getAddresses();
+    if (this.addresses.length < 2) {
+      await this.presentAlert();
+    }
   }
 
   get tag() {
@@ -76,8 +86,42 @@ export class RequestPage implements OnInit {
     return this.requestForm.get('destinyAddress');
   }
 
-  getRandomAddress(min = 0, max = this.adresses.length - 1): number {
-    if (this.adresses.length === 0) {
+  async getAddresses() {
+    this.addresses = this.addressService.getAllAddress();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Alert!',
+      backdropDismiss: false,
+      message: 'Debes primero tener al menos 2 direcciones en tu agenda',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: async () => {
+            await this.navController.navigateRoot('tabs/home');
+          },
+        },
+        {
+          text: 'Añadir',
+          role: 'confirm',
+          handler: async () => {
+            await this.navController.navigateRoot('addresses');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  createRequest() {
+
+  }
+
+  private getRandomAddress(min = 0, max = this.addresses.length - 1): number {
+    if (this.addresses.length === 0) {
       return 0;
     }
     const selectedAddressId = this.addressService.getSelectedAddressId()
@@ -85,7 +129,7 @@ export class RequestPage implements OnInit {
     do {
       randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
       console.log(randomGenerated)
-    } while (selectedAddressId === this.adresses[randomGenerated].id)
+    } while (selectedAddressId === this.addresses[randomGenerated].id)
     return randomGenerated;
   }
 
