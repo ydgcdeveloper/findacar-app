@@ -70,7 +70,7 @@ export class AddressService {
     return this.addresses;
   }
 
-  getSelectedAddressId(): number {
+  getSelectedAddressId(): number | null {
     const addresses = this.getAllAddress();
     const selected = addresses.filter((address) => {
       const add = address;
@@ -78,10 +78,10 @@ export class AddressService {
         return add;
       }
     });
-    return selected[0].id;
+    return selected ? selected[0]?.id : null;
   }
 
-  getSelectedAddress(): Address {
+  getSelectedAddress(): Address | null {
     const addresses = this.getAllAddress();
     const selected = addresses.filter((address) => {
       const add = address;
@@ -89,16 +89,16 @@ export class AddressService {
         return add;
       }
     });
-    return selected[0];
+    return selected ? selected[0] : null;
   }
 
-  setSelectedAddress(id: number){
+  setSelectedAddress(id: number) {
     const addresses = this.getAllAddress();
-    const selected = addresses.map(function(address) {
+    const selected = addresses.map(function (address) {
       const add = address;
       if (add.id == id) {
         address.selected = true;
-      }else{
+      } else {
         address.selected = false;
       }
       return address;
