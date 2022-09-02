@@ -12,12 +12,31 @@ import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 // import { Device } from '@awesome-cordova-plugins/device/ngx';
 // import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
+
+
+export const newTranslateLoader = (handler: HttpBackend) => {
+  const http = new HttpClient(handler);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'es',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: newTranslateLoader,
+        deps: [HttpBackend]
+      }
+    })
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, NativeGeocoder],
   bootstrap: [AppComponent],
 
 })
-export class AppModule {}
+export class AppModule { }
