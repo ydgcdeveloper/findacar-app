@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { TermsPage } from './terms.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TermsPageRoutingModule
+    TermsPageRoutingModule,
+    TranslateModule
   ],
   declarations: [TermsPage]
 })
