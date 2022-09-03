@@ -19,12 +19,24 @@
         "log_out": "Cerrar sesión"
     },
     "button": {
-        "save": "Guardar"
+        "save": "Guardar",
+        "select": "Seleccionar"
     },
     "settings": {
         "language": "Idioma",
-        "language_header": "Selecciona el lenguage",
+        "language_header": "Selecciona el Idioma",
         "lang_spanish": "Español",
         "lang_english": "Inglés"
+    },
+    "help": {
+        "contact_header": "Contacta con nosotros",
+        "contact": {
+            "whatsapp": "Escribir por WhatsApp",
+            "email": "Enviar correo",
+            "call": "Llamar por teléfono"
+        },
+        "about_header":"Sobre Nosotros",
+        "terms_header":"Términos y Condiciones",
+        "policy_header":"Política de Privacidad"
     }
 }

@@ -17,5 +17,26 @@
         "invite_friend": "Invite a friend",
         "conf": "Configuration",
         "log_out": "Logout"
+    },
+    "button": {
+        "save": "Save",
+        "select": "Select"
+    },
+    "settings": {
+        "language": "Language",
+        "language_header": "Select the language",
+        "lang_spanish": "Spanish",
+        "lang_english": "English"
+    },
+    "help": {
+        "contact_header": "Contact us",
+        "contact": {
+            "whatsapp": "Write via WhatsApp",
+            "email": "Send email",
+            "call": "Phone call"
+        },
+        "about_header":"About us",
+        "terms_header":"Terms y Conditions",
+        "policy_header":"Policy"
     }
 }
