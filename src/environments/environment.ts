@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  SKELETON_TIME: 1000
+  default_language: 'es',
+  lang_variable_name: 'app_language',
+  skeleton_time: 1000,
 };
 
 /*
