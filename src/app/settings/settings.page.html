@@ -8,12 +8,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item class="shadow rounded mt-2">
-    <ion-label>{{'settings.language_header'|translate}}</ion-label>
-    <ion-select>
-      <ion-select-option value="es">{{'settings.lang_spanish'|translate}}</ion-select-option>
-      <ion-select-option value="en">{{'settings.lang_english'|translate}}</ion-select-option>
-    </ion-select>
+  <ion-item class="shadow rounded mt-2" [href]="'/language'">
+    <ion-label>{{'settings.language'|translate}}</ion-label>
+    <ion-label color="primary" slot="end">{{selectedLanguage()}}</ion-label>
   </ion-item>
-  <ion-button class="fixed">{{'button.save'|translate}}</ion-button>
 </ion-content>
