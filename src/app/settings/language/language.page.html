@@ -1,9 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>language</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'settings.language'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <form [formGroup]="languageForm">
+    <ion-item class="shadow rounded mt-2">
+      <ion-label>{{'settings.language_header'|translate}}</ion-label>
+      <ion-select formControlName="lang" interface="action-sheet">
+        <ion-select-option value="es">{{'settings.lang_spanish'|translate}}</ion-select-option>
+        <ion-select-option value="en">{{'settings.lang_english'|translate}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+  <ion-button class="fixed" (click)="onSubmit()" [disabled]="!languageForm.valid || lang.value === selectedLanguage">{{'button.save'|translate}}</ion-button>
 </ion-content>

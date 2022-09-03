@@ -1,4 +1,9 @@
+import { NavController } from '@ionic/angular';
+import { LangTypes } from './../../services/language/language.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { LANGUAGE, setLanguage } from 'src/app/services/language/language.service';
 
 @Component({
   selector: 'app-language',
@@ -7,9 +12,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LanguagePage implements OnInit {
 
-  constructor() { }
+  public selectedLanguage = LANGUAGE()
+  languageForm: FormGroup;
 
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder, private navController: NavController) { }
+
+  async ngOnInit() {
+    this.languageForm = this.formBuilder.group({
+      lang: [this.selectedLanguage, [Validators.required]],
+    });
   }
 
+  get lang() {
+    return this.languageForm.get('lang');
+  }
+
+  async onSubmit() {
+    if (this.languageForm.invalid) return;
+
+    setLanguage(this.lang.value === 'en' ? LangTypes.English : LangTypes.Spanish)
+    this.navController.back();
+  }
 }
