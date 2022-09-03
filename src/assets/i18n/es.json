@@ -17,5 +17,14 @@
         "invite_friend": "Invitar a un amigo",
         "conf": "Configuración",
         "log_out": "Cerrar sesión"
+    },
+    "button": {
+        "save": "Guardar"
+    },
+    "settings": {
+        "language": "Idioma",
+        "language_header": "Selecciona el lenguage",
+        "lang_spanish": "Español",
+        "lang_english": "Inglés"
     }
 }
