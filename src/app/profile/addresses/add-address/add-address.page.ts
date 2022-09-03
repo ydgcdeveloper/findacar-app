@@ -1,9 +1,9 @@
+import { AddressService } from './../../../api/services/address/address.service';
+import { Address } from './../../../interfaces/address/address.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { IonRouterOutlet } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { Address } from '../api/interfaces/address/address.interface';
-import { AddressService } from '../api/services/address/address.service';
 
 @Component({
   selector: 'app-add-address',

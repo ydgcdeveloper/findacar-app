@@ -3,10 +3,17 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>Configuración</ion-title>
+    <ion-title>{{'profile.conf'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button class="fixed">Guardar</ion-button>
+<ion-content class="ion-padding">
+  <ion-item class="shadow rounded mt-2">
+    <ion-label>{{'settings.language_header'|translate}}</ion-label>
+    <ion-select>
+      <ion-select-option value="es">{{'settings.lang_spanish'|translate}}</ion-select-option>
+      <ion-select-option value="en">{{'settings.lang_english'|translate}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button class="fixed">{{'button.save'|translate}}</ion-button>
 </ion-content>

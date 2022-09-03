@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
-    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+    loadChildren: () => import('./profile/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   },
   {
     path: 'settings',
@@ -16,43 +16,43 @@ const routes: Routes = [
   },
   {
     path: 'help',
-    loadChildren: () => import('./help/help.module').then( m => m.HelpPageModule)
+    loadChildren: () => import('./profile/help/help.module').then( m => m.HelpPageModule)
   },
   {
     path: 'favorites',
-    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+    loadChildren: () => import('./profile/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },
   {
     path: 'payment-methods',
-    loadChildren: () => import('./payment-methods/payment-methods.module').then( m => m.PaymentMethodsPageModule)
+    loadChildren: () => import('./profile/payment-methods/payment-methods.module').then( m => m.PaymentMethodsPageModule)
   },
   {
     path: 'addresses',
-    loadChildren: () => import('./addresses/addresses.module').then( m => m.AddressesPageModule)
+    loadChildren: () => import('./profile/addresses/addresses.module').then( m => m.AddressesPageModule)
   },
   {
     path: 'about-us',
-    loadChildren: () => import('./about-us/about-us.module').then( m => m.AboutUsPageModule)
+    loadChildren: () => import('./profile/help/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
   {
     path: 'terms',
-    loadChildren: () => import('./terms/terms.module').then( m => m.TermsPageModule)
+    loadChildren: () => import('./profile/help/terms/terms.module').then( m => m.TermsPageModule)
   },
   {
     path: 'policy',
-    loadChildren: () => import('./policy/policy.module').then( m => m.PolicyPageModule)
+    loadChildren: () => import('./profile/help/policy/policy.module').then( m => m.PolicyPageModule)
   },
   {
     path: 'filters',
-    loadChildren: () => import('./filters/filters.module').then( m => m.FiltersPageModule)
+    loadChildren: () => import('./home/filters/filters.module').then( m => m.FiltersPageModule)
   },
   {
     path: 'add-address',
-    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+    loadChildren: () => import('./profile/addresses/add-address/add-address.module').then( m => m.AddAddressPageModule)
   },
   {
     path: 'add-address/:id',
-    loadChildren: () => import('./add-address/add-address.module').then( m => m.AddAddressPageModule)
+    loadChildren: () => import('./profile/addresses/add-address/add-address.module').then( m => m.AddAddressPageModule)
   },
   {
     path: 'search-location',
@@ -64,15 +64,19 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+    loadChildren: () => import('./profile/addresses/add-address/map/map.module').then( m => m.MapPageModule)
   },
   {
     path: 'rate/:id',
-    loadChildren: () => import('./rate/rate.module').then( m => m.RatePageModule)
+    loadChildren: () => import('./order/rate/rate.module').then( m => m.RatePageModule)
   },
   {
     path: 'request',
-    loadChildren: () => import('./request/request.module').then( m => m.RequestPageModule)
+    loadChildren: () => import('./home/request/request.module').then( m => m.RequestPageModule)
+  },
+  {
+    path: 'language',
+    loadChildren: () => import('./settings/language/language.module').then( m => m.LanguagePageModule)
   }
 ];
 @NgModule({

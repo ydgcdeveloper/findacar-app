@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RateOption } from '../api/interfaces/rate/rate-option.interface';
-import { Service } from '../api/interfaces/service/service.interface';
-import { RateService } from '../api/services/rate/rate.service';
-import { ServiceService } from '../api/services/service/service.service';
+import { RateOption } from '../../api/interfaces/rate/rate-option.interface';
+import { Service } from '../../api/interfaces/service/service.interface';
+import { RateService } from '../../api/services/rate/rate.service';
+import { ServiceService } from '../../api/services/service/service.service';
 
 @Component({
   selector: 'app-rate',

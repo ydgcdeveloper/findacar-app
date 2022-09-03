@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Category } from '../api/interfaces/category/category.interface';
-import { FilterService } from '../api/services/filter/filter.service';
+import { Category } from '../../api/interfaces/category/category.interface';
+import { FilterService } from '../../api/services/filter/filter.service';
 
 @Component({
   selector: 'app-filters',

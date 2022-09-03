@@ -1,6 +1,6 @@
-import { Address } from './../api/interfaces/address/address.interface';
-import { AddressService } from './../api/services/address/address.service';
-import { ToastColors, ToastService, ToastPositions } from './../api/services/toast/toast.service';
+import { Address } from '../../api/interfaces/address/address.interface';
+import { AddressService } from '../../api/services/address/address.service';
+import { ToastColors, ToastService, ToastPositions } from '../../api/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ViewWillEnter, AlertController, NavController } from '@ionic/angular';

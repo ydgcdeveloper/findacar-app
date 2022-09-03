@@ -1,11 +1,11 @@
+import { ModalPlacesComponent } from './../../../../component/modal-places/modal-places.component';
+import { Address } from './../../../../interfaces/address/address.interface';
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { IonRouterOutlet, ModalController, NavController, ToastController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
-import { ModalPlacesComponent } from '../component/modal-places/modal-places.component';
 import { Router } from '@angular/router';
-import { Address } from '../api/interfaces/address/address.interface';
 
 @Component({
   selector: 'app-map',

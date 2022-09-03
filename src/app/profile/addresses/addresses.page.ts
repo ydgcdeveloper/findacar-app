@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressService } from '../api/services/address/address.service';
+import { AddressService } from '../../api/services/address/address.service';
 
 @Component({
   selector: 'app-addresses',
