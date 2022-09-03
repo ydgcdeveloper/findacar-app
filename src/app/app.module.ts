@@ -1,3 +1,4 @@
+import { LANGUAGE } from './services/language/language.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -27,7 +28,7 @@ export const newTranslateLoader = (handler: HttpBackend) => {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'es',
+      defaultLanguage: LANGUAGE(),
       loader: {
         provide: TranslateLoader,
         useFactory: newTranslateLoader,
