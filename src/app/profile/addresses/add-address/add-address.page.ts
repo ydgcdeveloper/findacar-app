@@ -24,7 +24,7 @@ export class AddAddressPage implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.show = true;
-    }, environment.SKELETON_TIME);
+    }, environment.skeleton_time);
 
     const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {

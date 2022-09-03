@@ -21,7 +21,7 @@ export class EditProfilePage implements OnInit {
     console.log(this.currentYear.toString());
     setTimeout(() => {
       this.show = true;
-    }, environment.SKELETON_TIME);
+    }, environment.skeleton_time);
   }
 
   onSubmit(f: NgForm) {

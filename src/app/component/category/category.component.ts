@@ -17,7 +17,7 @@ constructor(private _service: FilterService){}
   ngOnInit() {
     setTimeout(() => {
 
-     }, environment.SKELETON_TIME);
+     }, environment.skeleton_time);
   }
 
 

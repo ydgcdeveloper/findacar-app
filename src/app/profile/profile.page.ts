@@ -14,7 +14,7 @@ export class ProfilePage implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.show = true;
-    }, environment.SKELETON_TIME);
+    }, environment.skeleton_time);
   }
 
 }

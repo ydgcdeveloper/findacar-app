@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     setTimeout(() => {
      this.getCategories();
      this.getServices();
-     }, environment.SKELETON_TIME);
+     }, environment.skeleton_time);
   }
 
   getCategories(){

@@ -21,7 +21,7 @@ export class AddressComponent implements OnInit {
     setTimeout(() => {
       this.getSelectedAddressId();
       this.getAddresses();
-    }, environment.SKELETON_TIME);
+    }, environment.skeleton_time);
   }
 
   getSelectedAddressId() {

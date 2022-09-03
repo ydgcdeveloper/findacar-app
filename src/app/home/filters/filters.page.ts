@@ -19,7 +19,7 @@ export class FiltersPage implements OnInit {
     setTimeout(() => {
       this.getCategories();
       this.show = true;
-    }, environment.SKELETON_TIME);
+    }, environment.skeleton_time);
   }
 
   getCategories(){

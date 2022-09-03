@@ -16,7 +16,7 @@ export class ServiceComponent implements OnInit {
   ngOnInit() {
     // setTimeout(() => {
     //   this.getServices()
-    // }, environment.SKELETON_TIME)
+    // }, environment.skeleton_time)
   }
 
   // getServices() {
