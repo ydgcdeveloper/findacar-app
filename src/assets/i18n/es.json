@@ -1,7 +1,24 @@
 {
     "home": {
         "all_vehicles_types": "Todos los transportes",
-        "search_placeholder": "Buscar transportes"
+        "search_placeholder": "Buscar transportes",
+        "filter": {
+            "filter_header": "Filtros",
+            "sort_by": "Ordenar por",
+            "closeness": "Cercanía",
+            "rating": "Valoraciones",
+            "arrival_time": "Tiempo de arribo",
+            "only_available": "Mostrar sólo transportistas disponibles",
+            "price_range": "Rango de precios",
+            "category": {
+                "header": "Categorías",
+                "taxi": "Taxi",
+                "taxi_motor": "Moto taxi",
+                "heavy_equipment": "Equipos pesados",
+                "heavy_cargo": "Carga pesada",
+                "house_moving": "Mudanza"
+            }
+        }
     },
     "tabs": {
         "start": "Inicio",
@@ -20,7 +37,8 @@
     },
     "button": {
         "save": "Guardar",
-        "select": "Seleccionar"
+        "select": "Seleccionar",
+        "apply_filter": "Aplicar filtro"
     },
     "settings": {
         "language": "Idioma",
@@ -35,8 +53,8 @@
             "email": "Enviar correo",
             "call": "Llamar por teléfono"
         },
-        "about_header":"Sobre Nosotros",
-        "terms_header":"Términos y Condiciones",
-        "policy_header":"Política de Privacidad"
+        "about_header": "Sobre Nosotros",
+        "terms_header": "Términos y Condiciones",
+        "policy_header": "Política de Privacidad"
     }
 }
