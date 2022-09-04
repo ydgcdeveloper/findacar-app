@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Filtros</ion-title>
+    <ion-title>{{'home.filter.filter_header'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,31 +13,31 @@
       <ion-list class="rounded shadow" lines="none">
         <ion-radio-group value="closeness">
           <ion-list-header>
-            <ion-label>Ordenar por</ion-label>
+            <ion-label>{{'home.filter.sort_by'|translate}}</ion-label>
           </ion-list-header>
 
           <ion-item>
             <ion-icon slot="start" name="location-sharp"></ion-icon>
-            <ion-label>Cercanía</ion-label>
+            <ion-label>{{'home.filter.closeness'|translate}}</ion-label>
             <ion-radio slot="end" value="closeness"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-icon slot="start" name="star-sharp"></ion-icon>
-            <ion-label>Valoraciones</ion-label>
+            <ion-label>{{'home.filter.rating'|translate}}</ion-label>
             <ion-radio slot="end" value="rate"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-icon slot="start" name="time-sharp"></ion-icon>
-            <ion-label>Tiempo de arribo</ion-label>
+            <ion-label>{{'home.filter.arrival_time'|translate}}</ion-label>
             <ion-radio slot="end" value="arrive"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
 
       <ion-item class="ion-margin-top rounded only-show shadow" lines="none">
-        <ion-label>Mostrar sólo transportistas disponibles</ion-label>
+        <ion-label>{{'home.filter.only_available'|translate}}</ion-label>
         <ion-checkbox slot="start"></ion-checkbox>
       </ion-item>
 
@@ -46,7 +46,7 @@
         <ion-accordion-group>
           <ion-accordion value="price" class="rounded shadow">
             <ion-item slot="header">
-              <ion-label>Rango de precios</ion-label>
+              <ion-label>{{'home.filter.price_range'|translate}}</ion-label>
             </ion-item>
 
             <ion-list slot="content">
@@ -67,7 +67,7 @@
         <ion-accordion-group >
           <ion-accordion value="categories" class="rounded shadow">
             <ion-item slot="header">
-              <ion-label>Categorías</ion-label>
+              <ion-label>{{'home.filter.category.header'|translate}}</ion-label>
             </ion-item>
             <ion-list slot="content" lines="none">
               <ion-item *ngFor="let category of categories">
@@ -80,7 +80,7 @@
 
       </div>
     </div>
-    <ion-button class="fixed">Aplicar filtro</ion-button>
+    <ion-button class="fixed">{{'button.apply_filter'|translate}}</ion-button>
   </div>
 
   <div *ngIf="!show">
@@ -153,6 +153,5 @@
         <ion-skeleton-text animated class="mt-4 ml-3" style="width: 50%; height: 10%;"></ion-skeleton-text>
       </ion-thumbnail>
     </ion-item>
-
   </div>
 </ion-content>
