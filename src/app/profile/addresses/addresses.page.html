@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>Mis direcciones</ion-title>
+    <ion-title>{{'profile.my_addresses'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +16,6 @@
 
   <ion-content class="ion-padding">
     <app-address (selectedToUp)="setSelected($event)"></app-address>
-    <ion-button class="fixed" (click)="saveSelected()">Seleccionar</ion-button>
+    <ion-button class="fixed" (click)="saveSelected()">{{'button.select'|translate}}</ion-button>
   </ion-content>
 </ion-content>

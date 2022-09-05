@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="success">
     <ion-searchbar id="search-place" debounce="800" type="search" animated [(ngModel)]='place' showCancelButton="always"  [value]="place"
-      (ionChange)="findPlace(place)" (ionCancel)="goBack()" (ionClear)="onClear()" (ionBlur)="dismiss()" autocomplete="false" placeholder="Escribe la ciudad o pueblo aquí">
+      (ionChange)="findPlace(place)" (ionCancel)="goBack()" (ionClear)="onClear()" (ionBlur)="dismiss()" autocomplete="false" [placeholder]="'map.search_placeholder'|translate">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +14,7 @@
     <ion-segment-button value="Holguin">
       <ion-label>Holguin</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Habana">
+    <ion-segment-button value="Havana">
       <ion-label>La Habana</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Matanzas">

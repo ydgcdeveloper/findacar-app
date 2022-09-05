@@ -50,7 +50,6 @@ export class AddAddressPage implements OnInit {
     if (this.address) {
       localStorage.removeItem('address');
       localStorage.setItem('address', JSON.stringify(this.address));
-      console.log('navigate in ', this.address);
     }
     this.router.navigate(['map']);
   }

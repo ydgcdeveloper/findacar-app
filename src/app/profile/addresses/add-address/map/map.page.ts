@@ -1,3 +1,5 @@
+import { MapPlaceService } from './../../../../api/services/map-place/map-place.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ModalPlacesComponent } from './../../../../component/modal-places/modal-places.component';
 import { Address } from './../../../../interfaces/address/address.interface';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +8,9 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@aw
 import { IonRouterOutlet, ModalController, NavController, ToastController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+const MAP_ACCESS_TOKEN = environment.map_access_token;
 
 @Component({
   selector: 'app-map',
@@ -22,7 +27,7 @@ export class MapPage implements OnInit {
   markerLat: number;
   markerLon: number;
   markerName: string;
-  accessToken = 'pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg';
+  accessToken: string = MAP_ACCESS_TOKEN;
   public showSaveButton = false;
   private marker = null;
   public places: any[] = [];
@@ -64,6 +69,8 @@ export class MapPage implements OnInit {
     maxResults: 5,
   };
 
+  private mapPlaces: any[];
+
   constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
@@ -71,7 +78,10 @@ export class MapPage implements OnInit {
     public modalController: ModalController,
     private router: Router,
     public navCtrl: NavController,
-    private outlet: IonRouterOutlet) {
+    private translate: TranslateService,
+    private mapPlacesService: MapPlaceService
+  ) {
+    this.mapPlaces = this.mapPlacesService.getMapPlaces();
   }
 
   ngOnInit() {
@@ -88,7 +98,6 @@ export class MapPage implements OnInit {
       this.marker.remove();
     };
 
-    console.log('place marker');
     this.marker = Leaflet.marker([this.address.locationData.latitude, this.address.locationData.longitude], {
       icon: this.markerIcon,
     }).addTo(this.map).bindPopup(this.address.name).openPopup();
@@ -101,7 +110,6 @@ export class MapPage implements OnInit {
       this.address = JSON.parse(address);
     }
 
-    console.log('did enter');
     if (!this.map) {
 
       this.leafletMap();
@@ -157,7 +165,7 @@ export class MapPage implements OnInit {
 
           Leaflet.marker([this.latitude, this.longitude], {
             icon: myIcon
-          }).addTo(this.map).bindPopup('Estás aquí ahora').openPopup();
+          }).addTo(this.map).bindPopup(this.translate.instant('map.here_now')).openPopup();
 
           this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, this.options)
             .then((result: NativeGeocoderResult[]) => {
@@ -178,7 +186,7 @@ export class MapPage implements OnInit {
               this.presentToast('error found: ' + error);
             });
 
-          this.presentToast('Localización encontrada');
+          this.presentToast(this.translate.instant('map.location_found'));
         });
     }
     //Colocar marcador en modo edición
@@ -248,26 +256,28 @@ export class MapPage implements OnInit {
       .then((result: NativeGeocoderResult[]) => {
 
         this.map.flyTo([result[0].latitude, result[0].longitude], 13);
-        switch (place) {
-          case 'Holguin':
-            this.place = 'Cuba, Holguín, Holguín';
-            break;
-          case 'Havana':
-            this.place = 'Cuba, La Habana';
-            break;
-          case 'Matanzas':
-            this.place = 'Cuba, Matanzas, Cárdenas';
-            break;
-          case 'Bayamo':
-            this.place = 'Cuba, Granma, Bayamo';
-            break;
-          case 'Las Tunas':
-            this.place = 'Cuba, Las Tunas, Las Tunas';
-            break;
-          default:
-            this.place = 'Cuba, Holguín, Holguín';
-            break;
-        }
+        /** CHECK IF THIS IS WORKING PROPERLY */
+        this.place = this.mapPlaces.find((element) => element.tag == place)?.description || 'Cuba, Holguín, Holguín';
+        // switch (place) {
+        //   case 'Holguin':
+        //     this.place = 'Cuba, Holguín, Holguín';
+        //     break;
+        //   case 'Havana':
+        //     this.place = 'Cuba, La Habana';
+        //     break;
+        //   case 'Matanzas':
+        //     this.place = 'Cuba, Matanzas, Cárdenas';
+        //     break;
+        //   case 'Bayamo':
+        //     this.place = 'Cuba, Granma, Bayamo';
+        //     break;
+        //   case 'Las Tunas':
+        //     this.place = 'Cuba, Las Tunas, Las Tunas';
+        //     break;
+        //   default:
+        //     this.place = 'Cuba, Holguín, Holguín';
+        //     break;
+        // }
 
       })
       .catch((error: any) => {

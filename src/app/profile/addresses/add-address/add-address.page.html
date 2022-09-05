@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button [routerLink]="['/addresses']"></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar Dirección</ion-title>
+    <ion-title>{{'address.add'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,30 +11,30 @@
   <div *ngIf="show">
     <div class="add-address padding-bottom-45">
       <ion-item class="rounded mt-2">
-        <ion-label position="floating">Nombre de la Dirección</ion-label>
+        <ion-label position="floating">{{'address.name'|translate}}</ion-label>
         <ion-input type="text" autocapitalize="on" name="address" [(ngModel)]="name"></ion-input>
       </ion-item>
       <ion-item class="rounded mt-2">
         <ion-grid>
           <ion-row class="mb-2">
-            <ion-label>Ubicación</ion-label>
+            <ion-label>{{'address.location'|translate}}</ion-label>
           </ion-row>
           <div class="my-location" id="my-location">
             <ion-img src="../../assets/images/foto_mapa_holguin.png" style="width: 100%;"></ion-img>
           </div>
           <ion-row>
             <ion-item (click)="navigate()" lines="none">
-              <ion-label class="item-link" color="primary">Buscar ubicación en el mapa</ion-label>
+              <ion-label class="item-link" color="primary">{{'address.search_location'|translate}}</ion-label>
             </ion-item>
           </ion-row>
         </ion-grid>
       </ion-item>
       <ion-item class="rounded mt-2">
-        <ion-label position="floating">Añadir detalles de la dirección</ion-label>
-        <ion-textarea placeholder="En un pasillo, casa pintada de verde..." rows="4" [(ngModel)]="details"
+        <ion-label position="floating">{{'address.details'|translate}}</ion-label>
+        <ion-textarea [placeholder]="'address.details_placeholder'|translate" rows="4" [(ngModel)]="details"
           spellcheck="true"></ion-textarea>
       </ion-item>
-      <ion-button class="fixed" (click)="saveEditAddress()">Guardar</ion-button>
+      <ion-button class="fixed" (click)="saveEditAddress()">{{'button.save'|translate}}</ion-button>
     </div>
   </div>
 

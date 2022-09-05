@@ -8,13 +8,15 @@ import { AddressesPageRoutingModule } from './addresses-routing.module';
 
 import { AddressesPage } from './addresses.page';
 import { AddressComponent } from '../../component/address/address.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddressesPageRoutingModule
+    AddressesPageRoutingModule,
+    TranslateModule
   ],
   declarations: [AddressesPage, AddressComponent]
 })

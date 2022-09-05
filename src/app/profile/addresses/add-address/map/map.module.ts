@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { ModalPlacesComponent } from './../../../../component/modal-places/modal-places.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,9 @@ import { MapPage } from './map.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MapPageRoutingModule
+    MapPageRoutingModule,
+    TranslateModule,
+    TranslateModule
   ],
   declarations: [MapPage, ModalPlacesComponent]
 })
