@@ -37,7 +37,9 @@
     },
     "button": {
         "save": "Save",
-        "select": "Select"
+        "select": "Select",
+        "apply_filter": "Apply",
+        "set": "Set"
     },
     "settings": {
         "language": "Language",
@@ -55,5 +57,18 @@
         "about_header":"About us",
         "terms_header":"Terms y Conditions",
         "policy_header":"Policy"
+    },
+    "address": {
+        "add": "Add Address",
+        "name": "Name",
+        "location": "Location",
+        "search_location": "Search location on the map",
+        "details": "Details",
+        "details_placeholder": "In a hallway, house painted green..."
+    },
+    "map": {
+        "search_placeholder": "Write city or town",
+        "here_now": "Here now",
+        "location_found": "Location found"
     }
 }

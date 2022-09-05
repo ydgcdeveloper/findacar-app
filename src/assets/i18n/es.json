@@ -38,7 +38,8 @@
     "button": {
         "save": "Guardar",
         "select": "Seleccionar",
-        "apply_filter": "Aplicar filtro"
+        "apply_filter": "Aplicar filtro",
+        "set": "Establecer"
     },
     "settings": {
         "language": "Idioma",
@@ -56,5 +57,18 @@
         "about_header": "Sobre Nosotros",
         "terms_header": "Términos y Condiciones",
         "policy_header": "Política de Privacidad"
+    },
+    "address": {
+        "add": "Agregar Dirección",
+        "name": "Nombre",
+        "location": "Ubicación",
+        "search_location": "Buscar ubicación en el mapa",
+        "details": "Detalles",
+        "details_placeholder": "En un pasillo, casa pintada de verde..."
+    },
+    "map": {
+        "search_placeholder": "Escribe la ciudad o pueblo",
+        "here_now": "Estás aquí ahora",
+        "location_found": "Localización encontrada"
     }
 }
