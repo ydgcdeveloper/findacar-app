@@ -11,23 +11,11 @@
   <!-- Segment with secondary color -->
   <ion-segment class="mb-2" (ionChange)="segmentChanged($event)"  color="success"
     value="Holguin" scrollable="true">
-    <ion-segment-button value="Holguin">
-      <ion-label>Holguin</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Havana">
-      <ion-label>La Habana</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Matanzas">
-      <ion-label>Matanzas</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Bayamo">
-      <ion-label>Granma</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Las Tunas">
-      <ion-label>Las Tunas</ion-label>
+    <ion-segment-button *ngFor="let place of mapPlaces" [value]="place.tag">
+      <ion-label>{{place.tag}}</ion-label>
     </ion-segment-button>
   </ion-segment>
   <div id="mapId" style="width: 100%; height: 92%"></div>
-  <ion-button class="fixed" *ngIf="!address && showSaveButton">Establecer</ion-button>
-  <ion-button class="fixed" (click)="saveEdit()" *ngIf="address && showSaveButton">Guardar</ion-button>
+  <ion-button class="fixed" *ngIf="!address && showSaveButton">{{'button.set'|translate}}</ion-button>
+  <ion-button class="fixed" (click)="saveEdit()" *ngIf="address && showSaveButton">{{'button.save'|translate}}</ion-button>
 </ion-content>

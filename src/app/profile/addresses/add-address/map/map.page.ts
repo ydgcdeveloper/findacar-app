@@ -69,7 +69,7 @@ export class MapPage implements OnInit {
     maxResults: 5,
   };
 
-  private mapPlaces: any[];
+  public mapPlaces: any[];
 
   constructor(
     private geolocation: Geolocation,
