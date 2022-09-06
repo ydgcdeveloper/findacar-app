@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,8 @@ import { ServiceSkeletonComponentModule } from '../../component/service-skeleton
     IonicModule,
     FavoritesPageRoutingModule,
     ServiceComponentModule,
-    ServiceSkeletonComponentModule
+    ServiceSkeletonComponentModule,
+    TranslateModule
   ],
   declarations: [FavoritesPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

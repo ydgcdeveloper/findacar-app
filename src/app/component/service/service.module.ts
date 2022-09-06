@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceComponent } from './service.component';
@@ -6,6 +7,7 @@ import { ServiceComponent } from './service.component';
     declarations: [ServiceComponentModule.rootComponent],
     imports: [
         CommonModule,
+        TranslateModule
     ],
     exports: [ServiceComponentModule.rootComponent],
     entryComponents: [ServiceComponentModule.rootComponent],
