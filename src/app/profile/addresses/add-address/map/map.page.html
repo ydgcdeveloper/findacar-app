@@ -11,7 +11,7 @@
   <!-- Segment with secondary color -->
   <ion-segment class="mb-2" (ionChange)="segmentChanged($event)"  color="success"
     value="Holguin" scrollable="true">
-    <ion-segment-button *ngFor="let place of mapPlaces" [value]="place.tag">
+    <ion-segment-button *ngFor="let place of mapPlaces" [value]="place">
       <ion-label>{{place.tag}}</ion-label>
     </ion-segment-button>
   </ion-segment>

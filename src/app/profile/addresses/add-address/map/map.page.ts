@@ -257,28 +257,7 @@ export class MapPage implements OnInit {
 
         this.map.flyTo([result[0].latitude, result[0].longitude], 13);
         /** CHECK IF THIS IS WORKING PROPERLY */
-        this.place = this.mapPlaces.find((element) => element.tag == place)?.description || 'Cuba, Holguín, Holguín';
-        // switch (place) {
-        //   case 'Holguin':
-        //     this.place = 'Cuba, Holguín, Holguín';
-        //     break;
-        //   case 'Havana':
-        //     this.place = 'Cuba, La Habana';
-        //     break;
-        //   case 'Matanzas':
-        //     this.place = 'Cuba, Matanzas, Cárdenas';
-        //     break;
-        //   case 'Bayamo':
-        //     this.place = 'Cuba, Granma, Bayamo';
-        //     break;
-        //   case 'Las Tunas':
-        //     this.place = 'Cuba, Las Tunas, Las Tunas';
-        //     break;
-        //   default:
-        //     this.place = 'Cuba, Holguín, Holguín';
-        //     break;
-        // }
-
+        this.place = place.description
       })
       .catch((error: any) => {
         this.presentToast(`Place Error with '${place}': ` + error);
