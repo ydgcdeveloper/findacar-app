@@ -39,7 +39,11 @@
         "save": "Guardar",
         "select": "Seleccionar",
         "apply_filter": "Aplicar filtro",
-        "set": "Establecer"
+        "set": "Establecer",
+        "delete": "Eliminar",
+        "confirm": "Confirmar",
+        "cancel": "Cancelar",
+        "rate": "Valorar"
     },
     "settings": {
         "language": "Idioma",
@@ -70,5 +74,18 @@
         "search_placeholder": "Escribe la ciudad o pueblo",
         "here_now": "Estás aquí ahora",
         "location_found": "Localización encontrada"
+    },
+    "order": {
+        "header": "Mis Pedidos",
+        "order": "Orden",
+        "segment_previous": "Anteriores",
+        "segment_current": "Actuales",
+        "segment_requests": "Solicitudes",
+        "request": "Solicitud",
+        "price": "Precio",
+        "able_to_pay": "Dispuesto a pagar",
+        "see_accepted": "Ver aceptadas",
+        "see-details": "Ver detalles",
+        "delete_request_warning_message": "Está seguro que desea eliminar la solicitud?"
     }
 }

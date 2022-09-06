@@ -39,7 +39,11 @@
         "save": "Save",
         "select": "Select",
         "apply_filter": "Apply",
-        "set": "Set"
+        "set": "Set",
+        "delete": "Delete",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "rate": "Rate"
     },
     "settings": {
         "language": "Language",
@@ -54,9 +58,9 @@
             "email": "Send email",
             "call": "Phone call"
         },
-        "about_header":"About us",
-        "terms_header":"Terms y Conditions",
-        "policy_header":"Policy"
+        "about_header": "About us",
+        "terms_header": "Terms y Conditions",
+        "policy_header": "Policy"
     },
     "address": {
         "add": "Add Address",
@@ -70,5 +74,18 @@
         "search_placeholder": "Write city or town",
         "here_now": "Here now",
         "location_found": "Location found"
+    },
+    "order": {
+        "header": "My Orders",
+        "order": "Order",
+        "segment_previous": "Previous",
+        "segment_current": "Current",
+        "segment_requests": "Requests",
+        "request": "Request",
+        "price": "Price",
+        "able_to_pay": "Able to pay",
+        "see_accepted": "See accepted",
+        "see-details": "See details",
+        "delete_request_warning_message": "Are you sure you want to delete the request?"
     }
 }
