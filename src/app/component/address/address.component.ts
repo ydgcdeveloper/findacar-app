@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ActionSheetController } from '@ionic/angular';
@@ -15,7 +16,7 @@ export class AddressComponent implements OnInit {
   @Output() selectedToUp = new EventEmitter<number>();
   addresses: Address[];
 
-  constructor(public actionSheetController: ActionSheetController, private router: Router, private _service: AddressService) { }
+  constructor(public actionSheetController: ActionSheetController, private router: Router, private _service: AddressService, private translate: TranslateService) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -51,7 +52,7 @@ export class AddressComponent implements OnInit {
       cssClass: 'address-sheet',
       buttons: [
         {
-          text: 'Editar dirección',
+          text: this.translate.instant('address.edit_address'),
           role: 'destructive',
           icon: 'create',
           id: 'delete-button',
@@ -63,7 +64,7 @@ export class AddressComponent implements OnInit {
             this.router.navigate(['/add-address', id]);
           }
         }, {
-          text: 'Eliminar dirección',
+          text: this.translate.instant('address.delete_address'),
           icon: 'trash',
           data: 10,
           handler: () => {

@@ -22,7 +22,7 @@ export class RequestComponent implements OnInit {
       message: this.translate.instant('order.delete_request_warning_message'),
       buttons: [
         {
-          text: 'Si',
+          text: this.translate.instant('button.yes'),
           cssClass: 'danger',
           id: 'delete-button',
           handler: () => {
@@ -30,7 +30,7 @@ export class RequestComponent implements OnInit {
           }
         },
         {
-          text: 'No',
+          text: this.translate.instant('button.no'),
           role: 'cancel',
           cssClass: 'secondary backblack',
           id: 'cancel-button',

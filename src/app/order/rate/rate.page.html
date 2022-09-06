@@ -12,7 +12,7 @@
       <ion-label class="rate-value" color="warning">{{rate}}</ion-label>
     </div>
     <div style="text-align: center;" class="ion-padding">
-      <ion-label>Valorar a <strong>{{service.name}}</strong></ion-label>
+      <ion-label>{{'button.rate'|translate}} <strong>{{service.name}}</strong></ion-label>
     </div>
 
     <ion-row class="mt-1" style="font-size: 27px; cursor: pointer;">
@@ -36,7 +36,7 @@
     </ion-row>
     <div class="divider"></div>
     <div style="text-align: center;" class="ion-padding mt-1">
-      <ion-label>Selecciona una o más opciones</ion-label>
+      <ion-label>{{'order.select_options'|translate}}</ion-label>
       <p id="chips">
         <ng-template ngFor let-option [ngForOf]="rateOptions">
           <ion-chip color="medium" [attr.data-rate]="option.value" [hidden]="!checkDiference(option.value)">
@@ -47,11 +47,11 @@
     </div>
 
     <ion-item lines="none" class="rounded shadow ion-margin">
-      <ion-label position="floating">Añadir una nota <ion-icon slot="end" name="pencil"></ion-icon>
+      <ion-label position="floating">{{'order.add_note'|translate}} <ion-icon slot="end" name="pencil"></ion-icon>
       </ion-label>
       <ion-textarea autocapitalize="true" rows="4"></ion-textarea>
     </ion-item>
-    <ion-button class="fixed">Valorar</ion-button>
+    <ion-button class="fixed">{{'button.rate'|translate}}</ion-button>
   </div>
 
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Order } from 'src/app/api/interfaces/order/order.interface';
 
 @Component({
@@ -10,7 +11,7 @@ import { Order } from 'src/app/api/interfaces/order/order.interface';
 export class OrderComponent implements OnInit {
 
   @Input() order: Order;
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private translate: TranslateService) { }
 
   ngOnInit() { }
 
@@ -18,11 +19,11 @@ export class OrderComponent implements OnInit {
   async presentAlertConfirmDelete(id: number) {
     const alert = await this.alertController.create({
       cssClass: 'alert-delete-class',
-      header: 'Confirmar',
-      message: 'Está seguro que desea eliminar la orden?',
+      header: this.translate.instant('button.confirm'),
+      message: this.translate.instant('order.delete_order_warning_message'),
       buttons: [
         {
-          text: 'Si',
+          text: this.translate.instant('button.yes'),
           cssClass: 'danger',
           id: 'delete-button',
           handler: () => {
@@ -30,7 +31,7 @@ export class OrderComponent implements OnInit {
           }
         },
         {
-          text: 'No',
+          text: this.translate.instant('button.no'),
           role: 'cancel',
           cssClass: 'secondary backblack',
           id: 'cancel-button',
