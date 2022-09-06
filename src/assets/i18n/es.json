@@ -94,5 +94,11 @@
         "delete_order_warning_message": "Está seguro que desea eliminar la orden?",
         "select_options":"Selecciona una o más opciones",
         "add_note":"Añadir una nota"
+    },
+    "favs": {
+        "header": "Mis favoritos"
+    },
+    "service": {
+        "pickup_time": "Tiempo de recogida"
     }
 }
