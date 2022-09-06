@@ -3,7 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Order } from 'src/app/api/interfaces/order/order.interface';
 
 @Component({
-  selector: 'app-past-order',
+  selector: 'app-past-order-component',
   templateUrl: './past-order.component.html',
   styleUrls: ['./past-order.component.scss'],
 })

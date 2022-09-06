@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,8 @@ import { RequestComponent } from '../component/request/request.component';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: OrderPage }]),
     OrderPageRoutingModule,
-    NoResultComponentModule
+    NoResultComponentModule,
+    TranslateModule
   ],
   declarations: [OrderPage, OrderComponent, PastOrderComponent, RequestComponent]
 })

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Mis Pedidos
+      {{'order.header'|translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,27 +9,27 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Order</ion-title>
+      <ion-title size="large">{{'order.order'|translate}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div class="orders-segment">
     <ion-segment color="primary" [(ngModel)]="fragment" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="previous">
-        <ion-label>Anteriores</ion-label>
+        <ion-label>{{'order.segment_previous'|translate}}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="current" checked>
-        <ion-label>Actuales</ion-label>
+        <ion-label>{{'order.segment_current'|translate}}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="request">
-        <ion-label>Solicitudes</ion-label>
+        <ion-label>{{'order.segment_requests'|translate}}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </div>
 
   <div [ngSwitch]="fragment">
     <div *ngSwitchCase="'previous'">
-      <app-past-order *ngFor="let order of orders" [order]="order"></app-past-order>
+      <app-past-order-component *ngFor="let order of orders" [order]="order"></app-past-order-component>
     </div>
 
     <div *ngSwitchCase="'current'">
@@ -37,7 +37,7 @@
     </div>
 
     <div *ngSwitchCase="'request'">
-      <app-request *ngFor="let request of requests" [request]="request"></app-request>
+      <app-request-component *ngFor="let request of requests" [request]="request"></app-request-component>
     </div>
   </div>
 

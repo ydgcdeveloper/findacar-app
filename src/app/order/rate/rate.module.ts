@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { RatePage } from './rate.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RatePageRoutingModule
+    RatePageRoutingModule,
+    TranslateModule
   ],
   declarations: [RatePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
