@@ -43,7 +43,9 @@
         "delete": "Delete",
         "confirm": "Confirm",
         "cancel": "Cancel",
-        "rate": "Rate"
+        "rate": "Rate",
+        "yes": "Yes",
+        "no": "No"
     },
     "settings": {
         "language": "Language",
@@ -68,7 +70,9 @@
         "location": "Location",
         "search_location": "Search location on the map",
         "details": "Details",
-        "details_placeholder": "In a hallway, house painted green..."
+        "details_placeholder": "In a hallway, house painted green...",
+        "edit_address":"Edit address",
+        "delete_address":"Delete address"
     },
     "map": {
         "search_placeholder": "Write city or town",
@@ -85,7 +89,10 @@
         "price": "Price",
         "able_to_pay": "Able to pay",
         "see_accepted": "See accepted",
-        "see-details": "See details",
-        "delete_request_warning_message": "Are you sure you want to delete the request?"
+        "see_details": "See details",
+        "delete_request_warning_message": "Are you sure you want to delete the request?",
+        "delete_order_warning_message": "Are you sure you want to delete the order?",
+        "select_options":"Select one or more options",
+        "add_note":"Add a note"
     }
 }

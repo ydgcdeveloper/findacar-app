@@ -43,7 +43,9 @@
         "delete": "Eliminar",
         "confirm": "Confirmar",
         "cancel": "Cancelar",
-        "rate": "Valorar"
+        "rate": "Valorar",
+        "yes": "Si",
+        "no": "No"
     },
     "settings": {
         "language": "Idioma",
@@ -68,7 +70,9 @@
         "location": "Ubicación",
         "search_location": "Buscar ubicación en el mapa",
         "details": "Detalles",
-        "details_placeholder": "En un pasillo, casa pintada de verde..."
+        "details_placeholder": "En un pasillo, casa pintada de verde...",
+        "edit_address":"Editar dirección",
+        "delete_address":"Eliminar dirección"
     },
     "map": {
         "search_placeholder": "Escribe la ciudad o pueblo",
@@ -85,7 +89,10 @@
         "price": "Precio",
         "able_to_pay": "Dispuesto a pagar",
         "see_accepted": "Ver aceptadas",
-        "see-details": "Ver detalles",
-        "delete_request_warning_message": "Está seguro que desea eliminar la solicitud?"
+        "see_details": "Ver detalles",
+        "delete_request_warning_message": "Está seguro que desea eliminar la solicitud?",
+        "delete_order_warning_message": "Está seguro que desea eliminar la orden?",
+        "select_options":"Selecciona una o más opciones",
+        "add_note":"Añadir una nota"
     }
 }
