@@ -1,3 +1,4 @@
+import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -14,7 +15,7 @@ export class SearchPage implements OnInit {
 
   categories: Category[];
 
-  constructor(private router: Router, private _service: FilterService) {}
+  constructor(private router: Router, private categoryService: CategoryService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -23,7 +24,7 @@ export class SearchPage implements OnInit {
   }
 
   getCategories(){
-    this.categories = this._service.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   ionViewDidEnter() {
