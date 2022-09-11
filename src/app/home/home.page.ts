@@ -1,3 +1,4 @@
+import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilterService } from 'src/app/api/services/filter/filter.service';
@@ -21,7 +22,7 @@ export class HomePage implements OnInit {
   categories: Category[];
   public services: Service[] = null;
 
-  constructor(private router: Router, private _service: FilterService, private _serviceService: ServiceService) {}
+  constructor(private router: Router, private categoryService: CategoryService, private _serviceService: ServiceService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -31,7 +32,7 @@ export class HomePage implements OnInit {
   }
 
   getCategories(){
-    this.categories = this._service.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   getServices() {
