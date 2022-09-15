@@ -58,7 +58,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
         ableToPay: [0, [Validators.pattern('[0-9]*')]],
         coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
         sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
-        destinyAddress: [this.addresses[this.getRandomAddress()].id, [Validators.required]]
+        destinationAddress: [this.addresses[this.getRandomAddress()].id, [Validators.required]]
       }, { validators: checkSameAddressValidator });
     }
   }
@@ -82,8 +82,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
   get sinceAddress() {
     return this.requestForm.get('sinceAddress');
   }
-  get destinyAddress() {
-    return this.requestForm.get('destinyAddress');
+  get destinationAddress() {
+    return this.requestForm.get('destinationAddress');
   }
 
   async getAddresses() {
@@ -286,6 +286,6 @@ export const Coins = [
 
 export const checkSameAddressValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const sinceAddress = control.get('sinceAddress');
-  const destinyAddress = control.get('destinyAddress');
-  return sinceAddress && destinyAddress && sinceAddress.value === destinyAddress.value ? { sameAddress: true } : null;
+  const destinationAddress = control.get('destinationAddress');
+  return sinceAddress && destinationAddress && sinceAddress.value === destinationAddress.value ? { sameAddress: true } : null;
 };

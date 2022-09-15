@@ -10,77 +10,82 @@
 <ion-content class="ion-padding">
   <div *ngIf="show">
     <div class="filter padding-bottom-40">
-      <ion-list class="rounded shadow" lines="none">
-        <ion-radio-group value="closeness">
-          <ion-list-header>
-            <ion-label>{{'home.filter.sort_by'|translate}}</ion-label>
-          </ion-list-header>
+      <form [formGroup]="filterForm">
+        <ion-list class="rounded shadow" lines="none">
+          <ion-radio-group formControlName="sortBy">
+            <ion-list-header>
+              <ion-label>{{'home.filter.sort_by'|translate}}</ion-label>
+            </ion-list-header>
 
-          <ion-item>
-            <ion-icon slot="start" name="location-sharp"></ion-icon>
-            <ion-label>{{'home.filter.closeness'|translate}}</ion-label>
-            <ion-radio slot="end" value="closeness"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon slot="start" name="star-sharp"></ion-icon>
-            <ion-label>{{'home.filter.rating'|translate}}</ion-label>
-            <ion-radio slot="end" value="rate"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon slot="start" name="time-sharp"></ion-icon>
-            <ion-label>{{'home.filter.arrival_time'|translate}}</ion-label>
-            <ion-radio slot="end" value="arrive"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-
-      <ion-item class="ion-margin-top rounded only-show shadow" lines="none">
-        <ion-label>{{'home.filter.only_available'|translate}}</ion-label>
-        <ion-checkbox slot="start"></ion-checkbox>
-      </ion-item>
-
-      <div class="ion-margin-top rounded shadow">
-        <!-- Basic -->
-        <ion-accordion-group>
-          <ion-accordion value="price" class="rounded shadow">
-            <ion-item slot="header">
-              <ion-label>{{'home.filter.price_range'|translate}}</ion-label>
+            <ion-item>
+              <ion-icon slot="start" name="location-sharp"></ion-icon>
+              <ion-label>{{'home.filter.closeness'|translate}}</ion-label>
+              <ion-radio slot="end" value="closeness"></ion-radio>
             </ion-item>
 
-            <ion-list slot="content">
-              <ion-item>
-                <ion-range dualKnobs="true" min="30" max="5000" step="50" [value]="{lower: 25, upper: 2000}" pin="true"
-                  [pinFormatter]="customFormatter" snaps="true">
-                  <ion-icon size="small" slot="start" name="cash-sharp"></ion-icon>
-                  <ion-icon slot="end" name="cash-sharp"></ion-icon>
-                </ion-range>
-              </ion-item>
-            </ion-list>
-          </ion-accordion>
-        </ion-accordion-group>
-      </div>
-
-      <div class="categories ion-margin-top">
-        <!-- Basic -->
-        <ion-accordion-group >
-          <ion-accordion value="categories" class="rounded shadow">
-            <ion-item slot="header">
-              <ion-label>{{'home.filter.category.header'|translate}}</ion-label>
+            <ion-item>
+              <ion-icon slot="start" name="star-sharp"></ion-icon>
+              <ion-label>{{'home.filter.rating'|translate}}</ion-label>
+              <ion-radio slot="end" value="rating"></ion-radio>
             </ion-item>
-            <ion-list slot="content" lines="none">
-              <ion-item *ngFor="let category of categories">
-                <ion-checkbox [name]="category.id"></ion-checkbox>
-                <ion-label class="ml-5">{{ category.name }}</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-accordion>
-        </ion-accordion-group>
 
-      </div>
+            <ion-item>
+              <ion-icon slot="start" name="time-sharp"></ion-icon>
+              <ion-label>{{'home.filter.arrival_time'|translate}}</ion-label>
+              <ion-radio slot="end" value="arrival_time"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-item class="ion-margin-top rounded only-show shadow" lines="none">
+          <ion-label>{{'home.filter.only_available'|translate}}</ion-label>
+          <ion-checkbox formControlName="onlyAvailable" slot="start"></ion-checkbox>
+        </ion-item>
+
+        <div class="ion-margin-top rounded shadow">
+          <!-- Basic -->
+          <ion-accordion-group>
+            <ion-accordion value="price" class="rounded shadow">
+              <ion-item slot="header">
+                <ion-label>{{'home.filter.price_range'|translate}}</ion-label>
+              </ion-item>
+
+              <ion-list slot="content">
+                <ion-item>
+                  <ion-range formControlName="priceRange" dualKnobs="true" [min]="priceRangeMin" [max]="priceRangeMax"
+                    [step]="priceRangeStep" pin="true" [pinFormatter]="customFormatter" snaps="true">
+                    <ion-icon size="small" slot="start" name="cash-sharp"></ion-icon>
+                    <ion-icon slot="end" name="cash-sharp"></ion-icon>
+                  </ion-range>
+                </ion-item>
+              </ion-list>
+            </ion-accordion>
+          </ion-accordion-group>
+        </div>
+
+        <div class="categories ion-margin-top">
+          <!-- Basic -->
+          <ion-accordion-group>
+            <ion-accordion value="categories" class="rounded shadow">
+              <ion-item slot="header">
+                <ion-label>{{'home.filter.category.header'|translate}}</ion-label>
+              </ion-item>
+              <ion-list slot="content" lines="none">
+              <ng-container formArrayName="category">
+                <ion-item *ngFor="let category of checkedCategories, let i = index">
+                  <ion-checkbox [formControlName]="i" [checked]="category.checked" (ionChange)="updateChecked()"></ion-checkbox>
+                  <ion-label class="ml-5">{{ category.name }}</ion-label>
+                </ion-item>
+              </ng-container>
+              </ion-list>
+            </ion-accordion>
+            <ion-label *ngIf="category.errors?.['noCategorySelected']" class="input-message" color="danger">{{'home.filter.select_category'|translate}}</ion-label>
+          </ion-accordion-group>
+
+        </div>
+      </form>
     </div>
-    <ion-button class="fixed">{{'button.apply_filter'|translate}}</ion-button>
+    <ion-button class="fixed" [disabled]="!filterForm.valid">{{'button.apply_filter'|translate}}</ion-button>
   </div>
 
   <div *ngIf="!show">

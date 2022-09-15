@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddressService } from './../../../api/services/address/address.service';
 import { Address } from './../../../interfaces/address/address.interface';
 import { Component, OnInit } from '@angular/core';
@@ -18,17 +19,23 @@ export class AddAddressPage implements OnInit {
   id;
   show = false;
   editable = false;
+  addAddressForm: FormGroup
 
-  constructor(private activatedRoute: ActivatedRoute, private outlet: IonRouterOutlet, private router: Router, private _service: AddressService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private addressService: AddressService,
+    private formBuilder: FormBuilder
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     setTimeout(() => {
       this.show = true;
     }, environment.skeleton_time);
 
-    const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    const id = parseInt(await this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
-      this.address = this._service.getAddressById(id);
+      this.address = this.addressService.getAddressById(id);
       if (this.address) {
         this.id = id;
         this.name = this.address.name;
@@ -44,6 +51,14 @@ export class AddAddressPage implements OnInit {
     }
 
     this.editable = this.id ? true : false;
+  }
+
+  setForm() {
+    this.addAddressForm = this.formBuilder.group({
+      name: [this.name, [Validators.required]],
+      location: [this.address, [Validators.required]],
+      details: [this.details],
+    })
   }
 
   navigate() {

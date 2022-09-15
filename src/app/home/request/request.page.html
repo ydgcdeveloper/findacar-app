@@ -9,44 +9,40 @@
 
 <ion-content class="ion-padding">
   <div *ngIf="addresses.length > 1">
-    <ion-title>Crear Solicitud de Viaje</ion-title>
+    <ion-title>{{'request.create'|translate}}</ion-title>
     <form [formGroup]="requestForm">
       <ion-item class="shadow rounded mt-2">
-        <ion-label position="floating">Etiqueta</ion-label>
+        <ion-label position="floating">{{'request.tag'|translate}}</ion-label>
         <ion-input formControlName="tag"></ion-input>
 
       </ion-item>
-      <ion-label *ngIf="tag.errors?.['required']" class="input-message" color="danger">Escribe un identificador para la
-        solicitud</ion-label>
-      <ion-label *ngIf="tag.errors?.['minlength']" class="input-message" color="danger">Debe tener al menos dos
-        caracteres</ion-label>
+      <ion-label *ngIf="tag.errors?.['required']" class="input-message" color="danger">{{'request.tag_required'|translate}}</ion-label>
+      <ion-label *ngIf="tag.errors?.['minlength']" class="input-message" color="danger">{{'request.tag_length'|translate}}</ion-label>
 
       <ion-item class="shadow rounded mt-2">
-        <ion-label position="floating">Selecciona tu dirección de recogida</ion-label>
+        <ion-label position="floating">{{'request.pickup_address'|translate}}</ion-label>
         <ion-select formControlName="sinceAddress" interface="action-sheet">
-          <ion-select-option *ngFor="let adress of addresses" [value]="adress.id">
-            {{adress.name}}
+          <ion-select-option *ngFor="let address of addresses" [value]="address.id">
+            {{address.name}}
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser
-        diferentes</ion-label>
+      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">{{'request.same_address'|translate}}</ion-label>
 
       <ion-item class="shadow rounded mt-2">
-        <ion-label position="floating">Selecciona tu dirección de destino</ion-label>
-        <ion-select formControlName="destinyAddress" interface="action-sheet">
-          <ion-select-option *ngFor="let adress of addresses" [value]="adress.id">
-            {{adress.name}}
+        <ion-label position="floating">{{'request.destination_address'|translate}}</ion-label>
+        <ion-select formControlName="destinationAddress" interface="action-sheet">
+          <ion-select-option *ngFor="let address of addresses" [value]="address.id">
+            {{address.name}}
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">Las direcciones deben ser
-        diferentes</ion-label>
+      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">{{'request.same_address'|translate}}</ion-label>
 
       <ion-row class="mt-2">
         <ion-col size="8" style="padding-left: 0px; margin-left: 0px; margin-right: 0px;">
           <ion-item class="shadow rounded">
-            <ion-label position="floating">Dispuesto a pagar</ion-label>
+            <ion-label position="floating">{{'order.able_to_pay'|translate}}</ion-label>
             <ion-input formControlName="ableToPay" pattern="[0-9]*"></ion-input>
           </ion-item>
         </ion-col>
@@ -68,7 +64,7 @@
       </ion-item>
     </form>
 
-    <ion-button [disabled]="!requestForm.valid" class="fixed" (click)="createRequest()">Crear</ion-button>
+    <ion-button [disabled]="!requestForm.valid" class="fixed" (click)="createRequest()">{{'button.create'|translate}}</ion-button>
   </div>
   <div *ngIf="addresses.length < 2">
     <ion-item class="rounded mt-2">

@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AddressService } from './../../../api/services/address/address.service';
 import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -16,7 +16,8 @@ import { AddAddressPage } from './add-address.page';
     FormsModule,
     IonicModule,
     AddAddressPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ],
   providers:[AddressService],
   declarations: [AddAddressPage]

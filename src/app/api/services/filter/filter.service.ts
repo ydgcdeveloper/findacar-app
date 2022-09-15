@@ -7,18 +7,22 @@ import { Filter, SortByTypes } from '../../interfaces/filter/filter';
 export class FilterService {
 
   private filter: Filter = {
-    sortBy : SortByTypes.RATING,
+    sortBy: SortByTypes.RATING,
     onlyAvailable: true,
     priceRange: {
-      lower: 1000,
-      upper: 6000
+      lower: 100,
+      upper: 400
     },
-    categories: []
+    categories: [1, 3]
   }
-  
+
   constructor() { }
 
-  getFilter(){
+  getFilter() {
     return this.filter;
+  }
+
+  saveFilter(filter: Filter): void {
+    this.filter = filter;
   }
 }

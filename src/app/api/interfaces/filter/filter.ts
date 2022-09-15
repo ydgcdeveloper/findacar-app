@@ -5,7 +5,7 @@ export interface Filter {
         lower: number,
         upper: number,
     },
-    categories: string[]
+    categories: Array<string | number>
 }
 
 export enum SortByTypes {
