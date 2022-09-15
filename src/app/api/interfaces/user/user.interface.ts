@@ -1,5 +1,6 @@
+import { ID } from '../rate/rate.interface';
 export interface User{
-    id: number;
+    id: ID;
     username: string;
     name: string;
 }

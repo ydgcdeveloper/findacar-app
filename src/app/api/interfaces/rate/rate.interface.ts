@@ -1,9 +1,18 @@
 export interface RateOption {
-    id: number;
+    id: ID;
     description: string;
     value: number;
     quality: RateOptionQuality;
 }
+
+export interface Rate {
+    id: ID,
+    serviceId: ID,
+    rate: number,
+    rateOptions: ID [],
+}
+
+export type ID  = string | number
 
 export enum RateOptionQuality {
     EXCELENTE = 'EXCELENTE',

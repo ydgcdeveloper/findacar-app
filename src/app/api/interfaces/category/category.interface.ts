@@ -1,5 +1,6 @@
+import { ID } from '../rate/rate.interface';
 export interface Category {
-    id: number;
+    id: ID;
     name: string;
     color: string;
     description: string;

@@ -1,9 +1,9 @@
+import { ServiceService } from 'src/app/api/services/service/service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RateOption } from '../../api/interfaces/rate/rate-option.interface';
+import { RateOption } from '../../api/interfaces/rate/rate.interface';
 import { Service } from '../../api/interfaces/service/service.interface';
 import { RateService } from '../../api/services/rate/rate.service';
-import { ServiceService } from '../../api/services/service/service.service';
 
 @Component({
   selector: 'app-rate',
@@ -16,7 +16,12 @@ export class RatePage implements OnInit {
   id: number;
   rate = 3;
 
-  constructor(private router: Router, private _service: ServiceService, private rate_service: RateService, private activated: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private rateService: RateService, 
+    private serviceService: ServiceService, 
+    private activated: ActivatedRoute
+    ) { }
 
   ngOnInit() {
     this.id = parseInt(this.activated.snapshot.paramMap.get('id'));
@@ -24,7 +29,6 @@ export class RatePage implements OnInit {
       this.setService(this.id);
     }
     this.setRateOptions();
-
   }
 
   ionViewDidEnter() {
@@ -51,11 +55,11 @@ export class RatePage implements OnInit {
   }
 
   setService(id: number) {
-    this.service = this._service.getServiceById(id);
+    this.service = this.serviceService.getServiceById(id);
   }
 
   setRateOptions() {
-    this.rateOptions = this.rate_service.getAllRateOptions();
+    this.rateOptions = this.rateService.getAllRateOptions();
   }
 
   checkDiference(number1: number) {

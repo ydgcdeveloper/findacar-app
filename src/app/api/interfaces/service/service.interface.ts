@@ -1,5 +1,7 @@
+import { ID } from "../rate/rate.interface";
+
 export interface Service {
-    id: number;
+    id: ID;
     name: string;
     status: ServiceStatus;
     address: string;

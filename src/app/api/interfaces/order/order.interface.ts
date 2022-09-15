@@ -1,9 +1,10 @@
+import { ID } from '../rate/rate.interface';
 import { Place } from '../request/request.interface';
 import { Service } from '../service/service.interface';
 import { User } from '../user/user.interface';
 
 export interface Order {
-    id: number;
+    id: ID;
     service: Service;
     price: string;
     coin: Coin;

@@ -1,5 +1,6 @@
+import { ID } from './../../api/interfaces/rate/rate.interface';
 export interface Address {
-    id: number;
+    id: ID;
     name: string;
     details: string;
     locationData: {

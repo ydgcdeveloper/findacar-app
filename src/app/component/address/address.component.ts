@@ -1,3 +1,4 @@
+import { ID } from './../../api/interfaces/rate/rate.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -12,11 +13,15 @@ import { Address } from '../../api/interfaces/address/address.interface';
   styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
-  selected: number;
-  @Output() selectedToUp = new EventEmitter<number>();
+  selected: ID;
+  @Output() selectedToUp = new EventEmitter<ID>();
   addresses: Address[];
 
-  constructor(public actionSheetController: ActionSheetController, private router: Router, private _service: AddressService, private translate: TranslateService) { }
+  constructor(
+    public actionSheetController: ActionSheetController, 
+    private router: Router, 
+    private addressService: AddressService, 
+    private translate: TranslateService) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -26,7 +31,7 @@ export class AddressComponent implements OnInit {
   }
 
   getSelectedAddressId() {
-    this.selected = this._service.getSelectedAddressId();
+    this.selected = this.addressService.getSelectedAddressId();
   }
 
   updateSelected() {
@@ -34,7 +39,7 @@ export class AddressComponent implements OnInit {
   }
 
   getAddresses() {
-    this.addresses = this._service.getAllAddress();
+    this.addresses = this.addressService.getAllAddress();
   }
 
 

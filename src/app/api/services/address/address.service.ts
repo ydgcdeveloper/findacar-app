@@ -1,3 +1,4 @@
+import { ID } from './../../interfaces/rate/rate.interface';
 import { Injectable } from '@angular/core';
 import { Address } from '../../interfaces/address/address.interface';
 
@@ -55,7 +56,7 @@ export class AddressService {
 
   constructor() { }
 
-  getAddressById(id: number): Address {
+  getAddressById(id: ID): Address {
     const addresses = this.getAllAddress();
     const foundAddress = addresses.filter((address) => {
       const add = address;
@@ -70,7 +71,7 @@ export class AddressService {
     return this.addresses;
   }
 
-  getSelectedAddressId(): number | null {
+  getSelectedAddressId(): ID | null {
     const addresses = this.getAllAddress();
     const selected = addresses.filter((address) => {
       const add = address;
