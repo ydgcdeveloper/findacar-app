@@ -13,16 +13,16 @@ import { Filter, SortByTypes } from 'src/app/api/interfaces/filter/filter';
 })
 export class FiltersPage implements OnInit {
 
-  public filterForm: FormGroup
-  priceRangeMin: number = 30;
-  priceRangeMax: number = 5000;
-  priceRangeStep: number = 50;
+  public filterForm: FormGroup;
+  priceRangeMin = 30;
+  priceRangeMax = 5000;
+  priceRangeStep = 50;
   categories: Category[];
   checkedCategories;
   show = false;
   filterData: Filter;
-  sortTypes = SortByTypes
-  categoryFormArray: FormArray = new FormArray([], { validators: checkAtLeastOneCategory })
+  sortTypes = SortByTypes;
+  categoryFormArray: FormArray = new FormArray([], { validators: checkAtLeastOneCategory });
 
 
   constructor(private categoryService: CategoryService, private formBuilder: FormBuilder, private filterService: FilterService) { }
@@ -38,10 +38,10 @@ export class FiltersPage implements OnInit {
 
     this.filterData = await this.filterService.getFilter();
 
-    this.setCheckedCategory()
+    this.setCheckedCategory();
 
     for (let i = 0; i < this.checkedCategories.length; i++) {
-      this.categoryFormArray.push(new FormControl(this.checkedCategories[i].checked))
+      this.categoryFormArray.push(new FormControl(this.checkedCategories[i].checked));
     }
 
     this.filterForm = this.formBuilder.group({
@@ -49,26 +49,20 @@ export class FiltersPage implements OnInit {
       onlyAvailable: [this.filterData.onlyAvailable || false],
       priceRange: [{ lower: this.filterData?.priceRange.lower, upper: this.filterData?.priceRange.upper } || { lower: this.priceRangeMin, upper: this.priceRangeMax }, [Validators.required]],
       category: this.categoryFormArray
-    })
+    });
   }
 
   setCheckedCategory() {
-    this.checkedCategories = this.categories.map((category) => {
-      return { ...category, checked: this.filterData.categories.includes(category.id) }
-    })
+    this.checkedCategories = this.categories.map((category) => ({ ...category, checked: this.filterData.categories.includes(category.id) }));
   }
 
   updateChecked() {
-    this.checkedCategories = this.getCategoryFormArray().controls.map((category, index) => {
-      return { ...this.checkedCategories[index], checked: category.value }
-    })
+    this.checkedCategories = this.getCategoryFormArray().controls.map((category, index) => ({ ...this.checkedCategories[index], checked: category.value }));
   }
 
   getIdSelectedCategories() {
-    let finalCheckedCategories = this.checkedCategories as Array<any>
-    return finalCheckedCategories.filter((category) => category.checked).map((category) => {
-      return category.id
-    })
+    const finalCheckedCategories = this.checkedCategories as Array<any>;
+    return finalCheckedCategories.filter((category) => category.checked).map((category) => category.id);
   }
 
   get sortBy() {
@@ -88,7 +82,7 @@ export class FiltersPage implements OnInit {
   }
 
   getCategoryFormArray() {
-    return this.filterForm.controls.category as FormArray
+    return this.filterForm.controls.category as FormArray;
   }
 
   getCategories() {
@@ -100,9 +94,9 @@ export class FiltersPage implements OnInit {
   }
 
   onSubmit() {
-    console.log("Form --->>", this.filterForm)
+    console.log('Form --->>', this.filterForm);
     if (this.filterForm.invalid) {
-      return
+      return;
     }
 
     const newFilter: Filter = {
@@ -110,12 +104,10 @@ export class FiltersPage implements OnInit {
       onlyAvailable: this.onlyAvailable.value,
       priceRange: this.priceRange.value,
       categories: this.getIdSelectedCategories()
-    }
+    };
 
-    console.log("Filter --->>", newFilter)
+    console.log('Filter --->>', newFilter);
   }
 }
 
-export const checkAtLeastOneCategory: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  return !control.value.includes(true) ? { noCategorySelected: true } : null;
-};
+export const checkAtLeastOneCategory: ValidatorFn = (control: AbstractControl): ValidationErrors | null => !control.value.includes(true) ? { noCategorySelected: true } : null;

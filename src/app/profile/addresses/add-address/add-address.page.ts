@@ -19,7 +19,7 @@ export class AddAddressPage implements OnInit {
   id;
   show = false;
   editable = false;
-  addAddressForm: FormGroup
+  addAddressForm: FormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,7 +58,7 @@ export class AddAddressPage implements OnInit {
       name: [this.name, [Validators.required]],
       location: [this.address, [Validators.required]],
       details: [this.details],
-    })
+    });
   }
 
   navigate() {

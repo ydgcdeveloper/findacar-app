@@ -94,7 +94,7 @@ export class AddressService {
 
   setSelectedAddress(id: number) {
     const addresses = this.getAllAddress();
-    const selected = addresses.map(function (address) {
+    const selected = addresses.map(function(address) {
       const add = address;
       if (add.id == id) {
         address.selected = true;

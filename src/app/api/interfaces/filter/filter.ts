@@ -1,11 +1,11 @@
 export interface Filter {
-    sortBy: SortByTypes,
-    onlyAvailable: boolean,
+    sortBy: SortByTypes;
+    onlyAvailable: boolean;
     priceRange: {
-        lower: number,
-        upper: number,
-    },
-    categories: Array<string | number>
+        lower: number;
+        upper: number;
+    };
+    categories: Array<string | number>;
 }
 
 export enum SortByTypes {

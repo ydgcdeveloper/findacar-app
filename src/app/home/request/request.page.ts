@@ -26,7 +26,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
   public timeText: string;
   public requestForm: FormGroup;
   public coins = Coins;
-  public addresses: Address[]
+  public addresses: Address[];
 
   gadgets: any[] = [
     this.days,
@@ -124,12 +124,12 @@ export class RequestPage implements OnInit, ViewWillEnter {
     if (this.addresses.length === 0) {
       return 0;
     }
-    const selectedAddressId = this.addressService.getSelectedAddressId()
-    let randomGenerated
+    const selectedAddressId = this.addressService.getSelectedAddressId();
+    let randomGenerated;
     do {
       randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
-      console.log(randomGenerated)
-    } while (selectedAddressId === this.addresses[randomGenerated].id)
+      console.log(randomGenerated);
+    } while (selectedAddressId === this.addresses[randomGenerated].id);
     return randomGenerated;
   }
 
@@ -168,10 +168,10 @@ export class RequestPage implements OnInit, ViewWillEnter {
   }
 
   makeid(length: number) {
-    var result = [];
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
+    const result = [];
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
       result.push(characters.charAt(Math.floor(Math.random() *
         charactersLength)));
     }
@@ -282,7 +282,7 @@ export const Coins = [
   { tag: 'CUP' },
   { tag: 'MLC' },
   { tag: 'USD' }
-]
+];
 
 export const checkSameAddressValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const sinceAddress = control.get('sinceAddress');

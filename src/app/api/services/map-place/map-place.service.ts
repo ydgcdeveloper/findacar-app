@@ -26,7 +26,7 @@ export class MapPlaceService {
       tag: 'Las Tunas',
       description: 'Cuba, Las Tunas, Las Tunas'
     },
-  ]
+  ];
 
   constructor() { }
 

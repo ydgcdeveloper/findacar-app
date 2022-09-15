@@ -257,7 +257,7 @@ export class MapPage implements OnInit {
 
         this.map.flyTo([result[0].latitude, result[0].longitude], 13);
         /** CHECK IF THIS IS WORKING PROPERLY */
-        this.place = place.description
+        this.place = place.description;
       })
       .catch((error: any) => {
         this.presentToast(`Place Error with '${place}': ` + error);

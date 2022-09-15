@@ -14,7 +14,7 @@ export class FilterService {
       upper: 400
     },
     categories: [1, 3]
-  }
+  };
 
   constructor() { }
 

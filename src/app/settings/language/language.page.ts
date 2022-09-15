@@ -12,7 +12,7 @@ import { LANGUAGE, setLanguage } from 'src/app/services/language/language.servic
 })
 export class LanguagePage implements OnInit {
 
-  public selectedLanguage = LANGUAGE()
+  public selectedLanguage = LANGUAGE();
   languageForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private navController: NavController) { }
@@ -28,9 +28,9 @@ export class LanguagePage implements OnInit {
   }
 
   async onSubmit() {
-    if (this.languageForm.invalid) return;
+    if (this.languageForm.invalid) {return;}
 
-    setLanguage(this.lang.value === 'en' ? LangTypes.English : LangTypes.Spanish)
+    setLanguage(this.lang.value === 'en' ? LangTypes.English : LangTypes.Spanish);
     this.navController.back();
   }
 }

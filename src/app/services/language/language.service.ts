@@ -10,13 +10,11 @@ export class LanguageService {
 
 }
 
-export const LANGUAGE = (): string => {
-  return localStorage.getItem(environment.lang_variable_name || 'app_language') || environment.default_language;
-}
+export const LANGUAGE = (): string => localStorage.getItem(environment.lang_variable_name || 'app_language') || environment.default_language;
 
 export const setLanguage = (langName: LangTypes): void => {
-  localStorage.setItem(environment.lang_variable_name || 'app_language', langName)
-}
+  localStorage.setItem(environment.lang_variable_name || 'app_language', langName);
+};
 
 export enum LangTypes {
   Spanish = 'es',

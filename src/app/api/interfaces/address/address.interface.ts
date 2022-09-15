@@ -1,9 +1,9 @@
-import { Place } from "../request/request.interface";
+import { Place } from '../request/request.interface';
 
 export interface Address {
     id: number;
     name: string;
     details: string;
-    locationData: Place
+    locationData: Place;
     selected: boolean;
 }
