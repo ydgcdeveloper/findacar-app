@@ -21,6 +21,7 @@ export class FiltersPage implements OnInit {
   checkedCategories;
   show = false;
   filterData: Filter;
+  sortTypes = SortByTypes
   categoryFormArray: FormArray = new FormArray([], { validators: checkAtLeastOneCategory })
 
 
@@ -61,7 +62,6 @@ export class FiltersPage implements OnInit {
     this.checkedCategories = this.getCategoryFormArray().controls.map((category, index) => {
       return { ...this.checkedCategories[index], checked: category.value }
     })
-    console.log(this.category)
   }
 
   getIdSelectedCategories() {
@@ -99,11 +99,20 @@ export class FiltersPage implements OnInit {
     return `$${value}`;
   }
 
-  private onSubmit() {
+  onSubmit() {
+    console.log("Form --->>", this.filterForm)
     if (this.filterForm.invalid) {
       return
     }
 
+    const newFilter: Filter = {
+      sortBy: this.sortBy.value as SortByTypes,
+      onlyAvailable: this.onlyAvailable.value,
+      priceRange: this.priceRange.value,
+      categories: this.getIdSelectedCategories()
+    }
+
+    console.log("Filter --->>", newFilter)
   }
 }
 

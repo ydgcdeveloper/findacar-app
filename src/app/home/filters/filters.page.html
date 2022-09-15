@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="show">
+  <div *ngIf="show"> 
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <div class="filter padding-bottom-40">
-      <form [formGroup]="filterForm">
         <ion-list class="rounded shadow" lines="none">
           <ion-radio-group formControlName="sortBy">
             <ion-list-header>
@@ -20,19 +20,19 @@
             <ion-item>
               <ion-icon slot="start" name="location-sharp"></ion-icon>
               <ion-label>{{'home.filter.closeness'|translate}}</ion-label>
-              <ion-radio slot="end" value="closeness"></ion-radio>
+              <ion-radio slot="end" [value]="sortTypes.CLOSENESS"></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-icon slot="start" name="star-sharp"></ion-icon>
               <ion-label>{{'home.filter.rating'|translate}}</ion-label>
-              <ion-radio slot="end" value="rating"></ion-radio>
+              <ion-radio slot="end" [value]="sortTypes.RATING"></ion-radio>
             </ion-item>
 
             <ion-item>
               <ion-icon slot="start" name="time-sharp"></ion-icon>
               <ion-label>{{'home.filter.arrival_time'|translate}}</ion-label>
-              <ion-radio slot="end" value="arrival_time"></ion-radio>
+              <ion-radio slot="end" [value]="sortTypes.ARRIVAL_TIME"></ion-radio>
             </ion-item>
           </ion-radio-group>
         </ion-list>
@@ -83,9 +83,9 @@
           </ion-accordion-group>
 
         </div>
-      </form>
-    </div>
-    <ion-button class="fixed" [disabled]="!filterForm.valid">{{'button.apply_filter'|translate}}</ion-button>
+      </div>
+      <ion-button class="fixed" type="input" [disabled]="!filterForm.valid">{{'button.apply_filter'|translate}}</ion-button>
+    </form>
   </div>
 
   <div *ngIf="!show">
