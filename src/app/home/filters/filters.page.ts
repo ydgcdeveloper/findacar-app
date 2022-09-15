@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { CategoryService } from './../../api/services/category/category.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -25,7 +26,12 @@ export class FiltersPage implements OnInit {
   categoryFormArray: FormArray = new FormArray([], { validators: checkAtLeastOneCategory });
 
 
-  constructor(private categoryService: CategoryService, private formBuilder: FormBuilder, private filterService: FilterService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private formBuilder: FormBuilder,
+    private filterService: FilterService,
+    private navController: NavController
+  ) { }
 
   async ngOnInit() {
 
@@ -94,7 +100,6 @@ export class FiltersPage implements OnInit {
   }
 
   onSubmit() {
-    console.log('Form --->>', this.filterForm);
     if (this.filterForm.invalid) {
       return;
     }
@@ -106,7 +111,8 @@ export class FiltersPage implements OnInit {
       categories: this.getIdSelectedCategories()
     };
 
-    console.log('Filter --->>', newFilter);
+    this.filterService.saveFilter(newFilter);
+    this.navController.navigateForward('tabs/home')
   }
 }
 
