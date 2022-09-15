@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   categories: Category[];
   public services: Service[] = null;
 
-  constructor(private router: Router, private categoryService: CategoryService, private _serviceService: ServiceService) {}
+  constructor(private router: Router, private categoryService: CategoryService, private serviceService: ServiceService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
   }
 
   getServices() {
-    this.services = this._serviceService.getAllServices();
+    this.services = this.serviceService.getAllServices();
   }
 
   getRandomInt(min, max) {
