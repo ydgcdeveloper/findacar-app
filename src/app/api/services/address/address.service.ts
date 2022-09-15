@@ -94,7 +94,7 @@ export class AddressService {
 
   setSelectedAddress(id: number) {
     const addresses = this.getAllAddress();
-    const selected = addresses.map(function(address) {
+    const selected = addresses.map(function (address) {
       const add = address;
       if (add.id == id) {
         address.selected = true;
@@ -105,5 +105,14 @@ export class AddressService {
     });
 
     //save selected ones to the server
+  }
+
+  addAddress(address: Address) {
+    this.addresses.push(address)
+  }
+
+  saveAddress(address: Address) {
+    console.log(address)
+    this.addresses[this.addresses.findIndex((add) => add.id === address.id)] = address;
   }
 }

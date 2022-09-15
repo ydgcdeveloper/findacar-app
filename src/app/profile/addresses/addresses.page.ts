@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AddressService } from '../../api/services/address/address.service';
 
@@ -10,7 +11,7 @@ export class AddressesPage implements OnInit {
 
   selected: number;
 
-  constructor(private _service: AddressService) { }
+  constructor(private addressService: AddressService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,8 @@ export class AddressesPage implements OnInit {
   }
 
   saveSelected() {
-    this._service.setSelectedAddress(this.selected);
+    this.addressService.setSelectedAddress(this.selected);
+    this.router.navigate(['tabs/profile']);
   }
 
   ionViewDidEnter(){

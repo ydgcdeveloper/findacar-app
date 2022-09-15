@@ -2,8 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddressService } from './../../../api/services/address/address.service';
 import { Address } from './../../../interfaces/address/address.interface';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { IonRouterOutlet } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,14 +11,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-address.page.scss'],
 })
 export class AddAddressPage implements OnInit {
-  public name = '';
-  public details = '';
   public address: Address;
   public locationData;
   id;
   show = false;
   editable = false;
-  addAddressForm: FormGroup;
+  addressForm: FormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,26 +35,36 @@ export class AddAddressPage implements OnInit {
       this.address = this.addressService.getAddressById(id);
       if (this.address) {
         this.id = id;
-        this.name = this.address.name;
-        this.details = this.address.details;
       }
     } else {
       const address = localStorage.getItem('address');
       if (address) {
         this.address = JSON.parse(address);
-        this.name = this.address.name;
-        this.details = this.address.details;
       }
     }
 
-    this.editable = this.id ? true : false;
+    console.log("ID ---->>>" , this.id)
+    this.editable = this.id !== undefined ? true : false;
+    this.setForm(this.address)
   }
 
-  setForm() {
-    this.addAddressForm = this.formBuilder.group({
-      name: [this.name, [Validators.required]],
-      location: [this.address, [Validators.required]],
-      details: [this.details],
+  get name() {
+    return this.addressForm.get('name')
+  }
+
+  get location() {
+    return this.addressForm.get('location')
+  }
+
+  get details() {
+    return this.addressForm.get('details')
+  }
+
+  setForm(address: Address) {
+    this.addressForm = this.formBuilder.group({
+      name: [address?.name, [Validators.required, Validators.minLength(2)]],
+      location: [address?.locationData, [Validators.required]],
+      details: [address?.details],
     });
   }
 
@@ -69,14 +76,22 @@ export class AddAddressPage implements OnInit {
     this.router.navigate(['map']);
   }
 
-  saveEditAddress() {
+  onSubmit() {
+
+    const newAddress = {
+      id: this.id !== undefined ? this.id : this.addressService.getAllAddress().length + 1,
+      name: this.name.value,
+      details: this.details.value,
+      locationData: this.location.value
+    }
+
     //edit address case
     if (this.id) {
-      console.log('edit');
+      this.addressService.saveAddress({...newAddress, selected: this.address.selected})
     }
     //add address case
     else {
-      console.log('new');
+      this.addressService.addAddress({ ...newAddress, selected: false })
     }
     this.router.navigate(['/addresses']);
   }
