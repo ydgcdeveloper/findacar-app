@@ -17,7 +17,8 @@
                 "heavy_equipment": "Heavy equipment",
                 "heavy_cargo": "Heavy cargo",
                 "house_moving": "House moving"
-            }
+            },
+            "select_category": "Select at least one category"
         }
     },
     "tabs": {
@@ -45,7 +46,8 @@
         "cancel": "Cancel",
         "rate": "Rate",
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "create": "Create"
     },
     "settings": {
         "language": "Language",
@@ -94,6 +96,15 @@
         "delete_order_warning_message": "Are you sure you want to delete the order?",
         "select_options":"Select one or more options",
         "add_note":"Add a note"
+    },
+    "request": {
+        "create": "Create trip request",
+        "tag": "Tag",
+        "tag_required": "Write a request identifier",
+        "tag_length": "At least two characters",
+        "pickup_address": "Select your pick up address",
+        "same_address": "The addresses must be different",
+        "destination_address": "Select your destination address"
     },
     "favs": {
         "header": "My favorites"

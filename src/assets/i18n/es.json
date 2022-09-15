@@ -17,7 +17,8 @@
                 "heavy_equipment": "Equipos pesados",
                 "heavy_cargo": "Carga pesada",
                 "house_moving": "Mudanza"
-            }
+            },
+            "select_category": "Seleccione al menos una categoría"
         }
     },
     "tabs": {
@@ -45,7 +46,8 @@
         "cancel": "Cancelar",
         "rate": "Valorar",
         "yes": "Si",
-        "no": "No"
+        "no": "No",
+        "create": "Crear"
     },
     "settings": {
         "language": "Idioma",
@@ -94,6 +96,15 @@
         "delete_order_warning_message": "Está seguro que desea eliminar la orden?",
         "select_options":"Selecciona una o más opciones",
         "add_note":"Añadir una nota"
+    },
+    "request": {
+        "create": "Crear Solicitud de Viaje",
+        "tag": "Etiqueta",
+        "tag_required": "Escribe un identificador para la solicitud",
+        "tag_length": "Debe tener al menos dos caracteres",
+        "pickup_address": "Selecciona tu dirección de recogida",
+        "same_address": "Las direcciones deben ser diferentes",
+        "destination_address": "Selecciona tu dirección de destino"
     },
     "favs": {
         "header": "Mis favoritos"
