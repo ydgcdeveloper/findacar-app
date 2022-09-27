@@ -15,43 +15,46 @@
       <ion-label>{{'button.rate'|translate}} <strong>{{service.name}}</strong></ion-label>
     </div>
 
-    <ion-row class="mt-1" style="font-size: 27px; cursor: pointer;">
-      <ion-col size="1"></ion-col>
-      <ion-col size="2" class="rate-col">
-        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(1)"></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="rate-col">
-        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(2)"></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="rate-col">
-        <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(3)"></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="rate-col">
-        <ion-icon name="star" color="light" class="star-rate" (click)="setRate(4)"></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="rate-col">
-        <ion-icon name="star" color="light" class="star-rate" (click)="setRate(5)"></ion-icon>
-      </ion-col>
-      <ion-col size="1"></ion-col>
-    </ion-row>
-    <div class="divider"></div>
-    <div style="text-align: center;" class="ion-padding mt-1">
-      <ion-label>{{'order.select_options'|translate}}</ion-label>
-      <p id="chips">
-        <ng-template ngFor let-option [ngForOf]="rateOptions">
-          <ion-chip color="medium" [attr.data-rate]="option.value" [hidden]="!checkDiference(option.value)">
-            <ion-label>{{option.description + ' - ' + option.value}}</ion-label>
-          </ion-chip>
-        </ng-template>
-      </p>
-    </div>
+    <form [formGroup]="rateForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+      <ion-input hidden type="number" formControlName="rateI" [value]="rate"></ion-input>
+      <ion-row class="mt-1" style="font-size: 27px; cursor: pointer;">
+        <ion-col size="1"></ion-col>
+        <ion-col size="2" class="rate-col">
+          <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(1)"></ion-icon>
+        </ion-col>
+        <ion-col size="2" class="rate-col">
+          <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(2)"></ion-icon>
+        </ion-col>
+        <ion-col size="2" class="rate-col">
+          <ion-icon name="star" color="warning" class="star-rate" (click)="setRate(3)"></ion-icon>
+        </ion-col>
+        <ion-col size="2" class="rate-col">
+          <ion-icon name="star" color="light" class="star-rate" (click)="setRate(4)"></ion-icon>
+        </ion-col>
+        <ion-col size="2" class="rate-col">
+          <ion-icon name="star" color="light" class="star-rate" (click)="setRate(5)"></ion-icon>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+      <div class="divider"></div>
+      <div style="text-align: center;" class="ion-padding mt-1">
+        <ion-label>{{'order.select_options'|translate}}</ion-label>
+        <p id="chips">
+          <ng-template ngFor let-option [ngForOf]="rateOptions">
+            <ion-chip color="medium" [attr.data-rateId]="option.id" [attr.data-selected]="false" [hidden]="!checkDiference(option.value)">
+              <ion-label>{{option.description + ' - ' + option.value}}</ion-label>
+            </ion-chip>
+          </ng-template>
+        </p>
+      </div>
 
-    <ion-item lines="none" class="rounded shadow ion-margin">
-      <ion-label position="floating">{{'order.add_note'|translate}} <ion-icon slot="end" name="pencil"></ion-icon>
-      </ion-label>
-      <ion-textarea autocapitalize="true" rows="4"></ion-textarea>
-    </ion-item>
-    <ion-button class="fixed">{{'button.rate'|translate}}</ion-button>
+      <ion-item lines="none" class="rounded shadow ion-margin">
+        <ion-label position="floating">{{'order.add_note'|translate}} <ion-icon slot="end" name="pencil"></ion-icon>
+        </ion-label>
+        <ion-textarea formControlName="note" autocapitalize="true" rows="4"></ion-textarea>
+      </ion-item>
+      <ion-button type="submit" [disabled]="!rateForm.valid" class="fixed" color="">{{'button.rate'|translate}}</ion-button>
+    </form>
   </div>
 
 </ion-content>

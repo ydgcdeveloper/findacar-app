@@ -1,3 +1,4 @@
+import { ID } from './../../interfaces/rate/rate.interface';
 import { Rate } from './../../interfaces/rate/rate.interface';
 import { Injectable } from '@angular/core';
 import { RateOption, RateOptionQuality } from '../../interfaces/rate/rate.interface';
@@ -49,25 +50,25 @@ export class RateService {
   rates: Rate[] = [
     {
       id: 1,
-      serviceId: 2,
+      orderId: 2,
       rate: 3,
       rateOptions: [1, 4],
     },
     {
       id: 2,
-      serviceId: 3,
+      orderId: 3,
       rate: 4.5,
       rateOptions: [3],
     },
     {
       id: 3,
-      serviceId: 2,
+      orderId: 2,
       rate: 3,
       rateOptions: [6],
     },
     {
       id: 4,
-      serviceId: 1,
+      orderId: 1,
       rate: 4,
       rateOptions: [2, 5],
     },
@@ -81,5 +82,10 @@ export class RateService {
 
   getAllRates() {
     return this.rates;
+  }
+
+  getRateByServiceId(orderId: ID): number {
+    const ratesService = this.getAllRates().filter((rate) => rate.orderId === orderId)
+    return ratesService.reduce((rate, nextRate) => rate + nextRate.rate, 0) / ratesService.length
   }
 }

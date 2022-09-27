@@ -1,3 +1,5 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ID } from './../../api/interfaces/rate/rate.interface';
 import { ServiceService } from 'src/app/api/services/service/service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,30 +13,61 @@ import { RateService } from '../../api/services/rate/rate.service';
   styleUrls: ['./rate.page.scss'],
 })
 export class RatePage implements OnInit {
+
+  rateForm: FormGroup;
   service: Service;
   rateOptions: RateOption[];
-  id: number;
-  rate = 3;
+  id: ID;
+  rate: number = 3;
 
   constructor(
     private router: Router,
-    private rateService: RateService, 
-    private serviceService: ServiceService, 
-    private activated: ActivatedRoute
-    ) { }
+    private rateService: RateService,
+    private serviceService: ServiceService,
+    private activated: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
     this.id = parseInt(this.activated.snapshot.paramMap.get('id'));
     if (this.id) {
       this.setService(this.id);
+      // this.rate = this.round(parseFloat(this.rateService.getRateByServiceId(this.id).toFixed(1)), 0.5) || 3;
     }
     this.setRateOptions();
+    this.setForm()
+  }
+
+  get rateI() {
+    return this.rateForm.get('rateI')
+  }
+
+  get options() {
+    return this.rateForm.get('options')
+  }
+
+  get note() {
+    return this.rateForm.get('note')
   }
 
   ionViewDidEnter() {
     document.getElementById('serviceComponent').style.setProperty('background-image', `url(${this.service.photo})`);
     this.setEventToChips();
     console.log('did enter');
+  }
+
+  setForm() {
+    this.rateForm = this.formBuilder.group({
+      rateI: [[Validators.required]],
+      options: [],
+      note: ['', [Validators.minLength(2)]]
+    })
+  }
+
+  round(value, step) {
+    step || (step = 1.0);
+    var inv = 1.0 / step;
+    return Math.round(value * inv) / inv;
   }
 
   setEventToChips() {
@@ -45,11 +78,12 @@ export class RatePage implements OnInit {
         if (color == 'medium') {
           chip.setAttribute('color', 'dark');
           chip.setAttribute('outline', 'true');
+          chip.setAttribute('data-selected', 'true')
         } else {
           chip.setAttribute('color', 'medium');
           chip.setAttribute('outline', 'false');
+          chip.setAttribute('data-selected', 'false')
         }
-
       });
     });
   }
@@ -91,5 +125,22 @@ export class RatePage implements OnInit {
       stars.item(i).setAttribute('color', 'warning');
     }
     this.rate = rate;
+  }
+
+  onSubmit() {
+    if (this.rateForm.invalid) {
+      return;
+    }
+
+    try {
+      const rate = this.rateI.value;
+      const note = this.note.value;
+      const chips = document.getElementById('chips').children;
+      const options = Array.from(chips).filter(chip => {
+        return chip.getAttribute('data-selected') == 'true';
+      }).map(value => value.getAttribute('data-rateId'))
+    } catch (error) {
+
+    }
   }
 }

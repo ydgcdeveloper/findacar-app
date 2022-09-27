@@ -7,7 +7,7 @@ export interface RateOption {
 
 export interface Rate {
     id: ID,
-    serviceId: ID,
+    orderId: ID,
     rate: number,
     rateOptions: ID [],
 }
