@@ -47,7 +47,8 @@
         "rate": "Valorar",
         "yes": "Si",
         "no": "No",
-        "create": "Crear"
+        "create": "Crear",
+        "share": "Compartir"
     },
     "settings": {
         "language": "Idioma",
@@ -111,5 +112,9 @@
     },
     "service": {
         "pickup_time": "Tiempo de recogida"
+    },
+    "share": {
+        "invite_text": "Comparte este código e invita a tus amigos o familiares a que se unan a muestra app",
+        "toast_copied": "El código de invitación se ha copiado exitosamente"
     }
 }

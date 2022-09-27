@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>share</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'profile.invite_friend'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <ion-text>
+    <h6 style="text-align: center;">{{'share.invite_text'|translate}}</h6>
+  </ion-text>
+  <ion-item class="rounded-25 border code" (click)="copyCode()">
+    <ion-label class="label-code">code</ion-label>
+  </ion-item>
+  <ion-button class="fixed" (click)="openSocialSharing()">{{'button.share'|translate}}</ion-button>
 </ion-content>
