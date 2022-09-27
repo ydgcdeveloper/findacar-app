@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage,
+  },
+  {
+    path: 'share',
+    loadChildren: () => import('./share/share.module').then( m => m.SharePageModule)
   }
 ];
 
