@@ -116,5 +116,14 @@
     "share": {
         "invite_text": "Comparte este código e invita a tus amigos o familiares a que se unan a muestra app",
         "toast_copied": "El código de invitación se ha copiado exitosamente"
+    },
+    "auth": {
+        "log_in": "Acceso",
+        "register": "Register",
+        "sign_in": "Entrar",
+        "sign_up": "Registrarse",
+        "forgot_pass": "Olvidó su contraseaña?",
+        "email": "Correo electrónico",
+        "password": "Contraseña"
     }
 }

@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -9,12 +10,16 @@ import { environment } from 'src/environments/environment';
 export class ProfilePage implements OnInit {
   public show = false;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.show = true;
     }, environment.skeleton_time);
+  }
+
+  logOut() {
+    this.authService.logout();
   }
 
 }
