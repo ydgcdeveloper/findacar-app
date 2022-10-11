@@ -1,9 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'auth.register'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <div class="center-content">
+    <form>
+      <ion-item class="rounded shadow">
+        <ion-label position="floating">{{'auth.email'|translate}}</ion-label>
+        <ion-input type="text" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top  rounded shadow">
+        <ion-label position="floating">{{'auth.password'|translate}}</ion-label>
+        <ion-input type="password" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top  rounded shadow">
+        <ion-label position="floating">{{'auth.repeat_password'|translate}}</ion-label>
+        <ion-input type="repeatPassword" required></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <ion-button type="submit" expand="block">{{'auth.sign_up'|translate}}</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
 </ion-content>
