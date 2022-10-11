@@ -123,6 +123,11 @@
         "sign_up": "Sign Up",
         "forgot_pass": "Forgot Password?",
         "email": "Email",
-        "password": "Password"
+        "password": "Password",
+        "register":"Register",
+        "repeat_password":"Repeat password",
+        "send": "Send",
+        "forgot_pass_info":"Please provide the email address that you used when you signed up in the app.",
+        "reset_pass":"Reset Your Password"
     }
 }

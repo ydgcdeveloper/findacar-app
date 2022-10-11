@@ -119,11 +119,15 @@
     },
     "auth": {
         "log_in": "Acceso",
-        "register": "Register",
         "sign_in": "Entrar",
         "sign_up": "Registrarse",
-        "forgot_pass": "Olvidó su contraseaña?",
+        "forgot_pass": "Olvidó su contraseña?",
         "email": "Correo electrónico",
-        "password": "Contraseña"
+        "password": "Contraseña",
+        "register":"Registro",
+        "repeat_password":"Repetir contraseña",
+        "send": "Enviar",
+        "forgot_pass_info":"Por favor escriba la dirección de correo con la cual creó la cuenta",
+        "reset_pass":"Restablecer contraseña"
     }
 }
