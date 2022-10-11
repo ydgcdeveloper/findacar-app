@@ -1,5 +1,7 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService: AuthenticationService) { }
+  loginForm: FormGroup
+
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      emailUser: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.pattern('')]]
+    })
   }
 
-  login(){
+  login() {
     this.authService.login();
-    console.log('fsdfsdfdsf')
   }
 
+  onSubmit() {
+    this.login()
+    console.log('onSubmit()')
+  }
 }

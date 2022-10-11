@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  registerForm: FormGroup
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      emailUser: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.pattern('')]],
+      repeatPassword: [null, [Validators.required, Validators.pattern('')]]
+    })
   }
 
+  onSubmit() {
+    console.log('onSubmit()')
+  }
 }
