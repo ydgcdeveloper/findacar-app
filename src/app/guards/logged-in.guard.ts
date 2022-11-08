@@ -20,7 +20,7 @@ export class LoggedInGuard implements CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.authService.isAuthenticated()) {
-      this.navCtrl.navigateRoot('/tabs/home');
+      this.navCtrl.navigateRoot('tabs/home');
       return false;
     }
     return true;

@@ -6,7 +6,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthGuard]
   },
@@ -62,10 +62,10 @@ const routes: Routes = [
     path: 'search-location',
     loadChildren: () => import('./search-location/search-location.module').then(m => m.SearchLocationPageModule)
   },
-  {
-    path: '',
-    loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomePageModule),
-  },
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomePageModule),
+  // },
   {
     path: 'map',
     loadChildren: () => import('./profile/addresses/add-address/map/map.module').then(m => m.MapPageModule)
