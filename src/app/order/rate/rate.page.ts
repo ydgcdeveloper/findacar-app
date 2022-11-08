@@ -18,7 +18,7 @@ export class RatePage implements OnInit {
   service: Service;
   rateOptions: RateOption[];
   id: ID;
-  rate: number = 3;
+  rate = 3;
 
   constructor(
     private router: Router,
@@ -35,19 +35,19 @@ export class RatePage implements OnInit {
       // this.rate = this.round(parseFloat(this.rateService.getRateByServiceId(this.id).toFixed(1)), 0.5) || 3;
     }
     this.setRateOptions();
-    this.setForm()
+    this.setForm();
   }
 
   get rateI() {
-    return this.rateForm.get('rateI')
+    return this.rateForm.get('rateI');
   }
 
   get options() {
-    return this.rateForm.get('options')
+    return this.rateForm.get('options');
   }
 
   get note() {
-    return this.rateForm.get('note')
+    return this.rateForm.get('note');
   }
 
   ionViewDidEnter() {
@@ -61,12 +61,12 @@ export class RatePage implements OnInit {
       rateI: [[Validators.required]],
       options: [],
       note: ['', [Validators.minLength(2)]]
-    })
+    });
   }
 
   round(value, step) {
     step || (step = 1.0);
-    var inv = 1.0 / step;
+    const inv = 1.0 / step;
     return Math.round(value * inv) / inv;
   }
 
@@ -78,11 +78,11 @@ export class RatePage implements OnInit {
         if (color == 'medium') {
           chip.setAttribute('color', 'dark');
           chip.setAttribute('outline', 'true');
-          chip.setAttribute('data-selected', 'true')
+          chip.setAttribute('data-selected', 'true');
         } else {
           chip.setAttribute('color', 'medium');
           chip.setAttribute('outline', 'false');
-          chip.setAttribute('data-selected', 'false')
+          chip.setAttribute('data-selected', 'false');
         }
       });
     });
@@ -136,9 +136,7 @@ export class RatePage implements OnInit {
       const rate = this.rateI.value;
       const note = this.note.value;
       const chips = document.getElementById('chips').children;
-      const options = Array.from(chips).filter(chip => {
-        return chip.getAttribute('data-selected') == 'true';
-      }).map(value => value.getAttribute('data-rateId'))
+      const options = Array.from(chips).filter(chip => chip.getAttribute('data-selected') == 'true').map(value => value.getAttribute('data-rateId'));
     } catch (error) {
 
     }

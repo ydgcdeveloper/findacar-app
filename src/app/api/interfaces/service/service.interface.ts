@@ -1,4 +1,4 @@
-import { ID } from "../rate/rate.interface";
+import { ID } from '../rate/rate.interface';
 
 export interface Service {
     id: ID;

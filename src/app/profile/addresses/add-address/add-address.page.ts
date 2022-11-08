@@ -43,21 +43,21 @@ export class AddAddressPage implements OnInit {
       }
     }
 
-    console.log("ID ---->>>" , this.id)
+    console.log('ID ---->>>' , this.id);
     this.editable = this.id !== undefined ? true : false;
-    this.setForm(this.address)
+    this.setForm(this.address);
   }
 
   get name() {
-    return this.addressForm.get('name')
+    return this.addressForm.get('name');
   }
 
   get location() {
-    return this.addressForm.get('location')
+    return this.addressForm.get('location');
   }
 
   get details() {
-    return this.addressForm.get('details')
+    return this.addressForm.get('details');
   }
 
   setForm(address: Address) {
@@ -83,15 +83,15 @@ export class AddAddressPage implements OnInit {
       name: this.name.value,
       details: this.details.value,
       locationData: this.location.value
-    }
+    };
 
     //edit address case
     if (this.id) {
-      this.addressService.saveAddress({...newAddress, selected: this.address.selected})
+      this.addressService.saveAddress({...newAddress, selected: this.address.selected});
     }
     //add address case
     else {
-      this.addressService.addAddress({ ...newAddress, selected: false })
+      this.addressService.addAddress({ ...newAddress, selected: false });
     }
     this.router.navigate(['/addresses']);
   }

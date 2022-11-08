@@ -18,9 +18,9 @@ export class AddressComponent implements OnInit {
   addresses: Address[];
 
   constructor(
-    public actionSheetController: ActionSheetController, 
-    private router: Router, 
-    private addressService: AddressService, 
+    public actionSheetController: ActionSheetController,
+    private router: Router,
+    private addressService: AddressService,
     private translate: TranslateService) { }
 
   ngOnInit() {

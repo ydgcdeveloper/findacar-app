@@ -112,7 +112,7 @@ export class FiltersPage implements OnInit {
     };
 
     this.filterService.saveFilter(newFilter);
-    this.navController.navigateForward('tabs/home')
+    this.navController.navigateForward('tabs/home');
   }
 }
 

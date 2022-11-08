@@ -10,7 +10,7 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
   styleUrls: ['./share.page.scss'],
 })
 export class SharePage implements OnInit {
-  code: string = 'YANCODE';
+  code = 'YANCODE';
 
   constructor(
     private clipboard: Clipboard,
@@ -24,8 +24,8 @@ export class SharePage implements OnInit {
 
   copyCode() {
     this.clipboard.copy(this.code).then(() => {
-      this.presentToast(this.translate.instant('share.toast_copied'))
-    })
+      this.presentToast(this.translate.instant('share.toast_copied'));
+    });
   }
 
   async presentToast(message: string) {

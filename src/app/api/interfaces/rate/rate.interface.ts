@@ -6,13 +6,13 @@ export interface RateOption {
 }
 
 export interface Rate {
-    id: ID,
-    orderId: ID,
-    rate: number,
-    rateOptions: ID [],
+    id: ID;
+    orderId: ID;
+    rate: number;
+    rateOptions: ID [];
 }
 
-export type ID  = string | number
+export type ID  = string | number;
 
 export enum RateOptionQuality {
     EXCELENTE = 'EXCELENTE',

@@ -72,7 +72,7 @@ export class RateService {
       rate: 4,
       rateOptions: [2, 5],
     },
-  ]
+  ];
 
   constructor() { }
 
@@ -85,7 +85,7 @@ export class RateService {
   }
 
   getRateByServiceId(orderId: ID): number {
-    const ratesService = this.getAllRates().filter((rate) => rate.orderId === orderId)
-    return ratesService.reduce((rate, nextRate) => rate + nextRate.rate, 0) / ratesService.length
+    const ratesService = this.getAllRates().filter((rate) => rate.orderId === orderId);
+    return ratesService.reduce((rate, nextRate) => rate + nextRate.rate, 0) / ratesService.length;
   }
 }
