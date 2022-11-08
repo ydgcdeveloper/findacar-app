@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { SplashScreenPlugin } from './../../node_modules/@capacitor/splash-screen/dist/esm/definitions.d';
+import { AuthenticationService } from './services/authentication/authentication.service';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Platform, ToastController } from '@ionic/angular';
@@ -8,7 +11,13 @@ import { Platform, ToastController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private platform: Platform, private _location: Location, private toastController: ToastController) {
+  constructor(
+    private platform: Platform, 
+    private _location: Location, 
+    private toastController: ToastController,
+    private router: Router,
+    private authenticationService: AuthenticationService
+    ) {
     this.initializeApp();
     console.log('App init');
    }
@@ -30,6 +39,20 @@ export class AppComponent {
         this._location.back();
 
       }
+    });
+  }
+
+  checkAuth(){
+    this.platform.ready().then(() => {
+
+      this.authenticationService.authState.subscribe(state => {
+        if (state) {
+          this.router.navigate(['tabs/home']);
+        } else {
+          this.router.navigate(['login']);
+        }
+      });
+
     });
   }
 

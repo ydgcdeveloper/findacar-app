@@ -116,6 +116,11 @@ ion-header .searchbar-input-container input {
   padding-bottom: 5px;
 }
 
+.my-2{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .fixed {
   position: fixed;
   bottom: 1px;
@@ -179,5 +184,10 @@ ion-header .searchbar-input-container input {
     flex: 0 0 135px !important;
   }
 
+}
+
+.center-content {
+  position: relative;
+  margin-top: 40%;
 }
 

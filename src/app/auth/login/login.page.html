@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'auth.log_in'|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="center-content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item class="rounded shadow">
+        <ion-label position="floating">{{'auth.email'|translate}}</ion-label>
+        <ion-input formControlName="emailUser" type="text" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top rounded shadow">
+        <ion-label position="floating">{{'auth.password'|translate}}</ion-label>
+        <ion-input formControlName="password" type="password" required></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <ion-button type="submit" [disabled]="!loginForm.valid" expand="block">{{'auth.sign_in'|translate}}</ion-button>
+          <a [routerLink]="['/forgot-password']" class="small-text">{{'auth.forgot_pass'|translate}}</a>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
