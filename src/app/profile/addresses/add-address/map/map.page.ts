@@ -10,7 +10,7 @@ import * as Leaflet from 'leaflet';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
-const MAP_ACCESS_TOKEN = environment.map_access_token;
+const MAP_ACCESS_TOKEN = environment.mapAccessToken;
 
 @Component({
   selector: 'app-map',
@@ -18,22 +18,20 @@ const MAP_ACCESS_TOKEN = environment.map_access_token;
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements OnInit {
-  L: Leaflet;
   public place = '';
   public search = false;
   public map;
+  public showSaveButton = false;
+  public places: any[] = [];
+  public placesData: any[] = [];
+  public showModalplaces = false;
+  public modalPlaces;
   latitude;
   longitude;
   markerLat: number;
   markerLon: number;
   markerName: string;
   accessToken: string = MAP_ACCESS_TOKEN;
-  public showSaveButton = false;
-  private marker = null;
-  public places: any[] = [];
-  public placesData: any[] = [];
-  public showModalplaces = false;
-  public modalPlaces;
   address: Address;
   markerIcon = Leaflet.icon({
     iconUrl: 'marker-icon.png',
@@ -41,6 +39,8 @@ export class MapPage implements OnInit {
     iconAnchor: [12, 41],
   });
 
+  public mapPlaces: any[];
+  private marker = null;
   private sample: any[] = [
     {
       latitude: 75.45,
@@ -69,7 +69,7 @@ export class MapPage implements OnInit {
     maxResults: 5,
   };
 
-  public mapPlaces: any[];
+
 
   constructor(
     private geolocation: Geolocation,
@@ -279,8 +279,12 @@ export class MapPage implements OnInit {
         console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude);
         this.places = [];
 
-        for (let i = 0; i < result.length; i++) {
-          this.places.push(result[i]);
+        // for (let i = 0; i < result.length; i++) {
+        //   this.places.push(result[i]);
+        // }
+
+        for (const index in result) {
+          this.places.push(result[index]);
         }
 
         this.presentToast('length: ' + result.length);
@@ -288,8 +292,8 @@ export class MapPage implements OnInit {
         if (this.places.length) {
           this.placesData = [];
           const places = this.places;
-          for (let i = 0; i < places.length; i++) {
-            this.nativeGeocoder.reverseGeocode(places[i].latitude, places[i].longitude, this.options)
+          for (const placeHere of places) {
+            this.nativeGeocoder.reverseGeocode(placeHere.latitude, placeHere.longitude, this.options)
               .then((result: NativeGeocoderResult[]) => {
                 const res = result[0];
                 let phrase = '';
@@ -303,8 +307,8 @@ export class MapPage implements OnInit {
                   phrase += `, ${res.locality}`;
                 }
                 const data = {
-                  latitude: places[i].latitude,
-                  longitude: places[i].longitude,
+                  latitude: placeHere.latitude,
+                  longitude: placeHere.longitude,
                   name: phrase
                 };
                 this.placesData.push(data);
@@ -313,6 +317,31 @@ export class MapPage implements OnInit {
                 this.presentToast('error looking from there: ' + error);
               });
           }
+          // for (let i = 0; i < places.length; i++) {
+          //   this.nativeGeocoder.reverseGeocode(places[i].latitude, places[i].longitude, this.options)
+          //     .then((result: NativeGeocoderResult[]) => {
+          //       const res = result[0];
+          //       let phrase = '';
+          //       if (res.countryName) {
+          //         phrase += res.countryName;
+          //       }
+          //       if (res.administrativeArea) {
+          //         phrase += `, ${res.administrativeArea}`;
+          //       }
+          //       if (res.locality) {
+          //         phrase += `, ${res.locality}`;
+          //       }
+          //       const data = {
+          //         latitude: places[i].latitude,
+          //         longitude: places[i].longitude,
+          //         name: phrase
+          //       };
+          //       this.placesData.push(data);
+          //     })
+          //     .catch((error: any) => {
+          //       this.presentToast('error looking from there: ' + error);
+          //     });
+          // }
 
           this.presentModal();
         }
@@ -335,12 +364,13 @@ export class MapPage implements OnInit {
 
   leafletMap() {
 
-
     this.map = Leaflet.map('mapId');
-    Leaflet.tileLayer(`https://api.mapbox.com/styles/v1/ydgcdeveloper/ckydhd4y52fln14nxce24lhao/tiles/{z}/{x}/{y}?access_token=${this.accessToken}`, {
-      attribution: 'Find a Car App',
-      minZoom: 2
-    }).addTo(this.map);
+    Leaflet.tileLayer(
+      `https://api.mapbox.com/styles/v1/ydgcdeveloper/ckydhd4y52fln14nxce24lhao/tiles/{z}/{x}/{y}?access_token=${this.accessToken}`,
+      {
+        attribution: 'Find a Car App',
+        minZoom: 2
+      }).addTo(this.map);
 
     this.map.locate({ setView: true, maxZoom: 17 });
     // Leaflet.marker([28.6, 77]).addTo(this.map).bindPopup('Delhi').openPopup();

@@ -1,5 +1,5 @@
-import { ID } from '../rate/rate.interface';
-import { Place } from '../request/request.interface';
+import { ID } from './rate.interface';
+import { Place } from './request.interface';
 
 export interface Address {
     id: ID;

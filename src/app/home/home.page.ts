@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { FilterService } from 'src/app/api/services/filter/filter.service';
 import { environment } from 'src/environments/environment';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
-import { Category } from '../api/interfaces/category/category.interface';
-import { Service } from '../api/interfaces/service/service.interface';
+import { Category } from '../api/interfaces/category.interface';
+import { Service } from '../api/interfaces/service.interface';
 import { ServiceService } from '../api/services/service/service.service';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
     setTimeout(() => {
      this.getCategories();
      this.getServices();
-     }, environment.skeleton_time);
+     }, environment.skeletonTime);
   }
 
   getCategories(){

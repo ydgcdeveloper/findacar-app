@@ -12,7 +12,7 @@ export class EditProfilePage implements OnInit {
 
   dateValue = 'Fecha de Nacimiento';
   miVariableHora = '';
-  public currentYear = parseInt(new Date().getFullYear().toString());
+  public currentYear = parseInt(new Date().getFullYear().toString(), 10);
   show = false;
 
   constructor() { }
@@ -21,7 +21,7 @@ export class EditProfilePage implements OnInit {
     console.log(this.currentYear.toString());
     setTimeout(() => {
       this.show = true;
-    }, environment.skeleton_time);
+    }, environment.skeletonTime);
   }
 
   onSubmit(f: NgForm) {

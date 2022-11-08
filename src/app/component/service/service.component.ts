@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Service, ServiceStatus } from 'src/app/api/interfaces/service/service.interface';
+import { Service, ServiceStatus } from 'src/app/api/interfaces/service.interface';
 import { ServiceService } from 'src/app/api/services/service/service.service';
 import { environment } from 'src/environments/environment';
 

@@ -1,4 +1,4 @@
-import { Category } from 'src/app/api/interfaces/category/category.interface';
+import { Category } from 'src/app/api/interfaces/category.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({

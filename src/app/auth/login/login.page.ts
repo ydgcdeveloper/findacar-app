@@ -10,7 +10,7 @@ import { timeStamp } from 'console';
 })
 export class LoginPage implements OnInit {
 
-  loginForm: FormGroup
+  loginForm: FormGroup;
 
   constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) { }
 
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       emailUser: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.pattern('')]]
-    })
+    });
   }
 
   login() {
@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit() {
-    this.login()
-    console.log('onSubmit()')
+    this.login();
+    console.log('onSubmit()');
   }
 }

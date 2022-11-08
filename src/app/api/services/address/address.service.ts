@@ -1,6 +1,6 @@
-import { ID } from './../../interfaces/rate/rate.interface';
+import { ID } from '../../interfaces/rate.interface';
 import { Injectable } from '@angular/core';
-import { Address } from '../../interfaces/address/address.interface';
+import { Address } from '../../interfaces/address.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +60,7 @@ export class AddressService {
     const addresses = this.getAllAddress();
     const foundAddress = addresses.filter((address) => {
       const add = address;
-      if (add.id == id) {
+      if (add.id as string | number === id) {
         return add;
       }
     });
@@ -95,9 +95,9 @@ export class AddressService {
 
   setSelectedAddress(id: number) {
     const addresses = this.getAllAddress();
-    const selected = addresses.map(function(address) {
+    const selected = addresses.map((address) => {
       const add = address;
-      if (add.id == id) {
+      if (add.id as string | number === id) {
         address.selected = true;
       } else {
         address.selected = false;

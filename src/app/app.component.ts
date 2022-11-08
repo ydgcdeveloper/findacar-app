@@ -12,8 +12,8 @@ import { Platform, ToastController } from '@ionic/angular';
 })
 export class AppComponent {
   constructor(
-    private platform: Platform, 
-    private _location: Location, 
+    private platform: Platform,
+    private location: Location,
     private toastController: ToastController,
     private router: Router,
     private authenticationService: AuthenticationService
@@ -25,7 +25,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.backButton.subscribeWithPriority(15, (processNextHandler) => {
       console.log('Back press handler!');
-      if (this._location.isCurrentPathEqualTo('/tabs/home')) {
+      if (this.location.isCurrentPathEqualTo('/tabs/home')) {
 
         // Show Exit Alert!
         console.log('Show Exit Alert!');
@@ -36,7 +36,7 @@ export class AppComponent {
         // Navigate to back page
         console.log('Navigate to back page');
         this.presentToast('Navigate to back page');
-        this._location.back();
+        this.location.back();
 
       }
     });

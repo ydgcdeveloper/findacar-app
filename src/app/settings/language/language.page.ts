@@ -17,14 +17,14 @@ export class LanguagePage implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private navController: NavController) { }
 
+  get lang() {
+    return this.languageForm.get('lang');
+  }
+
   async ngOnInit() {
     this.languageForm = this.formBuilder.group({
       lang: [this.selectedLanguage, [Validators.required]],
     });
-  }
-
-  get lang() {
-    return this.languageForm.get('lang');
   }
 
   async onSubmit() {

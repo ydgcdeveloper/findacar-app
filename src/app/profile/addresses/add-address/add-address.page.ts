@@ -25,12 +25,24 @@ export class AddAddressPage implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
+  get name() {
+    return this.addressForm.get('name');
+  }
+
+  get location() {
+    return this.addressForm.get('location');
+  }
+
+  get details() {
+    return this.addressForm.get('details');
+  }
+
   async ngOnInit() {
     setTimeout(() => {
       this.show = true;
-    }, environment.skeleton_time);
+    }, environment.skeletonTime);
 
-    const id = parseInt(await this.activatedRoute.snapshot.paramMap.get('id'));
+    const id = parseInt(await this.activatedRoute.snapshot.paramMap.get('id'), 10);
     if (id) {
       this.address = this.addressService.getAddressById(id);
       if (this.address) {
@@ -46,18 +58,6 @@ export class AddAddressPage implements OnInit {
     console.log('ID ---->>>' , this.id);
     this.editable = this.id !== undefined ? true : false;
     this.setForm(this.address);
-  }
-
-  get name() {
-    return this.addressForm.get('name');
-  }
-
-  get location() {
-    return this.addressForm.get('location');
-  }
-
-  get details() {
-    return this.addressForm.get('details');
   }
 
   setForm(address: Address) {

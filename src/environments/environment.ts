@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  default_language: 'es',
-  lang_variable_name: 'app_language',
-  skeleton_time: 1000,
-  map_access_token: 'pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg',
+  defaultLanguage: 'es',
+  langVariableName: 'app_language',
+  skeletonTime: 1000,
+  mapAccessToken: 'pk.eyJ1IjoieWRnY2RldmVsb3BlciIsImEiOiJja3lkZTV3eTMwMWFiMnhwaDg4c29uY2dpIn0.yp2HiVFQOpP5sREO3rYgPg',
 };
 
 /*

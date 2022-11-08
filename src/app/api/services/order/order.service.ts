@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Coin, Order } from '../../interfaces/order/order.interface';
+import { Coin, Order } from '../../interfaces/order.interface';
 import { ServiceService } from '../service/service.service';
 import { UserService } from '../user/user.service';
 
@@ -11,11 +11,11 @@ export class OrderService {
   orders: Order[] = [
     {
       id: 1,
-      service: this.service_service.getServiceById(1),
+      service: this.serviceService.getServiceById(1),
       price: '120.00',
       coin: Coin.USD,
       date: new Date(),
-      client: this.user_service.getUserById(1),
+      client: this.userService.getUserById(1),
       from: {
         name: 'Ciudad de Guantanamo',
         latitude: 20.151510,
@@ -29,11 +29,11 @@ export class OrderService {
     },
     {
       id: 2,
-      service: this.service_service.getServiceById(2),
+      service: this.serviceService.getServiceById(2),
       price: '350.00',
       coin: Coin.CUP,
       date: new Date(),
-      client: this.user_service.getUserById(2),
+      client: this.userService.getUserById(2),
       from: {
         name: 'Ciudad de Holguin',
         latitude: 20.898995,
@@ -47,11 +47,11 @@ export class OrderService {
     },
     {
       id: 3,
-      service: this.service_service.getServiceById(3),
+      service: this.serviceService.getServiceById(3),
       price: '560.00',
       coin: Coin.CUP,
       date: new Date(),
-      client: this.user_service.getUserById(3),
+      client: this.userService.getUserById(3),
       from: {
         name: 'Ciudad de Guantanamo',
         latitude: 20.151510,
@@ -65,13 +65,13 @@ export class OrderService {
     }
   ];
 
-  constructor(private user_service: UserService, private service_service: ServiceService) { }
+  constructor(private userService: UserService, private serviceService: ServiceService) { }
 
   getAllOrders() {
     return this.orders;
   }
 
   getOrderById(id: number) {
-    return this.orders.filter((order) => order.id == id)[0];
+    return this.orders.filter((order) => order.id as number === id)[0];
   }
 }

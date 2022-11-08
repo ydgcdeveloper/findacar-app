@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../interfaces/user/user.interface';
+import { User } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,6 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    return this.users.filter((user) => user.id == id)[0];
+    return this.users.filter((user) => user.id as number === id)[0];
   }
 }

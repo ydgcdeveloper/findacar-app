@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Service, ServiceStatus } from '../../interfaces/service/service.interface';
+import { Service, ServiceStatus } from '../../interfaces/service.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,6 @@ services: Service [] = [
   }
 
   getServiceById(id: number) {
-    return this.services.filter((service) => service.id == id)[0];
+    return this.services.filter((service) => service.id as number === id)[0];
   }
 }

@@ -1,4 +1,4 @@
-import { ID } from '../rate/rate.interface';
+import { ID } from './rate.interface';
 
 export interface Service {
     id: ID;
@@ -12,6 +12,8 @@ export interface Service {
 }
 
 export enum ServiceStatus {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     DISPONIBLE = 'DISPONIBLE',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     NO_DISPONIBLE = 'NO_DISPONIBLE',
 }

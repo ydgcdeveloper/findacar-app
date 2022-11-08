@@ -1,7 +1,7 @@
-import { ID } from './../../interfaces/rate/rate.interface';
-import { Rate } from './../../interfaces/rate/rate.interface';
+import { ID } from '../../interfaces/rate.interface';
+import { Rate } from '../../interfaces/rate.interface';
 import { Injectable } from '@angular/core';
-import { RateOption, RateOptionQuality } from '../../interfaces/rate/rate.interface';
+import { RateOption, RateOptionQuality } from '../../interfaces/rate.interface';
 
 @Injectable({
   providedIn: 'root'

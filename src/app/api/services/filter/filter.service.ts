@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Filter, SortByTypes } from '../../interfaces/filter/filter';
+import { Filter, SortByTypes } from '../../interfaces/filter';
 
 @Injectable({
   providedIn: 'root'

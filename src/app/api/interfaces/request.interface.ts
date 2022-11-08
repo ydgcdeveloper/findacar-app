@@ -1,6 +1,6 @@
 import { Time } from '@angular/common';
-import { User } from '../user/user.interface';
-import { Coin } from '../order/order.interface';
+import { User } from './user.interface';
+import { Coin } from './order.interface';
 
 export interface Request {
     id: number;
@@ -21,8 +21,12 @@ export interface Place {
 }
 
 export enum RequestStatus {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     STARTED = 'STARTED',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     ACCEPTED = 'ACCEPTED',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     ORDER = 'ORDER',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     CANCELED = 'CANCELED',
 }

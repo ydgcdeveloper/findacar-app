@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Service } from '../../api/interfaces/service/service.interface';
+import { Service } from '../../api/interfaces/service.interface';
 import { ServiceService } from '../../api/services/service/service.service';
 
 @Component({
@@ -11,16 +11,16 @@ import { ServiceService } from '../../api/services/service/service.service';
 export class FavoritesPage implements OnInit {
   public services: Service[] = null;
 
-  constructor(private _service: ServiceService) {}
+  constructor(private service: ServiceService) {}
 
   ngOnInit() {
     setTimeout(() => {
       this.getServices();
-    }, environment.skeleton_time);
+    }, environment.skeletonTime);
   }
 
   getServices() {
-    this.services = this._service.getAllServices();
+    this.services = this.service.getAllServices();
   }
 
 }

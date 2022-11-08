@@ -1,4 +1,4 @@
-import { ID } from './../../api/interfaces/rate/rate.interface';
+import { ID } from '../../api/interfaces/rate.interface';
 export interface Address {
     id: ID;
     name: string;

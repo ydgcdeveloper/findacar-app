@@ -46,7 +46,8 @@ export class WelcomePage implements OnInit {
     //   err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
     // );
 
-    // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+    // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.CAMERA,
+    // this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
 
   }
 

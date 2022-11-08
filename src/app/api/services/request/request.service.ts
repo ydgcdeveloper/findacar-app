@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Coin } from '../../interfaces/order/order.interface';
-import { Request, RequestStatus } from '../../interfaces/request/request.interface';
+import { Coin } from '../../interfaces/order.interface';
+import { Request, RequestStatus } from '../../interfaces/request.interface';
 import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
+
   requests: Request [] = [
     {
       id: 1,
-    client: this.user_service.getUserById(1),
+    client: this.userService.getUserById(1),
     date: new Date(),
     datetime: {
       hours: new Date().getHours(),
@@ -32,7 +33,7 @@ export class RequestService {
     },
     {
       id: 2,
-    client: this.user_service.getUserById(1),
+    client: this.userService.getUserById(1),
     date: new Date(),
     datetime: {
       hours: new Date().getHours(),
@@ -54,7 +55,7 @@ export class RequestService {
     },
     {
       id: 3,
-    client: this.user_service.getUserById(1),
+    client: this.userService.getUserById(1),
     date: new Date(),
     datetime: {
       hours: new Date().getHours(),
@@ -76,13 +77,13 @@ export class RequestService {
     },
   ];
 
-  constructor(private user_service: UserService) { }
+  constructor(private userService: UserService) { }
 
   getAllRquests(){
     return this.requests;
   }
 
   getRequestsById(id: number){
-    return this.requests.filter((request) => request.id == id)[0];
+    return this.requests.filter((request) => request.id as number === id)[0];
   }
 }

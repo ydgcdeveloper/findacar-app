@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Category } from 'src/app/api/interfaces/category/category.interface';
+import { Category } from 'src/app/api/interfaces/category.interface';
 import { FilterService } from 'src/app/api/services/filter/filter.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +17,7 @@ constructor(private _service: FilterService){}
   ngOnInit() {
     setTimeout(() => {
 
-     }, environment.skeleton_time);
+     }, environment.skeletonTime);
   }
 
 

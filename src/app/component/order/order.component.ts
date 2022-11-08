@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Order } from 'src/app/api/interfaces/order/order.interface';
+import { Order } from 'src/app/api/interfaces/order.interface';
 
 @Component({
   selector: 'app-order-component',

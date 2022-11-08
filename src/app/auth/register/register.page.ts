@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  registerForm: FormGroup
+  registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -17,10 +17,10 @@ export class RegisterPage implements OnInit {
       emailUser: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.pattern('')]],
       repeatPassword: [null, [Validators.required, Validators.pattern('')]]
-    })
+    });
   }
 
   onSubmit() {
-    console.log('onSubmit()')
+    console.log('onSubmit()');
   }
 }

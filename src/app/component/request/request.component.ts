@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Request } from 'src/app/api/interfaces/request/request.interface';
+import { Request } from 'src/app/api/interfaces/request.interface';
 
 @Component({
   selector: 'app-request-component',

@@ -1,11 +1,11 @@
-import { ID } from './../../api/interfaces/rate/rate.interface';
+import { ID } from '../../api/interfaces/rate.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AddressService } from '../../api/services/address/address.service';
-import { Address } from '../../api/interfaces/address/address.interface';
+import { Address } from '../../api/interfaces/address.interface';
 
 @Component({
   selector: 'app-address',
@@ -13,8 +13,8 @@ import { Address } from '../../api/interfaces/address/address.interface';
   styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
-  selected: ID;
   @Output() selectedToUp = new EventEmitter<ID>();
+  selected: ID;
   addresses: Address[];
 
   constructor(
@@ -27,7 +27,7 @@ export class AddressComponent implements OnInit {
     setTimeout(() => {
       this.getSelectedAddressId();
       this.getAddresses();
-    }, environment.skeleton_time);
+    }, environment.skeletonTime);
   }
 
   getSelectedAddressId() {

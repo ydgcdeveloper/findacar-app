@@ -1,11 +1,13 @@
-import { Address } from '../../api/interfaces/address/address.interface';
+import { Address } from '../../api/interfaces/address.interface';
 import { AddressService } from '../../api/services/address/address.service';
 import { ToastColors, ToastService, ToastPositions } from '../../api/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PickerColumn, PickerColumnOption, PickerController, PickerOptions, ViewWillEnter, AlertController, NavController } from '@ionic/angular';
+import { PickerColumn, PickerColumnOption, PickerController,
+  PickerOptions, ViewWillEnter, AlertController, NavController } from '@ionic/angular';
 import { add } from 'date-fns';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Coins } from 'src/app/data/coins';
 
 
 
@@ -16,6 +18,10 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 })
 export class RequestPage implements OnInit, ViewWillEnter {
 
+  public timeText: string;
+  public requestForm: FormGroup;
+  public coins = Coins;
+  public addresses: Address[];
   private days: any[] = [];
   private hours: string[] = [];
   private minutes: string[] = [];
@@ -23,12 +29,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
   private minute;
   private meridiam;
   private date;
-  public timeText: string;
-  public requestForm: FormGroup;
-  public coins = Coins;
-  public addresses: Address[];
 
-  gadgets: any[] = [
+  private gadgets: any[] = [
     this.days,
     this.hours,
     this.minutes,
@@ -47,6 +49,30 @@ export class RequestPage implements OnInit, ViewWillEnter {
     private navController: NavController,
   ) {
     this.getAddresses();
+  }
+
+  get tag() {
+    return this.requestForm.get('tag');
+  }
+
+  get ableToPay() {
+    return this.requestForm.get('ableToPay');
+  }
+
+  get coin() {
+    return this.requestForm.get('coin');
+  }
+
+  get sinceAddress() {
+    return this.requestForm.get('sinceAddress');
+  }
+
+  get destinationAddress() {
+    return this.requestForm.get('destinationAddress');
+  }
+
+  async getAddresses() {
+    this.addresses = this.addressService.getAllAddress();
   }
 
   async ngOnInit() {
@@ -70,25 +96,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
     }
   }
 
-  get tag() {
-    return this.requestForm.get('tag');
-  }
-  get ableToPay() {
-    return this.requestForm.get('ableToPay');
-  }
-  get coin() {
-    return this.requestForm.get('coin');
-  }
-  get sinceAddress() {
-    return this.requestForm.get('sinceAddress');
-  }
-  get destinationAddress() {
-    return this.requestForm.get('destinationAddress');
-  }
 
-  async getAddresses() {
-    this.addresses = this.addressService.getAllAddress();
-  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -120,18 +128,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
 
   }
 
-  private getRandomAddress(min = 0, max = this.addresses.length - 1): number {
-    if (this.addresses.length === 0) {
-      return 0;
-    }
-    const selectedAddressId = this.addressService.getSelectedAddressId();
-    let randomGenerated;
-    do {
-      randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
-      console.log(randomGenerated);
-    } while (selectedAddressId === this.addresses[randomGenerated].id);
-    return randomGenerated;
-  }
+
 
   goToHome() {
     this.router.navigate(['tabs/home']);
@@ -196,15 +193,22 @@ export class RequestPage implements OnInit, ViewWillEnter {
         {
           text: 'Confirmar',
           handler: (value) => {
-            const date = new Date(this.gadgets[0][parseInt(value.col0.value)].realdate);
-            const hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value)]);
-            date.setHours(this.gadgets[3][parseInt(value.col3.value)] == 'AM' ? hourVal == 12 ? 0 : hourVal : hourVal == 12 ? 12 : hourVal + 12);
-            date.setMinutes(this.gadgets[2][parseInt(value.col2.value)]);
+            const date = new Date(this.gadgets[0][parseInt(value.col0.value, 10)].realdate);
+            const hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value, 10)], 10);
+            date.setHours(this.gadgets[3][parseInt(value.col3.value, 10)] as string === 'AM' ?
+            hourVal as number === 12 ? 0 : hourVal : hourVal as number === 12 ? 12 : hourVal + 12);
+            date.setMinutes(this.gadgets[2][parseInt(value.col2.value, 10)]);
             const dateNow = new Date(Date.now());
             if (+dateNow > +date) {
               this.date = dateNow;
               this.timeText = 'Ahora';
-              this.toast.showToast({ header: 'INFO', message: 'Fecha anterior a la actual', color: ToastColors.WARNING, position: ToastPositions.TOP, icon: 'information-circle' });
+              this.toast.showToast({
+                header: 'INFO',
+                message: 'Fecha anterior a la actual',
+                color: ToastColors.WARNING,
+                position: ToastPositions.TOP,
+                icon: 'information-circle'
+              });
             } else {
               const optionsDate: Intl.DateTimeFormatOptions = {
                 weekday: 'long', month: 'short', day: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit'
@@ -226,8 +230,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
     let option: Intl.DateTimeFormatOptions = {
       hour12: false, hour: 'numeric',
     };
-    const parse = parseInt(new Date(Date.now()).toLocaleString('es-Es', option));
-    this.hour = parse == 12 ? 12 : parse % 12;
+    const parse = parseInt(new Date(Date.now()).toLocaleString('es-Es', option), 10);
+    this.hour = parse as number === 12 ? 12 : parse % 12;
 
     option = {
       minute: 'numeric',
@@ -243,7 +247,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
       columns.push({
         name: `col${i}`,
         options: this.getColumnOptions(i, elements),
-        selectedIndex: i == 1 || i == 2 || i == 3 ? this.checkSelected(i) : 0,
+        selectedIndex: i === 1 || i === 2 || i === 3 ? this.checkSelected(i) : 0,
       });
     }
     return columns;
@@ -254,7 +258,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
     const options: PickerColumnOption[] = [];
     for (let i = 0; i < elements[columIndex].length; i++) {
       options.push({
-        text: columIndex == 0 ? elements[columIndex][i].dateview : elements[columIndex][i],
+        text: columIndex === 0 ? elements[columIndex][i].dateview : elements[columIndex][i],
         value: i,
       });
     }
@@ -262,27 +266,34 @@ export class RequestPage implements OnInit, ViewWillEnter {
   }
 
   checkSelected(columIndex: number) {
-    if (columIndex == 1) {
-      return parseInt(this.hour) - 1;
-    } if (columIndex == 2) {
+    if (columIndex === 1) {
+      return parseInt(this.hour, 10) - 1;
+    } if (columIndex === 2) {
       if (this.minute > 54) {
         this.hour++;
         return 0;
       }
-      return Math.ceil(parseInt(this.minute) / 5);
-    } if (columIndex == 3) {
-      return this.meridiam == 'AM' ? 0 : 1;
+      return Math.ceil(parseInt(this.minute, 10) / 5);
+    } if (columIndex === 3) {
+      return this.meridiam as string === 'AM' ? 0 : 1;
     }
     return 0;
   }
 
-}
+  private getRandomAddress(min = 0, max = this.addresses.length - 1): number {
+    if (this.addresses.length === 0) {
+      return 0;
+    }
+    const selectedAddressId = this.addressService.getSelectedAddressId();
+    let randomGenerated;
+    do {
+      randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
+      console.log(randomGenerated);
+    } while (selectedAddressId === this.addresses[randomGenerated].id);
+    return randomGenerated;
+  }
 
-export const Coins = [
-  { tag: 'CUP' },
-  { tag: 'MLC' },
-  { tag: 'USD' }
-];
+}
 
 export const checkSameAddressValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const sinceAddress = control.get('sinceAddress');

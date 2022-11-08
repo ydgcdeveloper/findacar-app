@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Order } from 'src/app/api/interfaces/order/order.interface';
+import { Order } from 'src/app/api/interfaces/order.interface';
 
 @Component({
   selector: 'app-past-order-component',

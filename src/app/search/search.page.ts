@@ -2,7 +2,7 @@ import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Category } from '../api/interfaces/category/category.interface';
+import { Category } from '../api/interfaces/category.interface';
 import { FilterService } from '../api/services/filter/filter.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
      this.getCategories();
-     }, environment.skeleton_time);
+     }, environment.skeletonTime);
   }
 
   getCategories(){

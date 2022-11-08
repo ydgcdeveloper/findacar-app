@@ -27,17 +27,17 @@ export class AuthenticationService {
   }
 
   login() {
-    var dummy_response = {
-      user_id: '007',
-      user_name: 'test'
+    const dummyResponse = {
+      userId: '007',
+      userName: 'test'
     };
-    localStorage.setItem('USER_INFO', JSON.stringify(dummy_response))
+    localStorage.setItem('USER_INFO', JSON.stringify(dummyResponse));
     this.router.navigate(['tabs/home']);
     this.authState.next(true);
   }
 
   logout() {
-    localStorage.removeItem('USER_INFO')
+    localStorage.removeItem('USER_INFO');
     this.router.navigate(['login']);
     this.authState.next(false);
   }

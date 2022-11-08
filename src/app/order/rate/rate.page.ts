@@ -1,10 +1,10 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ID } from './../../api/interfaces/rate/rate.interface';
+import { ID } from '../../api/interfaces/rate.interface';
 import { ServiceService } from 'src/app/api/services/service/service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RateOption } from '../../api/interfaces/rate/rate.interface';
-import { Service } from '../../api/interfaces/service/service.interface';
+import { RateOption } from '../../api/interfaces/rate.interface';
+import { Service } from '../../api/interfaces/service.interface';
 import { RateService } from '../../api/services/rate/rate.service';
 
 @Component({
@@ -28,16 +28,6 @@ export class RatePage implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
-    this.id = parseInt(this.activated.snapshot.paramMap.get('id'));
-    if (this.id) {
-      this.setService(this.id);
-      // this.rate = this.round(parseFloat(this.rateService.getRateByServiceId(this.id).toFixed(1)), 0.5) || 3;
-    }
-    this.setRateOptions();
-    this.setForm();
-  }
-
   get rateI() {
     return this.rateForm.get('rateI');
   }
@@ -48,6 +38,16 @@ export class RatePage implements OnInit {
 
   get note() {
     return this.rateForm.get('note');
+  }
+
+  ngOnInit() {
+    this.id = parseInt(this.activated.snapshot.paramMap.get('id'), 10);
+    if (this.id) {
+      this.setService(this.id);
+      // this.rate = this.round(parseFloat(this.rateService.getRateByServiceId(this.id).toFixed(1)), 0.5) || 3;
+    }
+    this.setRateOptions();
+    this.setForm();
   }
 
   ionViewDidEnter() {
@@ -64,8 +64,7 @@ export class RatePage implements OnInit {
     });
   }
 
-  round(value, step) {
-    step || (step = 1.0);
+  round(value, step = 1.0) {
     const inv = 1.0 / step;
     return Math.round(value * inv) / inv;
   }
@@ -75,7 +74,7 @@ export class RatePage implements OnInit {
     Array.from(chips).forEach((chip) => {
       chip.addEventListener('click', () => {
         const color = chip.getAttribute('color');
-        if (color == 'medium') {
+        if (color as string === 'medium') {
           chip.setAttribute('color', 'dark');
           chip.setAttribute('outline', 'true');
           chip.setAttribute('data-selected', 'true');
@@ -107,8 +106,8 @@ export class RatePage implements OnInit {
 
   setRate(rate: number) {
     const stars = document.getElementsByClassName('star-rate');
-    if (this.rate == rate || this.rate == rate - 0.5) {
-      if (stars.item(rate - 1).getAttribute('name') == 'star') {
+    if (this.rate === rate || this.rate === rate - 0.5) {
+      if (stars.item(rate - 1).getAttribute('name') as string === 'star') {
         stars.item(rate - 1).setAttribute('name', 'star-half');
         rate = rate - 0.5;
       } else {
@@ -117,7 +116,7 @@ export class RatePage implements OnInit {
     }
     for (let i = 0; i < stars.length; i++) {
       stars.item(i).setAttribute('color', 'light');
-      if (i + 1 != Math.ceil(rate)) {
+      if (i + 1 !== Math.ceil(rate)) {
         stars.item(i).setAttribute('name', 'star');
       }
     }
@@ -136,7 +135,8 @@ export class RatePage implements OnInit {
       const rate = this.rateI.value;
       const note = this.note.value;
       const chips = document.getElementById('chips').children;
-      const options = Array.from(chips).filter(chip => chip.getAttribute('data-selected') == 'true').map(value => value.getAttribute('data-rateId'));
+      const options = Array.from(chips).filter(chip => chip.getAttribute('data-selected') as string === 'true')
+      .map(value => value.getAttribute('data-rateId'));
     } catch (error) {
 
     }
