@@ -116,5 +116,18 @@
     "share": {
         "invite_text": "Share this code and invite your friends or family to join our app",
         "toast_copied": "The invitation code has been successfully copied"
+    },
+    "auth": {
+        "log_in": "Log In",
+        "sign_in": "Sign In",
+        "sign_up": "Sign Up",
+        "forgot_pass": "Forgot Password?",
+        "email": "Email",
+        "password": "Password",
+        "register":"Register",
+        "repeat_password":"Repeat password",
+        "send": "Send",
+        "forgot_pass_info":"Please provide the email address that you used when you signed up in the app.",
+        "reset_pass":"Reset Your Password"
     }
 }
