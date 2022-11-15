@@ -1,3 +1,4 @@
+import { GraphQLModule } from './graphql.module';
 import { LANGUAGE } from './services/language/language.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,7 +27,12 @@ export const newTranslateLoader = (handler: HttpBackend) => {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    HttpClientModule,
+    GraphQLModule,
     TranslateModule.forRoot({
       defaultLanguage: LANGUAGE(),
       loader: {

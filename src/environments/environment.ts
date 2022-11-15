@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'localhost:3000',
   defaultLanguage: 'es',
   langVariableName: 'app_language',
   skeletonTime: 1000,
