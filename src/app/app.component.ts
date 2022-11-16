@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/api/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { SplashScreenPlugin } from './../../node_modules/@capacitor/splash-screen/dist/esm/definitions.d';
 import { AuthenticationService } from './services/authentication/authentication.service';
@@ -16,7 +17,7 @@ export class AppComponent {
     private location: Location,
     private toastController: ToastController,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
     ) {
     this.initializeApp();
     console.log('App init');
@@ -45,7 +46,7 @@ export class AppComponent {
   checkAuth(){
     this.platform.ready().then(() => {
 
-      this.authenticationService.authState.subscribe(state => {
+      this.authService.authState.subscribe(state => {
         if (state) {
           this.router.navigate(['tabs/home']);
         } else {

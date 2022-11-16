@@ -3,6 +3,7 @@ import { AuthenticationService } from './../services/authentication/authenticati
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from '../api/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class LoggedInGuard implements CanLoad {
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private navCtrl: NavController
   ) {
 

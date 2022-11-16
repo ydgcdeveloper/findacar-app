@@ -1,4 +1,11 @@
 {
+    "common": {
+        "error": "Error",
+        "error_message": {
+            "invalid_credentials": "Invalid credentials",
+            "unknown": "Unknown error"
+        }
+    },
     "home": {
         "all_vehicles_types": "All services",
         "search_placeholder": "Search service",

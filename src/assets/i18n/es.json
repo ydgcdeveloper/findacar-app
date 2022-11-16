@@ -1,4 +1,11 @@
 {
+    "common": {
+        "error": "Error",
+        "error_message": {
+            "invalid_credentials": "Credenciales inválidas",
+            "unknown": "Error desconocido"
+        }
+    },
     "home": {
         "all_vehicles_types": "Todos los transportes",
         "search_placeholder": "Buscar transportes",

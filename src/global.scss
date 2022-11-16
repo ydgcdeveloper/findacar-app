@@ -191,3 +191,13 @@ ion-header .searchbar-input-container input {
   margin-top: 40%;
 }
 
+ion-toast.custom-toast {
+  --background: #FD764C;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #ffffff;
+  font-size: 16px;
+}
+
+ion-toast.custom-toast::part(message) {
+  font-style: italic;
+}

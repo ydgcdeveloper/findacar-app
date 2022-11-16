@@ -1,6 +1,35 @@
-import {gql} from 'apollo-angular';
+import { gql } from 'apollo-angular';
 
 export const mutations = {
+  login: () => gql`
+    mutation login(
+      $username: String!,
+      $password: String!,
+    ){
+    login(loginUserInput: {
+      username: $username,
+      password: $password
+    }){
+      accessToken
+      user{
+        id
+        username
+      }
+    }
+    }
+  `,
+  verifyEmailByPin: () => gql`
+    mutation verifyEmailByPin(
+      $pin: Float!
+    ){
+      verifyEmailByPin(verifyByPinInput: {
+        pin: $pin
+      }){
+        email
+        emailVerified
+      }
+    }
+  `,
   updatePatientBasicInfo: () => gql`
     mutation updatePatientBasicInfo(
       $id: ID!,

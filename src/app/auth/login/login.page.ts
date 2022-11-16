@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
+import { CommonService } from '../../services/common/common.service';
+import { LoginInput } from './../../api/models/login.input';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from './../../services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
-import { timeStamp } from 'console';
+import { AuthService } from 'src/app/api/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,12 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) { }
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private commonService: CommonService,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -21,12 +28,30 @@ export class LoginPage implements OnInit {
     });
   }
 
-  login() {
-    this.authService.login();
+  get emailUser() {
+    return this.loginForm.get('emailUser')
   }
 
-  onSubmit() {
-    this.login();
+  get password() {
+    return this.loginForm.get('password')
+  }
+
+  async onSubmit() {
+    if (this.loginForm.valid) {
+
+      const loginData: LoginInput = {
+        password: this.password.value,
+        username: this.emailUser.value,
+      }
+
+      try {
+        await this.authService.login(loginData)
+        this.router.navigate(['tabs/home'])
+      } catch (error) {
+        console.log("Error -->> ",error);
+        this.commonService.showErrorMsg(error)
+      }
+    }
     console.log('onSubmit()');
   }
 }
