@@ -3,7 +3,7 @@ import { Token } from './../../interfaces/token.interface';
 import { LoginResponse } from './../../interfaces/responses/login-response';
 import { Router } from '@angular/router';
 import { ToastController, Platform } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, of } from 'rxjs';
 import { LoginInput } from './../../models/login.input';
 import { Injectable } from '@angular/core';
 import { AuthRepoService } from '../../repos/auth/auth-repo.service';
@@ -35,35 +35,34 @@ export class AuthService {
   }
 
   login(loginInput: LoginInput): Promise<boolean> {
-
     return new Promise((resolve, reject) => {
-      this.authRepo.login(loginInput).subscribe(
-        loginData => {
-          AuthService.save({ access_token: loginData.accessToken as string })
-          this.authState.next(true);
-          resolve(true);
-        },
-        error => {
-          reject(error)
+      from(this.authRepo.login(loginInput)).subscribe(
+        {
+          next: (loginData) => {
+            // @ts-ignore eslint-disable-next-line 
+            AuthService.save({ access_token: loginData.data.login.accessToken as string })
+            this.authState.next(true);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error)
+          }
         }
       )
     })
+  }
 
-    // this.authRepo.login(loginInput)
-    //   .then((loginData: LoginResponse) => {
-    //     if (loginData) {
-    //       AuthService.save({ access_token: loginData.accessToken as string })
-    //       console.log("Login Data", loginData);
-    //       this.router.navigate(['tabs/home'])
-    //       this.authState.next(true);
-    //       return loginData.user;
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //     return error.message
-    //   })
-    // return;
+  verifyEmailByPin(code: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      from(this.authRepo.verifyEmailByPin(code)).subscribe({
+        next: () => {
+          resolve(true);
+        },
+        error: (error) => {
+          reject(error)
+        }
+      })
+    })
   }
 
   logout() {

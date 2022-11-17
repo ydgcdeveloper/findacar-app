@@ -3,7 +3,8 @@
         "error": "Error",
         "error_message": {
             "invalid_credentials": "Invalid credentials",
-            "unknown": "Unknown error"
+            "unknown": "Unknown error",
+            "email_already_verified" : "Needless operation"
         }
     },
     "home": {
@@ -55,7 +56,8 @@
         "yes": "Yes",
         "no": "No",
         "create": "Create",
-        "share": "Share"
+        "share": "Share",
+        "send": "Send"
     },
     "settings": {
         "language": "Language",
@@ -133,8 +135,11 @@
         "password": "Password",
         "register":"Register",
         "repeat_password":"Repeat password",
-        "send": "Send",
         "forgot_pass_info":"Please provide the email address that you used when you signed up in the app.",
         "reset_pass":"Reset Your Password"
+    },
+    "verify_email":{
+        "header": "Verify email",
+        "label": "Write the code sent to your email"
     }
 }

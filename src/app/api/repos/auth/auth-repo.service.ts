@@ -13,17 +13,17 @@ export class AuthRepoService {
 
   login(loginInput: LoginInput): Observable<any> {
     return this.apollo.mutate({
-          mutation: mutations.login(),
-          variables: loginInput,
-        })
-    // return await firstValueFrom(
-    //   this.apollo.mutate({
-    //     mutation: mutations.login(),
-    //     variables: loginInput,
-    //   })
-    //   ).then(result => {
-    //     //@ts-ignore eslint-disable-next-line
-    //     return result.data.login;
-    //   })
+      mutation: mutations.login(),
+      variables: loginInput,
+    })
+  }
+
+  verifyEmailByPin(pin: string): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.verifyEmailByPin(),
+      variables: {
+        pin
+      }
+    })
   }
 }

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'verify_email.header'|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="center-content">
+    <form [formGroup]="verifyEmailForm" (ngSubmit)="onSubmit()">
+      <ion-label class="ml-2">{{'verify_email.label'|translate}} </ion-label>
+      <ion-row class="mt-2">
+        <ion-col>
+          <ion-item class="rounded shadow">
+            <ion-input formControlName="code1" type="number" clearOnEdit="true" [min]="min" [max]="max" autofocus="true" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="rounded shadow">
+            <ion-input formControlName="code2" type="number" clearOnEdit="true" [min]="min" [max]="max" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="rounded shadow">
+            <ion-input formControlName="code3" type="number" clearOnEdit="true" [min]="min" [max]="max" required></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="rounded shadow">
+            <ion-input formControlName="code4" type="number" clearOnEdit="true" [min]="min" [max]="max" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <ion-button type="submit" [disabled]="!verifyEmailForm.valid" expand="block">{{'button.send'|translate}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

@@ -3,7 +3,8 @@
         "error": "Error",
         "error_message": {
             "invalid_credentials": "Credenciales inválidas",
-            "unknown": "Error desconocido"
+            "unknown": "Error desconocido",
+            "email_already_verified" : "Operación innecesaria"
         }
     },
     "home": {
@@ -55,7 +56,8 @@
         "yes": "Si",
         "no": "No",
         "create": "Crear",
-        "share": "Compartir"
+        "share": "Compartir",
+        "send": "Enviar"
     },
     "settings": {
         "language": "Idioma",
@@ -133,8 +135,11 @@
         "password": "Contraseña",
         "register":"Registro",
         "repeat_password":"Repetir contraseña",
-        "send": "Enviar",
         "forgot_pass_info":"Por favor escriba la dirección de correo con la cual creó la cuenta",
         "reset_pass":"Restablecer contraseña"
+    },
+    "verify_email":{
+        "header": "Verificar correo",
+        "label": "Escriba el código enviado a su dirección de correo"
     }
 }

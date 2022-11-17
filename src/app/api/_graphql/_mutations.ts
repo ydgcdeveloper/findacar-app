@@ -20,7 +20,7 @@ export const mutations = {
   `,
   verifyEmailByPin: () => gql`
     mutation verifyEmailByPin(
-      $pin: Float!
+      $pin: String!
     ){
       verifyEmailByPin(verifyByPinInput: {
         pin: $pin

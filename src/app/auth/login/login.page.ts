@@ -45,11 +45,16 @@ export class LoginPage implements OnInit {
       }
 
       try {
-        await this.authService.login(loginData)
-        this.router.navigate(['tabs/home'])
+        await this.commonService.showLoader()
+        await this.authService.login(loginData).then(async (value) => {
+          if(value){
+            await this.router.navigate(['tabs/home'])
+          }
+        })
       } catch (error) {
-        console.log("Error -->> ",error);
         this.commonService.showErrorMsg(error)
+      } finally {
+        await this.commonService.hideLoader();
       }
     }
     console.log('onSubmit()');
