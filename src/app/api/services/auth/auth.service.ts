@@ -39,17 +39,17 @@ export class AuthService {
       from(this.authRepo.login(loginInput)).subscribe(
         {
           next: (loginData) => {
-            // @ts-ignore eslint-disable-next-line 
-            AuthService.save({ access_token: loginData.data.login.accessToken as string })
+            // @ts-ignore eslint-disable-next-line
+            AuthService.save({ access_token: loginData.data.login.accessToken as string });
             this.authState.next(true);
             resolve(true);
           },
           error: (error) => {
-            reject(error)
+            reject(error);
           }
         }
-      )
-    })
+      );
+    });
   }
 
   verifyEmailByPin(code: string): Promise<boolean> {
@@ -59,10 +59,10 @@ export class AuthService {
           resolve(true);
         },
         error: (error) => {
-          reject(error)
+          reject(error);
         }
-      })
-    })
+      });
+    });
   }
 
   logout() {

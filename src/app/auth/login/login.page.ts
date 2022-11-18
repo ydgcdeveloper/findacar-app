@@ -29,11 +29,11 @@ export class LoginPage implements OnInit {
   }
 
   get emailUser() {
-    return this.loginForm.get('emailUser')
+    return this.loginForm.get('emailUser');
   }
 
   get password() {
-    return this.loginForm.get('password')
+    return this.loginForm.get('password');
   }
 
   async onSubmit() {
@@ -42,17 +42,17 @@ export class LoginPage implements OnInit {
       const loginData: LoginInput = {
         password: this.password.value,
         username: this.emailUser.value,
-      }
+      };
 
       try {
-        await this.commonService.showLoader()
+        await this.commonService.showLoader();
         await this.authService.login(loginData).then(async (value) => {
           if(value){
-            await this.router.navigate(['tabs/home'])
+            await this.router.navigate(['tabs/home']);
           }
-        })
+        });
       } catch (error) {
-        this.commonService.showErrorMsg(error)
+        this.commonService.showErrorMsg(error);
       } finally {
         await this.commonService.hideLoader();
       }

@@ -28,9 +28,9 @@ export const newTranslateLoader = (handler: HttpBackend) => {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule, 
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     HttpClientModule,
     GraphQLModule,
     TranslateModule.forRoot({

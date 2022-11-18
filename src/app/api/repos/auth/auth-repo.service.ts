@@ -15,7 +15,7 @@ export class AuthRepoService {
     return this.apollo.mutate({
       mutation: mutations.login(),
       variables: loginInput,
-    })
+    });
   }
 
   verifyEmailByPin(pin: string): Observable<any> {
@@ -24,6 +24,6 @@ export class AuthRepoService {
       variables: {
         pin
       }
-    })
+    });
   }
 }

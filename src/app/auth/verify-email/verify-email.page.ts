@@ -32,19 +32,19 @@ export class VerifyEmailPage implements OnInit {
   }
 
   get code1() {
-    return this.verifyEmailForm.get('code1').value
+    return this.verifyEmailForm.get('code1').value;
   }
 
   get code2() {
-    return this.verifyEmailForm.get('code2').value
+    return this.verifyEmailForm.get('code2').value;
   }
 
   get code3() {
-    return this.verifyEmailForm.get('code3').value
+    return this.verifyEmailForm.get('code3').value;
   }
 
   get code4() {
-    return this.verifyEmailForm.get('code4').value
+    return this.verifyEmailForm.get('code4').value;
   }
 
   async onSubmit() {

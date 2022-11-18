@@ -8,7 +8,7 @@ import { AlertController, ToastController, LoadingController } from '@ionic/angu
 })
 export class CommonService {
 
-  public loader: HTMLIonLoadingElement
+  public loader: HTMLIonLoadingElement;
 
   constructor(
     private alertController: AlertController,
@@ -17,11 +17,11 @@ export class CommonService {
     private loadingController: LoadingController
   ) { }
 
-  async showAlert(header: string = "Error", message: string) {
+  async showAlert(header: string = 'Error', message: string) {
     const alert = await this.alertController.create({
       header,
       message,
-    })
+    });
 
     await alert.present();
   }
@@ -32,10 +32,10 @@ export class CommonService {
     const headerText = this.translate.instant('common.error');
 
     const msgText = this.translate.instant(
-      ["Invalid email/password", "Inactive user account", "Email not verified"].includes(error.message) ? 'common.error_message.invalid_credentials' :
+      ['Invalid email/password', 'Inactive user account', 'Email not verified'].includes(error.message) ? 'common.error_message.invalid_credentials' :
         (error.message as string).includes('Unknown Error') ? 'common.error_message.unknown' :
-          error.message === "Email is already verified" ? "common.error_message.email_already_verified" :
-            error.message === "Wrong pin" ? "verify_email.wrong_pin_message" : "common.error_message.unknown"
+          error.message === 'Email is already verified' ? 'common.error_message.email_already_verified' :
+            error.message === 'Wrong pin' ? 'verify_email.wrong_pin_message' : 'common.error_message.unknown'
     );
     const toast = await this.toastController.create({
       header: headerText,
@@ -52,9 +52,9 @@ export class CommonService {
   async showMessage(messageType: MessageType, message: string) {
 
     const headerText = await this.translate.instant(`common.message.${messageType}`);
-   
+
     const color = messageType === MessageType.INFO ? ToastColors.PRIMARY : messageType;
-    const icon = messageType === MessageType.INFO ? 'information-circle-outline' : messageType === MessageType.SUCCESS ? 'checkmark-circle-outline' : 'warning-outline'
+    const icon = messageType === MessageType.INFO ? 'information-circle-outline' : messageType === MessageType.SUCCESS ? 'checkmark-circle-outline' : 'warning-outline';
 
     const toast = await this.toastController.create({
       header: headerText,
@@ -79,7 +79,7 @@ export class CommonService {
   }
 
   async hideLoader() {
-    await this.loader.dismiss()
+    await this.loader.dismiss();
   }
 }
 
