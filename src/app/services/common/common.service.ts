@@ -1,6 +1,7 @@
+import { ToastColors } from './../../api/services/toast/toast.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
-import { AlertController , ToastController, LoadingController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -27,18 +28,20 @@ export class CommonService {
 
   async showErrorMsg(error: any) {
 
+    console.log(error);
     const headerText = this.translate.instant('common.error');
 
     const msgText = this.translate.instant(
-      error.message === "Invalid email/password" || "Inactive user account" || "Email not verified" ? 'common.error_message.invalid_credentials' : 
-      (error.message as string).includes('Unknown Error') ?  'common.error_message.unknown' :
-      error.message === "Email is already verified" ?  "common.error_message.email_already_verified": "common.error_message.unknown"
+      ["Invalid email/password", "Inactive user account", "Email not verified"].includes(error.message) ? 'common.error_message.invalid_credentials' :
+        (error.message as string).includes('Unknown Error') ? 'common.error_message.unknown' :
+          error.message === "Email is already verified" ? "common.error_message.email_already_verified" :
+            error.message === "Wrong pin" ? "verify_email.wrong_pin_message" : "common.error_message.unknown"
     );
     const toast = await this.toastController.create({
       header: headerText,
       message: msgText,
       icon: 'close-circle-outline',
-      cssClass: 'custom-toast',
+      cssClass: 'custom-toast-error',
       duration: 4500,
       position: 'top',
       animated: true,
@@ -46,8 +49,25 @@ export class CommonService {
     await toast.present();
   }
 
-  async showMessage(){
+  async showMessage(messageType: MessageType, message: string) {
 
+    const headerText = await this.translate.instant(`common.message.${messageType}`);
+   
+    const color = messageType === MessageType.INFO ? ToastColors.PRIMARY : messageType;
+    const icon = messageType === MessageType.INFO ? 'information-circle-outline' : messageType === MessageType.SUCCESS ? 'checkmark-circle-outline' : 'warning-outline'
+
+    const toast = await this.toastController.create({
+      header: headerText,
+      message,
+      icon,
+      cssClass: 'custom-toast',
+      duration: 3500,
+      position: 'top',
+      animated: true,
+      color
+    });
+
+    await toast.present();
   }
 
   async showLoader() {
@@ -58,8 +78,13 @@ export class CommonService {
     await this.loader.present();
   }
 
-  async hideLoader(){
+  async hideLoader() {
     await this.loader.dismiss()
   }
+}
 
+export enum MessageType {
+  INFO = 'info',
+  WARNING = 'warning',
+  SUCCESS = 'success',
 }

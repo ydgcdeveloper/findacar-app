@@ -5,6 +5,11 @@
             "invalid_credentials": "Invalid credentials",
             "unknown": "Unknown error",
             "email_already_verified" : "Needless operation"
+        },
+        "message": {
+            "info": "Information",
+            "warning": "Warning",
+            "success": "Success"
         }
     },
     "home": {
@@ -140,6 +145,8 @@
     },
     "verify_email":{
         "header": "Verify email",
-        "label": "Write the code sent to your email"
+        "label": "Write the code sent to your email",
+        "success_message": "Email succesfully verified",
+        "wrong_pin_message": "Wrong code!"
     }
 }

@@ -5,6 +5,11 @@
             "invalid_credentials": "Credenciales inválidas",
             "unknown": "Error desconocido",
             "email_already_verified" : "Operación innecesaria"
+        },
+        "message": {
+            "info": "Información",
+            "warning": "Advertencia",
+            "success": "Éxito"
         }
     },
     "home": {
@@ -140,6 +145,8 @@
     },
     "verify_email":{
         "header": "Verificar correo",
-        "label": "Escriba el código enviado a su dirección de correo"
+        "label": "Escriba el código enviado a su dirección de correo",
+        "success_message": "Su correo ha sido verificado correctamente",
+        "wrong_pin_message": "Código incorrecto!"
     }
 }

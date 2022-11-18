@@ -1,7 +1,8 @@
+import { TranslateService } from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/api/services/auth/auth.service';
-import { CommonService } from './../../services/common/common.service';
+import { CommonService, MessageType } from './../../services/common/common.service';
 import { VerifyEmailPageForm } from './verify-email.page.form';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -21,6 +22,7 @@ export class VerifyEmailPage implements OnInit {
     private formBuilder: FormBuilder,
     private commonService: CommonService,
     private authService: AuthService,
+    private translate: TranslateService,
     private navController: NavController,
     private router: Router
   ) { }
@@ -49,14 +51,14 @@ export class VerifyEmailPage implements OnInit {
     if (this.verifyEmailForm.valid) {
       const code = `${this.code1}${this.code2}${this.code3}${this.code4}`;
       try {
-        await this.commonService.showLoader()
+        await this.commonService.showLoader();
         await this.authService.verifyEmailByPin(code).then(async (value) => {
           if (value) {
+            await this.commonService.showMessage(MessageType.SUCCESS, this.translate.instant('verify_email.success_message'));
             await this.navController.navigateRoot('login');
           }
         });
       } catch (e) {
-        console.log(e);
         await this.commonService.showErrorMsg(e);
       } finally {
         await this.commonService.hideLoader();
