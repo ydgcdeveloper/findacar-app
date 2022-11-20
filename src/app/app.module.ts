@@ -1,3 +1,4 @@
+import { HttpConfigInterceptor } from './interceptors/http-interceptor';
 import { GraphQLModule } from './graphql.module';
 import { LANGUAGE } from './services/language/language.service';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,7 @@ import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 export const newTranslateLoader = (handler: HttpBackend) => {
@@ -42,7 +43,12 @@ export const newTranslateLoader = (handler: HttpBackend) => {
       }
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, NativeGeocoder],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Geolocation,
+    NativeGeocoder,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 
 })
