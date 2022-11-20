@@ -4,7 +4,8 @@
         "error_message": {
             "invalid_credentials": "Invalid credentials",
             "unknown": "Unknown error",
-            "email_already_verified" : "Needless operation"
+            "email_already_verified" : "Needless operation",
+            "email_already_in_use" : "The account couldn't be created. Please, try later"
         },
         "message": {
             "info": "Information",

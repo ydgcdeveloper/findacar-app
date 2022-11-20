@@ -20,13 +20,29 @@ export const mutations = {
   `,
   verifyEmailByPin: () => gql`
     mutation verifyEmailByPin(
+      $id: ID!,
       $pin: String!
     ){
       verifyEmailByPin(verifyByPinInput: {
+        id: $id,
         pin: $pin
       }){
         email
         emailVerified
+      }
+    }
+  `,
+  createAccount: () => gql`
+    mutation createAccount(
+      $email: String!, 
+      $password: String!
+      ){
+      createAccount(createUserInput: {
+        email: $email,
+        password: $password,
+      })
+      {
+        id
       }
     }
   `,

@@ -1,3 +1,4 @@
+import { SignupInput } from './../../models/signup.input';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
@@ -11,6 +12,13 @@ export class AuthRepoService {
 
   constructor(private apollo: Apollo) { }
 
+  signUp(signupInput: SignupInput): Observable<any>{
+    return this.apollo.mutate({
+      mutation: mutations.createAccount(),
+      variables: signupInput
+    })
+  }
+
   login(loginInput: LoginInput): Observable<any> {
     return this.apollo.mutate({
       mutation: mutations.login(),
@@ -18,10 +26,11 @@ export class AuthRepoService {
     });
   }
 
-  verifyEmailByPin(pin: string): Observable<any> {
+  verifyEmailByPin(id: string, pin: string): Observable<any> {
     return this.apollo.mutate({
       mutation: mutations.verifyEmailByPin(),
       variables: {
+        id,
         pin
       }
     });

@@ -1,6 +1,16 @@
 import { gql } from 'apollo-angular';
 
 export const queries = {
+  getUsers: () => gql`
+    query getUsers {
+      getUsers{
+        id
+        email
+        username
+      }
+    }
+  `
+  ,
   getPathologiesAndTypes: () => gql`
     query getPathologiesAndTypes {
       pathologyTypes {

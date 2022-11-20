@@ -12,7 +12,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <ion-item class="rounded shadow">
         <ion-label position="floating">{{'auth.email'|translate}}</ion-label>
-        <ion-input formControlName="emailUser" type="text" required></ion-input>
+        <ion-input formControlName="email" type="email" required></ion-input>
       </ion-item>
       <ion-item class="ion-margin-top  rounded shadow">
         <ion-label position="floating">{{'auth.password'|translate}}</ion-label>

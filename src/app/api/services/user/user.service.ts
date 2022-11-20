@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../interfaces/user.interface';
+import { UserRepoService } from '../../repos/user/user-repo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,22 @@ export class UserService {
     },
   ];
 
-  constructor() { }
+  constructor(private userRepo: UserRepoService) { }
 
   getUsers() {
     return this.users;
+  }
+
+  async getUsersV1() {
+    try {
+      const usersResponse = await this.userRepo.getUsers();
+      if (!usersResponse.errors) {
+        console.log("Usuarios:", usersResponse.data);
+        return usersResponse.data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   getUserById(id: number) {

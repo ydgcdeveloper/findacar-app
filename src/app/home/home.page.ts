@@ -1,3 +1,4 @@
+import { UserService } from './../api/services/user/user.service';
 import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,12 +23,18 @@ export class HomePage implements OnInit {
   categories: Category[];
   public services: Service[] = null;
 
-  constructor(private router: Router, private categoryService: CategoryService, private serviceService: ServiceService) {}
+  constructor(
+    private router: Router,
+    private categoryService: CategoryService,
+    private serviceService: ServiceService,
+    private usersService: UserService
+    ) {}
 
   ngOnInit() {
     setTimeout(() => {
      this.getCategories();
      this.getServices();
+     this.getUsersV1();
      }, environment.skeletonTime);
   }
 
@@ -37,6 +44,13 @@ export class HomePage implements OnInit {
 
   getServices() {
     this.services = this.serviceService.getAllServices();
+  }
+
+  getUsersV1(){
+    this.usersService.getUsersV1().then((value) =>{
+      if(value){
+      }
+    })  
   }
 
   getRandomInt(min, max) {

@@ -15,8 +15,10 @@ import { Component, OnInit } from '@angular/core';
 export class VerifyEmailPage implements OnInit {
 
   verifyEmailForm: FormGroup;
-  min = 0;
-  max = 9;
+  dataNavigation: any;
+  userID;
+  min: number = 0;
+  max: number = 9;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +31,9 @@ export class VerifyEmailPage implements OnInit {
 
   ngOnInit() {
     this.verifyEmailForm = new VerifyEmailPageForm(this.formBuilder).createForm();
+    this.dataNavigation = this.router.getCurrentNavigation().extras.state;
+    console.log("UserID", this.dataNavigation?.userID);
+    this.userID = this.dataNavigation?.userID;
   }
 
   get code1() {
@@ -52,7 +57,7 @@ export class VerifyEmailPage implements OnInit {
       const code = `${this.code1}${this.code2}${this.code3}${this.code4}`;
       try {
         await this.commonService.showLoader();
-        await this.authService.verifyEmailByPin(code).then(async (value) => {
+        await this.authService.verifyEmailByPin(this.userID, code).then(async (value) => {
           if (value) {
             await this.commonService.showMessage(MessageType.SUCCESS, this.translate.instant('verify_email.success_message'));
             await this.navController.navigateRoot('login');
