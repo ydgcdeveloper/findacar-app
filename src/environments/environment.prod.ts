@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://app-bbe11c7d-105d-4d19-8d15-579fbb8ea328.cleverapps.io',
   defaultLanguage: 'es',
   langVariableName: 'app_language',
   skeletonTime: 1000,
