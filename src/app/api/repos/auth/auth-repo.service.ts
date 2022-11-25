@@ -16,7 +16,7 @@ export class AuthRepoService {
     return this.apollo.mutate({
       mutation: mutations.createAccount(),
       variables: signupInput
-    })
+    });
   }
 
   login(loginInput: LoginInput): Observable<any> {

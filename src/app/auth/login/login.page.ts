@@ -21,6 +21,14 @@ export class LoginPage implements OnInit {
     private router: Router,
     ) { }
 
+    get emailUser() {
+      return this.loginForm.get('emailUser');
+    }
+
+    get password() {
+      return this.loginForm.get('password');
+    }
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       emailUser: [null, [Validators.required]],
@@ -28,20 +36,12 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get emailUser() {
-    return this.loginForm.get('emailUser');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
   async onSubmit() {
     if (this.loginForm.valid) {
 
       const loginData: LoginInput = {
         password: this.password.value,
-        username: this.emailUser.value,
+        email: this.emailUser.value,
       };
 
       try {

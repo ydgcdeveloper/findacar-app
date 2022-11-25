@@ -1,3 +1,4 @@
+import { STORAGE_ACCESS_TOKEN_KEY } from './api/services/auth/auth.service';
 import { HttpConfigInterceptor } from './interceptors/http-interceptor';
 import { GraphQLModule } from './graphql.module';
 import { LANGUAGE } from './services/language/language.service';
@@ -18,6 +19,7 @@ import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpBackend, HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 export const newTranslateLoader = (handler: HttpBackend) => {
@@ -41,7 +43,12 @@ export const newTranslateLoader = (handler: HttpBackend) => {
         useFactory: newTranslateLoader,
         deps: [HttpBackend]
       }
-    })
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem(STORAGE_ACCESS_TOKEN_KEY),
+      },
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

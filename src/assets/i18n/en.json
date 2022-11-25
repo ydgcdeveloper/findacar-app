@@ -149,5 +149,16 @@
         "label": "Write the code sent to your email",
         "success_message": "Email succesfully verified",
         "wrong_pin_message": "Wrong code!"
+    },
+    "edit_profile": {
+        "header": "Edit profile",
+        "gender": "Gender",
+        "gender_placeholder": "Select one",
+        "male": "Male",
+        "female": "Female",
+        "phone_number": "Phone Number",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "birthdate": "Birth date"
     }
 }

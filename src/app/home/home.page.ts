@@ -1,3 +1,4 @@
+import { AuthRepoService } from './../api/repos/auth/auth-repo.service';
 import { UserService } from './../api/services/user/user.service';
 import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -8,6 +9,7 @@ import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swi
 import { Category } from '../api/interfaces/category.interface';
 import { Service } from '../api/interfaces/service.interface';
 import { ServiceService } from '../api/services/service/service.service';
+import { AuthService } from '../api/services/auth/auth.service';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
 
@@ -27,10 +29,13 @@ export class HomePage implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private serviceService: ServiceService,
-    private usersService: UserService
+    private usersService: UserService,
+    private authService: AuthService
     ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    const userId = parseInt(this.authService.getUserId(), 10);
+    await this.usersService.getUser(userId);
     setTimeout(() => {
      this.getCategories();
      this.getServices();
@@ -50,7 +55,7 @@ export class HomePage implements OnInit {
     this.usersService.getUsersV1().then((value) =>{
       if(value){
       }
-    })  
+    });
   }
 
   getRandomInt(min, max) {

@@ -32,10 +32,11 @@ export class CommonService {
     const headerText = this.translate.instant('common.error');
 
     const msgText = this.translate.instant(
-      ['Invalid email/password', 'Inactive user account', 'Email not verified'].includes(error.message) ? 'common.error_message.invalid_credentials' :
+      ['Invalid email/password', 'Inactive user account', 'Email not verified'].includes(error.message) ? 
+      'common.error_message.invalid_credentials' :
         (error.message as string).includes('Unknown Error') ? 'common.error_message.unknown' :
           error.message === 'Email is already verified' ? 'common.error_message.email_already_verified' :
-            error.message === 'Wrong pin' ? 'verify_email.wrong_pin_message' : 
+            error.message === 'Wrong pin' ? 'verify_email.wrong_pin_message' :
             error.message === 'Email already used' ? 'common.error_message.email_already_in_use' : 'common.error_message.unknown'
     );
     const toast = await this.toastController.create({

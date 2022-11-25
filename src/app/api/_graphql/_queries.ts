@@ -27,6 +27,23 @@ export const queries = {
       }
     }
   `,
+  getUserById: () => gql`
+    query getUserById($id: Int!){
+      getUserById(id: $id){
+        id
+        email
+        username
+        role
+        profile{
+          firstName
+          lastName
+          gender
+          phone
+          dateOfBirth
+        }
+      }
+    }
+  `,
   getDiagnosedPathologies: () => gql`
     query getDiagnosedPathologies(
     $itemsPerPage: Int,

@@ -29,7 +29,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                    if(event.body.errors){
-                    const errorMessages = (event.body.errors as Array<any>).map((element) => { return element.message })
+                    const errorMessages = (event.body.errors as Array<any>).map((element) => element.message);
                     if (errorMessages.includes('Expired JWT Token') || errorMessages.includes('Wrong JWT Token')) {
                         console.log('Error JWT token');
                         this.authService.logout().then(() => {

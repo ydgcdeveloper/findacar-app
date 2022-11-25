@@ -4,8 +4,8 @@
         "error_message": {
             "invalid_credentials": "Credenciales inválidas",
             "unknown": "Error desconocido",
-            "email_already_verified" : "Operación innecesaria",
-            "email_already_in_use" : "La cuenta no pudo ser creada. Por favor, intenta más tarde"
+            "email_already_verified": "Operación innecesaria",
+            "email_already_in_use": "La cuenta no pudo ser creada. Por favor, intenta más tarde"
         },
         "message": {
             "info": "Información",
@@ -89,8 +89,8 @@
         "search_location": "Buscar ubicación en el mapa",
         "details": "Detalles",
         "details_placeholder": "En un pasillo, casa pintada de verde...",
-        "edit_address":"Editar dirección",
-        "delete_address":"Eliminar dirección"
+        "edit_address": "Editar dirección",
+        "delete_address": "Eliminar dirección"
     },
     "map": {
         "search_placeholder": "Escribe la ciudad o pueblo",
@@ -110,8 +110,8 @@
         "see_details": "Ver detalles",
         "delete_request_warning_message": "Está seguro que desea eliminar la solicitud?",
         "delete_order_warning_message": "Está seguro que desea eliminar la orden?",
-        "select_options":"Selecciona una o más opciones",
-        "add_note":"Añadir una nota"
+        "select_options": "Selecciona una o más opciones",
+        "add_note": "Añadir una nota"
     },
     "request": {
         "create": "Crear Solicitud de Viaje",
@@ -139,15 +139,26 @@
         "forgot_pass": "Olvidó su contraseña?",
         "email": "Correo electrónico",
         "password": "Contraseña",
-        "register":"Registro",
-        "repeat_password":"Repetir contraseña",
-        "forgot_pass_info":"Por favor escriba la dirección de correo con la cual creó la cuenta",
-        "reset_pass":"Restablecer contraseña"
+        "register": "Registro",
+        "repeat_password": "Repetir contraseña",
+        "forgot_pass_info": "Por favor escriba la dirección de correo con la cual creó la cuenta",
+        "reset_pass": "Restablecer contraseña"
     },
-    "verify_email":{
+    "verify_email": {
         "header": "Verificar correo",
         "label": "Escriba el código enviado a su dirección de correo",
         "success_message": "Su correo ha sido verificado correctamente",
         "wrong_pin_message": "Código incorrecto!"
+    },
+    "edit_profile": {
+        "header": "Editar perfil",
+        "gender": "Género",
+        "gender_placeholder": "Selecciona uno",
+        "male": "Masculino",
+        "female": "Femenino",
+        "phone_number": "Número de Teléfono",
+        "firstname": "Nombre",
+        "lastname": "Apellido",
+        "birthdate": "Fecha de nacimiento"
     }
 }

@@ -3,11 +3,11 @@ import { gql } from 'apollo-angular';
 export const mutations = {
   login: () => gql`
     mutation login(
-      $username: String!,
+      $email: String!,
       $password: String!,
     ){
     login(loginUserInput: {
-      username: $username,
+      email: $email,
       password: $password
     }){
       accessToken
@@ -45,6 +45,41 @@ export const mutations = {
         id
       }
     }
+  `,
+  updateProfile: () => gql`
+    mutation updateProfile(
+      $firstName: String,
+      $lastName: String,
+      $gender: Gender,
+      $phone: String,
+      $dateOfBirth: DateTime
+    ){
+      updateProfile(updateProfileInput: {
+        firstName: $firstName,
+        lastName: $lastName,
+        gender: $gender,
+        phone: $phone,
+        dateOfBirth: $dateOfBirth
+      }){
+        firstName
+        lastName
+        gender
+        user{
+          role
+        }
+      }
+  },
+  `,
+  updateFilter: () => gql`
+    mutation updateFilter(
+      $filter: Float
+    ){
+      updateProfile(updateProfileInput: {
+        filter: $filter
+      }){
+        filter
+      }
+  }
   `,
   updatePatientBasicInfo: () => gql`
     mutation updatePatientBasicInfo(

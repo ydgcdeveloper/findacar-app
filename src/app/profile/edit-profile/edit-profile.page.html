@@ -1,10 +1,9 @@
-<!-- Default back button -->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>Editar perfil</ion-title>
+    <ion-title>{{'edit_profile.header'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,30 +19,28 @@
     </ion-row>
 
     <div class="padding-bottom-60">
-      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <ion-item class="rounded mt-2">
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input autocapitalize="true" type="text"></ion-input>
+          <ion-label position="floating">{{'edit_profile.firstname'|translate}}</ion-label>
+          <ion-input formControlName="firstName" autocapitalize="true" type="text"></ion-input>
         </ion-item>
         <ion-item class="rounded mt-2">
-          <ion-label position="floating">Apellido</ion-label>
-          <ion-input autocapitalize="true" type="text"></ion-input>
+          <ion-label position="floating">{{'edit_profile.lastname'|translate}}</ion-label>
+          <ion-input formControlName="lastName" autocapitalize="true" type="text"></ion-input>
         </ion-item>
         <ion-item class="rounded mt-2">
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input type="email"></ion-input>
+          <ion-label position="floating">{{'auth.email'|translate}}</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
         </ion-item>
         <ion-item class="rounded mt-2">
-          <ion-label position="floating">Número de Teléfono</ion-label>
-          <ion-input type="tel"></ion-input>
+          <ion-label position="floating">{{'edit_profile.phone_number'|translate}}</ion-label>
+          <ion-input formControlName="phone" type="tel"></ion-input>
         </ion-item>
         <ion-item class="rounded mt-2">
-          <ion-label>Género</ion-label>
-          <ion-select placeholder="Selecciona uno">
-            <ion-select-option value="f">Femenino</ion-select-option>
-            <ion-select-option value="m">Masculino</ion-select-option>
-            <ion-select-option value="o">Otro</ion-select-option>
+          <ion-label>{{'edit_profile.gender'|translate}}</ion-label>
+          <ion-select [placeholder]="'edit_profile.gender_placeholder'|translate">
+            <ion-select-option value="f">{{'edit_profile.female'|translate}}</ion-select-option>
+            <ion-select-option value="m">{{'edit_profile.male'|translate}}</ion-select-option>
           </ion-select>
         </ion-item>
 
@@ -55,15 +52,15 @@
           </ion-button>
           <ion-popover trigger="open-date-input" show-backdrop="false">
             <ng-template>
-              <ion-datetime placeholder="Fecha de nacimiento" [max]="currentYear - 15" locale="sp-SP" value="2007-12-15"
+              <ion-datetime [placeholder]="'edit_profile.birthdate'|translate" [max]="currentYear - 15" locale="sp-SP" value="2007-12-15"
                 name="birthdate" #popoverDatetime presentation="date"
                 (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
             </ng-template>
           </ion-popover>
         </ion-item>
 
+        <ion-button class="fixed" type="submit" >{{'button.save'|translate}}</ion-button>
       </form>
-      <ion-button class="fixed">Guardar</ion-button>
     </div>
   </div>
 

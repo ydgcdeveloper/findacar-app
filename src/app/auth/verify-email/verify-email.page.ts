@@ -17,8 +17,8 @@ export class VerifyEmailPage implements OnInit {
   verifyEmailForm: FormGroup;
   dataNavigation: any;
   userID;
-  min: number = 0;
-  max: number = 9;
+  min = 0;
+  max = 9;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +32,7 @@ export class VerifyEmailPage implements OnInit {
   ngOnInit() {
     this.verifyEmailForm = new VerifyEmailPageForm(this.formBuilder).createForm();
     this.dataNavigation = this.router.getCurrentNavigation().extras.state;
-    console.log("UserID", this.dataNavigation?.userID);
+    console.log('UserID', this.dataNavigation?.userID);
     this.userID = this.dataNavigation?.userID;
   }
 

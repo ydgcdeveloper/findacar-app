@@ -23,5 +23,4 @@ export class SettingsPage implements OnInit {
     }
     return this.translate.instant('settings.lang_spanish');
   }
-
 }

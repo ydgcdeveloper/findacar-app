@@ -1,13 +1,12 @@
 import { SignupInput } from './../../models/signup.input';
-import { User } from './../../interfaces/user.interface';
 import { Token } from './../../interfaces/token.interface';
-import { LoginResponse } from './../../interfaces/responses/login-response';
 import { Router } from '@angular/router';
 import { ToastController, Platform } from '@ionic/angular';
-import { BehaviorSubject, from, of } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { LoginInput } from './../../models/login.input';
 import { Injectable } from '@angular/core';
 import { AuthRepoService } from '../../repos/auth/auth-repo.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 export const STORAGE_ACCESS_TOKEN_KEY = 'access_token';
 
@@ -22,11 +21,16 @@ export class AuthService {
     private router: Router,
     public toastController: ToastController,
     private platform: Platform,
-    private authRepo: AuthRepoService
+    private authRepo: AuthRepoService,
+    private jwtHelper: JwtHelperService
   ) {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
     });
+  }
+
+  private static save(token: Token) {
+    localStorage.setItem(STORAGE_ACCESS_TOKEN_KEY, token.access_token);
   }
 
   ifLoggedIn() {
@@ -55,6 +59,7 @@ export class AuthService {
       from(this.authRepo.login(loginInput)).subscribe(
         {
           next: (loginData) => {
+            //@ts-ignore typescript-eslint/naming-convention
             AuthService.save({ access_token: loginData.data.login.accessToken as string });
             this.authState.next(true);
             resolve(true);
@@ -90,8 +95,7 @@ export class AuthService {
     return this.authState.value;
   }
 
-  private static save(token: Token) {
-    localStorage.setItem(STORAGE_ACCESS_TOKEN_KEY, token.access_token);
+  getUserId(): string {
+    return this.jwtHelper.decodeToken(this.jwtHelper.tokenGetter())?.sub ?? '';
   }
-
 }

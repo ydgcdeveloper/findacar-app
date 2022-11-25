@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./profile/help/help.module').then(m => m.HelpPageModule)
   },
   {
+    path: 'share',
+    loadChildren: () => import('./profile/share/share.module').then( m => m.SharePageModule)
+  },
+  {
     path: 'favorites',
     loadChildren: () => import('./profile/favorites/favorites.module').then(m => m.FavoritesPageModule)
   },
@@ -95,7 +99,8 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
-  },  {
+  },
+  {
     path: 'verify-email',
     loadChildren: () => import('./auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   }

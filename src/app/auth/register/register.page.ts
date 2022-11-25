@@ -48,13 +48,13 @@ export class RegisterPage implements OnInit {
       const signupData: SignupInput = {
         email: this.email.value,
         password: this.password.value,
-      }
+      };
 
       try {
         await this.commonService.showLoader();
         await this.authService.signUp(signupData).then(async (value) => {
           if (value) {
-            console.log("Signup Data", value);
+            console.log('Signup Data', value);
             //@ts-ignore eslint-disable-next-line
             await this.router.navigate(['verify-email'], { state: { userID: value.id } });
           }

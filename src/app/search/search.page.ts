@@ -1,3 +1,4 @@
+import { ViewWillEnter } from '@ionic/angular';
 import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { FilterService } from '../api/services/filter/filter.service';
   templateUrl: 'search.page.html',
   styleUrls: ['search.page.scss']
 })
-export class SearchPage implements OnInit {
+export class SearchPage implements OnInit, ViewWillEnter {
   @ViewChild('searcher') sInput;
 
   categories: Category[];
@@ -27,7 +28,12 @@ export class SearchPage implements OnInit {
     this.categories = this.categoryService.getCategories();
   }
 
-  ionViewDidEnter() {
+  async ionViewWillEnter() {
+    console.log('SearchPage ionViewWillEnter');
+  }
+
+  async ionViewDidEnter() {
+    console.log('SearchPage');
     this.sInput.setFocus();
   }
 

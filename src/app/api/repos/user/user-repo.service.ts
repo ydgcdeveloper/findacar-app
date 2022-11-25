@@ -1,3 +1,5 @@
+import { UpdateProfileInput } from './../../models/update-profile.input';
+import { mutations } from './../../_graphql/_mutations';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -16,7 +18,26 @@ export class UserRepoService {
         query: queries.getUsers(),
         fetchPolicy: 'no-cache',
       })
-    )
+    );
   }
-  
+
+  async getUser(id: number): Promise<any> {
+    console.log(id);
+    return await firstValueFrom(
+      this.apollo.query({
+        query: queries.getUserById(),
+        variables: {
+          id
+        },
+        fetchPolicy: 'no-cache',
+      })
+    );
+  }
+
+  updateUserProfile(updateProfileInput: UpdateProfileInput): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.updateProfile(),
+      variables: updateProfileInput
+    });
+  }
 }

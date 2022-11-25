@@ -15,7 +15,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: ProfilePage }]),
+    // RouterModule.forChild([{ path: '', component: ProfilePage }]),
     ProfilePageRoutingModule,
     TranslateModule
   ],
