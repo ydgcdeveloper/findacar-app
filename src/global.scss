@@ -212,3 +212,32 @@ ion-toast.custom-toast {
 ion-toast.custom-toast::part(message) {
   font-style: italic;
 }
+
+// ion-popover {
+//   --backdrop-opacity: 0.6;
+//   --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+//   --color: white;
+//   --width: 300px;
+//   --offset-y: -100px;
+// }
+
+// ion-popover ion-content {
+//   --background: rgba(40, 173, 218, 0.6);
+//   width: 50%;
+//   height: 50%;
+// }
+
+ion-popover::part(content){
+  width: 85%;
+  // height: 45%;
+}
+
+// ion-popover.popover-bottom ion-datetime {
+//   margin-left: auto;
+//   margin-right: auto;
+//   --background: white;
+// }
+
+// ion-popover::part(backdrop) {
+//   background-color: rgb(6, 14, 106);
+// }

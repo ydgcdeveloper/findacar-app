@@ -63,7 +63,8 @@
         "no": "No",
         "create": "Create",
         "share": "Share",
-        "send": "Send"
+        "send": "Send",
+        "done": "Done"
     },
     "settings": {
         "language": "Language",

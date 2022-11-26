@@ -104,7 +104,6 @@ const routes: Routes = [
     path: 'verify-email',
     loadChildren: () => import('./auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   }
-
 ];
 @NgModule({
   imports: [

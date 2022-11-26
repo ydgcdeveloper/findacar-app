@@ -38,28 +38,49 @@
         </ion-item>
         <ion-item class="rounded mt-2">
           <ion-label>{{'edit_profile.gender'|translate}}</ion-label>
-          <ion-select [placeholder]="'edit_profile.gender_placeholder'|translate">
-            <ion-select-option value="f">{{'edit_profile.female'|translate}}</ion-select-option>
-            <ion-select-option value="m">{{'edit_profile.male'|translate}}</ion-select-option>
+          <ion-select formControlName="gender" [placeholder]="'edit_profile.gender_placeholder'|translate">
+            <ion-select-option [value]="genders.FEMALE">{{'edit_profile.female'|translate}}</ion-select-option>
+            <ion-select-option [value]="genders.MALE">{{'edit_profile.male'|translate}}</ion-select-option>
           </ion-select>
         </ion-item>
+
+
 
         <!-- Datetime in popover with input -->
         <ion-item class="rounded mt-2">
           <ion-input [value]="dateValue"></ion-input>
-          <ion-button fill="clear" id="open-date-input">
+          <ion-button fill="clear" id="open-popover">
             <ion-icon icon="calendar"></ion-icon>
           </ion-button>
-          <ion-popover trigger="open-date-input" show-backdrop="false">
+
+          <ion-popover [keepContentsMounted]="true" trigger="open-popover">
             <ng-template>
-              <ion-datetime [placeholder]="'edit_profile.birthdate'|translate" [max]="currentYear - 15" locale="sp-SP" value="2007-12-15"
-                name="birthdate" #popoverDatetime presentation="date"
-                (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+              <ion-content class="ion-padding">
+                <ion-datetime 
+                presentation="date" 
+                [showDefaultButtons]="true" 
+                [doneText]="doneText"
+                [cancelText]="cancelText" 
+                [min]="min" 
+                [max]="max"
+                #popoverDatetime
+                (ionChange)="setDate(popoverDatetime.value)"
+                [locale]="setLocale()"
+                ></ion-datetime>
+              </ion-content>
             </ng-template>
           </ion-popover>
+          <!-- <ion-popover trigger="open-date-input" show-backdrop="false">
+            <ng-template>
+              <ion-datetime [placeholder]="'edit_profile.birthdate'|translate" [max]="currentYear - 15" locale="sp-SP"
+                value="2007-12-15" name="birthdate" #popoverDatetime presentation="date"
+                (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
+              <h1>fsdfsdfdf</h1>
+            </ng-template>
+          </ion-popover> -->
         </ion-item>
 
-        <ion-button class="fixed" type="submit" >{{'button.save'|translate}}</ion-button>
+        <ion-button class="fixed" type="submit">{{'button.save'|translate}}</ion-button>
       </form>
     </div>
   </div>
@@ -97,7 +118,7 @@
       </ion-item>
       <ion-item class="rounded mt-2">
         <ion-label class="py-1">
-            <ion-skeleton-text animated style="width: 30%; height: 14px;" class="rounded"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 30%; height: 14px;" class="rounded"></ion-skeleton-text>
         </ion-label>
         <ion-label slot="end">
           <ion-skeleton-text animated style="width: 80px; height: 14px;" class="rounded"></ion-skeleton-text>
@@ -105,14 +126,14 @@
       </ion-item>
       <ion-item class="rounded mt-2">
         <ion-label class="py-1">
-            <ion-skeleton-text animated style="width: 50%; height: 14px;" class="rounded"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%; height: 14px;" class="rounded"></ion-skeleton-text>
         </ion-label>
         <ion-label slot="end">
-          <ion-skeleton-text animated style="width: 16px; height: 16px;" >
+          <ion-skeleton-text animated style="width: 16px; height: 16px;">
           </ion-skeleton-text>
         </ion-label>
       </ion-item>
-      </div>
+    </div>
   </div>
 
 </ion-content>

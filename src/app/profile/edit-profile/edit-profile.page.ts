@@ -1,4 +1,5 @@
-import { NavController } from '@ionic/angular';
+import { LANGUAGE } from 'src/app/services/language/language.service';
+import { NavController, PopoverController } from '@ionic/angular';
 import { UpdateProfileInput } from './../../api/models/update-profile.input';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { format, parseISO } from 'date-fns';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { Gender } from 'src/app/data/gender.enum';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,6 +24,13 @@ export class EditProfilePage implements OnInit {
   show = false;
   profileForm: FormGroup;
   user;
+  genders = Gender;
+
+  //Calendar props
+  max = this.currentYear - 15;
+  min = this.currentYear - 122;
+  doneText;
+  cancelText;
 
   constructor(
     private userService: UserService,
@@ -30,6 +39,7 @@ export class EditProfilePage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private navCtrl: NavController,
+    public popoverController: PopoverController
   ) { }
 
   get firstName() {
@@ -58,47 +68,46 @@ export class EditProfilePage implements OnInit {
 
   async ngOnInit() {
     this.user = this.userService.user;
-    this.dateValue = this.translate.instant('edit_profile.birthdate');
     this.profileForm = this.formBuilder.group({
       firstName: [this.user?.profile?.firstName, [Validators.required]],
       lastName: [this.user?.profile?.lastName, [Validators.required]],
       email: [this.user?.email, [Validators.required, Validators.email]],
-      gender: ['MALE', [Validators.required]],
+      gender: [this.user?.profile?.gender, [Validators.required]],
       phone: [this.user?.profile?.phone, [Validators.required]],
-      dateOfBirth: ['2022-06-06', [Validators.required]]
+      dateOfBirth: [this.user?.profile?.dateOfBirth, [Validators.required]]
     });
     setTimeout(() => {
       this.show = true;
     }, environment.skeletonTime);
-    console.log(this.dateValue);
+    this.dateValue = this.dateOfBirth.value ? this.formatDate(this.dateOfBirth.value) : this.translate.instant('edit_profile.birthdate');
   }
 
   async onSubmit() {
     // if (this.profileForm.valid) {
 
-      const profileInput: UpdateProfileInput = {
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        email: this.email.value,
-        phone: this.phone.value,
-        gender: this.gender.value,
-        dateOfBirth: this.dateOfBirth.value,
-      };
+    const profileInput: UpdateProfileInput = {
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      email: this.email.value,
+      phone: this.phone.value,
+      gender: this.gender.value,
+      dateOfBirth: this.dateOfBirth.value,
+    };
 
-      try {
-        await this.commonService.showLoader();
-        await this.userService.updateUserProfile(profileInput).then(async (value) => {
-          if (value) {
-            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigate(['tabs/profile']);
-            });
-          }
-        });
-      } catch (error) {
-        this.commonService.showErrorMsg(error);
-      } finally {
-        await this.commonService.hideLoader();
-      }
+    try {
+      await this.commonService.showLoader();
+      await this.userService.updateUserProfile(profileInput).then(async (value) => {
+        if (value) {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['tabs/profile']);
+          });
+        }
+      });
+    } catch (error) {
+      this.commonService.showErrorMsg(error);
+    } finally {
+      await this.commonService.hideLoader();
+    }
     // }
   }
 
@@ -106,7 +115,26 @@ export class EditProfilePage implements OnInit {
     console.log(this.miVariableHora);
   }
 
+  setDate(value: string) {
+    this.dateOfBirth.setValue(value);
+    this.dateValue = this.formatDate(value);
+  }
+
+  setLocale() {
+    switch (LANGUAGE()) {
+      case 'es':
+        return 'es-Es';
+      case 'en':
+        return 'en-En';
+    }
+  }
+
   formatDate(value: string) {
-    return format(parseISO(value), 'dd MMM yyyy');
+    switch (LANGUAGE()) {
+      case 'es':
+        return format(parseISO(value), 'dd MMM yyyy');
+      case 'en':
+        return format(parseISO(value), 'yyyy MMM dd');
+    }
   }
 }

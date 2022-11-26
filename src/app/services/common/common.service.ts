@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { ToastColors } from './../../api/services/toast/toast.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
@@ -24,6 +25,10 @@ export class CommonService {
     });
 
     await alert.present();
+  }
+
+  translateKey(key: string){
+    return this.translate.instant(key);
   }
 
   async showErrorMsg(error: any) {
@@ -53,10 +58,12 @@ export class CommonService {
 
   async showMessage(messageType: MessageType, message: string) {
 
-    const headerText = await this.translate.instant(`common.message.${messageType}`);
+    const headerText = this.translate.instant(`common.message.${messageType}`);
 
     const color = messageType === MessageType.INFO ? ToastColors.PRIMARY : messageType;
-    const icon = messageType === MessageType.INFO ? 'information-circle-outline' : messageType === MessageType.SUCCESS ? 'checkmark-circle-outline' : 'warning-outline';
+    const icon = messageType === MessageType.INFO ? 
+    'information-circle-outline' : messageType === MessageType.SUCCESS ? 
+    'checkmark-circle-outline' : 'warning-outline';
 
     const toast = await this.toastController.create({
       header: headerText,
