@@ -1,3 +1,5 @@
+import { ID } from './rate.interface';
+
 export interface Filter {
     sortBy: SortByTypes;
     onlyAvailable: boolean;
@@ -5,7 +7,7 @@ export interface Filter {
         lower: number;
         upper: number;
     };
-    categories: Array<string | number>;
+    categories: Array<ID>;
 }
 
 export enum SortByTypes {

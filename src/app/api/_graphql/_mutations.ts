@@ -64,6 +64,7 @@ export const mutations = {
         firstName
         lastName
         gender
+        filter
         user{
           role
         }
@@ -72,7 +73,7 @@ export const mutations = {
   `,
   updateFilter: () => gql`
     mutation updateFilter(
-      $filter: Float
+      $filter: JSONObject
     ){
       updateProfile(updateProfileInput: {
         filter: $filter

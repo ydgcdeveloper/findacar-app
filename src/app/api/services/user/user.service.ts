@@ -1,3 +1,4 @@
+import { FilterInput } from './../../models/filter.input';
 import { AuthRepoService } from './../../repos/auth/auth-repo.service';
 import { UpdateProfileInput } from './../../models/update-profile.input';
 import { Injectable } from '@angular/core';
@@ -41,7 +42,7 @@ export class UserService {
       if (!userResponse.errors) {
         const user = userResponse.data.getUserById;
         this.loggedUser.next(user);
-        console.log('Logged User:', user);
+        // console.log('Logged User:', user);
         return user;
       }
     } catch (error) {
@@ -64,6 +65,22 @@ export class UserService {
   updateUserProfile(updateProfileInput: UpdateProfileInput): Promise<any> {
     return new Promise((resolve, reject) => {
       from(this.userRepo.updateUserProfile(updateProfileInput)).subscribe(
+        {
+          next: (updatedData) => {
+            console.log(updatedData);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error);
+          }
+        }
+      );
+    });
+  }
+
+  updateFilter(filterInput: FilterInput){
+    return new Promise((resolve, reject) => {
+      from(this.userRepo.updateFilter(filterInput)).subscribe(
         {
           next: (updatedData) => {
             console.log(updatedData);

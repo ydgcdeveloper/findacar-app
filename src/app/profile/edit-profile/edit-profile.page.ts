@@ -38,7 +38,6 @@ export class EditProfilePage implements OnInit {
     private commonService: CommonService,
     private router: Router,
     private translate: TranslateService,
-    private navCtrl: NavController,
     public popoverController: PopoverController
   ) { }
 

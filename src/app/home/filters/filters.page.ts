@@ -1,3 +1,7 @@
+import { Router } from '@angular/router';
+import { CommonService } from './../../services/common/common.service';
+import { FilterInput } from './../../api/models/filter.input';
+import { UserService } from './../../api/services/user/user.service';
 import { NavController } from '@ionic/angular';
 import { CategoryService } from './../../api/services/category/category.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
@@ -25,12 +29,16 @@ export class FiltersPage implements OnInit {
   sortTypes = SortByTypes;
   categoryFormArray: FormArray = new FormArray([], { validators: checkAtLeastOneCategory });
 
+  user;
 
   constructor(
+    private userService: UserService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private filterService: FilterService,
-    private navController: NavController
+    private commonService: CommonService,
+    private navController: NavController,
+    private router: Router,
   ) { }
 
 
@@ -51,7 +59,8 @@ export class FiltersPage implements OnInit {
   }
 
   async ngOnInit() {
-
+    this.user = this.userService.user;
+    console.log('User in filter: ', this.userService.user);
     this.getCategories();
 
     setTimeout(() => {
@@ -59,7 +68,8 @@ export class FiltersPage implements OnInit {
       this.show = true;
     }, environment.skeletonTime);
 
-    this.filterData = await this.filterService.getFilter();
+    // this.filterData = await this.filterService.getFilter();
+    this.filterData = this.user?.profile?.filter;
 
     this.setCheckedCategory();
 
@@ -74,9 +84,9 @@ export class FiltersPage implements OnInit {
 
     this.filterForm = this.formBuilder.group({
       sortBy: [this.filterData?.sortBy || SortByTypes.CLOSENESS, [Validators.required]],
-      onlyAvailable: [this.filterData.onlyAvailable || false],
-      priceRange: [{ lower: this.filterData?.priceRange.lower, upper: this.filterData?.priceRange.upper } ||
-        { lower: this.priceRangeMin, upper: this.priceRangeMax }, [Validators.required]],
+      onlyAvailable: [this.filterData?.onlyAvailable || false],
+      priceRange: [{ lower: this.filterData?.priceRange.lower || this.priceRangeMin,
+        upper: this.filterData?.priceRange.upper || this.priceRangeMax }, [Validators.required]],
       category: this.categoryFormArray
     });
   }
@@ -84,22 +94,20 @@ export class FiltersPage implements OnInit {
 
   setCheckedCategory() {
     this.checkedCategories = this.categories.map((category) => ({
-      ...category, checked: this.filterData.categories.includes(category.id)
+      ...category, checked: this.filterData?.categories.includes(category.id)
     }));
   }
 
   updateChecked() {
     this.checkedCategories = this.getCategoryFormArray().controls.map((category, index) => (
       { ...this.checkedCategories[index], checked: category.value }
-      ));
+    ));
   }
 
   getIdSelectedCategories() {
     const finalCheckedCategories = this.checkedCategories as Array<any>;
     return finalCheckedCategories.filter((category) => category.checked).map((category) => category.id);
   }
-
-
 
   getCategoryFormArray() {
     return this.filterForm.controls.category as FormArray;
@@ -113,22 +121,33 @@ export class FiltersPage implements OnInit {
     return `$${value}`;
   }
 
-  onSubmit() {
-    if (this.filterForm.invalid) {
-      return;
+  async onSubmit() {
+    if (this.filterForm.valid) {
+
+      const filterInput: FilterInput = {
+        sortBy: this.sortBy.value as SortByTypes,
+        onlyAvailable: this.onlyAvailable.value,
+        priceRange: this.priceRange.value,
+        categories: this.getIdSelectedCategories()
+      };
+
+      try {
+        await this.commonService.showLoader();
+        await this.userService.updateFilter(filterInput).then(async (value) => {
+          if (value) {
+            this.router.navigateByUrl('/tabs/order', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['tabs/home']);
+            });
+          }
+        });
+      } catch (error) {
+        this.commonService.showErrorMsg(error);
+      } finally {
+        await this.commonService.hideLoader();
+      }
     }
-
-    const newFilter: Filter = {
-      sortBy: this.sortBy.value as SortByTypes,
-      onlyAvailable: this.onlyAvailable.value,
-      priceRange: this.priceRange.value,
-      categories: this.getIdSelectedCategories()
-    };
-
-    this.filterService.saveFilter(newFilter);
-    this.navController.navigateForward('tabs/home');
   }
 }
 
 export const checkAtLeastOneCategory: ValidatorFn = (control: AbstractControl): ValidationErrors |
-null => !control.value.includes(true) ? { noCategorySelected: true } : null;
+  null => !control.value.includes(true) ? { noCategorySelected: true } : null;

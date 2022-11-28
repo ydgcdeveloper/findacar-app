@@ -1,3 +1,4 @@
+import { ViewWillEnter } from '@ionic/angular';
 import { AuthRepoService } from './../api/repos/auth/auth-repo.service';
 import { UserService } from './../api/services/user/user.service';
 import { CategoryService } from './../api/services/category/category.service';
@@ -20,7 +21,7 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
   styleUrls: ['home.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, ViewWillEnter {
 
   categories: Category[];
   public services: Service[] = null;
@@ -29,17 +30,22 @@ export class HomePage implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private serviceService: ServiceService,
-    private usersService: UserService,
+    private userService: UserService,
     private authService: AuthService
     ) {}
 
   async ngOnInit() {
+
+  }
+
+  async ionViewWillEnter() {
     const userId = parseInt(this.authService.getUserId(), 10);
-    await this.usersService.getUser(userId);
+    await this.userService.getUser(userId);
+    console.log('User in home: ', this.userService.user);
     setTimeout(() => {
      this.getCategories();
      this.getServices();
-     this.getUsersV1();
+    //  this.getUsersV1();
      }, environment.skeletonTime);
   }
 
@@ -52,7 +58,7 @@ export class HomePage implements OnInit {
   }
 
   getUsersV1(){
-    this.usersService.getUsersV1().then((value) =>{
+    this.userService.getUsersV1().then((value) =>{
       if(value){
       }
     });

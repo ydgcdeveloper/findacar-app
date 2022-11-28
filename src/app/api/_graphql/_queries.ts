@@ -40,6 +40,7 @@ export const queries = {
           gender
           phone
           dateOfBirth
+          filter
         }
       }
     }
