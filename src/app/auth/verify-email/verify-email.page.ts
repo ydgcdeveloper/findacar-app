@@ -29,13 +29,6 @@ export class VerifyEmailPage implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.verifyEmailForm = new VerifyEmailPageForm(this.formBuilder).createForm();
-    this.dataNavigation = this.router.getCurrentNavigation().extras.state;
-    console.log('UserID', this.dataNavigation?.userID);
-    this.userID = this.dataNavigation?.userID;
-  }
-
   get code1() {
     return this.verifyEmailForm.get('code1').value;
   }
@@ -50,6 +43,13 @@ export class VerifyEmailPage implements OnInit {
 
   get code4() {
     return this.verifyEmailForm.get('code4').value;
+  }
+
+  ngOnInit() {
+    this.verifyEmailForm = new VerifyEmailPageForm(this.formBuilder).createForm();
+    this.dataNavigation = this.router.getCurrentNavigation().extras.state;
+    console.log('UserID', this.dataNavigation?.userID);
+    this.userID = this.dataNavigation?.userID;
   }
 
   async onSubmit() {

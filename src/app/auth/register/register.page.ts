@@ -23,6 +23,14 @@ export class RegisterPage implements OnInit {
     private router: Router,
   ) { }
 
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -34,13 +42,6 @@ export class RegisterPage implements OnInit {
       });
   }
 
-  get email() {
-    return this.registerForm.get('email');
-  }
-
-  get password() {
-    return this.registerForm.get('password');
-  }
 
   async onSubmit() {
     if (this.registerForm.valid) {

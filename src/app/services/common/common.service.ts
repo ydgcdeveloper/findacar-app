@@ -37,7 +37,7 @@ export class CommonService {
     const headerText = this.translate.instant('common.error');
 
     const msgText = this.translate.instant(
-      ['Invalid email/password', 'Inactive user account', 'Email not verified'].includes(error.message) ? 
+      ['Invalid email/password', 'Inactive user account', 'Email not verified'].includes(error.message) ?
       'common.error_message.invalid_credentials' :
         (error.message as string).includes('Unknown Error') ? 'common.error_message.unknown' :
           error.message === 'Email is already verified' ? 'common.error_message.email_already_verified' :
@@ -61,8 +61,8 @@ export class CommonService {
     const headerText = this.translate.instant(`common.message.${messageType}`);
 
     const color = messageType === MessageType.INFO ? ToastColors.PRIMARY : messageType;
-    const icon = messageType === MessageType.INFO ? 
-    'information-circle-outline' : messageType === MessageType.SUCCESS ? 
+    const icon = messageType === MessageType.INFO ?
+    'information-circle-outline' : messageType === MessageType.SUCCESS ?
     'checkmark-circle-outline' : 'warning-outline';
 
     const toast = await this.toastController.create({

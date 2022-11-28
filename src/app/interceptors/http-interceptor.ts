@@ -42,7 +42,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }),
             // catchError((response: HttpResponse<any>) => {
             //     // console.log('http_event--->', response.body.errors);
-            //     // if (response.body.errors.length && (response.body.errors as Array<any>).includes((element) => { element.message === 'Expired JWT Token' })) {
+            //     // if (response.body.errors.length && (response.body.errors as Array<any>).includes((element) =>
+            // { element.message === 'Expired JWT Token' })) {
             //     //     console.log('Error refresh token');
             //     //     this.authService.logout().then(() => {
             //     //         this.router.navigate(['/login']).then();
