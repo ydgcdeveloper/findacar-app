@@ -70,17 +70,9 @@
               </ion-content>
             </ng-template>
           </ion-popover>
-          <!-- <ion-popover trigger="open-date-input" show-backdrop="false">
-            <ng-template>
-              <ion-datetime [placeholder]="'edit_profile.birthdate'|translate" [max]="currentYear - 15" locale="sp-SP"
-                value="2007-12-15" name="birthdate" #popoverDatetime presentation="date"
-                (ionChange)="dateValue = formatDate(popoverDatetime.value)"></ion-datetime>
-              <h1>fsdfsdfdf</h1>
-            </ng-template>
-          </ion-popover> -->
         </ion-item>
 
-        <ion-button class="fixed" type="submit">{{'button.save'|translate}}</ion-button>
+        <ion-button class="fixed" [disabled]="!profileForm.valid" type="submit">{{'button.save'|translate}}</ion-button>
       </form>
     </div>
   </div>

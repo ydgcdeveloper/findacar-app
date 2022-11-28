@@ -82,32 +82,32 @@ export class EditProfilePage implements OnInit {
   }
 
   async onSubmit() {
-    // if (this.profileForm.valid) {
+    if (this.profileForm.valid) {
 
-    const profileInput: UpdateProfileInput = {
-      firstName: this.firstName.value,
-      lastName: this.lastName.value,
-      email: this.email.value,
-      phone: this.phone.value,
-      gender: this.gender.value,
-      dateOfBirth: this.dateOfBirth.value,
-    };
+      const profileInput: UpdateProfileInput = {
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        email: this.email.value,
+        phone: this.phone.value,
+        gender: this.gender.value,
+        dateOfBirth: this.dateOfBirth.value,
+      };
 
-    try {
-      await this.commonService.showLoader();
-      await this.userService.updateUserProfile(profileInput).then(async (value) => {
-        if (value) {
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['tabs/profile']);
-          });
-        }
-      });
-    } catch (error) {
-      this.commonService.showErrorMsg(error);
-    } finally {
-      await this.commonService.hideLoader();
+      try {
+        await this.commonService.showLoader();
+        await this.userService.updateUserProfile(profileInput).then(async (value) => {
+          if (value) {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['tabs/profile']);
+            });
+          }
+        });
+      } catch (error) {
+        this.commonService.showErrorMsg(error);
+      } finally {
+        await this.commonService.hideLoader();
+      }
     }
-    // }
   }
 
   validateButton() {
