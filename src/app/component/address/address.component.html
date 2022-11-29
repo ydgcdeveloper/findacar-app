@@ -6,7 +6,7 @@
         <ion-label>
           <ion-grid>
             <ion-row class="my-2 text-90">{{address.name}}</ion-row>
-            <ion-row class="my-2 text-80 gray">{{address.locationData.name}}</ion-row>
+            <ion-row class="my-2 text-80 gray">{{address.locationData?.name}}</ion-row>
           </ion-grid>
         </ion-label>
         <ion-icon slot="end" (click)="showAction(address.id)" class="circle" name="ellipsis-horizontal"></ion-icon>

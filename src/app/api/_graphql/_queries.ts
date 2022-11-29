@@ -45,6 +45,16 @@ export const queries = {
       }
     }
   `,
+  getAddressesByUser: () => gql`
+    query getAddressesByUser{
+      getAddressesByUser{
+      name
+      details
+      locationData
+      selected
+    }
+  }
+  `,
   getDiagnosedPathologies: () => gql`
     query getDiagnosedPathologies(
     $itemsPerPage: Int,

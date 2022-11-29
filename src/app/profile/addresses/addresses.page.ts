@@ -11,7 +11,11 @@ export class AddressesPage implements OnInit {
 
   selected: number;
 
-  constructor(private addressService: AddressService, private router: Router) { }
+  constructor(
+    private addressService: AddressService,
+    private router: Router,
+  )
+  { }
 
   ngOnInit() {
   }

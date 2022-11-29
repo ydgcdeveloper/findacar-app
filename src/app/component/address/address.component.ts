@@ -24,9 +24,13 @@ export class AddressComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit() {
+    this.addressService.getAddressesByUser().then((value) => {
+      console.log(value);
+      this.addresses = value;
+    });
     setTimeout(() => {
       this.getSelectedAddressId();
-      this.getAddresses();
+      // this.getAddresses();
     }, environment.skeletonTime);
   }
 

@@ -1,3 +1,4 @@
+import { AddressRepoService } from './../../repos/address/address-repo.service';
 import { ID } from '../../interfaces/rate.interface';
 import { Injectable } from '@angular/core';
 import { Address } from '../../interfaces/address.interface';
@@ -54,7 +55,7 @@ export class AddressService {
     },
   ];
 
-  constructor() { }
+  constructor(private addressRepo: AddressRepoService) { }
 
   getAddressById(id: ID): Address {
     const addresses = this.getAllAddress();
@@ -69,6 +70,19 @@ export class AddressService {
 
   getAllAddress(): Address[] {
     return this.addresses;
+  }
+
+  async getAddressesByUser(): Promise<Address[]>{
+    try {
+      const userResponse = await this.addressRepo.getAddressesByUser();
+      if (!userResponse.errors) {
+        const addressesByUser = userResponse.data.getAddressesByUser;
+        console.log('Addresses:', addressesByUser);
+        return addressesByUser;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   getSelectedAddressId(): ID | null {
