@@ -48,10 +48,21 @@ export const queries = {
   getAddressesByUser: () => gql`
     query getAddressesByUser{
       getAddressesByUser{
+      id
       name
       details
       locationData
       selected
+    }
+  }
+  `,
+  getAddressById: () => gql`
+    query getAddressById($id: Int!){
+      getAddressById(id: $id){
+        name
+        details
+        locationData
+        selected
     }
   }
   `,

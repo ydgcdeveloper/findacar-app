@@ -26,16 +26,16 @@ export class AddressComponent implements OnInit {
   ngOnInit() {
     this.addressService.getAddressesByUser().then((value) => {
       console.log(value);
-      this.addresses = value;
-    });
-    setTimeout(() => {
       this.getSelectedAddressId();
-      // this.getAddresses();
-    }, environment.skeletonTime);
+      this.addresses = value.sort((a, b) => (a.id as number) - (b.id as number));
+    });
   }
 
   getSelectedAddressId() {
     this.selected = this.addressService.getSelectedAddressId();
+    if(this.selected){
+      this.selectedToUp.emit(this.selected);
+    }
   }
 
   updateSelected() {
@@ -45,7 +45,6 @@ export class AddressComponent implements OnInit {
   getAddresses() {
     this.addresses = this.addressService.getAllAddress();
   }
-
 
   showAction(id: number) {
     this.presentActionSheet(id);

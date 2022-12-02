@@ -16,6 +16,6 @@
     </ion-segment-button>
   </ion-segment>
   <div id="mapId" style="width: 100%; height: 92%"></div>
-  <ion-button class="fixed" *ngIf="!address && showSaveButton">{{'button.set'|translate}}</ion-button>
+  <ion-button class="fixed" (click)="saveEdit()" *ngIf="!address && showSaveButton">{{'button.set'|translate}}</ion-button>
   <ion-button class="fixed" (click)="saveEdit()" *ngIf="address && showSaveButton">{{'button.save'|translate}}</ion-button>
 </ion-content>

@@ -82,6 +82,42 @@ export const mutations = {
       }
   }
   `,
+  addAddress: () => gql`
+    mutation addAddress(
+      $name: String!,
+      $details: String,
+      $locationData: JSONObject,
+      $selected: Boolean,
+    ){
+      addAddress(createAddressInput:{
+        name: $name,
+        details: $details,
+        locationData: $locationData,
+        selected: $selected
+      }){
+        id
+        name
+        details
+        selected
+        locationData
+    }
+  }
+  `,
+  setSelectedAddress: () => gql`
+    mutation setSelectedAddress(
+      $id: Int!
+    ){
+      setSelectedAddress(
+        id: $id
+        ){
+          id
+          name
+          details
+          locationData
+          selected       
+      }
+  }
+  `,
   updatePatientBasicInfo: () => gql`
     mutation updatePatientBasicInfo(
       $id: ID!,

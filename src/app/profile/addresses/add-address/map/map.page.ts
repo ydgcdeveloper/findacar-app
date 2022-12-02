@@ -126,25 +126,25 @@ export class MapPage implements OnInit {
             icon: this.markerIcon,
           }).addTo(this.map);
 
-          this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
-            .then((result: NativeGeocoderResult[]) => {
-              const res = result[0];
-              let phrase = '';
-              if (res.countryName) {
-                phrase += res.countryName;
-              }
-              if (res.administrativeArea) {
-                phrase += `, ${res.administrativeArea}`;
-              }
-              if (res.locality) {
-                phrase += `, ${res.locality}`;
-              }
-              this.place = phrase;
-            })
-            .catch((error: any) => {
-              this.presentToast('error click: ' + error);
-              this.showSaveButton = false;
-            });
+          // this.nativeGeocoder.reverseGeocode(e.latlng.lat, e.latlng.lng, this.options)
+          //   .then((result: NativeGeocoderResult[]) => {
+          //     const res = result[0];
+          //     let phrase = '';
+          //     if (res.countryName) {
+          //       phrase += res.countryName;
+          //     }
+          //     if (res.administrativeArea) {
+          //       phrase += `, ${res.administrativeArea}`;
+          //     }
+          //     if (res.locality) {
+          //       phrase += `, ${res.locality}`;
+          //     }
+          //     this.place = phrase;
+          //   })
+          //   .catch((error: any) => {
+          //     this.presentToast('error click: ' + error);
+          //     this.showSaveButton = false;
+          //   });
 
           this.showSaveButton = true;
           this.markerLat = e.latlng.lat;
@@ -199,9 +199,9 @@ export class MapPage implements OnInit {
   saveEdit() {
 
     const address = {
-      id: this.address.id,
-      name: this.address.name,
-      details: this.address.details,
+      id: this.address?.id,
+      name: this.address?.name,
+      details: this.address?.details,
       locationData: {
         name: this.markerName,
         latitude: this.markerLat,

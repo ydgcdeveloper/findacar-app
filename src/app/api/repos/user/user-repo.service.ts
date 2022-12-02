@@ -24,7 +24,6 @@ export class UserRepoService {
   }
 
   async getUser(id: number): Promise<any> {
-    console.log(id);
     return await firstValueFrom(
       this.apollo.query({
         query: queries.getUserById(),

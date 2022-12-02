@@ -26,8 +26,17 @@ export class AddressesPage implements OnInit {
   }
 
   saveSelected() {
-    this.addressService.setSelectedAddress(this.selected);
-    this.router.navigate(['tabs/profile']);
+    console.log(this.selected);
+    this.addressService.setSelectedAddress(this.selected as number).then((value) => {
+      if(value){
+        this.router.navigate(['tabs/profile']);
+      }
+    });
+  }
+
+  checkSameSelected(): boolean{
+    const currentSelected = this.addressService.getSelectedAddressId();
+    return currentSelected as number === this.selected;
   }
 
   ionViewDidEnter(){

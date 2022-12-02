@@ -16,6 +16,6 @@
 
   <ion-content class="ion-padding">
     <app-address (selectedToUp)="setSelected($event)"></app-address>
-    <ion-button class="fixed" (click)="saveSelected()">{{'button.select'|translate}}</ion-button>
+    <ion-button class="fixed" [disabled]="checkSameSelected()" (click)="saveSelected()">{{'button.select'|translate}}</ion-button>
   </ion-content>
 </ion-content>

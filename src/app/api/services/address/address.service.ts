@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+import { AddressInput } from './../../models/address.input';
 import { AddressRepoService } from './../../repos/address/address-repo.service';
 import { ID } from '../../interfaces/rate.interface';
 import { Injectable } from '@angular/core';
@@ -8,76 +10,32 @@ import { Address } from '../../interfaces/address.interface';
 })
 export class AddressService {
 
-  private addresses: Address[] = [
-    {
-      id: 1,
-      name: 'My first Address',
-      details: 'Alli cerca del rio',
-      locationData: {
-        name: 'Cuba, Holguin, Holguin',
-        latitude: 23.5634826412,
-        longitude: 78.2316094,
-      },
-      selected: false
-    },
-    {
-      id: 2,
-      name: 'My second Address',
-      details: 'Alli cerca del rio 2',
-      locationData: {
-        name: 'Cuba, Granma, Bayamo',
-        latitude: 15.5634826412,
-        longitude: 56.2316094,
-      },
-      selected: true,
-    },
-    {
-      id: 3,
-      name: 'My third Address',
-      details: 'Alli cerca del rio 3',
-      locationData: {
-        name: 'Cuba, Matanzas, Jovellanos',
-        latitude: 38.5634826412,
-        longitude: 8.2316094,
-      },
-      selected: false
-    },
-    {
-      id: 4,
-      name: 'My fourth Address',
-      details: 'Alli cerca del rio 4',
-      locationData: {
-        name: 'Cuba, Las Tunas, Las Tunas',
-        latitude: 23.5634826412,
-        longitude: 78.2316094,
-      },
-      selected: false
-    },
-  ];
+  public addresses: Address[] = [];
 
   constructor(private addressRepo: AddressRepoService) { }
 
-  getAddressById(id: ID): Address {
-    const addresses = this.getAllAddress();
-    const foundAddress = addresses.filter((address) => {
-      const add = address;
-      if (add.id as string | number === id) {
-        return add;
+  async getAddressById(id: number): Promise<Address> {
+    try {
+      const addressResponse = await this.addressRepo.getAddressById(id);
+      if (!addressResponse.errors) {
+        const address = addressResponse.data.getAddressById;
+        return address;
       }
-    });
-    return foundAddress[0];
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   getAllAddress(): Address[] {
     return this.addresses;
   }
 
-  async getAddressesByUser(): Promise<Address[]>{
+  async getAddressesByUser(): Promise<Address[]> {
     try {
-      const userResponse = await this.addressRepo.getAddressesByUser();
-      if (!userResponse.errors) {
-        const addressesByUser = userResponse.data.getAddressesByUser;
-        console.log('Addresses:', addressesByUser);
+      const addressResponse = await this.addressRepo.getAddressesByUser();
+      if (!addressResponse.errors) {
+        const addressesByUser = addressResponse.data.getAddressesByUser;
+        this.addresses = addressesByUser;
         return addressesByUser;
       }
     } catch (error) {
@@ -85,15 +43,32 @@ export class AddressService {
     }
   }
 
-  getSelectedAddressId(): ID | null {
-    const addresses = this.getAllAddress();
-    const selected = addresses.filter((address) => {
-      const add = address;
-      if (add.selected) {
-        return add;
-      }
+  addAddress(addressInput: AddressInput) {
+    return new Promise((resolve, reject) => {
+      from(this.addressRepo.addAddress(addressInput)).subscribe(
+        {
+          next: (updatedData) => {
+            console.log(updatedData);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error);
+          }
+        }
+      );
     });
-    return selected ? selected[0]?.id : null;
+  }
+
+  getSelectedAddressId(): ID {
+    const addresses = this.getAllAddress();
+    if (!addresses.length) {
+      return -1;
+    }
+    return addresses.find((address) => {
+      if (address.selected) {
+        return address;
+      }
+    })?.id;
   }
 
   getSelectedAddress(): Address | null {
@@ -108,23 +83,36 @@ export class AddressService {
   }
 
   setSelectedAddress(id: number) {
-    const addresses = this.getAllAddress();
-    const selected = addresses.map((address) => {
-      const add = address;
-      if (add.id as string | number === id) {
-        address.selected = true;
-      } else {
-        address.selected = false;
-      }
-      return address;
+    return new Promise((resolve, reject) => {
+      from(this.addressRepo.setSelectedAddress(id)).subscribe(
+        {
+          next: (selectedAddress) => {
+            console.log(selectedAddress);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error);
+          }
+        }
+      );
     });
+    // const addresses = this.getAllAddress();
+    // const selected = addresses.map((address) => {
+    //   const add = address;
+    //   if (add.id as string | number === id) {
+    //     address.selected = true;
+    //   } else {
+    //     address.selected = false;
+    //   }
+    //   return address;
+    // });
 
     //save selected ones to the server
   }
 
-  addAddress(address: Address) {
-    this.addresses.push(address);
-  }
+  // addAddress(address: Address) {
+  //   this.addresses.push(address);
+  // }
 
   saveAddress(address: Address) {
     console.log(address);

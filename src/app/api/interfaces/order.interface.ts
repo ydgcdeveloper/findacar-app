@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { ID } from './rate.interface';
 import { Place } from './request.interface';
 import { Service } from './service.interface';
@@ -5,13 +6,15 @@ import { User } from './user.interface';
 
 export interface Order {
     id: ID;
-    service: Service;
-    price: string;
-    coin: Coin;
-    date: Date;
     client: User;
+    service: Service;
+    date: Date;
+    dateTime: Time;
+    price: number;
+    coin: Coin;
     from: Place;
     to: Place;
+    status: OrderStatus;
 }
 
 export enum Coin {

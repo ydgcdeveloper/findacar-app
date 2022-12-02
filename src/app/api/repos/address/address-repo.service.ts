@@ -1,5 +1,7 @@
+import { mutations } from './../../_graphql/_mutations';
+import { AddressInput } from './../../models/address.input';
 import { queries } from 'src/app/api/_graphql/_queries';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
@@ -17,5 +19,33 @@ export class AddressRepoService {
         fetchPolicy: 'no-cache',
       })
     );
+  }
+
+  async getAddressById(id: number): Promise<any> {
+    return await firstValueFrom(
+      this.apollo.query({
+        query: queries.getAddressById(),
+        variables: {
+          id
+        },
+        fetchPolicy: 'no-cache',
+      })
+    );
+  }
+
+  addAddress(addressInput: AddressInput): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.addAddress(),
+      variables: addressInput
+    });
+  }
+
+  setSelectedAddress(id: number): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.setSelectedAddress(),
+      variables: {
+        id: parseInt((id as unknown) as string, 10)
+      }
+    });
   }
 }
