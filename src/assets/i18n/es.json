@@ -11,7 +11,8 @@
             "info": "Información",
             "warning": "Advertencia",
             "success": "Éxito"
-        }
+        },
+        "now": "Ahora"
     },
     "home": {
         "all_vehicles_types": "Todos los transportes",
@@ -64,7 +65,8 @@
         "create": "Crear",
         "share": "Compartir",
         "send": "Enviar",
-        "done": "Hecho"
+        "done": "Hecho",
+        "add": "Añadir"
     },
     "settings": {
         "language": "Idioma",
@@ -121,7 +123,10 @@
         "tag_length": "Debe tener al menos dos caracteres",
         "pickup_address": "Selecciona tu dirección de recogida",
         "same_address": "Las direcciones deben ser diferentes",
-        "destination_address": "Selecciona tu dirección de destino"
+        "destination_address": "Selecciona tu dirección de destino",
+        "wrong_date": "Fecha anterior a la actual",
+        "add_address_warning": "Debes primero tener al menos 2 direcciones en tu perfil",
+        "today": "Hoy"
     },
     "favs": {
         "header": "Mis favoritos"

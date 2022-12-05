@@ -1,10 +1,9 @@
+import { AddressService } from './../api/services/address/address.service';
 import { ViewWillEnter } from '@ionic/angular';
-import { AuthRepoService } from './../api/repos/auth/auth-repo.service';
 import { UserService } from './../api/services/user/user.service';
 import { CategoryService } from './../api/services/category/category.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { FilterService } from 'src/app/api/services/filter/filter.service';
 import { environment } from 'src/environments/environment';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { Category } from '../api/interfaces/category.interface';
@@ -31,7 +30,8 @@ export class HomePage implements OnInit, ViewWillEnter {
     private categoryService: CategoryService,
     private serviceService: ServiceService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private addressService: AddressService
     ) {}
 
   async ngOnInit() {
@@ -39,6 +39,7 @@ export class HomePage implements OnInit, ViewWillEnter {
   }
 
   async ionViewWillEnter() {
+    this.addressService.getAddressesByUser();
     const userId = parseInt(this.authService.getUserId(), 10);
     await this.userService.getUser(userId);
     console.log('User in home: ', this.userService.user);

@@ -16,6 +16,15 @@ export const setLanguage = (langName: LangTypes): void => {
   localStorage.setItem(environment.langVariableName || 'app_language', langName);
 };
 
+export const getLocale = () => {
+  switch (LANGUAGE()) {
+    case 'es':
+      return 'es-Es';
+    case 'en':
+      return 'en-En';
+  }
+};
+
 export enum LangTypes {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Spanish = 'es',

@@ -16,17 +16,31 @@ export class OrderPage implements OnInit {
   type: string;
   fragment: string;
 
-  constructor(private orderServices: OrderService, private requestService: RequestService, private activated: ActivatedRoute) { }
+  constructor(
+    private orderServices: OrderService,
+    private requestService: RequestService,
+    private activated: ActivatedRoute
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.fragment = 'current';
     this.getOrders();
-    this.getRequests();
+    // this.getRequests();
+    await this.requestService.getRequestsByUser().then((value) => {
+      if(value){
+        this.requests = (value as unknown) as Array<Request>;
+        this.requestService.requestsSubject.subscribe((data) => {
+          if(data){
+            this.requests = (this.requestService.requests as unknown) as Array<Request>;
+          };
+        });
+      }
+    });
   }
 
   ionViewDidEnter() {
-    const fragment = this.activated.snapshot.fragment;
-    this.fragment = fragment as string === 'previous' ? fragment : this.fragment;
+    const fragment = this.activated.snapshot.fragment as string;
+    this.fragment = fragment === 'previous' || fragment === 'request' ? fragment : this.fragment;
   }
 
   getOrders() {
@@ -34,11 +48,11 @@ export class OrderPage implements OnInit {
   }
 
   getRequests() {
-    this.requests = this.requestService.getAllRquests();
+    // this.requests = this.requestService.getAllRquests();
   }
 
   segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
+    // console.log('Segment changed', ev);
   }
 
 }

@@ -100,8 +100,8 @@ export const mutations = {
         details
         selected
         locationData
+      }
     }
-  }
   `,
   setSelectedAddress: () => gql`
     mutation setSelectedAddress(
@@ -116,7 +116,47 @@ export const mutations = {
           locationData
           selected       
       }
+    }
+  `,
+  addRequest: () => gql`
+    mutation addRequest(
+      $tag: String!,
+      $date: DateTime!,
+      $datetime: JSONObject!,
+      $ableToPay: Float!,
+      $price: Float,
+      $coin: String!,
+      $from: JSONObject!,
+      $to: JSONObject!,
+      $status: String!
+  ){
+    addRequest(createRequestInput:{
+      tag: $tag,
+      date: $date,
+      datetime: $datetime,
+      ableToPay: $ableToPay,
+      price: $price,
+      coin: $coin,
+      from: $from,
+      to: $to,
+      status: $status
+    }){
+      tag
+      user{
+        email
+      }
+    }
   }
+  `,
+  deleteRequest: () => gql`
+    mutation deleteRequest(
+      $id: Int!
+    )
+    {
+      deleteRequest(id: $id){
+        id
+      }
+    }
   `,
   updatePatientBasicInfo: () => gql`
     mutation updatePatientBasicInfo(

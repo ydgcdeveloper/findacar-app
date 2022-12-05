@@ -56,6 +56,22 @@ export const queries = {
     }
   }
   `,
+  getRequestsByUser: () => gql`
+    query getRequestsByUser{
+      getRequestsByUser{
+        id
+        tag
+        date
+        datetime
+        ableToPay
+        price
+        coin
+        from
+        to
+        status
+    }
+  }
+  `,
   getAddressById: () => gql`
     query getAddressById($id: Int!){
       getAddressById(id: $id){

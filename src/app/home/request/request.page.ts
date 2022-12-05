@@ -1,13 +1,22 @@
+import { getLocale } from './../../services/language/language.service';
+import { Place } from './../../api/interfaces/request.interface';
+import { CommonService } from './../../services/common/common.service';
+import { RequestService } from './../../api/services/request/request.service';
+import { RequestInput } from './../../api/models/request.input';
+import { TranslateService } from '@ngx-translate/core';
 import { Address } from '../../api/interfaces/address.interface';
 import { AddressService } from '../../api/services/address/address.service';
 import { ToastColors, ToastService, ToastPositions } from '../../api/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PickerColumn, PickerColumnOption, PickerController,
-  PickerOptions, ViewWillEnter, AlertController, NavController } from '@ionic/angular';
+import {
+  PickerColumn, PickerColumnOption, PickerController,
+  PickerOptions, ViewWillEnter, AlertController, NavController
+} from '@ionic/angular';
 import { add } from 'date-fns';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Coins } from 'src/app/data/coins';
+import { RequestStatus } from 'src/app/api/interfaces/request.interface';
 
 
 
@@ -40,13 +49,17 @@ export class RequestPage implements OnInit, ViewWillEnter {
     ]
   ];
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private pickerController: PickerController,
     private toast: ToastService,
     private formBuilder: FormBuilder,
+    private commonService: CommonService,
     private addressService: AddressService,
     private alertController: AlertController,
     private navController: NavController,
+    private translate: TranslateService,
+    private requestService: RequestService,
   ) {
     this.getAddresses();
   }
@@ -78,9 +91,11 @@ export class RequestPage implements OnInit, ViewWillEnter {
   async ngOnInit() {
     if (this.addresses.length > 2) {
       this.setPickerData();
-      this.timeText = 'Ahora';
+      this.timeText = this.translate.instant('common.now');
       this.requestForm = this.formBuilder.group({
-        tag: [`Solicitud-${this.makeid(6)}`, [Validators.required, Validators.maxLength(24), Validators.minLength(2)]],
+        tag: [`${this.translate.instant('order.request')}-${this.makeid(6)}`,
+        [Validators.required, Validators.maxLength(24), Validators.minLength(2)]
+        ],
         ableToPay: [0, [Validators.pattern('[0-9]*')]],
         coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
         sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
@@ -96,23 +111,21 @@ export class RequestPage implements OnInit, ViewWillEnter {
     }
   }
 
-
-
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Alert!',
       backdropDismiss: false,
-      message: 'Debes primero tener al menos 2 direcciones en tu agenda',
+      message: this.translate.instant('request.add_address_warning'),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.translate.instant('button.cancel'),
           role: 'cancel',
           handler: async () => {
             await this.navController.navigateRoot('tabs/home');
           },
         },
         {
-          text: 'Añadir',
+          text: this.translate.instant('button.add'),
           role: 'confirm',
           handler: async () => {
             await this.navController.navigateRoot('addresses');
@@ -123,12 +136,6 @@ export class RequestPage implements OnInit, ViewWillEnter {
 
     await alert.present();
   }
-
-  createRequest() {
-
-  }
-
-
 
   goToHome() {
     this.router.navigate(['tabs/home']);
@@ -149,7 +156,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
 
     this.days.push({
       realdate: new Date().toDateString(),
-      dateview: 'Hoy'
+      dateview: this.translate.instant('request.today')
     });
     for (let index = 1; index < 30; index++) {
       const day = add(new Date(), {
@@ -158,7 +165,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
 
       const data = {
         realdate: day.toDateString(),
-        dateview: new Intl.DateTimeFormat('es-Es', options).format(day)
+        dateview: new Intl.DateTimeFormat(getLocale(), options).format(day)
       };
       this.days.push(data);
     }
@@ -182,29 +189,29 @@ export class RequestPage implements OnInit, ViewWillEnter {
       cssClass: 'date-picker',
       buttons: [
         {
-          text: 'Ahora',
+          text: this.translate.instant('common.now'),
           role: 'cancel',
           cssClass: 'rounded',
           handler: () => {
             this.date = new Date(Date.now());
-            this.timeText = 'Ahora';
+            this.timeText = this.translate.instant('common.now');
           },
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('button.confirm'),
           handler: (value) => {
             const date = new Date(this.gadgets[0][parseInt(value.col0.value, 10)].realdate);
             const hourVal = parseInt(this.gadgets[1][parseInt(value.col1.value, 10)], 10);
             date.setHours(this.gadgets[3][parseInt(value.col3.value, 10)] as string === 'AM' ?
-            hourVal as number === 12 ? 0 : hourVal : hourVal as number === 12 ? 12 : hourVal + 12);
+              hourVal as number === 12 ? 0 : hourVal : hourVal as number === 12 ? 12 : hourVal + 12);
             date.setMinutes(this.gadgets[2][parseInt(value.col2.value, 10)]);
             const dateNow = new Date(Date.now());
             if (+dateNow > +date) {
               this.date = dateNow;
-              this.timeText = 'Ahora';
+              this.timeText = this.translate.instant('common.now');
               this.toast.showToast({
                 header: 'INFO',
-                message: 'Fecha anterior a la actual',
+                message: this.translate.instant('request.wrong_date'),
                 color: ToastColors.WARNING,
                 position: ToastPositions.TOP,
                 icon: 'information-circle'
@@ -213,7 +220,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
               const optionsDate: Intl.DateTimeFormatOptions = {
                 weekday: 'long', month: 'short', day: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit'
               };
-              this.timeText = new Intl.DateTimeFormat('es-Es', optionsDate).format(date);
+              this.date = date;
+              this.timeText = new Intl.DateTimeFormat(getLocale(), optionsDate).format(date);
               this.timeText = this.timeText.charAt(0).toUpperCase() + this.timeText.slice(1);
             }
           },
@@ -280,6 +288,42 @@ export class RequestPage implements OnInit, ViewWillEnter {
     return 0;
   }
 
+  async onSubmit() {
+    if (this.requestForm.valid) {
+
+      if(this.timeText === this.translate.instant('common.now')){
+        this.date = new Date(Date.now());
+      }
+
+      const requestInput: RequestInput = {
+        tag: this.tag.value,
+        from: this.addressById(this.sinceAddress.value).locationData as Place,
+        to: this.addressById(this.destinationAddress.value).locationData as Place,
+        ableToPay: this.ableToPay.value,
+        coin: this.coin.value,
+        date: this.date,
+        datetime: {
+          hours: this.date.getHours(),
+          minutes: this.date.getMinutes(),
+        },
+        status: RequestStatus.STARTED,
+      };
+
+      try {
+        await this.commonService.showLoader();
+        await this.requestService.addRequest(requestInput).then(async (value) => {
+          if (value) {
+            this.router.navigate(['tabs/order'], { fragment: 'request' });
+          }
+        });
+      } catch (error) {
+        this.commonService.showErrorMsg(error);
+      } finally {
+        await this.commonService.hideLoader();
+      }
+    }
+  }
+
   private getRandomAddress(min = 0, max = this.addresses.length - 1): number {
     if (this.addresses.length === 0) {
       return 0;
@@ -291,6 +335,12 @@ export class RequestPage implements OnInit, ViewWillEnter {
       console.log(randomGenerated);
     } while (selectedAddressId === this.addresses[randomGenerated].id);
     return randomGenerated;
+  }
+
+  private addressById(id: number): Address {
+    return this.addresses.find((address) => {
+      if (address.id === id) { return address; }
+    });
   }
 
 }

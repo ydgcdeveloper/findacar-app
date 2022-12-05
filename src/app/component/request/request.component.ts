@@ -1,3 +1,4 @@
+import { RequestService } from './../../api/services/request/request.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
@@ -9,11 +10,20 @@ import { Request } from 'src/app/api/interfaces/request.interface';
   styleUrls: ['./request.component.scss'],
 })
 export class RequestComponent implements OnInit {
-   @Input() request: Request;
+  @Input() request: Request;
 
-  constructor(private alertController: AlertController, private translate: TranslateService) { }
+  constructor(
+    private alertController: AlertController,
+    private translate: TranslateService,
+    private requestService: RequestService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const requestDate = new Date(this.request.date);
+    requestDate.setHours(this.request?.datetime.hours);
+    requestDate.setMinutes(this.request?.datetime.minutes);
+    this.request.date = requestDate;
+  }
 
   async presentAlertConfirmDelete(id: number) {
     const alert = await this.alertController.create({
@@ -26,7 +36,7 @@ export class RequestComponent implements OnInit {
           cssClass: 'danger',
           id: 'delete-button',
           handler: () => {
-            console.log('Confirm Delete');
+            this.requestService.deleteRequest(this.request.id);
           }
         },
         {
@@ -40,5 +50,4 @@ export class RequestComponent implements OnInit {
 
     await alert.present();
   }
-
 }
