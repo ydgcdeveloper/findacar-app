@@ -82,6 +82,17 @@ export const queries = {
     }
   }
   `,
+  getCategories: () => gql`
+    query getCategories{
+      getCategories{
+        id
+        name
+        color
+        code
+        photo
+    }
+  }
+  `,
   getDiagnosedPathologies: () => gql`
     query getDiagnosedPathologies(
     $itemsPerPage: Int,

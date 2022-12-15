@@ -50,8 +50,8 @@ export class HomePage implements OnInit, ViewWillEnter {
      }, environment.skeletonTime);
   }
 
-  getCategories(){
-    this.categories = this.categoryService.getCategories();
+  async   getCategories(){
+    this.categories = await this.categoryService.getCategories();
   }
 
   getServices() {

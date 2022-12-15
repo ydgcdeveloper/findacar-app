@@ -59,14 +59,14 @@ export class FiltersPage implements OnInit {
   }
 
   async ngOnInit() {
+
     this.user = this.userService.user;
-    console.log('User in filter: ', this.userService.user);
-    this.getCategories();
+    await this.getCategories();
+    this.show = false;
+    // setTimeout(() => {
 
-    setTimeout(() => {
-
-      this.show = true;
-    }, environment.skeletonTime);
+    //   this.show = true;
+    // }, environment.skeletonTime);
 
     // this.filterData = await this.filterService.getFilter();
     this.filterData = this.user?.profile?.filter;
@@ -89,6 +89,7 @@ export class FiltersPage implements OnInit {
         upper: this.filterData?.priceRange.upper || this.priceRangeMax }, [Validators.required]],
       category: this.categoryFormArray
     });
+    this.show = true;
   }
 
 
@@ -113,8 +114,8 @@ export class FiltersPage implements OnInit {
     return this.filterForm.controls.category as FormArray;
   }
 
-  getCategories() {
-    this.categories = this.categoryService.getCategories();
+  async getCategories() {
+    this.categories = await this.categoryService.getCategories();
   }
 
   public customFormatter(value: number) {
