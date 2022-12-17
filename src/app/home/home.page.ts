@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { Category } from '../api/interfaces/category.interface';
 import { Service } from '../api/interfaces/service.interface';
-import { ServiceService } from '../api/services/service/service.service';
+import { TransportService } from '../api/services/transport/transport.service';
 import { AuthService } from '../api/services/auth/auth.service';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom]);
@@ -28,11 +28,11 @@ export class HomePage implements OnInit, ViewWillEnter {
   constructor(
     private router: Router,
     private categoryService: CategoryService,
-    private serviceService: ServiceService,
+    private transportService: TransportService,
     private userService: UserService,
     private authService: AuthService,
     private addressService: AddressService
-    ) {}
+  ) { }
 
   async ngOnInit() {
 
@@ -43,24 +43,24 @@ export class HomePage implements OnInit, ViewWillEnter {
     const userId = parseInt(this.authService.getUserId(), 10);
     await this.userService.getUser(userId);
     console.log('User in home: ', this.userService.user);
-    setTimeout(() => {
-     this.getCategories();
-     this.getServices();
+    // setTimeout(() => {
+    this.getCategories();
+    await this.getServices();
     //  this.getUsersV1();
-     }, environment.skeletonTime);
+    //  }, environment.skeletonTime);
   }
 
-  async   getCategories(){
+  async getCategories() {
     this.categories = await this.categoryService.getCategories();
   }
 
-  getServices() {
-    this.services = this.serviceService.getAllServices();
+  async getServices() {
+    this.services = await this.transportService.getTransportServices();
   }
 
-  getUsersV1(){
-    this.userService.getUsersV1().then((value) =>{
-      if(value){
+  getUsersV1() {
+    this.userService.getUsersV1().then((value) => {
+      if (value) {
       }
     });
   }
@@ -71,7 +71,7 @@ export class HomePage implements OnInit, ViewWillEnter {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  yeah(){
+  yeah() {
     this.router.navigate(['tabs/search']);
   }
 }

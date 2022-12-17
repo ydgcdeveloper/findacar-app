@@ -93,6 +93,22 @@ export const queries = {
     }
   }
   `,
+  getTransportServices: () => gql`
+    query getTransportServices{
+      getTransportServices{
+        name
+        status
+        photo
+        rating
+        address
+        pickupTime
+        category{
+          id
+          name
+        }
+      }
+    }
+  `,
   getDiagnosedPathologies: () => gql`
     query getDiagnosedPathologies(
     $itemsPerPage: Int,

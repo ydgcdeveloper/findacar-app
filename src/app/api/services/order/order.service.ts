@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Coin, Order } from '../../interfaces/order.interface';
-import { ServiceService } from '../service/service.service';
+import { TransportService } from '../transport/transport.service';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -65,7 +65,7 @@ export class OrderService {
     // }
   ];
 
-  constructor(private userService: UserService, private serviceService: ServiceService) { }
+  constructor(private userService: UserService, private transportService: TransportService) { }
 
   getAllOrders() {
     return this.orders;

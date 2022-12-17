@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Service, ServiceStatus } from 'src/app/api/interfaces/service.interface';
-import { ServiceService } from 'src/app/api/services/service/service.service';
+import { TransportService } from 'src/app/api/services/transport/transport.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ServiceComponent implements OnInit {
   @Input() service: Service = null;
 
-  constructor(private _service: ServiceService) {}
+  constructor(private transportService: TransportService) {}
 
   ngOnInit() {
     // setTimeout(() => {

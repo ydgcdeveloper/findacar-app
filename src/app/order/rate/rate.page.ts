@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ID } from '../../api/interfaces/rate.interface';
-import { ServiceService } from 'src/app/api/services/service/service.service';
+import { TransportService } from 'src/app/api/services/transport/transport.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RateOption } from '../../api/interfaces/rate.interface';
@@ -23,7 +23,7 @@ export class RatePage implements OnInit {
   constructor(
     private router: Router,
     private rateService: RateService,
-    private serviceService: ServiceService,
+    private transportService: TransportService,
     private activated: ActivatedRoute,
     private formBuilder: FormBuilder
   ) { }
@@ -88,7 +88,7 @@ export class RatePage implements OnInit {
   }
 
   setService(id: number) {
-    this.service = this.serviceService.getServiceById(id);
+    this.service = this.transportService.getServiceById(id);
   }
 
   setRateOptions() {

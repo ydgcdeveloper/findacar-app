@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Service } from '../../api/interfaces/service.interface';
-import { ServiceService } from '../../api/services/service/service.service';
+import { TransportService } from '../../api/services/transport/transport.service';
 
 @Component({
   selector: 'app-favorites',
@@ -11,7 +11,7 @@ import { ServiceService } from '../../api/services/service/service.service';
 export class FavoritesPage implements OnInit {
   public services: Service[] = null;
 
-  constructor(private service: ServiceService) {}
+  constructor(private transportService: TransportService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -19,8 +19,8 @@ export class FavoritesPage implements OnInit {
     }, environment.skeletonTime);
   }
 
-  getServices() {
-    this.services = this.service.getAllServices();
+  async getServices() {
+    this.services = await this.transportService.getTransportServices();
   }
 
 }
