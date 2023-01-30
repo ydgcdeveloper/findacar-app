@@ -132,7 +132,9 @@
         "header": "My favorites"
     },
     "service": {
-        "pickup_time": "Pick up time"
+        "pickup_time": "Pick up time",
+        "available": "Available",
+        "not_available": "Not available"
     },
     "share": {
         "invite_text": "Share this code and invite your friends or family to join our app",

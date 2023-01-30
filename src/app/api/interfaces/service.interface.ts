@@ -5,8 +5,8 @@ export interface Service {
     name: string;
     status: ServiceStatus;
     address: string;
-    schedule: string;
-    rate: number;
+    schedule: JSON;
+    rating: number;
     photo: string;
     pickupTime: string;
 }

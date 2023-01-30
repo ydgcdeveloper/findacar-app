@@ -132,7 +132,9 @@
         "header": "Mis favoritos"
     },
     "service": {
-        "pickup_time": "Tiempo de recogida"
+        "pickup_time": "Tiempo de recogida",
+        "available": "Disponible",
+        "not_available": "No disponible"
     },
     "share": {
         "invite_text": "Comparte este código e invita a tus amigos o familiares a que se unan a muestra app",

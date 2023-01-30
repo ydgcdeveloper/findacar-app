@@ -1,27 +1,28 @@
-    <div class="service-photo">
-      <ion-img [src]="service.photo"></ion-img>
-    </div>
-    <div class="floating">
-      <ion-icon name="heart-sharp" (click)="yeah()" class="float-heart"></ion-icon>
-    </div>
-    <div class="service-data">
-      <ion-text class="service-name">{{service.name}}</ion-text>
-      <ion-grid>
-        <ion-row class="service-row">
-          <div class="service-rate">
-            <ion-text class="darker">
-              {{service.rate}}
-              <ion-icon name="star-sharp" class="golden"></ion-icon>
-            </ion-text>
-          </div>
-          <div class="service-pick darker ml-2">
-            {{'service.pickup_time'|translate}} ~ {{service.pickupTime}}
-          </div>
-        </ion-row>
-      </ion-grid>
-      <div class="service-status">
-        <ion-text color="{{service.status === 'NO_DISPONIBLE' ? 'danger' : 'success' }}">
-          {{service.status === 'NO_DISPONIBLE' ? 'NO DISPONIBLE' : 'DISPONIBLE'}}
+<div class="service-photo">
+  <ion-img [src]="service.photo"></ion-img>
+</div>
+<div class="floating">
+  <ion-icon name="heart-sharp" (click)="yeah()" class="float-heart"></ion-icon>
+</div>
+<div class="service-data">
+  <ion-text class="service-name">{{service.name}}</ion-text>
+  <ion-grid>
+    <ion-row class="service-row">
+      <div class="service-rate">
+        <ion-text class="darker">
+          {{service.rating}}
+          <ion-icon name="star-sharp" class="golden"></ion-icon>
         </ion-text>
       </div>
-    </div>
+      <div class="service-pick darker ml-2">
+        {{'service.pickup_time'|translate}} ~ {{service.pickupTime}}
+      </div>
+    </ion-row>
+  </ion-grid>
+  <div class="service-status">
+    <ion-text color="{{ !availability ? 'danger' : 'success' }}">
+      <ng-container *ngIf="!availability">{{'service.not_available'|translate}}</ng-container>
+      <ng-container *ngIf="availability">{{'service.available'|translate}}</ng-container>
+    </ion-text>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Injectable } from '@angular/core';
 import { Filter, SortByTypes } from '../../interfaces/filter';
 
@@ -16,10 +17,12 @@ export class FilterService {
     categories: [1, 3]
   };
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   getFilter() {
-    return this.filter;
+    return this.userService.filter;
   }
 
   saveFilter(filter: Filter): void {

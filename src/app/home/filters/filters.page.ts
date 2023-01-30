@@ -2,11 +2,9 @@ import { Router } from '@angular/router';
 import { CommonService } from './../../services/common/common.service';
 import { FilterInput } from './../../api/models/filter.input';
 import { UserService } from './../../api/services/user/user.service';
-import { NavController } from '@ionic/angular';
 import { CategoryService } from './../../api/services/category/category.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Category } from '../../api/interfaces/category.interface';
 import { FilterService } from '../../api/services/filter/filter.service';
 import { Filter, SortByTypes } from 'src/app/api/interfaces/filter';
@@ -37,7 +35,6 @@ export class FiltersPage implements OnInit {
     private formBuilder: FormBuilder,
     private filterService: FilterService,
     private commonService: CommonService,
-    private navController: NavController,
     private router: Router,
   ) { }
 
@@ -63,10 +60,6 @@ export class FiltersPage implements OnInit {
     this.user = this.userService.user;
     await this.getCategories();
     this.show = false;
-    // setTimeout(() => {
-
-    //   this.show = true;
-    // }, environment.skeletonTime);
 
     // this.filterData = await this.filterService.getFilter();
     this.filterData = this.user?.profile?.filter;

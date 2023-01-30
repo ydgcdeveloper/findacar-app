@@ -36,6 +36,10 @@ export class UserService {
     return this.loggedUser.value;
   }
 
+  get filter(): Observable<any>{
+    return this.loggedUser.value?.profile?.filter;
+  }
+
   async getUser(id: number): Promise<any> {
     try {
       const userResponse = await this.userRepo.getUser(id);

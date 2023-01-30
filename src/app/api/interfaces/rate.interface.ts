@@ -1,3 +1,4 @@
+import { SortByTypes } from './filter';
 export interface RateOption {
     id: ID;
     description: string;

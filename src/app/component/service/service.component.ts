@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Service, ServiceStatus } from 'src/app/api/interfaces/service.interface';
-import { TransportService } from 'src/app/api/services/transport/transport.service';
-import { environment } from 'src/environments/environment';
+import { Service } from 'src/app/api/interfaces/service.interface';
+import { getAvailability } from 'src/app/util/common';
 
 @Component({
   selector: 'app-service',
@@ -10,21 +9,34 @@ import { environment } from 'src/environments/environment';
 })
 export class ServiceComponent implements OnInit {
   @Input() service: Service = null;
-
-  constructor(private transportService: TransportService) {}
+  availability = null;
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.getServices()
-    // }, environment.skeleton_time)
+    this.setAvailability();
   }
 
-  // getServices() {
-  //   return this.services = this._service.getAllServices();
-  // }
+  setAvailability() {
+    // const currentDate = new Date();
+    // const optionsDate: Intl.DateTimeFormatOptions = {
+    //   weekday: 'short'
+    // };
+    // const locale = new Intl.Locale('en-US');
+    // // eslint-disable-next-line @typescript-eslint/naming-convention
+    // const { Days, Time } = JSON.parse(JSON.stringify(this.service.schedule));
+    // const initialTime = set(new Date(), {
+    //   hours: (Time as string).split('-')[0].split(':')[0],
+    //   minutes: (Time as string).split('-')[0].split(':')[1],
+    // });
+    // const finalTime = set(new Date(), {
+    //   hours: (Time as string).split('-')[1].split(':')[0],
+    //   minutes: (Time as string).split('-')[1].split(':')[1],
+    // });
+    // this.availability = (Days as [string]).includes(currentDate.toLocaleString(locale, optionsDate))
+    //   && (isAfter(new Date(), initialTime) && isBefore(new Date(), finalTime));
+    this.availability = getAvailability(this.service);
+  }
 
   yeah() {
     console.log(this.service);
   }
-
 }
