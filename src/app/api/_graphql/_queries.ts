@@ -101,6 +101,7 @@ export const queries = {
         photo
         rating
         address
+        schedule
         pickupTime
         category{
           id
