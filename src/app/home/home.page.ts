@@ -40,7 +40,7 @@ export class HomePage implements OnInit, ViewWillEnter {
     private addressService: AddressService
   ) { }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
 
   }
 
