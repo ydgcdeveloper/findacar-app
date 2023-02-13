@@ -3,6 +3,7 @@ export interface Address {
     id: ID;
     name: string;
     details: string;
+    description: string;
     locationData: {
         name: string;
         latitude: number;

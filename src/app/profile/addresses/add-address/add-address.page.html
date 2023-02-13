@@ -13,7 +13,7 @@
       <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
         <ion-item class="rounded mt-2">
           <ion-label position="floating">{{'address.name'|translate}}</ion-label>
-          <ion-input type="text" formControlName="name" autocapitalize="on"></ion-input>
+          <ion-input type="text" formControlName="name" [placeholder]="'address.name_placeholder'|translate" autocapitalize="on"></ion-input>
         </ion-item>
         <ion-item class="rounded mt-2">
           <ion-grid>
@@ -24,17 +24,28 @@
               <ion-img src="../../assets/images/foto_mapa_holguin.png" style="width: 100%;"></ion-img>
             </div>
             <ion-row>
+              <!-- * Next version comment
               <ion-item (click)="navigate()" lines="none">
                 <ion-label class="item-link" color="primary">{{'address.search_location'|translate}}</ion-label>
               </ion-item>
+              * Next version comment -->
             </ion-row>
           </ion-grid>
         </ion-item>
+        <!-- * Next version comment
         <ion-item class="rounded mt-2">
           <ion-label position="floating">{{'address.details'|translate}}</ion-label>
           <ion-textarea formControlName="details" [placeholder]="'address.details_placeholder'|translate" rows="4"
             spellcheck="true"></ion-textarea>
         </ion-item>
+        * Next version comment -->
+        <!-- ^ Current version comment -->
+        <ion-item class="rounded mt-2">
+          <ion-label position="floating">{{'address.description'|translate}}</ion-label>
+          <ion-textarea formControlName="description" [placeholder]="'address.description_placeholder'|translate" rows="4"
+            spellcheck="true"></ion-textarea>
+        </ion-item>
+        <!-- ^ Current version comment -->
         <ion-button *ngIf="editable"  class="fixed" type="input" [disabled]="!addressForm.valid">{{'button.save'|translate}}</ion-button>
         <ion-button *ngIf="!editable" class="fixed" type="input" [disabled]="!addressForm.valid">{{'button.create'|translate}}</ion-button>
       </form>

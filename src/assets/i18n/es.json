@@ -88,10 +88,13 @@
     "address": {
         "add": "Agregar Dirección",
         "name": "Nombre",
+        "name_placeholder": "Casa de mi abuela",
         "location": "Ubicación",
         "search_location": "Buscar ubicación en el mapa",
         "details": "Detalles",
         "details_placeholder": "En un pasillo, casa pintada de verde...",
+        "description": "Descripción",
+        "description_placeholder": "Calle Calixto #31 % A. Guerra y Libertad...",
         "edit_address": "Editar dirección",
         "delete_address": "Eliminar dirección"
     },

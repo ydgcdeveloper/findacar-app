@@ -51,6 +51,7 @@ export const queries = {
       id
       name
       details
+      description
       locationData
       selected
     }
@@ -77,6 +78,7 @@ export const queries = {
       getAddressById(id: $id){
         name
         details
+        description
         locationData
         selected
     }

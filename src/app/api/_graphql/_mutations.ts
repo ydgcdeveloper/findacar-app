@@ -86,12 +86,14 @@ export const mutations = {
     mutation addAddress(
       $name: String!,
       $details: String,
+      $description: String!,
       $locationData: JSONObject,
       $selected: Boolean,
     ){
       addAddress(createAddressInput:{
         name: $name,
         details: $details,
+        description: $description,
         locationData: $locationData,
         selected: $selected
       }){

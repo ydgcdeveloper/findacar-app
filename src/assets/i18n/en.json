@@ -88,10 +88,13 @@
     "address": {
         "add": "Add Address",
         "name": "Name",
+        "name_placeholder": "Grandma´s house",
         "location": "Location",
         "search_location": "Search location on the map",
         "details": "Details",
         "details_placeholder": "In a hallway, house painted green...",
+        "description": "Description",
+        "description_placeholder": "Calixto street #31 % A. Guerra and Libertad...",
         "edit_address":"Edit address",
         "delete_address":"Delete address"
     },

@@ -42,6 +42,10 @@ export class AddAddressPage implements OnInit, ViewWillEnter {
     return this.addressForm.get('details');
   }
 
+  get description() {
+    return this.addressForm.get('description');
+  }
+
   async ngOnInit() {
     setTimeout(() => {
       this.show = true;
@@ -75,8 +79,15 @@ export class AddAddressPage implements OnInit, ViewWillEnter {
   setForm(address: Address) {
     this.addressForm = this.formBuilder.group({
       name: [address?.name, [Validators.required, Validators.minLength(2)]],
-      location: [address?.locationData, [Validators.required]],
-      details: [address?.details],
+      //* Next version comment
+      // location: [address?.locationData, [Validators.required]],
+      //* Next version comment
+      //^ Current version comment
+      description: [address?.description, [Validators.required]],
+      //^ Current version comment
+      //* Next version comment
+      // details: [address?.details],
+      //* Next version comment
     });
   }
 
@@ -93,8 +104,11 @@ export class AddAddressPage implements OnInit, ViewWillEnter {
     if (this.addressForm.valid) {
       const address: AddressInput = {
         name: this.name.value,
-        details: this.details.value,
-        locationData: this.location.value
+        //* Next version comment
+        // details: this.details.value,
+        // locationData: this.location.value
+        //* Next version comment
+        description: this.description.value,
       };
 
       try {
