@@ -40,6 +40,22 @@ export class AddressRepoService {
     });
   }
 
+  editAddress(addressInput: AddressInput): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.editAddress(),
+      variables: addressInput
+    });
+  }
+
+  removeAddress(id: number): Observable<any> {
+    return this.apollo.mutate({
+      mutation: mutations.removeAddress(),
+      variables: {
+        id: parseInt((id as unknown) as string, 10)
+      }
+    });
+  }
+
   setSelectedAddress(id: number): Observable<any> {
     return this.apollo.mutate({
       mutation: mutations.setSelectedAddress(),

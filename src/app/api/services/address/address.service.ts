@@ -59,6 +59,38 @@ export class AddressService {
     });
   }
 
+  editAddress(addressInput: AddressInput) {
+    return new Promise((resolve, reject) => {
+      from(this.addressRepo.editAddress(addressInput)).subscribe(
+        {
+          next: (updatedData) => {
+            console.log(updatedData);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error);
+          }
+        }
+      );
+    });
+  }
+
+  removeAddress(id: number) {
+    return new Promise((resolve, reject) => {
+      from(this.addressRepo.removeAddress(id)).subscribe(
+        {
+          next: (deletedData) => {
+            console.log(deletedData);
+            resolve(true);
+          },
+          error: (error) => {
+            reject(error);
+          }
+        }
+      );
+    });
+  }
+
   getSelectedAddressId(): ID {
     const addresses = this.getAllAddress();
     if (!addresses.length) {

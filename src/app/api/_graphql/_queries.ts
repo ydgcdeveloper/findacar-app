@@ -76,6 +76,7 @@ export const queries = {
   getAddressById: () => gql`
     query getAddressById($id: Int!){
       getAddressById(id: $id){
+        id
         name
         details
         description

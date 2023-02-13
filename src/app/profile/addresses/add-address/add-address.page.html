@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button [routerLink]="['/addresses']"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{'address.add'|translate}}</ion-title>
+    <ion-title *ngIf="!editable">{{'address.add'|translate}}</ion-title>
+    <ion-title *ngIf="editable">{{'address.edit'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

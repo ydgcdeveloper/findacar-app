@@ -24,6 +24,10 @@ export class AddressComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit() {
+    this.setUserAddresses();
+  }
+
+  setUserAddresses() {
     this.addressService.getAddressesByUser().then((value) => {
       console.log(value);
       this.getSelectedAddressId();
@@ -33,7 +37,7 @@ export class AddressComponent implements OnInit {
 
   getSelectedAddressId() {
     this.selected = this.addressService.getSelectedAddressId();
-    if(this.selected){
+    if (this.selected) {
       this.selectedToUp.emit(this.selected);
     }
   }
@@ -74,9 +78,18 @@ export class AddressComponent implements OnInit {
         }, {
           text: this.translate.instant('address.delete_address'),
           icon: 'trash',
+          role: 'remove',
           data: 10,
           handler: () => {
-            console.log('Trash clicked' + this.selected);
+            console.log('Trash clicked' + id);
+            try {
+              this.addressService.removeAddress(id).then((value) => {
+                if (value) {
+                  this.setUserAddresses();
+                }
+              });
+            } catch (error) {
+            }
           }
         }]
     });

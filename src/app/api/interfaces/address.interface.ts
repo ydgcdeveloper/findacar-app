@@ -1,8 +1,7 @@
-import { ID } from './rate.interface';
 import { Place } from './request.interface';
 
 export interface Address {
-    id: ID;
+    id: number;
     name: string;
     description: string;
     details: string;

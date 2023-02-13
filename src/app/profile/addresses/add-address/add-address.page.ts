@@ -115,15 +115,22 @@ export class AddAddressPage implements OnInit, ViewWillEnter {
         await this.commonService.showLoader();
         //edit address case
         if (this.id) {
-
+          await this.addressService.editAddress({ ...address,
+            id: parseInt((this.address.id as unknown) as string, 10) }).then(async (value) => {
+            if (value) {
+              this.router.navigateByUrl('/tabs/profile', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['addresses']);
+              });
+            }
+          });
         }
         //add address case
         else {
           await this.addressService.addAddress(address).then(async (value) => {
             if (value) {
-              // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['addresses']);
-              // });
+              this.router.navigateByUrl('/tabs/profile', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['addresses']);
+              });
             }
           });
         }

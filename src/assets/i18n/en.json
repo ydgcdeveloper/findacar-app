@@ -87,6 +87,7 @@
     },
     "address": {
         "add": "Add Address",
+        "edit": "Edit Address",
         "name": "Name",
         "name_placeholder": "Grandma´s house",
         "location": "Location",

@@ -87,6 +87,7 @@
     },
     "address": {
         "add": "Agregar Dirección",
+        "edit": "Editar Dirección",
         "name": "Nombre",
         "name_placeholder": "Casa de mi abuela",
         "location": "Ubicación",
