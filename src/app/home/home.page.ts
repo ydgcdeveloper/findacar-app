@@ -37,7 +37,7 @@ export class HomePage implements OnInit, ViewWillEnter {
     private filterService: FilterService,
     private userService: UserService,
     private authService: AuthService,
-    private addressService: AddressService
+    private addressService: AddressService,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -105,5 +105,13 @@ export class HomePage implements OnInit, ViewWillEnter {
 
   yeah() {
     this.router.navigate(['tabs/search']);
+  }
+
+  onClick(service: Service){
+    this.router.navigate(['transport-service', service.id], {
+      state: {
+        service
+      }
+    });
   }
 }

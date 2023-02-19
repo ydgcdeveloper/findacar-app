@@ -15,7 +15,8 @@
         "now": "Ahora"
     },
     "home": {
-        "all_vehicles_types": "Todos los transportes",
+        "all_vehicles_types": "Servicios de transporte",
+        "transport_service": "Servicio de transporte",
         "search_placeholder": "Buscar transportes",
         "filter": {
             "filter_header": "Filtros",

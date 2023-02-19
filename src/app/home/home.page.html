@@ -50,7 +50,7 @@
     <ion-title size="large" class="ml-3">{{'home.all_vehicles_types'|translate}}</ion-title>
     <div id="service-container" *ngIf="services">
       <div class="service" *ngFor="let service of services">
-        <app-service [service]="service"></app-service>
+        <app-service class="app-service" [service]="service" (click)="onClick(service)"></app-service>
       </div>
     </div>
     <!-- Skeleton screen -->

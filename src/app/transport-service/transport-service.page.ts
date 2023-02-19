@@ -1,3 +1,5 @@
+import { Service } from './../api/interfaces/service.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transport-service.page.scss'],
 })
 export class TransportServicePage implements OnInit {
+  transportService: Service;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.transportService = this.router.getCurrentNavigation().extras.state?.service;
   }
 
 }

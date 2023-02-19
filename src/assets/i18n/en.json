@@ -15,7 +15,8 @@
         "now": "Now"
     },
     "home": {
-        "all_vehicles_types": "All services",
+        "all_vehicles_types": "Transport services",
+        "transport_service": "Transport service",
         "search_placeholder": "Search service",
         "filter": {
             "filter_header": "Filters",
