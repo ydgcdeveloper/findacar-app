@@ -103,7 +103,12 @@ const routes: Routes = [
   {
     path: 'verify-email',
     loadChildren: () => import('./auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+  },
+  {
+    path: 'transport-service/:id',
+    loadChildren: () => import('./transport-service/transport-service.module').then( m => m.TransportServicePageModule)
   }
+
 ];
 @NgModule({
   imports: [
