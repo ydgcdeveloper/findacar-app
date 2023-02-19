@@ -20,8 +20,14 @@
       </ion-item>
       <ion-row>
         <ion-col class="ion-margin-top">
-          <ion-button type="submit" [disabled]="!loginForm.valid" expand="block">{{'auth.sign_in'|translate}}</ion-button>
-          <a [routerLink]="['/forgot-password']" class="small-text">{{'auth.forgot_pass'|translate}}</a>
+          <ion-button type="submit" [disabled]="!loginForm.valid"
+            expand="block">{{'auth.sign_in'|translate}}</ion-button>
+          <ion-row>
+            <a [routerLink]="['/register']" class="link">{{'auth.create_account'|translate}}</a>
+          </ion-row>
+          <ion-row>
+            <a [routerLink]="['/forgot-password']" class="link">{{'auth.forgot_pass'|translate}}</a>
+          </ion-row>
         </ion-col>
       </ion-row>
     </form>

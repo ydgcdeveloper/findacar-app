@@ -25,6 +25,9 @@
       <ion-row>
         <ion-col class="ion-margin-top">
           <ion-button type="submit" [disabled]="!registerForm.valid" expand="block">{{'auth.sign_up'|translate}}</ion-button>
+          <ion-row>
+            <a [routerLink]="['/login']" class="link">{{'auth.access'|translate}}</a>
+          </ion-row>
         </ion-col>
       </ion-row>
     </form>

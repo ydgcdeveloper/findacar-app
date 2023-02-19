@@ -152,6 +152,8 @@
         "email": "Email",
         "password": "Password",
         "register":"Register",
+        "create_account":"Create account",
+        "access":"Log in",
         "repeat_password":"Repeat password",
         "forgot_pass_info":"Please provide the email address that you used when you signed up in the app.",
         "reset_pass":"Reset Your Password"
