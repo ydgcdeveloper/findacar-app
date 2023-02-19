@@ -28,7 +28,7 @@
     "@awesome-cordova-plugins/core": "^6.2.0",
     "@awesome-cordova-plugins/native-geocoder": "^6.2.0",
     "@awesome-cordova-plugins/social-sharing": "^6.2.0",
-    "@capacitor/android": "^4.4.0",
+    "@capacitor/android": "4.4.0",
     "@capacitor/app": "^4.1.0",
     "@capacitor/core": "^4.4.0",
     "@capacitor/haptics": "^4.0.1",
