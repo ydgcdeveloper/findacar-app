@@ -99,6 +99,7 @@ export const queries = {
   getTransportServices: () => gql`
     query getTransportServices{
       getTransportServices{
+        id
         name
         status
         photo
