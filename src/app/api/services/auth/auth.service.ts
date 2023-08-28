@@ -96,6 +96,6 @@ export class AuthService {
   }
 
   getUserId(): string {
-    return this.jwtHelper.decodeToken(this.jwtHelper.tokenGetter())?.sub ?? '';
+    return this.jwtHelper.decodeToken(this.jwtHelper.tokenGetter() as string)?.sub ?? '';
   }
 }
