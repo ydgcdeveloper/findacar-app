@@ -18,19 +18,17 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { Coins } from 'src/app/data/coins';
 import { RequestStatus } from 'src/app/api/interfaces/request.interface';
 
-
-
 @Component({
   selector: 'app-request',
   templateUrl: './request.page.html',
   styleUrls: ['./request.page.scss'],
 })
-export class RequestPage implements OnInit, ViewWillEnter {
+export class RequestPage implements OnInit {
 
   public timeText: string;
   public requestForm: FormGroup;
   public coins = Coins;
-  public addresses: Address[];
+  public addresses: Address[] = null;
   private days: any[] = [];
   private hours: string[] = [];
   private minutes: string[] = [];
@@ -61,36 +59,44 @@ export class RequestPage implements OnInit, ViewWillEnter {
     private translate: TranslateService,
     private requestService: RequestService,
   ) {
-    this.getAddresses();
   }
 
   get tag() {
-    return this.requestForm.get('tag');
+    return this?.requestForm?.get('tag');
   }
 
   get ableToPay() {
-    return this.requestForm.get('ableToPay');
+    return this?.requestForm?.get('ableToPay');
   }
 
   get coin() {
-    return this.requestForm.get('coin');
+    return this?.requestForm?.get('coin');
   }
 
   get sinceAddress() {
-    return this.requestForm.get('sinceAddress');
+    return this?.requestForm?.get('sinceAddress');
   }
 
   get destinationAddress() {
-    return this.requestForm.get('destinationAddress');
+    return this?.requestForm?.get('destinationAddress');
   }
 
-  async getAddresses() {
-    this.addresses = this.addressService.getAllAddress();
+  getAddresses() {
+    this.addressService.getAddressesByUser().then( async value => {
+      this.addresses = value;
+      if (this.addresses?.length < 2) {
+        await this.presentAlert();
+      }
+    });
   }
 
-  async ngOnInit() {
-    if (this.addresses.length > 2) {
-      this.setPickerData();
+  ngOnInit() {
+    this.getAddresses();
+    this.initActions();
+  }
+
+  initActions(){
+    this.setPickerData();
       this.timeText = this.translate.instant('common.now');
       this.requestForm = this.formBuilder.group({
         tag: [`${this.translate.instant('order.request')}-${this.makeid(6)}`,
@@ -99,16 +105,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
         ableToPay: [0, [Validators.pattern('[0-9]*')]],
         coin: [this.coins[0]?.tag || 'CUP', [Validators.required]],
         sinceAddress: [this.addressService.getSelectedAddressId(), [Validators.required]],
-        destinationAddress: [this.addresses[this.getRandomAddress()].id, [Validators.required]]
+        destinationAddress: [this.addresses? this.addresses[this.getRandomAddress()]?.id : null, [Validators.required]]
       }, { validators: checkSameAddressValidator });
-    }
-  }
-
-  async ionViewWillEnter() {
-    await this.getAddresses();
-    if (this.addresses.length < 2) {
-      await this.presentAlert();
-    }
   }
 
   async presentAlert() {
@@ -324,8 +322,8 @@ export class RequestPage implements OnInit, ViewWillEnter {
     }
   }
 
-  private getRandomAddress(min = 0, max = this.addresses.length - 1): number {
-    if (this.addresses.length === 0) {
+  private getRandomAddress(min = 0, max = this.addresses?.length - 1): number {
+    if (this.addresses?.length === 0) {
       return 0;
     }
     const selectedAddressId = this.addressService.getSelectedAddressId();
@@ -333,7 +331,7 @@ export class RequestPage implements OnInit, ViewWillEnter {
     do {
       randomGenerated = (Math.random() * (max - min) + min).toFixed(0);
       console.log(randomGenerated);
-    } while (selectedAddressId === this.addresses[randomGenerated].id);
+    } while (this.addresses && selectedAddressId === this.addresses[randomGenerated]?.id);
     return randomGenerated;
   }
 

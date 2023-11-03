@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <div *ngIf="addresses.length > 1" class="close-button circle" (click)="goToHome()">
+    <div *ngIf="addresses?.length > 1" class="close-button circle" (click)="goToHome()">
       <ion-icon slot="start" class="icon-close" name="close-outline"></ion-icon>
     </div>
 
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="addresses.length > 1">
+  <div *ngIf="addresses?.length > 1">
     <ion-title>{{'request.create'|translate}}</ion-title>
     <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
       <ion-item class="shadow rounded mt-2">
@@ -16,8 +16,8 @@
         <ion-input formControlName="tag"></ion-input>
 
       </ion-item>
-      <ion-label *ngIf="tag.errors?.['required']" class="input-message" color="danger">{{'request.tag_required'|translate}}</ion-label>
-      <ion-label *ngIf="tag.errors?.['minlength']" class="input-message" color="danger">{{'request.tag_length'|translate}}</ion-label>
+      <ion-label *ngIf="tag?.errors?.['required']" class="input-message" color="danger">{{'request.tag_required'|translate}}</ion-label>
+      <ion-label *ngIf="tag?.errors?.['minlength']" class="input-message" color="danger">{{'request.tag_length'|translate}}</ion-label>
 
       <ion-item class="shadow rounded mt-2">
         <ion-label position="floating">{{'request.pickup_address'|translate}}</ion-label>
@@ -27,7 +27,7 @@
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">{{'request.same_address'|translate}}</ion-label>
+      <ion-label *ngIf="requestForm?.errors?.sameAddress" class="input-message" color="danger">{{'request.same_address'|translate}}</ion-label>
 
       <ion-item class="shadow rounded mt-2">
         <ion-label position="floating">{{'request.destination_address'|translate}}</ion-label>
@@ -37,7 +37,8 @@
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message" color="danger">{{'request.same_address'|translate}}</ion-label>
+      <ion-label *ngIf="requestForm.errors?.sameAddress" class="input-message"
+        color="danger">{{'request.same_address'|translate}}</ion-label>
 
       <ion-row class="mt-2">
         <ion-col size="8" style="padding-left: 0px; margin-left: 0px; margin-right: 0px;">
@@ -62,12 +63,12 @@
         <ion-label>{{timeText}}</ion-label>
         <ion-icon name="time-outline" slot="end"></ion-icon>
       </ion-item>
-      
+
       <ion-button type="input" [disabled]="!requestForm.valid" class="fixed">{{'button.create'|translate}}</ion-button>
     </form>
   </div>
 
-  <div *ngIf="addresses.length < 2">
+  <div *ngIf="addresses?.length < 2 || !addresses">
     <ion-item class="rounded mt-2">
       <ion-label class="py-1">
         <ion-skeleton-text animated style="width: 45%; height: 14px;" class="rounded"></ion-skeleton-text>
