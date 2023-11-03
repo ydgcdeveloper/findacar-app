@@ -1,14 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-row class="ion-align-items-center">
+    <ion-row>
       <ion-col size="10">
-        <!-- * Next version comment
-        <ion-searchbar class="rounded" (ionFocus)="yeah()" [placeholder]="'home.search_placeholder'|translate">
-        </ion-searchbar>
-        * Next version comment -->
-        <ion-title>Find a car</ion-title>
+        <!-- <ion-searchbar class="rounded" (ionFocus)="yeah()" [placeholder]="'home.search_placeholder'|translate">
+        </ion-searchbar> -->
       </ion-col>
-      <ion-col>
+      <ion-title>Find a car</ion-title>
+      <ion-col size="2">
         <ion-icon class="circle-filter" [routerLink]="['/filters']" name="options-sharp"></ion-icon>
       </ion-col>
     </ion-row>
@@ -16,46 +14,42 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{'tabs.start'|translate}}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    
 
-    <div class="category-slider" *ngIf="categories">
-      <swiper [slidesPerView]="3" [autoplay]="true" [keyboard]="true" [pagination]="false" [scrollbar]="false"
-        [zoom]="true">
-        <ng-template *ngFor="let category of categories" [class]="'cat-'+ category.color" swiperSlide>
-          <app-category [category]="category"></app-category>
-        </ng-template>
-      </swiper>
-    </div>
+  <div class="category-slider" *ngIf="categories">
+    <swiper [slidesPerView]="3" [autoplay]="true" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+      [zoom]="true">
+      <ng-template *ngFor="let category of categories" [class]="'cat-'+ category.color" swiperSlide>
+        <app-category [category]="category"></app-category>
+      </ng-template>
+    </swiper>
+  </div>
 
-    <div *ngIf="!categories">
-      <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
-        [zoom]="true">
-        <ng-template *ngFor="let item of [1,2,3,4,5,6,7]" swiperSlide>
-          <div style="padding-top: 5px;">
-            <ion-label>
-              <ion-skeleton-text animated style="width: 1500%; height: 30%;" class="rounded"></ion-skeleton-text>
-            </ion-label>
-            <ion-skeleton-text animated style="width: 3000%; height: 70px; top: 15px; left: -45px;"></ion-skeleton-text>
-          </div>
-        </ng-template>
-      </swiper>
-    </div>
+  <div *ngIf="!categories">
+    <swiper [slidesPerView]="3" [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="false"
+      [zoom]="true">
+      <ng-template *ngFor="let item of [1,2,3,4,5,6,7]" swiperSlide>
+        <div style="padding-top: 5px;">
+          <ion-label>
+            <ion-skeleton-text animated style="width: 1500%; height: 30%;" class="rounded"></ion-skeleton-text>
+          </ion-label>
+          <ion-skeleton-text animated style="width: 3000%; height: 70px; top: 15px; left: -45px;"></ion-skeleton-text>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
 
-    <ion-title size="large" class="ml-3">{{'home.all_vehicles_types'|translate}}</ion-title>
-    <div id="service-container" *ngIf="services">
-      <div class="service" *ngFor="let service of services">
-        <app-service class="app-service" [service]="service" (click)="onClick(service)"></app-service>
-      </div>
+  <ion-list id="service-container" *ngIf="services">
+    <ion-list-header>
+      <ion-label class="mt-0">{{'home.all_vehicles_types'|translate}}</ion-label>
+    </ion-list-header>
+    <div class="service" *ngFor="let service of services">
+      <app-service [service]="service" (click)="onClick(service)"></app-service>
     </div>
-    <!-- Skeleton screen -->
+  </ion-list>
+
+  <!-- Skeleton screen -->
   <div *ngIf="!services">
-  
+
     <app-service-skeleton></app-service-skeleton>
     <app-service-skeleton></app-service-skeleton>
     <app-service-skeleton></app-service-skeleton>
@@ -63,7 +57,6 @@
     <app-service-skeleton></app-service-skeleton>
     <app-service-skeleton></app-service-skeleton>
   </div>
-  </ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="light" size="small" [routerLink]="['/request']">
       <ion-icon name="add"></ion-icon>
