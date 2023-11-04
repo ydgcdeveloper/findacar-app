@@ -116,7 +116,7 @@ ion-header .searchbar-input-container input {
   padding-bottom: 5px;
 }
 
-.my-2{
+.my-2 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -227,12 +227,12 @@ ion-toast.custom-toast::part(message) {
 //   height: 50%;
 // }
 
-ion-popover::part(content){
+ion-popover::part(content) {
   width: 85%;
   // height: 45%;
 }
 
-a.link{
+a.link {
   margin-top: 8px;
 }
 
@@ -245,3 +245,29 @@ a.link{
 // ion-popover::part(backdrop) {
 //   background-color: rgb(6, 14, 106);
 // }
+
+
+
+.d-flex {
+  display: flex;
+}
+
+.content-center {
+  justify-content: center;
+}
+
+.content-end {
+  justify-content: end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}

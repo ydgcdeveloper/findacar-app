@@ -2,11 +2,13 @@
   <ion-toolbar>
     <ion-row>
       <ion-col size="10">
-        <!-- <ion-searchbar class="rounded" (ionFocus)="yeah()" [placeholder]="'home.search_placeholder'|translate">
-        </ion-searchbar> -->
+        <!-- * Next version comment
+        <ion-searchbar class="rounded" (ionFocus)="yeah()" [placeholder]="'home.search_placeholder'|translate">
+        </ion-searchbar>
+        * Next version comment -->
       </ion-col>
       <ion-title>Find a car</ion-title>
-      <ion-col size="2">
+      <ion-col size="2" class="d-flex content-center">
         <ion-icon class="circle-filter" [routerLink]="['/filters']" name="options-sharp"></ion-icon>
       </ion-col>
     </ion-row>
@@ -40,11 +42,11 @@
 
   <ion-list id="service-container" *ngIf="services">
     <ion-list-header>
-      <ion-label class="mt-0">{{'home.all_vehicles_types'|translate}}</ion-label>
+      <ion-label class="mt-0 mb-0">{{'home.all_vehicles_types'|translate}}</ion-label>
     </ion-list-header>
-    <div class="service" *ngFor="let service of services">
+    <ng-container *ngFor="let service of services">
       <app-service [service]="service" (click)="onClick(service)"></app-service>
-    </div>
+    </ng-container>
   </ion-list>
 
   <!-- Skeleton screen -->
@@ -57,10 +59,12 @@
     <app-service-skeleton></app-service-skeleton>
     <app-service-skeleton></app-service-skeleton>
   </div>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="light" size="small" [routerLink]="['/request']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  
   <app-explore-container name="Home"></app-explore-container>
 </ion-content>

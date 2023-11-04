@@ -23,7 +23,7 @@
   object-fit: cover;
 }
 
-.floating{
+.floating {
   position: relative;
   padding: 4px;
   width: 24px;
@@ -41,42 +41,47 @@
   font-size: 105%;
 }
 
-.darker{
+.darker {
   color: rgb(7, 7, 7);
 }
 
-.service-data{
+.service-data {
   padding: 0 10px;
 }
 
-.service-name{
+.service-name {
   margin-top: 0px;
   font-weight: bold;
   color: black;
 }
 
-.service-rate{
-  align-items: center;
+.service-rate {
+  display: flex;
+  gap: 3px;
+  color: rgb(7, 7, 7);
+  font-weight: bold;
 }
 
-.golden{
+.golden {
   color: rgb(204, 128, 5);
 }
 
-.service-row{
+.service-row {
   font-size: 76%;
 }
 
-.service-status{
-  position: relative;
-  top: -45px;
-  right: -220px;
-  font-size: 70%;
+.service-status {
+  font-size: 10px;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
 }
 
+.pickup-text{
+  font-size: 12px;
+}
+
 ion-icon {
+
   // default: not-fav
   &[name="heart-sharp"] {
     fill: grey;
