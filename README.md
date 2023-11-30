@@ -7,7 +7,10 @@ Aquí se muestra un mapa para seleccionar
 específicamente el sitio relacionado a una dirección:
 <img src='https://github.com/ydgcdeveloper/findacar-app/assets/63915445/acabe768-b1c3-4c51-9286-ab88cde6be52' width='30%'>
 
-
+\n
+\n
+\n
+\n
 Aquí se crean nuevas direcciones o locaciones
 para luego seleccionar al hacer una solicitud 
 de viaje o traslado:
