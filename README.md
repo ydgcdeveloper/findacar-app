@@ -1,5 +1,5 @@
 # findacar-app
-### An Ionic app for meeting the client with the carrier made with Angular and Nest
+### An Ionic app for meeting the client with the carrier. Build with Angular and Nest
 
 #### Se trata de una aplicación móvil hecha en Ionic-Angular, en la cual usuarios comunes pueden encontrar diferentes tipos 
 de transporte para diferentes necesidades: desde taxi hasta mudanza. El backend está hecho en NestJs<br><br>
